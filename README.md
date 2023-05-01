@@ -5,14 +5,14 @@
 > 2023.04.03 ~ 2023.05.26
 
 
-## 👫 Members
+## 👫 구성원
 |<img src="https://user-images.githubusercontent.com/96401350/229277093-a968a9c7-19ca-4629-b19b-a8253739a124.jpeg" width="35%" />|<img src="https://user-images.githubusercontent.com/96401350/229572946-b001bd4a-039b-4506-a7fb-6252b415761c.jpeg" width="35%" />|
 |:---:|:---:|
 |최한윤|조해린|
 |[@chlgksdbs](https://github.com/chlgksdbs)|[@zosunny](https://github.com/zosunny)|
 
 
-## 🔧 Tech Stack
+## 🔧 사용 기술
 
 ### Front-end
 | Category          | Stack                                                                           |
@@ -35,3 +35,36 @@
 | Sprint Management | - Jira                                                                          |
 | Documents         | - Google Sheets <br>- Notion                                                    |
 | Tools             | - Figma <br>- Swagger                                                           |
+
+## 🗓 프로젝트 진행일정
+<br>
+<img width="1179" alt="forJ Jira" src="https://user-images.githubusercontent.com/96401350/235462578-0b5fd635-5dca-4c50-b762-538e3f34071c.png">
+
+### 스프린트별 목표 정의
+- **Sprint #1**
+  - 요구사항 명세서 작성
+  - 협업 툴 설정 (Jira, google sheets)
+  - UI 설계 (Figma)
+  - 디자인 시안 확정
+  - DevOps 환경 구축
+  - DB (ERD) 설계
+  - 로그인 / 회원가입 구현
+  - 여행 계획 공유 게시판 구현
+- **Sprint #2**
+  - 여행 계획 관련 기능 구현
+  - 공공 데이터 활용
+  - 개인정보 CRUD 기능 구현
+  - 스크랩 + 장바구니 기능 구현
+- **Sprint #3**
+  - 실시간 날씨 정보 open API 구현
+  - 소셜 로그인(카카오, 네이버) open API 구현
+  - 공통 component (header, footer) UI 구현
+  - Auth Page, User Page, Planning Page UI 구현
+- **Sprint #4**
+  - Board Page UI 구현
+  - Open API Page UI 구현
+  - 전체 Html, CSS, JS 코드 리팩토링
+- **Sprint #5**
+  - 개발 마무리 및 통합 테스트
+  - AWS EC2를 이용한 배포
+  - 결과 보고서 작성 (ppt)
