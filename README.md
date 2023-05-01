@@ -15,29 +15,23 @@
 ## 🔧 Tech Stack
 
 ### Front-end
-<div>
-  <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=Vue.js&logoColor=white">
-  <img src="https://img.shields.io/badge/Styled Components-DB7093?style=for-the-badge&logo=StyledComponents&logoColor=white">
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white">
-</div>
+| Category          | Stack                                                                           |
+| ----------------- | ------------------------------------------------------------------------------- |
+| Language          | - Javascript                                                                    |
+| Framework         | - Vue                                                                           |
+| CSS               | - Styled Components                                                             |
 
 ### Back-end
-<div>
-  <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white">
-  <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white">
-  <img src="https://img.shields.io/badge/JUnit5-25A162?style=for-the-badge&logo=JUnit5&logoColor=white">
-</div>
-<div>
-  <img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=NGINX&logoColor=white">
-  <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white">
-  <img src="https://img.shields.io/badge/SonarQube-4E9BCD?style=for-the-badge&logo=SonarQube&logoColor=white">
-  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
-</div>
+| Category          | Stack                                                                           |
+| ----------------- | ------------------------------------------------------------------------------- |
+| Framework         | - Spring Boot 2.7.11                                                            |
+| Test              | - JUnit 5                                                                       |
+| Infra             | - Docker <br>- AWS EC2 <br>- Jenkins <br>                                       |
+| Database          | - MySql <br>- 공공데이터                                                         |
 
-### Server
-
-<div>
-  <img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=for-the-badge&logo=ApacheTomcat&logoColor=white">
-  <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=AmazonAWS&logoColor=white">
-  <img src="https://img.shields.io/badge/AWS EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white">
-</div>
+### Communication
+| Category          | Stack                                                                           |
+| ----------------- | ------------------------------------------------------------------------------- |
+| Sprint Management | - Jira                                                                          |
+| Documents         | - Google Sheets <br>- Notion                                                    |
+| Tools             | - Figma <br>- Swagger                                                           |
