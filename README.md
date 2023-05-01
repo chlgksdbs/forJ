@@ -19,7 +19,7 @@
 | ----------------- | ------------------------------------------------------------------------------- |
 | Language          | - Javascript                                                                    |
 | Framework         | - Vue                                                                           |
-| CSS               | - BootstrapVue <br>- Styled Components                                          |
+| CSS               | - Bootstrap-Vue <br>- Styled Components                                          |
 
 ### Back-end
 | Category          | Stack                                                                           |
