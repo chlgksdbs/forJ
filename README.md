@@ -56,7 +56,6 @@
   - 개인정보 CRUD 기능 구현
   - 스크랩 + 장바구니 기능 구현
 - **Sprint #3**
-  - 실시간 날씨 정보 open API 구현
   - 소셜 로그인(카카오, 네이버) open API 구현
   - 공통 component (header, footer) UI 구현
   - Auth Page, User Page, Planning Page UI 구현
