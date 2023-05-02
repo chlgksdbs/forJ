@@ -1,5 +1,8 @@
 package com.forj.user.model.repository;
 
-public interface UserMapper {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public interface UserMapper {
+	
 }
