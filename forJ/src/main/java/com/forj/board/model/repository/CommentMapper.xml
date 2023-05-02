@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forj.board.model.repository.CommentMapper">
+
+	<select id="selectAll" parameterType="int" resultType="com.forj.board.model.dto.CommentDto">
+		select comment_id as commentId, board_id as boardId, user_id as userId, content, write_date as writeDate
+		from forj_comment
+		where board_id = #{boardId}
+	</select>
+	
+	<insert id="insert" parameterType="com.forj.board.model.dto.CommentDto">
+		insert into forj_comment(board_id, user_id, content, write_date)
+		values(#{boardId}, #{userId}, #{content}, now())
+	</insert>
+	
+</mapper>

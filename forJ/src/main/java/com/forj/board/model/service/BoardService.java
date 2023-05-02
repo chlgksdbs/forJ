@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.forj.board.model.dto.BoardDto;
+import com.forj.board.model.dto.CommentDto;
 import com.forj.board.model.repository.BoardMapper;
+import com.forj.board.model.repository.CommentMapper;
 
 @Service
 public class BoardService {
@@ -14,7 +16,10 @@ public class BoardService {
 	@Autowired
 	private BoardMapper boardMapper;
 	
-	// 전체 조회
+	@Autowired
+	private CommentMapper commentMapper;
+	
+	// 게시글 전체 조회
 	public List<BoardDto> boardList(){
 		return boardMapper.selectAll();
 	}
@@ -37,5 +42,15 @@ public class BoardService {
 	// 글 삭제
 	public void deleteBoard(int boardId) {
 		boardMapper.delete(boardId);
+	}
+	
+	// 댓글 전체 조회
+	public List<CommentDto> commentList(int boardId){
+		return commentMapper.selectAll(boardId);
+	}
+	
+	// 댓글 작성
+	public void writeComment(CommentDto comment) {
+		commentMapper.insert(comment);
 	}
 }
