@@ -5,7 +5,7 @@
 > 2023.04.03 ~ 2023.05.26
 
 
-## 👫 구성원
+## 👫 TEAM: 내 손을 JAVA
 |<img src="https://user-images.githubusercontent.com/96401350/229277093-a968a9c7-19ca-4629-b19b-a8253739a124.jpeg" width="35%" />|<img src="https://user-images.githubusercontent.com/96401350/229572946-b001bd4a-039b-4506-a7fb-6252b415761c.jpeg" width="35%" />|
 |:---:|:---:|
 |최한윤|조해린|
