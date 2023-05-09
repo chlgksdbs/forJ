@@ -12,6 +12,81 @@
 |[@chlgksdbs](https://github.com/chlgksdbs)|[@zosunny](https://github.com/zosunny)|
 
 
+## 📂 Folder Structure
+
+```javascript
+📂 forj
+    📂 Java Resources
+     └── 📂 src
+     |    ├── 📂 Controller
+     |    |    ├── 📄 TourController.java
+     |    |    ├── 📄 UserController.java
+     |    ├── 📂 dao
+     |    |    ├── 📄 TourDao.java
+     |    |    ├── 📄 UserDao.java
+     |    └── 📂 dto
+     |    |    ├── 📄 SidoDto.java
+     |    |    ├── 📄 TourDto.java
+     |    |    ├── 📄 UserDto.java
+     |    ├── 📂 service
+     |    |    ├── 📄 TourService.java
+     |    |    ├── 📄 UserService.java
+     |    ├── 📂 util
+     |    |    ├── 📄 DBUtil.java
+     |    |    ├── 📄 PageNavigation.java
+     |    |    ├── 📄 ParameterCheck.java
+     |    |    ├── 📄 SizeConstant.java
+     |    |    ├── 📄 SHA256.java
+    📂 resources
+    ├── 📄 database.sql
+    ├── 📄 enjoytrip_er_diagram.png
+    📂 WebContent
+    ├── 📄 index.jsp
+    └── 📂 assets
+         └── 📂 css
+         |    ├── 📄 login.css
+         |    ├── 📄 main.css
+         |    ├── 📄 search.css
+         └── 📂 img
+         |    ├── 📄 aerial.jpg
+         |    ├── 📄 bgImg.png
+         |    ├── 📄 logo.png
+         |    ├── 📄 noimg.png
+         |    ├── 📄 originBG.png
+         |    ├── 📄 sungsimdang.jpg
+         └── 📂 js
+         |    ├── 📄 key.js
+         |    ├── 📄 login.js
+         |    ├── 📄 register.js
+         |    ├── 📄 search.js
+         |    ├── 📄 searchPwd.js
+    └── 📂 error
+    |    ├── 📄 changePwFail.jsp
+    |    ├── 📄 deleteUserFail.jsp
+    |    ├── 📄 error.jsp
+    |    ├── 📄 loginFail.jsp
+    |    ├── 📄 notEqPw.jsp
+    └── 📂 include
+    |    ├── 📄 footer.jsp
+    |    ├── 📄 head.jsp
+    |    ├── 📄 nav.jsp
+    └── 📂 tourplace
+    |    ├── 📄 map.jsp
+    |    ├── 📄 search.jsp
+    └── 📂 user
+    |    ├── 📄 changePwSuccess.jsp
+    |    ├── 📄 deleteUserSuccess.jsp
+    |    ├── 📄 findpwd.jsp
+    |    ├── 📄 findPwdSuccess.jsp
+    |    ├── 📄 login.jsp
+    |    ├── 📄 myPage.jsp
+    |    ├── 📄 regist.jsp
+    |    ├── 📄 registerSuccess.jsp         
+    📄 README.md
+    📄 pom.xml
+```
+
+
 ## 🔧 사용 기술
 
 ### Front-end
@@ -19,7 +94,7 @@
 | ----------------- | ------------------------------------------------------------------------------- |
 | Language          | - Javascript                                                                    |
 | Framework         | - Vue                                                                           |
-| CSS               | - Bootstrap-Vue <br>- Styled Components                                          |
+| CSS               | - Styled Components                                                         |
 
 ### Back-end
 | Category          | Stack                                                                           |
@@ -35,6 +110,7 @@
 | Sprint Management | - Jira                                                                          |
 | Documents         | - Google Sheets <br>- Notion                                                    |
 | Tools             | - Figma <br>- Swagger                                                           |
+
 
 ## 🗓 프로젝트 진행일정
 <br>
