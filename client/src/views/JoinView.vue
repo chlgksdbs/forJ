@@ -92,7 +92,7 @@ input, select {
   width: 95%;
   height: 30px;
   margin: 12px 0;
-  font-size: 15px;
+  font-size: 13px;
 }
 input::-webkit-inner-spin-button {
   appearance: none;
@@ -102,7 +102,7 @@ input:focus, select:focus {
 }
 .form_input_box {
   width: 100%;
-  height: 50px;
+  height: 49px;
   border: 1px solid #dadada;
 }
 .form_email_box {
@@ -117,7 +117,7 @@ input:focus, select:focus {
 }
 .form_text {
   text-align: left;
-  font-size: 18px;
+  font-size: 15px;
   color: #888;
 }
 #join_logo {
