@@ -14,10 +14,9 @@
 <script>
 export default {
     name: "TheCard",
-    
 }
 </script>
-<style>
+<style scoped>
 .card_box {
     margin: 0 20px;
 }

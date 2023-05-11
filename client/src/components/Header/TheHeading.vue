@@ -15,7 +15,7 @@ export default {
     name: "TheHeading",
 }
 </script>
-<style>
+<style scoped>
 img {
     width: 250px;
 }

@@ -5,6 +5,7 @@ import MyPageView from "../views/MyPageView.vue";
 import MyPageModify from "../components/MyPage/MyPageModify.vue";
 import LoginPageView from "@/views/LoginPageView.vue";
 import JoinPageView from "@/views/JoinPageView.vue";
+import BoardPageView from "@/views/BoardPageView.vue";
 
 Vue.use(VueRouter);
 
@@ -36,6 +37,11 @@ const routes = [
         component: MyPageModify,
       },
     ],
+  },
+  {
+    path: "/board",
+    name: "board",
+    component: BoardPageView,
   },
 ];
 

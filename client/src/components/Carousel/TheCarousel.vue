@@ -10,7 +10,7 @@ export default {
     name: "TheCarousel",
 }
 </script>
-<style>
+<style scoped>
 .img_carousel {
     width: 100%;
 }
