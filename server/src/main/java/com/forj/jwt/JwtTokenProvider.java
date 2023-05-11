@@ -35,8 +35,10 @@ public class JwtTokenProvider {
 		this.key = Keys.hmacShaKeyFor(secretByteKey);
 	}
 	
+	// User 정보를 가지고 AccessToken, RefreshToken을 생성하는 메서드 
 	public JwtToken generateToken(Authentication authentication) {
 		
+		// 권한 가져오기
 		String authorities = authentication.getAuthorities().stream()
 				.map(GrantedAuthority::getAuthority)
 				.collect(Collectors.joining(","));
@@ -60,6 +62,7 @@ public class JwtTokenProvider {
 		return jwtToken;
 	}
 	
+	// JWT를 복호화하여 Token에 들어있는 정보를 꺼내는 메서드
 	public Authentication getAuthentication(String accessToken) {
 		
 		// Token 복호화
@@ -69,16 +72,19 @@ public class JwtTokenProvider {
 			throw new RuntimeException("권한 정보가 없는 토큰입니다.");
 		}
 		
+		// Claim에서 권한 정보 가져오기
 		Collection<? extends GrantedAuthority> authorities =
 				Arrays.stream(claims.get("auth").toString().split(","))
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
 		
+		// UserDetails 객체를 만들어서 Authentication 리턴
 		UserDetails principal = new User(claims.getSubject(), "", authorities);
 		
 		return new UsernamePasswordAuthenticationToken(principal, "", authorities);
 	}
 	
+	// 토큰 정보를 검증하는 메서드
 	public boolean validateToken(String token) {
 		
 		try {
