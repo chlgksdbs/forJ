@@ -1,5 +1,5 @@
 <template>
-  <div id="JoinView">
+  <div id="JoinPageView">
     <div id="logo_box">
       <router-link to="/">
         <img src="@/assets/img/logo.png" id="join_logo" alt="">
@@ -71,7 +71,7 @@
 
 <script>
 export default {
-  name: 'JoinView',
+  name: 'JoinPageView',
   components: {},
   data() {
     return {

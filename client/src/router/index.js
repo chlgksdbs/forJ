@@ -1,17 +1,28 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import MainPageView from "@/views/MainPageView.vue";
 import MyPageView from "../views/MyPageView.vue";
-import MyPageModify from "../components/mypage/MyPageModify.vue";
-import LoginView from "@/views/LoginView.vue";
-import JoinView from "@/views/JoinView.vue";
+import MyPageModify from "../components/MyPage/MyPageModify.vue";
+import LoginPageView from "@/views/LoginPageView.vue";
+import JoinPageView from "@/views/JoinPageView.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/",
+    name: "main",
+    component: MainPageView,
+  },
+  {
     path: "/login",
     name: "login",
-    component: LoginView,
+    component: LoginPageView,
+  },
+  {
+    path: "/join",
+    name: "join",
+    component: JoinPageView,
   },
   {
     path: "/mypage",
@@ -25,11 +36,6 @@ const routes = [
         component: MyPageModify,
       },
     ],
-  },
-  {
-    path: "/join",
-    name: "join",
-    component: JoinView,
   },
 ];
 

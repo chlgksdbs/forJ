@@ -1,5 +1,5 @@
 <template>
-  <div id="LoginView">
+  <div id="LoginPageView">
     <div id="logo_box">
       <router-link to="/">
         <img src="@/assets/img/logo.png" id="login_logo" alt="">
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: 'LoginView',
+  name: 'LoginPageView',
   components: {},
   data() {
     return {

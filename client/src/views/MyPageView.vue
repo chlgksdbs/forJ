@@ -1,5 +1,5 @@
 <template>
-  <div class="mypageBox">
+  <div class="MyPageView">
       <!-- 카테고리를 이루는 왼쪽 화면 -->
     <div class="leftBox">
       <!-- User 프로필 사진 -->
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style>
-.mypageBox{
+.MyPageView{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
