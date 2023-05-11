@@ -17,6 +17,7 @@ const routes = [
     path: "/mypage",
     name: "mypage",
     component: MyPageView,
+    redirect: "/modify",
     children: [
       {
         path: "/modify",
