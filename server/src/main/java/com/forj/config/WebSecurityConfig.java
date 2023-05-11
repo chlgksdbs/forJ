@@ -32,8 +32,9 @@ public class WebSecurityConfig {
 	// (3) .formLogin().disable() : HTTP Basic Authentication을 사용하지 않음
 	// (4) .httpBasic().disable() : Form Based Authentication을 사용하지 않음
 	// (5) .authorizeRequests() : 요청에 의한 보안 검사 시작
-	// (6) .antMatchers("/user").permitAll() : 해당 url 요청에 대해 모두 접근 가능하게 함
-	// (7) .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class) : UsernamePasswordAuthenticationFilter에 가기 전에 직접 작성한 JwtAuthenticationFilter를 실행함 
+	// (6) .antMatchers("/user").permitAll() : 해당 API에 대해서는 모든 요청을 허가한다는 설정
+	// (7) .anyRequest().authenticated() : 이 밖의 모든 요청에 대해서 인증을 필요로 한다는 설정
+	// (8) .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class) : UsernamePasswordAuthenticationFilter에 가기 전에 직접 작성한 JwtAuthenticationFilter를 실행함 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
@@ -44,6 +45,7 @@ public class WebSecurityConfig {
 			.httpBasic().disable()
 			.authorizeRequests()
 			.antMatchers("/user").permitAll()
+			.anyRequest().authenticated()
 			.and()
 			.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 		System.out.println(jwtTokenProvider);
