@@ -1,18 +1,26 @@
+<<<<<<< HEAD
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import MyPageView from '../views/MyPageView.vue'
 import MyPageModify from '../components/mypage/MyPageModify.vue'
+=======
+import Vue from "vue";
+import VueRouter from "vue-router";
+import LoginView from "@/views/LoginView.vue";
+import JoinView from "@/views/JoinView.vue";
+>>>>>>> b1d47859236ac116c1a68c15af9f0e0a74b3af3e
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/login",
+    name: "login",
+    component: LoginView,
   },
   {
+<<<<<<< HEAD
     path: '/about',
     name: 'about',
     // route level code-splitting
@@ -33,11 +41,18 @@ const routes = [
     ]
   }
 ]
+=======
+    path: "/join",
+    name: "join",
+    component: JoinView,
+  },
+];
+>>>>>>> b1d47859236ac116c1a68c15af9f0e0a74b3af3e
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
