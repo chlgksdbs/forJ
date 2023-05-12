@@ -8,17 +8,17 @@
       <h1>2박 3일 먹방으로 힐링하는 제주도 여행 일정 공유</h1>
     </div>
     <div class="detail_nav">
-      <div class="detail_nav_profile_img">
+      <div class="detail_nav_profile_img_text">
         <div class="detail_nav_profile_img_box">
           <img src="@/assets/img/detail_profile.jpg">
         </div>
-      </div>
-      <div class="detail_nav_profile_text">
-        <div class="detail_nav_profile_nickname">
-          먹깨비
-        </div>
-        <div class="detail_nav_profile_write_date">
-          2023-05-04 18:05:12
+        <div class="detail_nav_profile_text">
+          <div class="detail_nav_profile_nickname">
+            먹깨비
+          </div>
+          <div class="detail_nav_profile_write_date">
+            2023-05-04 18:05:12
+          </div>
         </div>
       </div>
       <div class="detail_nav_hit">
@@ -59,28 +59,29 @@ export default {
 .detail_title {
   margin: 40px 0;
 }
+
+.detail_nav_profile_img_box {
+  width: 100px;
+  height: 100px;
+  margin: 0px 50px;
+  border-radius: 70%;
+  overflow: hidden;
+}
 .detail_nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100px;
 }
-.detail_nav_hit {
-  width: 30%;
-  color: #888;
-}
-.detail_nav_profile_img {
-  width: 10%;
-  margin-left: 100px;
-}
-.detail_nav_profile_img_box {
-  width: 100px;
-  height: 100px;
-  border-radius: 70%;
-  overflow: hidden;
+.detail_nav_profile_img_text{
+  display: flex;
+  align-items: center;
 }
 .detail_nav_profile_text {
-  width: 40%;
+  color: #888;
+}
+.detail_nav_hit {
+  margin: 0px 150px;
   color: #888;
 }
 .detail_nav_profile_img_box img {
