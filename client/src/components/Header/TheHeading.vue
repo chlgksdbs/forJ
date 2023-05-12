@@ -28,7 +28,7 @@ a {
     display: flex;
 }
 #header_left {
-    flex: 1;
+    flex: 2;
 }
 #header_center {
     flex: 3;
@@ -37,6 +37,7 @@ a {
 #header_right {
     flex: 1;
     text-align: center;
-    margin: auto;
+    margin: auto 50px;
+    font-size: 100%;
 }
 </style>
