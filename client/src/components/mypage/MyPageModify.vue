@@ -1,5 +1,6 @@
 <template>
   <div>
+    <the-heading></the-heading>
     <h2 class="modifyTitle">회원정보 수정</h2>
     <div class="modifyBox">
       <div>
@@ -43,13 +44,20 @@
         <span><button>변경</button></span>
       </div>
     </div>
+    <the-footer></the-footer>
   </div>
 </template>
 
 <script>
+import TheHeading from '../Header/TheHeading.vue';
+import TheFooter from '../Footer/TheFooter.vue';
+
 export default {
   name: 'MyPageModify',
-  components: {},
+  components: {
+    TheHeading,
+    TheFooter,
+  },
   data() {
     return {
       message: '',
@@ -73,22 +81,32 @@ export default {
   display: block;
   border: 1px solid lightgray;
   border-radius: 10px;
+  width: 750px;
+}
+.modifyBox>div{
+  margin: 20px 0px;
 }
 .modifyBox>div>span:first-child{
   display: inline-block;
-  width: 20%;
+  width: 25%;
+  margin-left:5px;
   text-align: left;
 }
 .modifyBox>div>span:nth-child(2){
   display: inline-block;
-  width: 70%;
+  width: 50%;
   text-align: left;
+}
+.modifyBox>div>span:nth-child(2)>input{
+  width: 90%;
 }
 .modifyBox>div>span:nth-child(3){
   display: inline-block;
-  width: 10%;
+  width: 20%;
   text-align: right;
-  /* float: right; */
+}
+.modifyBox>div>span:nth-child(3)>button{
+  margin: 0px 30px;
 }
 .imgmodify{
   width: 100px;
