@@ -1,7 +1,7 @@
 <template>
     <div id="TheCarousel">
         <div>
-            <img src="@/assets/img/main_carousel.png" class="img_carousel">
+            <img src="@/assets/img/main_carousel.jpg" class="img_carousel">
         </div>
     </div>
 </template>
