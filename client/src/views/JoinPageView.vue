@@ -66,13 +66,18 @@
         </router-link>
       </div>
     </div>
+    <the-footer></the-footer>
   </div>
 </template>
 
 <script>
+import TheFooter from "@/components/Footer/TheFooter.vue";
+
 export default {
   name: 'JoinPageView',
-  components: {},
+  components: {
+    TheFooter,
+  },
   data() {
     return {
       message: '',
