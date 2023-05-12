@@ -26,18 +26,17 @@ a {
 }
 #TheHeading {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 #header_left {
-    flex: 2;
+    width: 25%;
 }
 #header_center {
-    flex: 3;
-    text-align: center;
+    width: 50%;
 }
 #header_right {
-    flex: 1;
-    text-align: center;
-    margin: auto 50px;
+    width: 25%;
     font-size: 100%;
 }
 </style>
