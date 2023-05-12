@@ -6,6 +6,7 @@ import MyPageModify from "../components/MyPage/MyPageModify.vue";
 import LoginPageView from "@/views/LoginPageView.vue";
 import JoinPageView from "@/views/JoinPageView.vue";
 import BoardPageView from "@/views/BoardPageView.vue";
+import BoardDetailView from "@/views/BoardDetailView.vue";
 
 Vue.use(VueRouter);
 
@@ -42,6 +43,11 @@ const routes = [
     path: "/board",
     name: "board",
     component: BoardPageView,
+  },
+  {
+    path: "/detail",
+    name: "detail",
+    component: BoardDetailView,
   },
 ];
 
