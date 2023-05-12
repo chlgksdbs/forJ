@@ -34,6 +34,9 @@ img {
     right: 5%;
     transform: translate( -50%, -50% );
 }
+#TheSearchBar {
+    margin: 0 50px;
+}
 #input_search_bar {
     position: relative;
     width: 300px;
