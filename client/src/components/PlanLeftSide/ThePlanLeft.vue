@@ -8,16 +8,21 @@
         <div class="plan_left_select_list">
             <h3>선택 목록</h3>
             <button class="plan_left_delete_btn">장소 전체 삭제</button>
-            <div>삼성화재 유성연수원</div>
-            <div>유성온천역</div>
-            <div>충남대학교</div>
+            <the-select-list-card :title="'삼성화재 유성연수원'"></the-select-list-card>
+            <the-select-list-card :title="'유성온천역'"></the-select-list-card>
+            <the-select-list-card :title="'충남대학교'"></the-select-list-card>
             <button class="plan_left_create_btn">일정 생성</button>
         </div>
     </div>
 </template>
 <script>
+import TheSelectListCard from "../SelectListCard/TheSelectListCard.vue";
+
 export default {
     name: "ThePlanLeft",
+    components: {
+        TheSelectListCard,
+    },
 }
 </script>
 <style scoped>
