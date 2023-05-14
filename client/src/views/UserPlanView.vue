@@ -30,5 +30,6 @@ export default {
 <style scoped>
 .user_plan_content {
     display: flex;
+    justify-content: center;
 }
 </style>

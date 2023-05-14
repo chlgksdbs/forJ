@@ -26,6 +26,7 @@ export default {
 </script>
 <style scoped>
 #ThePlanRight {
+    margin: auto;
     background-color: #F5F5F5;
 }
 </style>
