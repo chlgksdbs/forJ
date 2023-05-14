@@ -42,7 +42,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .MyPageView{
   display: flex;
   flex-direction: row;
