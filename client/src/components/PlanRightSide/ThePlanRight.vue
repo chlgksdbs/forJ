@@ -4,10 +4,10 @@
             <input type="text" placeholder="검색어를 입력하세요.">
         </div>
         <div class="plan_right_category">
-            <button>호텔</button>
-            <button>식당</button>
-            <button>카페</button>
-            <button>여행지</button>
+            <the-category-btn :title="'호텔'"></the-category-btn>
+            <the-category-btn :title="'식당'"></the-category-btn>
+            <the-category-btn :title="'카페'"></the-category-btn>
+            <the-category-btn :title="'여행지'"></the-category-btn>
         </div>
         <div class="plan_right_card">
             <div>충남대학교</div>
@@ -20,8 +20,13 @@
     </div>
 </template>
 <script>
+import TheCategoryBtn from "../CategoryBtn/TheCategoryBtn.vue";
+
 export default {
     name: "ThePlanRight",
+    components: {
+        TheCategoryBtn,
+    }
 }
 </script>
 <style scoped>
@@ -30,5 +35,8 @@ export default {
     background-color: #F5F5F5;
     width: 15%;
     height: 661px;
+}
+.plan_right_category {
+    display: flex;
 }
 </style>
