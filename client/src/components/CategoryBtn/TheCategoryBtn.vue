@@ -13,7 +13,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 #TheCategoryBtn {
     border: 1px solid #40A3FF;
     border-radius: 10px;
