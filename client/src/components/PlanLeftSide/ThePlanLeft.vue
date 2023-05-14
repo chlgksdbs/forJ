@@ -24,6 +24,8 @@ export default {
 #ThePlanLeft {
     margin: auto;
     background-color: #F5F5F5;
+    width: 12%;
+    height: 661px;
 }
 .plan_left_calendar {
     width: 70%;

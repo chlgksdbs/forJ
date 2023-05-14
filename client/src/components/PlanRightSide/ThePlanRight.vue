@@ -28,5 +28,7 @@ export default {
 #ThePlanRight {
     margin: auto;
     background-color: #F5F5F5;
+    width: 15%;
+    height: 661px;
 }
 </style>
