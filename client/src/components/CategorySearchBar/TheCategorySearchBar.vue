@@ -11,7 +11,7 @@ export default {
     name: 'TheCategorySearchBar',
 }
 </script>
-<style>
+<style scoped>
 input {
     position: absolute;
     border: none;
