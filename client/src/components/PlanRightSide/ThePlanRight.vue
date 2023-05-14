@@ -1,7 +1,7 @@
 <template>
     <div id="ThePlanRight">
         <div class="plan_right_search_bar">
-            <input type="text" placeholder="검색어를 입력하세요.">
+            <the-category-search-bar></the-category-search-bar>
         </div>
         <div class="plan_right_category">
             <the-category-btn :title="'호텔'"></the-category-btn>
@@ -20,11 +20,13 @@
     </div>
 </template>
 <script>
+import TheCategorySearchBar from "../CategorySearchBar/TheCategorySearchBar.vue";
 import TheCategoryBtn from "../CategoryBtn/TheCategoryBtn.vue";
 
 export default {
     name: "ThePlanRight",
     components: {
+        TheCategorySearchBar,
         TheCategoryBtn,
     }
 }
