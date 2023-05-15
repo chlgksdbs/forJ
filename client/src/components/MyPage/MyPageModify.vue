@@ -62,36 +62,42 @@ export default {
 </script>
 
 <style>
-/* .modifyTotalBox{
-  width: 70%;
-  
-} */
 .modifyTitle{
   text-align: left;
   margin-top: 0px;
 }
 .modifyBox{
   display: block;
-  border: 1px solid lightgray;
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 10px;
-  width: 750px;
+  width: 800px;
+  height: 555px;
+  background-color: #fff;
 }
 .modifyBox>div{
-  margin: 20px 0px;
+  margin: 30px 0px;
 }
 .modifyBox>div>span:first-child{
   display: inline-block;
-  width: 25%;
+  width: 20%;
   margin-left:5px;
   text-align: left;
 }
 .modifyBox>div>span:nth-child(2){
   display: inline-block;
-  width: 50%;
+  width: 55%;
   text-align: left;
 }
 .modifyBox>div>span:nth-child(2)>input{
   width: 90%;
+  height: 25px;
+  border: none;
+  border-bottom: 1px solid #B8B8B8;
+  border-radius: 3px;
+  background-color: transparent;
+}
+.modifyBox>div>span:nth-child(2)>input:focus{
+  outline: 1px solid #0085FF;
 }
 .modifyBox>div>span:nth-child(3){
   display: inline-block;
@@ -100,6 +106,15 @@ export default {
 }
 .modifyBox>div>span:nth-child(3)>button{
   margin: 0px 30px;
+  width: 50px;
+  height: 25px;
+  background-color: white;
+  border: 1px solid #0085FF;
+  border-radius: 5px;
+}
+.modifyBox>div>span:nth-child(3)>button:hover{
+  border: 1px solid #90dfff;
+  background-color: #90dfff;
 }
 .imgmodify{
   width: 100px;
