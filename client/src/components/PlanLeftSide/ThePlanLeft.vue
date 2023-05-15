@@ -31,26 +31,21 @@ export default {
     background-color: #F5F5F5;
     width: 15%;
     height: 661px;
-    position: relative;
 }
 .plan_left_calendar {
     width: 70%;
     height: 25%;
     background-color: #FFFFFF;
-    position: absolute;
-    top: 1%;
-    left: 10%;
     border: 1px solid #40A3FF;
+    margin: 10px auto;
     padding: 15px;
 }
 .plan_left_select_list {
     width: 70%;
     height: 60%;
     background-color: #FFFFFF;
-    position: absolute;
-    top: 34%;
-    left: 10%;
     border: 1px solid #40A3FF;
+    margin: 10px auto;
     padding: 15px;
     overflow: auto;
 }
