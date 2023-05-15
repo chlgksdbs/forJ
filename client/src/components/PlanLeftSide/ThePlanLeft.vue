@@ -8,9 +8,9 @@
         <div class="plan_left_select_list">
             <h3>선택 목록</h3>
             <button class="plan_left_delete_btn">장소 전체 삭제</button>
-            <the-select-list-card :title="'삼성화재 유성연수원'"></the-select-list-card>
-            <the-select-list-card :title="'유성온천역'"></the-select-list-card>
-            <the-select-list-card :title="'충남대학교'"></the-select-list-card>
+            <the-select-list-card :img="require('@/assets/img/ex_img5.png')" :title="'삼성화재 유성연수원'"></the-select-list-card>
+            <the-select-list-card :img="require('@/assets/img/ex_img2.png')" :title="'유성온천역'"></the-select-list-card>
+            <the-select-list-card :img="require('@/assets/img/ex_img1.png')" :title="'충남대학교'"></the-select-list-card>
             <button class="plan_left_create_btn">일정 생성</button>
         </div>
     </div>
@@ -29,29 +29,25 @@ export default {
 #ThePlanLeft {
     margin: auto;
     background-color: #F5F5F5;
-    width: 12%;
+    width: 15%;
     height: 661px;
-    position: relative;
 }
 .plan_left_calendar {
     width: 70%;
     height: 25%;
     background-color: #FFFFFF;
-    position: absolute;
-    top: 1%;
-    left: 5%;
     border: 1px solid #40A3FF;
+    margin: 10px auto;
     padding: 15px;
 }
 .plan_left_select_list {
     width: 70%;
     height: 60%;
     background-color: #FFFFFF;
-    position: absolute;
-    top: 34%;
-    left: 5%;
     border: 1px solid #40A3FF;
+    margin: 10px auto;
     padding: 15px;
+    overflow: auto;
 }
 /* 추후에 modify 버튼과 create 버튼을 하나의 component로 작성 예정 */
 .plan_left_modify_btn {
