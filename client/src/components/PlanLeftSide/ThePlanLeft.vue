@@ -8,9 +8,9 @@
         <div class="plan_left_select_list">
             <h3>선택 목록</h3>
             <button class="plan_left_delete_btn">장소 전체 삭제</button>
-            <the-select-list-card :title="'삼성화재 유성연수원'"></the-select-list-card>
-            <the-select-list-card :title="'유성온천역'"></the-select-list-card>
-            <the-select-list-card :title="'충남대학교'"></the-select-list-card>
+            <the-select-list-card :img="require('@/assets/img/ex_img5.png')" :title="'삼성화재 유성연수원'"></the-select-list-card>
+            <the-select-list-card :img="require('@/assets/img/ex_img2.png')" :title="'유성온천역'"></the-select-list-card>
+            <the-select-list-card :img="require('@/assets/img/ex_img1.png')" :title="'충남대학교'"></the-select-list-card>
             <button class="plan_left_create_btn">일정 생성</button>
         </div>
     </div>
@@ -29,7 +29,7 @@ export default {
 #ThePlanLeft {
     margin: auto;
     background-color: #F5F5F5;
-    width: 12%;
+    width: 15%;
     height: 661px;
     position: relative;
 }

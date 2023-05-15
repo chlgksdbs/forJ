@@ -1,7 +1,7 @@
 <template>
     <div id="TheCategoryBtn">
         <div class="text_box">
-            {{ title }}
+            <b>{{ title }}</b>
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@ export default {
 #TheCategoryBtn {
     border: 1px solid #40A3FF;
     border-radius: 10px;
-    width: 16%;
+    width: 18%;
     height: 10%;
     cursor: pointer;
     margin: 10px auto;

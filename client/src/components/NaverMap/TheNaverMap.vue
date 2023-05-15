@@ -23,7 +23,7 @@ export default {
 </script>
 <style scoped>
 #TheNaverMap {
-    width: 65%;
+    width: 57%;
 }
 .naver_map {
     width: 100%;
