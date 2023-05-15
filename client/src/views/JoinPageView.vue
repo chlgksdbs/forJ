@@ -94,6 +94,7 @@ export default {
         .then((resp) => {
           console.log("resp: " + resp);
           alert('인증번호가 전송되었습니다.');
+          // emailCheckConfirm();
         });
     },
   },
