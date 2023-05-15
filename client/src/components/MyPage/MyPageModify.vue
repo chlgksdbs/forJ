@@ -62,10 +62,6 @@ export default {
 </script>
 
 <style>
-/* .modifyTotalBox{
-  width: 70%;
-  
-} */
 .modifyTitle{
   text-align: left;
   margin-top: 0px;
