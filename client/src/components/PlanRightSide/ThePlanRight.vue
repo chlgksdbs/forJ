@@ -39,6 +39,7 @@ export default {
     background-color: #F5F5F5;
     width: 20%;
     height: 661px;
+    overflow: auto;
 }
 .plan_right_category {
     display: flex;

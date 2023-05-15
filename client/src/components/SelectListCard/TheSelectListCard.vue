@@ -30,7 +30,7 @@ export default {
     align-items: center;
 }
 .img_box {
-    width: 10%;
+    width: 30%;
     height: 95%;
     margin: auto 15px auto 0;
 }

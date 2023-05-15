@@ -39,7 +39,7 @@ export default {
     background-color: #FFFFFF;
     position: absolute;
     top: 1%;
-    left: 5%;
+    left: 10%;
     border: 1px solid #40A3FF;
     padding: 15px;
 }
@@ -49,9 +49,10 @@ export default {
     background-color: #FFFFFF;
     position: absolute;
     top: 34%;
-    left: 5%;
+    left: 10%;
     border: 1px solid #40A3FF;
     padding: 15px;
+    overflow: auto;
 }
 /* 추후에 modify 버튼과 create 버튼을 하나의 component로 작성 예정 */
 .plan_left_modify_btn {

@@ -58,5 +58,6 @@ export default {
 }
 .btn_box img {
   width:100%;
+  margin: 2px 0;
 }
 </style>
