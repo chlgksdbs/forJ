@@ -28,7 +28,6 @@ public class MailSendService {
 		System.out.println("certKey: " + certKey);
 		
 		MimeMessage message = mailSender.createMimeMessage();
-		System.out.println("좀 돼라;;;");
 		
 		message.addRecipients(Message.RecipientType.TO, to); // 보내는 대상
 		message.setSubject("[forJ] 회원가입 이메일 인증번호"); // 메일 제목
@@ -47,6 +46,7 @@ public class MailSendService {
 		
 		// 보내는 사람의 이메일 주소, 보내는 사람 이름
 		message.setFrom(new InternetAddress("forj@naver.com", "forJ_Admin"));
+		
 		
 		return message;
 	}
