@@ -1,112 +1,112 @@
-package com.forj.jwt;
-
-import java.security.Key;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.stream.Collectors;
-
-import javax.xml.bind.DatatypeConverter;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-
-@Component
-public class JwtTokenProvider {
-
-	private final Key key;
-
-	public JwtTokenProvider(@Value("${jwt.secret.key}") String secretKey) {
-		
-		byte[] secretByteKey = DatatypeConverter.parseBase64Binary(secretKey);
-		this.key = Keys.hmacShaKeyFor(secretByteKey);
-	}
-	
-	// User 정보를 가지고 AccessToken, RefreshToken을 생성하는 메서드 
-	public JwtToken generateToken(Authentication authentication) {
-		
-		// 권한 가져오기
-		String authorities = authentication.getAuthorities().stream()
-				.map(GrantedAuthority::getAuthority)
-				.collect(Collectors.joining(","));
-		
-		// Access Token 생성 (만료시간 : 1000(ms) * 60 * 30 => 30분)
-		String accessToken = Jwts.builder()
-				.setSubject(authentication.getName())
-				.claim("auth", authorities)
-				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
-				.signWith(key, SignatureAlgorithm.HS256)
-				.compact();
-		
-		// Refresh Token 생성 (만료시간 : 1000(ms) * 60 * 60 * 36 => 36시간)
-		String refreshToken = Jwts.builder()
-				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 36))
-				.signWith(key, SignatureAlgorithm.HS256)
-				.compact();
-		
-		JwtToken jwtToken = new JwtToken("Bearer", accessToken, refreshToken);
-		
-		return jwtToken;
-	}
-	
-	// JWT를 복호화하여 Token에 들어있는 정보를 꺼내는 메서드
-	public Authentication getAuthentication(String accessToken) {
-		
-		// Token 복호화
-		Claims claims = parseClaims(accessToken);
-		
-		if (claims.get("auth") == null) {
-			throw new RuntimeException("권한 정보가 없는 토큰입니다.");
-		}
-		
-		// Claim에서 권한 정보 가져오기
-		Collection<? extends GrantedAuthority> authorities =
-				Arrays.stream(claims.get("auth").toString().split(","))
-				.map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toList());
-		
-		// UserDetails 객체를 만들어서 Authentication 리턴
-		UserDetails principal = new User(claims.getSubject(), "", authorities);
-		
-		return new UsernamePasswordAuthenticationToken(principal, "", authorities);
-	}
-	
-	// 토큰 정보를 검증하는 메서드
-	public boolean validateToken(String token) {
-		
-		try {
-			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
-	
-	private Claims parseClaims(String accessToken) {
-		
-		try {
-			return Jwts.parserBuilder()
-					.setSigningKey(key)
-					.build()
-					.parseClaimsJws(accessToken)
-					.getBody();
-		} catch (ExpiredJwtException e) {
-			return e.getClaims();
-		}
-	}
-}
+//package com.forj.jwt;
+//
+//import java.security.Key;
+//import java.util.Arrays;
+//import java.util.Collection;
+//import java.util.Date;
+//import java.util.stream.Collectors;
+//
+//import javax.xml.bind.DatatypeConverter;
+//
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.stereotype.Component;
+//
+//import io.jsonwebtoken.Claims;
+//import io.jsonwebtoken.ExpiredJwtException;
+//import io.jsonwebtoken.Jwts;
+//import io.jsonwebtoken.MalformedJwtException;
+//import io.jsonwebtoken.SignatureAlgorithm;
+//import io.jsonwebtoken.security.Keys;
+//
+//@Component
+//public class JwtTokenProvider {
+//
+//	private final Key key;
+//
+//	public JwtTokenProvider(@Value("${jwt.secret.key}") String secretKey) {
+//		
+//		byte[] secretByteKey = DatatypeConverter.parseBase64Binary(secretKey);
+//		this.key = Keys.hmacShaKeyFor(secretByteKey);
+//	}
+//	
+//	// User 정보를 가지고 AccessToken, RefreshToken을 생성하는 메서드 
+//	public JwtToken generateToken(Authentication authentication) {
+//		
+//		// 권한 가져오기
+//		String authorities = authentication.getAuthorities().stream()
+//				.map(GrantedAuthority::getAuthority)
+//				.collect(Collectors.joining(","));
+//		
+//		// Access Token 생성 (만료시간 : 1000(ms) * 60 * 30 => 30분)
+//		String accessToken = Jwts.builder()
+//				.setSubject(authentication.getName())
+//				.claim("auth", authorities)
+//				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
+//				.signWith(key, SignatureAlgorithm.HS256)
+//				.compact();
+//		
+//		// Refresh Token 생성 (만료시간 : 1000(ms) * 60 * 60 * 36 => 36시간)
+//		String refreshToken = Jwts.builder()
+//				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 36))
+//				.signWith(key, SignatureAlgorithm.HS256)
+//				.compact();
+//		
+//		JwtToken jwtToken = new JwtToken("Bearer", accessToken, refreshToken);
+//		
+//		return jwtToken;
+//	}
+//	
+//	// JWT를 복호화하여 Token에 들어있는 정보를 꺼내는 메서드
+//	public Authentication getAuthentication(String accessToken) {
+//		
+//		// Token 복호화
+//		Claims claims = parseClaims(accessToken);
+//		
+//		if (claims.get("auth") == null) {
+//			throw new RuntimeException("권한 정보가 없는 토큰입니다.");
+//		}
+//		
+//		// Claim에서 권한 정보 가져오기
+//		Collection<? extends GrantedAuthority> authorities =
+//				Arrays.stream(claims.get("auth").toString().split(","))
+//				.map(SimpleGrantedAuthority::new)
+//				.collect(Collectors.toList());
+//		
+//		// UserDetails 객체를 만들어서 Authentication 리턴
+//		UserDetails principal = new User(claims.getSubject(), "", authorities);
+//		
+//		return new UsernamePasswordAuthenticationToken(principal, "", authorities);
+//	}
+//	
+//	// 토큰 정보를 검증하는 메서드
+//	public boolean validateToken(String token) {
+//		
+//		try {
+//			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+//			return true;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return false;
+//	}
+//	
+//	private Claims parseClaims(String accessToken) {
+//		
+//		try {
+//			return Jwts.parserBuilder()
+//					.setSigningKey(key)
+//					.build()
+//					.parseClaimsJws(accessToken)
+//					.getBody();
+//		} catch (ExpiredJwtException e) {
+//			return e.getClaims();
+//		}
+//	}
+//}

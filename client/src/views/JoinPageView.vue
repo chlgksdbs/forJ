@@ -49,15 +49,15 @@
       <div>
         <div class="form_text">이메일</div>
         <div class="form_email_box">
-          <input type="email" id="email_text" maxlength="100">
+          <input type="email" v-model="userEmail" id="email_text" maxlength="100">
         </div>
         <router-link to="#">
-          <button id="certBtn">인증번호 받기</button>
+          <button id="certBtn" @click="emailCheck">인증번호 받기</button>
         </router-link>
       </div>
       <div>
         <div class="form_input_box">
-          <input type="number" placeholder="인증번호를 입력하세요.">
+          <input type="number" v-model="certNumber" placeholder="인증번호를 입력하세요.">
         </div>
       </div>
       <div>
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import TheFooter from "@/components/Footer/TheFooter.vue";
 
 export default {
@@ -80,11 +81,23 @@ export default {
   },
   data() {
     return {
-      message: '',
+      userEmail: '',
+      certNumber: '',
     };
   },
   created() {},
-  methods: {},
+  methods: {
+    emailCheck() {
+      console.log("입력된 이메일: " + this.userEmail); // email 체크
+
+      axios.post('http://localhost/user/certmail', this.userEmail)
+        .then((resp) => {
+          console.log("resp: " + resp);
+          alert('인증번호가 전송되었습니다.');
+          // emailCheckConfirm();
+        });
+    },
+  },
 };
 </script>
 
