@@ -77,6 +77,17 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!-- JWT Dependency End -->
+		<!-- Java Email API Start -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<!-- Java Email API End -->
 	</dependencies>
 
 	<build>
