@@ -1,6 +1,5 @@
 <template>
   <div>
-    <the-heading></the-heading>
     <h2 class="modifyTitle">회원정보 수정</h2>
     <div class="modifyBox">
       <div>
@@ -44,20 +43,14 @@
         <span><button>변경</button></span>
       </div>
     </div>
-    <the-footer></the-footer>
   </div>
 </template>
 
 <script>
-import TheHeading from '../Header/TheHeading.vue';
-import TheFooter from '../Footer/TheFooter.vue';
 
 export default {
   name: 'MyPageModify',
-  components: {
-    TheHeading,
-    TheFooter,
-  },
+  components: {},
   data() {
     return {
       message: '',
