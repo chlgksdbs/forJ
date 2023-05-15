@@ -39,6 +39,7 @@ export default {
     border: 1px solid #000;
     display: flex;
     align-items: center;
+    background-color: #FFF;
 }
 .img_box {
     width: 20%;

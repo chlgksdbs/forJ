@@ -22,6 +22,7 @@ export default {
     cursor: pointer;
     margin: 10px auto;
     padding: 5px;
+    background-color: #FFF;
 }
 .text_box {
     font-size: 80%;
