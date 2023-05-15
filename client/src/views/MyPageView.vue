@@ -12,16 +12,15 @@
       <div class="MyPgCateBox" align="center">
         <div>
           <h3>회원정보</h3>
-          <router-link to="/modify" class="MyPgcateList" >회원정보 수정</router-link><br/>
-          <!-- <a href="#" class="MyPgcateList">회원정보 수정</a><br/> -->
-          <a href="#" class="MyPgcateList">My 장바구니</a><br/>
-          <a href="#" class="MyPgcateList">1:1 문의</a><br/>
-          <a href="#" class="MyPgcateList">좋아요</a><br/>
+          <router-link to="/mypage/modify" class="MyPgcateList" >회원정보 수정</router-link><br/>
+          <router-link to="/mypage/cart" class="MyPgcateList" >My 장바구니</router-link><br/>
+          <router-link to="/mypage/qna" class="MyPgcateList" >1:1 문의</router-link><br/>
+          <router-link to="/mypage/like" class="MyPgcateList" >좋아요</router-link><br/>
         </div>
         <div>
           <h3>커뮤니티</h3>
-          <a href="#" class="MyPgcateList">내가 쓴 게시글</a><br/>
-          <a href="#" class="MyPgcateList">내가 쓴 댓글</a>
+          <router-link to="/mypage/myboard" class="MyPgcateList" >내가 쓴 게시글</router-link><br/>
+          <router-link to="/mypage/mycomment" class="MyPgcateList" >내가 쓴 댓글</router-link><br/>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="modifyTitle">My 장바구니</h2>
+    <h2 class="modifyTitle">1:1 문의</h2>
     <div class="modifyBox">
     </div>
   </div>
