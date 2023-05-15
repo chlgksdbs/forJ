@@ -37,7 +37,7 @@ export default {
   color: #dadada;
 }
 #TheFooter {
-  margin: 0 0 40px 0;
+  padding: 0 0 40px 0;
 }
 #footer_line {
   margin: 30px 0;

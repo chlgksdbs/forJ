@@ -1,5 +1,7 @@
 <template>
-  <div class="MyPageView">
+  <div class="totalMyPage">
+    <the-heading></the-heading>
+    <div class="MyPage">
       <!-- 카테고리를 이루는 왼쪽 화면 -->
     <div class="leftBox">
       <!-- User 프로필 사진 -->
@@ -26,12 +28,17 @@
     <!-- 각 카테고리별 변경되는 오른쪽 화면 -->
     <router-view class="rightBox"></router-view>
   </div>
+  <the-footer></the-footer>
+  </div>
 </template>
 
 <script>
+import TheHeading from '@/components/Header/TheHeading.vue';
+import TheFooter from '@/components/Footer/TheFooter.vue';
+
 export default {
   name: 'MyPageView',
-  components: {},
+  components: {TheHeading, TheFooter},
   data() {
     return {
       message: '',
@@ -43,21 +50,19 @@ export default {
 </script>
 
 <style scoped>
-.MyPageView{
+.totalMyPage{
+  background-color: #f8f8f8;
+}
+.MyPage{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
-/* .mypage{
-  background-color: lightgray;
-} */
 .leftBox{
   float: left;
-  /* width: 20%; */
-  /* height: 80%; */
   margin-right: 30px;
-  /* margin-left: 30px; */
+  margin-bottom: 10px;
 }
 .profileBox{
   border-radius: 15px;
@@ -66,11 +71,10 @@ export default {
 .MyPgCateBox{
   width: 150px;
   padding-bottom: 20px;
-  /* padding: 0px 3px 20px; */
-  /* margin: 10px 0px; */
   margin: auto;
-  line-height: 30px;
-  border: 1px solid lightgrey;
+  margin-top: 25px;
+  line-height: 40px;
+  border: 1px solid rgb(255, 255, 255);
   background-color: #fff;
   border-radius: 10px;
 }
@@ -79,6 +83,6 @@ export default {
   color: black;
 }
 .rightBox{
-  width: 70%;
+  width: 45%;
 }
 </style>
