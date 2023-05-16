@@ -27,6 +27,12 @@ export default {
             position: new naver.maps.LatLng(37.3595704, 127.105399),
             map: this.map,
         });
+
+        // 지도 클릭 이벤트 핸들러
+        naver.maps.Event.addListener(this.map, 'click', (e) => {
+            const latlng = new naver.maps.LatLng(e.coord.y, e.coord.x);
+            this.marker.setPosition(latlng); // 마커 위치 변경
+        });
     },
 }
 </script>
