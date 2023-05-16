@@ -1,14 +1,25 @@
 <template>
     <div id="TheCategorySearchBar">
         <div id="input_search_bar">
-            <input type="text" placeholder="검색어를 입력하세요." maxlength="45" />
-            <img src="@/assets/img/icon_search.png">
+            <input type="text" v-model="categoryTitle" @keyup.enter="searchCategoryTitle" placeholder="검색어를 입력하세요." maxlength="45" />
+            <img src="@/assets/img/icon_search.png" @click="searchCategoryTitle">
         </div>
     </div>
 </template>
 <script>
 export default {
     name: 'TheCategorySearchBar',
+    data() {
+        return {
+            categoryTitle: '',
+        }
+    },
+    methods: {
+        // 검색어 입력 후, 엔터키를 치거나 버튼 누른 후의 작업을 수행하는 메서드
+        searchCategoryTitle() {
+            console.log(this.categoryTitle);
+        },
+    },
 }
 </script>
 <style scoped>

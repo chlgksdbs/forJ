@@ -1,6 +1,6 @@
 <template>
     <div id="TheNaverMap">
-        <div class="naver_map" ref="map"></div>
+        <div id="map" class="naver_map" ref="map"></div>
     </div>
 </template>
 <script>
@@ -26,6 +26,12 @@ export default {
         this.marker = new naver.maps.Marker({
             position: new naver.maps.LatLng(37.3595704, 127.105399),
             map: this.map,
+        });
+
+        // 지도 클릭 이벤트 핸들러
+        naver.maps.Event.addListener(this.map, 'click', (e) => {
+            const latlng = new naver.maps.LatLng(e.coord.y, e.coord.x);
+            this.marker.setPosition(latlng);
         });
     },
 }
