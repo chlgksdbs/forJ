@@ -6,6 +6,12 @@
 <script>
 export default {
     name: "TheNaverMap",
+    data() {
+        return {
+            map: null,
+            marker: null,
+        }
+    },
     mounted() {
         var naver = window.naver; // window 객체의 naver를 변수로서 선언
         var mapDiv = this.$refs.map;
@@ -16,9 +22,12 @@ export default {
             zoom: 14,
         };
 
-        const map = new naver.maps.Map(mapDiv, mapOptions);
-        console.log(map); // 필요 없는 명령어, 그러나 vue에서는 변수를 선언했으면 반드시 사용해야 하므로 사용
-    }
+        this.map = new naver.maps.Map(mapDiv, mapOptions);
+        this.marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.3595704, 127.105399),
+            map: this.map,
+        });
+    },
 }
 </script>
 <style scoped>
