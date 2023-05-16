@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.forj.user.model.repository.UserMapper">
 
+	<insert id="join" parameterType="com.forj.user.model.dto.UserDto">
+		INSERT INTO forj_user
+			(user_id, user_pw, user_name, user_gender, user_phone, user_email)
+		VALUES
+			(#{userId}, #{userPw}, #{userName}, #{userGender}, #{userPhone}, #{userEmail})
+	</insert>
+
 	<select id="login" parameterType="com.forj.user.model.dto.UserDto" resultType="com.forj.user.model.dto.UserDto">
 		SELECT 
 			user_id as userId, user_pw as userPw, user_email as userEmail

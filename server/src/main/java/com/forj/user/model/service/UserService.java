@@ -21,6 +21,11 @@ public class UserService {
 //	@Autowired
 //	private JwtService jwtTokenProvider;
 	
+	public void join(UserDto userDto) {
+		
+		userMapper.join(userDto);
+	}
+	
 	public UserDto login(UserDto userDto) {
 		
 		// 입력된 id나 pw 정보가 없는 경우, null을 리턴
