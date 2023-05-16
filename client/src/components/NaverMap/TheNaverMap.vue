@@ -31,7 +31,7 @@ export default {
         // 지도 클릭 이벤트 핸들러
         naver.maps.Event.addListener(this.map, 'click', (e) => {
             const latlng = new naver.maps.LatLng(e.coord.y, e.coord.x);
-            this.marker.setPosition(latlng);
+            this.marker.setPosition(latlng); // 마커 위치 변경
         });
     },
 }
