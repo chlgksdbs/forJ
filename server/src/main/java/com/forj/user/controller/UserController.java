@@ -67,9 +67,16 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
 	
-	@GetMapping("/join")
-	public String join() {
-		return "user/join";
+	@PostMapping("/join")
+	public String join(@RequestBody UserDto userDto) {
+		
+		try {
+			userService.join(userDto);
+			return "JOIN SUCCESS";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "JOIN FAIL";
+		}
 	}
 	
 	@PostMapping("/certmail")

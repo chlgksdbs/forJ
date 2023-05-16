@@ -7,6 +7,9 @@ import com.forj.user.model.dto.UserDto;
 @Mapper
 public interface UserMapper {
 	
+	// 회원가입
+	void join(UserDto userDto);
+	
 	// 로그인
 	UserDto login(UserDto userDto);
 }

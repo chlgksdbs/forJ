@@ -98,6 +98,12 @@ export default {
   methods: {
     // 인증번호 받기 버튼 클릭 시, 수행하는 함수
     emailCheck() {
+      // 이메일이 유효한 지 체크
+      if (this.userEmail.length == 0) {
+        alert('이메일을 입력하세요.');
+        return;
+      }
+
       // JSON 형태로 전송
       let userDto = {
         "userEmail": this.userEmail,
@@ -111,19 +117,31 @@ export default {
     },
     // 가입하기 버튼 클릭 시, 수행하는 함수
     joinCheck() {
-      // 1. 비밀번호와 비밀번호 재확인이 동일한 지 체크
+      // 1. 입력란에 공백이 있지 않은 지 확인
+      if (this.userId.length == 0 || this.userName.length == 0 || this.userPhone.length == 0 || this.userEmail.length == 0) {
+        alert('모든 항목란은 필수 입력입니다.');
+        return;
+      }
+
+      // 2. 성별을 입력했는 지 확인
+      if (this.userGender.length == 0 || this.userGender == '성별') {
+        alert('성별을 입력해주세요.');
+        return;
+      }
+
+      // 3. 비밀번호와 비밀번호 재확인이 동일한 지 체크
       if (this.userPw.length == 0 || this.userPw !== this.userPwCheck) {
         alert('비밀번호를 확인해주세요!');
         return;
       }
 
-      // 2. 이메일 인증번호가 유효한 지 체크
+      // 4. 이메일 인증번호가 유효한 지 체크
       if (this.certNumber != this.secretCertNumber) {
         alert('인증번호를 확인해주세요!');
         return;
       }
 
-      // 3. 사용자 정보 백엔드로 보내서 유효한 지 체크 후 가입
+      // 5. 사용자 정보 백엔드로 보내서 유효한 지 체크 후 가입
       // 사용자 정보 JSON 형태로 전송
       let userDto = {
         "userId": this.userId,
@@ -135,8 +153,8 @@ export default {
       }
 
       axios.post('http://localhost/user/join', userDto)
-        .then((resp) => {
-          alert('(' + resp.data.userName + ')님 forJ에 가입하신걸 환영합니다!');
+        .then(() => {
+          alert('(' + this.userName + ')님 forJ에 가입하신걸 환영합니다!');
         });
 
     }
