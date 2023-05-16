@@ -1,6 +1,5 @@
 package com.forj.jwt;
 
-import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
