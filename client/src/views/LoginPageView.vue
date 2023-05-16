@@ -18,7 +18,7 @@
       </div>
       <div>
         <router-link to="#">
-          <button id="loginBtn">로그인</button>
+          <button id="loginBtn" @click="loginCheck">로그인</button>
         </router-link>
       </div>
       <div class="find_box">
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'LoginPageView',
   components: {},
@@ -55,7 +57,25 @@ export default {
     },
     input_delete_pw() {
       this.pw='';
-    }
+    },
+    loginCheck() {
+      // 1. 입력이 안된 정보가 있는 지 체크
+      if (this.id.length == 0 || this.pw.length == 0) {
+        alert('아이디 또는 비밀번호를 입력하세요');
+        return;
+      }
+
+      // 2. JSON 객체로 만들어서 Server로 전송
+      let userDto = {
+        "userId": this.id,
+        "userPw": this.pw,
+      }
+
+      axios.post('http://localhost/user/login', userDto)
+        .then(() => {
+          this.$router.push('/');
+        });
+    },
   },
 };
 </script>

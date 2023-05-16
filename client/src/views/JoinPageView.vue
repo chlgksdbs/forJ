@@ -155,6 +155,7 @@ export default {
       axios.post('http://localhost/user/join', userDto)
         .then(() => {
           alert('(' + this.userName + ')님 forJ에 가입하신걸 환영합니다!');
+          this.$router.push('/login');
         });
 
     }
