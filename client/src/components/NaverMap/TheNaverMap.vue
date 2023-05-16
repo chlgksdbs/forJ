@@ -1,6 +1,6 @@
 <template>
     <div id="TheNaverMap">
-        <div class="naver_map" ref="map"></div>
+        <div id="map" class="naver_map" ref="map"></div>
     </div>
 </template>
 <script>
