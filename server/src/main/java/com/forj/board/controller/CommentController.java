@@ -14,7 +14,7 @@ import com.forj.board.model.dto.CommentDto;
 import com.forj.board.model.service.BoardService;
 
 @RestController
-@CrossOrigin("*")
+// @CrossOrigin("*") // CorsConfig로 처리
 public class CommentController {
 	
 	@Autowired
