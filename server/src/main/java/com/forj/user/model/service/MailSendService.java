@@ -4,9 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 import javax.mail.Message;
-import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +42,8 @@ public class MailSendService {
 		// 내용, charset type, subtype
 		message.setText(content, "utf-8", "html");
 		
-		// 보내는 사람의 이메일 주소, 보내는 사람 이름
-		message.setFrom(new InternetAddress("forj@naver.com", "forJ_Admin"));
+		// 보내는 사람의 이메일 주소
+		message.setFrom("chlgksdbs98@naver.com");
 		
 		
 		return message;

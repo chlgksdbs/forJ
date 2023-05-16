@@ -78,10 +78,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/certmail")
-	public String certmail(@RequestBody String userEmail) throws Exception {
+	public String certmail(@RequestBody UserDto userDto) throws Exception {
 		
-		System.out.println(userEmail);
-		String code = mailSendService.sendMail(userEmail);
+		String code = mailSendService.sendMail(userDto.getUserEmail());
 		System.out.println(code);
 		
 		return code;
