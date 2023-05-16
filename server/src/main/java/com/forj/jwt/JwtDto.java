@@ -1,12 +1,12 @@
 package com.forj.jwt;
 
-public class JwtToken {
+public class JwtDto {
 
 	private String grantType;
 	private String accessToken;
 	private String refreshToken;
 
-	public JwtToken(String grantType, String accessToken, String refreshToken) {
+	public JwtDto(String grantType, String accessToken, String refreshToken) {
 		super();
 		this.grantType = grantType;
 		this.accessToken = accessToken;

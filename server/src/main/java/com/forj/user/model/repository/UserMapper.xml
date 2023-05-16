@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.forj.user.model.repository.UserMapper">
 
+	<select id="login" parameterType="com.forj.user.model.dto.UserDto" resultType="com.forj.user.model.dto.UserDto">
+		SELECT 
+			user_id as userId, user_pw as userPw, user_email as userEmail
+		FROM 
+			forj_user
+		WHERE 
+			user_id=#{userId} and user_pw=#{userPw}
+	</select>
+	
 </mapper>

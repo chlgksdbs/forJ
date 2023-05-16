@@ -1,5 +1,6 @@
 package com.forj.jwt;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,51 +16,49 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
-@Component
-public class JwtTokenProvider {
+@Service
+public class JwtService {
 
-	private final Key key;
+	@Value("${jwt.secret.key}")
+	private String SALT;
 
-	public JwtTokenProvider(@Value("${jwt.secret.key}") String secretKey) {
-		
-		byte[] secretByteKey = DatatypeConverter.parseBase64Binary(secretKey);
-		this.key = Keys.hmacShaKeyFor(secretByteKey);
-	}
-	
 	// User 정보를 가지고 AccessToken, RefreshToken을 생성하는 메서드 
-	public JwtToken generateToken(Authentication authentication) {
-		
-		// 권한 가져오기
-		String authorities = authentication.getAuthorities().stream()
-				.map(GrantedAuthority::getAuthority)
-				.collect(Collectors.joining(","));
+	public <T> String generateToken(String key, T data, String subject) {
 		
 		// Access Token 생성 (만료시간 : 1000(ms) * 60 * 30 => 30분)
 		String accessToken = Jwts.builder()
-				.setSubject(authentication.getName())
-				.claim("auth", authorities)
+				.setHeaderParam("typ", "JWT")
+				.setHeaderParam("regDate", System.currentTimeMillis())
 				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
-				.signWith(key, SignatureAlgorithm.HS256)
+				.setSubject(subject)
+				.claim(key, data)
+				.signWith(this.generateKey(), SignatureAlgorithm.HS256)
 				.compact();
 		
-		// Refresh Token 생성 (만료시간 : 1000(ms) * 60 * 60 * 36 => 36시간)
-		String refreshToken = Jwts.builder()
-				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 36))
-				.signWith(key, SignatureAlgorithm.HS256)
-				.compact();
+		return accessToken;
+	}
+	
+	private Key generateKey() {
 		
-		JwtToken jwtToken = new JwtToken("Bearer", accessToken, refreshToken);
+		byte[] bytekey = null;
+		Key key = null;
 		
-		return jwtToken;
+		try {
+			bytekey = DatatypeConverter.parseBase64Binary(SALT);
+			key = Keys.hmacShaKeyFor(bytekey);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return key;
 	}
 	
 	// JWT를 복호화하여 Token에 들어있는 정보를 꺼내는 메서드
@@ -88,7 +87,7 @@ public class JwtTokenProvider {
 	public boolean validateToken(String token) {
 		
 		try {
-			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+			Jwts.parserBuilder().setSigningKey(generateKey()).build().parseClaimsJws(token);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,7 +100,7 @@ public class JwtTokenProvider {
 		
 		try {
 			return Jwts.parserBuilder()
-					.setSigningKey(key)
+					.setSigningKey(generateKey())
 					.build()
 					.parseClaimsJws(accessToken)
 					.getBody();

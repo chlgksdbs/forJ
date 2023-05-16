@@ -2,45 +2,83 @@ package com.forj.user.controller;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.forj.jwt.JwtDto;
+import com.forj.jwt.JwtService;
+import com.forj.user.model.dto.UserDto;
 import com.forj.user.model.service.MailSendService;
-//import com.forj.user.model.service.UserService;
+import com.forj.user.model.service.UserService;
 
 @RestController
 @RequestMapping("/user")
 // @CrossOrigin("*") // CorsConfig로 처리
 public class UserController {
 	
-//	@Autowired
-//	private UserService userService;
+	// 토큰 검증 시, 활용할 메시지
+	private static final String SUCCESS = "success";
+	private static final String FAIL = "fail";
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private JwtService jwtService;
 	
 	@Autowired
 	private MailSendService mailSendService;
 	
-//	@PostMapping("/login")
-//	public JwtToken loginSuccess(@RequestBody Map<String, String> loginInfo) {
-//		
-//		JwtToken token = userService.login(loginInfo.get("userId"), loginInfo.get("userPw"));
-//		
-//		return token;
-//	}
+	@PostMapping("/login")
+	public ResponseEntity<Map<String, Object>> loginSuccess(@RequestBody UserDto userDto) {
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			UserDto loginInfo = userService.login(userDto);
+			
+			// 로그인 정보가 존재하는 경우
+			if (loginInfo != null) {
+				// JWT 생성 (Key, Data, Subject)
+				String token = jwtService.generateToken("userId", loginInfo.getUserId(), "access-token");
+				
+				resultMap.put("access-token", token);
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			}
+			// 로그인 정보가 존재하지 않는 경우
+			else {
+				resultMap.put("message", FAIL);
+				status = HttpStatus.ACCEPTED;
+			}
+		} catch (Exception e) {
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
 	
 	@GetMapping("/join")
 	public String join() {
 		return "user/join";
 	}
 	
-	@PostMapping("/certmail/{userEmail}")
-	public String certmail(@PathVariable String userEmail) throws Exception {
+	@PostMapping("/certmail")
+	public String certmail(@RequestBody String userEmail) throws Exception {
 		
 		System.out.println(userEmail);
 		String code = mailSendService.sendMail(userEmail);
