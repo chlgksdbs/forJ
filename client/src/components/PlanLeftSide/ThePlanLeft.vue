@@ -64,8 +64,12 @@ export default {
         // 여행 일정 기간을 계산하는 메서드
         calcPeriod(date1, date2) {
             let period = date2.getTime() - date1.getTime();
-            if (date1 > date2) {
-                alert('출발일은 도착일보다 늦어야합니다.');
+
+            // 여행 도착일이 출발일보다 빠르다면, 설정 초기화
+            if (period < 0) {
+                alert('여행 출발일과 도착일의 설정이 잘못되었습니다.');
+                this.attr[0].dates.start = new Date();
+                this.attr[0].dates.end = new Date();
                 return "?";
             }
             return Math.floor(period / (1000 * 60 * 60 * 24)) + 1;
