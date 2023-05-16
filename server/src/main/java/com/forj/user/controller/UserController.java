@@ -6,7 +6,6 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,7 @@ import com.forj.user.model.service.MailSendService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin("*")
+// @CrossOrigin("*") // CorsConfig로 처리
 public class UserController {
 	
 //	@Autowired

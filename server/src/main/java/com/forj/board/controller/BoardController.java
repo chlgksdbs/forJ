@@ -19,7 +19,7 @@ import com.forj.board.model.service.BoardService;
 
 @RestController
 @RequestMapping("/board")
-@CrossOrigin("*")
+// @CrossOrigin("*") // CorsConfig로 처리
 public class BoardController {
 	
 	@Autowired
