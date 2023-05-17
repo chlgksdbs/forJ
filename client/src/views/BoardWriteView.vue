@@ -134,8 +134,8 @@ td {
 }
 #btn_box {
   display: flex;
-  justify-content: right;
   margin: 0px auto;
   padding: 0px 20px;
+  width: 1060px;
 }
 </style>
