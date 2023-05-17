@@ -2,16 +2,7 @@
   <div id="TheBoardDetail">
     <div class="detail_content">
       <p class="detail_content_text">
-        {{ boardItem.content }}
-      </p>
-      <div class="detail_content_img_box">
-        <h2>흑돼지 맛집 숙성도</h2>
-        <img src="@/assets/img/detail_place.jpg">
-      </div>
-      <p class="detail_content_text">
-        첫번째 맛집은 숙성도입니다!!!
-        <br>
-        숙성도는 제 친구의 추천으로 방문하게 되었는데요~ 생각했던 것보다 더 고기가 맛있...
+        <viewer v-if="boardItem.content != null" :initialValue="boardItem.content"/>
       </p>
     </div>
     <div class="detail_route">
@@ -24,13 +15,16 @@
 </template>
 
 <script>
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Viewer } from "@toast-ui/vue-editor";
+
 export default {
   name: 'TheBoardDetail',
-  components: {},
+  components: {
+    Viewer,
+  },
   data() {
-    return {
-      message: '',
-    };
+    return {};
   },
   props: {
     boardItem: Object,

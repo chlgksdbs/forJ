@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import TheHeading from "@/components/Header/TheHeading.vue";
 import TheFooter from "@/components/Footer/TheFooter.vue";
 import "@toast-ui/editor/dist/toastui-editor.css";
@@ -52,7 +53,7 @@ export default {
   data() {
     return {
       title: '',
-      writer: '',
+      writer: 'chlgksdbs',
       writeDate: '',
       content: '',
     };
@@ -63,11 +64,22 @@ export default {
   methods: {
     writeBtn() {
       // content를 markdown 형태로 저장하는 action
-      var content = this.$refs.toastuiEditor.invoke("getMarkdown");
+      this.content = this.$refs.toastuiEditor.invoke("getMarkdown");
+      // console.log(content); // 디버깅
 
       // content를 html 형태로 저장하는 action
       // var content = this.$refs.toastuiEditor.invoke("getHtml");
-      console.log(content);
+
+      let boardDto = {
+        'title': this.title,
+        'writer': this.writer,
+        'content': this.content,
+      };
+      axios.post('http://localhost/board/write', boardDto)
+        .then((resp) => {
+          console.log(resp.data);
+          this.$router.push("/board");
+        });
     },
     // 날짜 포맷을 변경하는 메서드
     dateFormat(date) {

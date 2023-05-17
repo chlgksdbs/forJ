@@ -4,7 +4,7 @@
         <the-search-bar></the-search-bar>
         <the-board-list></the-board-list>
         <div class="post_area">
-            <router-link to="#">글작성</router-link>
+            <router-link to="/write">글작성</router-link>
         </div>
         <the-page-navigation></the-page-navigation>
         <the-footer></the-footer>
