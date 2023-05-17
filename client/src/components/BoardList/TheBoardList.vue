@@ -15,59 +15,11 @@
                     <td>admin</td>
                     <td>2023-04-15</td>
                 </tr>
-                <tr class="board_table_line">
-                    <td>54</td>
-                    <td>2박 3일 먹방으로 힐링하는 제주도 여행 일정 공유</td>
-                    <td>먹깨비</td>
-                    <td>2023-05-04</td>
-                </tr>
-                <tr class="board_table_line">
-                    <td>53</td>
-                    <td>지방사람의 1박 2일 인천 서울 여행 일정</td>
-                    <td>군머꼰대</td>
-                    <td>2023-05-03</td>
-                </tr>
-                <tr class="board_table_line">
-                    <td>52</td>
-                    <td>2박 3일 부산 커플 여행 일정 공유해요~!!</td>
-                    <td>단대복학생</td>
-                    <td>2023-05-02</td>
-                </tr>
-                <tr class="board_table_line">
-                    <td>51</td>
-                    <td>당일치기 수원 일정 공유합니다~</td>
-                    <td>여행가도비</td>
-                    <td>2023-05-01</td>
-                </tr>
-                <tr class="board_table_line">
-                    <td>50</td>
-                    <td>2박 3일 전주 일정 공유</td>
-                    <td>난아이유가아니유</td>
-                    <td>2023-05-01</td>
-                </tr>
-                <tr class="board_table_line">
-                    <td>49</td>
-                    <td>대전 유성구 1박 2일 일정 공유합니다!!</td>
-                    <td>지방유학생</td>
-                    <td>2023-04-30</td>
-                </tr>
-                <tr class="board_table_line">
-                    <td>48</td>
-                    <td>1박 2일 알찬 제주 서귀포 여행 일정</td>
-                    <td>마음만은20대</td>
-                    <td>2023-04-30</td>
-                </tr>
-                <tr class="board_table_line">
-                    <td>47</td>
-                    <td>일본(교토, 오사카) 4박 5일 여행 일정 공유</td>
-                    <td>조민트</td>
-                    <td>2023-04-30</td>
-                </tr>
-                <tr class="board_table_line">
-                    <td>46</td>
-                    <td>5년차 서울 커플의 데이트 코스 공유~~</td>
-                    <td>누구없소</td>
-                    <td>2023-04-29</td>
+                <tr class="board_table_line" v-for="item in items" :key="item.board_id">
+                    <td>{{ item.boardId }}</td>
+                    <td><router-link :to="'/detail/' + item.boardId">{{ item.title }}</router-link></td>
+                    <td>{{ item.writer }}</td>
+                    <td>{{ dateFormat(item.writeDate) }}</td>
                 </tr>
                 <tr class="board_table_line"></tr>
             </table>
@@ -75,8 +27,30 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     name: "TheBoardList",
+    data() {
+        return {
+            items: [],
+        }
+    },
+    created() {
+        // axios 비동기 통신으로 server에서 list 가져오기
+        axios.get('http://localhost/board/list')
+            .then((resp) => {
+                // console.log(resp); // 디버깅
+                this.items = resp.data;
+            });
+    },
+    methods: {
+        // 날짜 포맷을 변경하는 메서드 (시, 분, 초 제외)
+        dateFormat(date) {
+            let dateFormat = date.substring(0, 10);
+            return dateFormat;
+        },
+    },
 }
 </script>
 <style scoped>

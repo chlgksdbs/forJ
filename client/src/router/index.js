@@ -76,7 +76,7 @@ const routes = [
     component: BoardPageView,
   },
   {
-    path: "/detail",
+    path: "/detail/:boardId",
     name: "detail",
     component: BoardDetailView,
   },

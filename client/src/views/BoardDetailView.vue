@@ -5,7 +5,7 @@
       <img src="@/assets/img/detail_logo.jpg" class="detail_logo" />
     </div>
     <div class="detail_title">
-      <h1>2박 3일 먹방으로 힐링하는 제주도 여행 일정 공유</h1>
+      <h1>{{ boardItem.title }}</h1>
     </div>
     <div class="detail_nav">
       <div class="detail_nav_profile_img_text">
@@ -14,23 +14,24 @@
         </div>
         <div class="detail_nav_profile_text">
           <div class="detail_nav_profile_nickname">
-            먹깨비
+            {{ boardItem.writer }}
           </div>
           <div class="detail_nav_profile_write_date">
-            2023-05-04 18:05:12
+            {{ boardItem.writeDate }}
           </div>
         </div>
       </div>
       <div class="detail_nav_hit">
-        조회수 : 138
+        조회수 : {{ boardItem.hit }}
       </div>
     </div>
-    <the-board-detail></the-board-detail>
+    <the-board-detail :boardItem="boardItem"></the-board-detail>
     <the-footer></the-footer>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import TheHeading from "@/components/Header/TheHeading.vue";
 import TheBoardDetail from "@/components/BoardDetail/TheBoardDetail.vue";
 import TheFooter from "@/components/Footer/TheFooter.vue";
@@ -44,10 +45,18 @@ export default {
   },
   data() {
     return {
-      message: '',
+      boardItem: {},
     };
   },
-  created() {},
+  created() {
+    // console.log(this.$route.params.boardId); // 디버깅
+    // axios 비동기 통신으로 server에서 detail 가져오기
+    axios.get('http://localhost/board/detail/' + this.$route.params.boardId)
+      .then((resp) => {
+        // console.log(resp.data); // 디버깅
+        this.boardItem = resp.data;
+      });
+  },
   methods: {},
 };
 </script>
