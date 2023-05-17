@@ -31,12 +31,16 @@ public class MailSendService {
 		message.setSubject("[forJ] 회원가입 이메일 인증번호"); // 메일 제목
 		
 		String content = ""; // 메일 본문
-		content += "<div style='margin: 100px;'>";
-		content += "<h1>안녕하세요!</h1>";
-		content += "<h1>forJ 회원가입 이메일 인증번호를 알려드립니다.</h1>";
+		content += "<div>";
+		content += "<h2>안녕하세요. forJ 관리자 입니다.</h2>";
+		content += "<h2>회원가입 인증번호는 다음과 같습니다.</h2>";
 		content += "<hr>";
 		content += "<h2 style='color: blue;'>인증번호 : <strong>" + certKey;
 		content += "</strong></h2>";
+		content += "<div style='font-size: 8pt;'>이용약관 | 개인정보처리방침</div>";
+		content += "<div style='font-size: 8pt;'>본 메일은 발신전용 메일이므로 문의 및 회신하실 경우 답변되지 않습니다.</div>";
+		content += "<div style='font-size: 8pt;'>문의사항은 fgan75@naver.com를 이용해주시기 바랍니다.</div>";
+		content += "<div style='font-size: 8pt;'>Copyright ⓒforJ. All Rights Reserved.</div>";
 		content += "</div>";
 		
 		// 내용, charset type, subtype
