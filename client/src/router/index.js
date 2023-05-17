@@ -12,6 +12,7 @@ import LoginPageView from "@/views/LoginPageView.vue";
 import JoinPageView from "@/views/JoinPageView.vue";
 import BoardPageView from "@/views/BoardPageView.vue";
 import BoardDetailView from "@/views/BoardDetailView.vue";
+import BoardWriteView from "@/views/BoardWriteView.vue";
 import UserPlanView from "@/views/UserPlanView.vue";
 
 Vue.use(VueRouter);
@@ -76,9 +77,14 @@ const routes = [
     component: BoardPageView,
   },
   {
-    path: "/detail",
+    path: "/detail/:boardId",
     name: "detail",
     component: BoardDetailView,
+  },
+  {
+    path: "/write",
+    name: "write",
+    component: BoardWriteView,
   },
   {
     path: "/plan",
