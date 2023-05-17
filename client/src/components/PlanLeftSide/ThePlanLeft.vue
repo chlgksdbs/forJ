@@ -13,7 +13,7 @@
         </div>
         <div class="plan_left_select_list">
             <h3>선택 목록</h3>
-            <button class="plan_left_delete_btn">장소 전체 삭제</button>
+            <button class="plan_left_delete_btn" @click="deleteAllCard">장소 전체 삭제</button>
             <the-select-list-card :img="require('@/assets/img/ex_img5.png')" :title="'삼성화재 유성연수원'"></the-select-list-card>
             <the-select-list-card :img="require('@/assets/img/ex_img2.png')" :title="'유성온천역'"></the-select-list-card>
             <the-select-list-card :img="require('@/assets/img/ex_img1.png')" :title="'충남대학교'"></the-select-list-card>
@@ -87,6 +87,10 @@ export default {
                 this.attr[0].dates.end = date.date;
                 this.clickCount = 0;
             }
+        },
+        // 선택 목록에 있는 the-select-list-card를 전체 삭제하는 메서드
+        deleteAllCard() {
+            
         },
     },
 }
