@@ -93,7 +93,7 @@
 | Category          | Stack                                                                           |
 | ----------------- | ------------------------------------------------------------------------------- |
 | Language          | - Javascript                                                                    |
-| Framework         | - Vue                                                                           |
+| Framework         | - Vue 2                                                                         |
 
 ### Back-end
 | Category          | Stack                                                                           |
