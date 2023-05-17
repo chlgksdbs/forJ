@@ -14,9 +14,7 @@
         <div class="plan_left_select_list">
             <h3>선택 목록</h3>
             <button class="plan_left_delete_btn" @click="deleteAllCard">장소 전체 삭제</button>
-            <the-select-list-card :img="require('@/assets/img/ex_img5.png')" :title="'삼성화재 유성연수원'"></the-select-list-card>
-            <the-select-list-card :img="require('@/assets/img/ex_img2.png')" :title="'유성온천역'"></the-select-list-card>
-            <the-select-list-card :img="require('@/assets/img/ex_img1.png')" :title="'충남대학교'"></the-select-list-card>
+            <the-select-list-card v-for="selectItem in selectItems" :key="selectItem.no" :img="selectItem.img" :title="selectItem.title"></the-select-list-card>
             <button class="plan_left_create_btn">일정 생성</button>
         </div>
     </div>
@@ -32,6 +30,23 @@ export default {
     data() {
         return {
             openmodal: false,
+            selectItems: [
+                {
+                    no: 1,
+                    title: '삼성화재 유성연수원',
+                    img: require('@/assets/img/ex_img5.png')
+                },
+                {
+                    no: 2,
+                    title: '유성온천역',
+                    img: require('@/assets/img/ex_img2.png')
+                },
+                {
+                    no: 3,
+                    title: '충남대학교',
+                    img: require('@/assets/img/ex_img1.png')
+                },
+            ],
             attr: [
                 {
                     highlight: {
@@ -90,7 +105,7 @@ export default {
         },
         // 선택 목록에 있는 the-select-list-card를 전체 삭제하는 메서드
         deleteAllCard() {
-            
+            this.selectItems.splice(0);
         },
     },
 }
@@ -135,13 +150,14 @@ export default {
     cursor: pointer;
 }
 .plan_left_delete_btn {
+    margin: 3px;
     color: #FFF;
     font-weight: bold;
     background-color: #EF5C53;
     border: 1px solid #EF5C53;
-    border-radius: 5px;
-    width: 99%;
-    height: 6%;
+    border-radius: 15px;
+    width: 90%;
+    height: 7%;
     cursor: pointer;
 }
 .plan_left_create_btn {
@@ -151,7 +167,7 @@ export default {
     border: 1px solid #0085FF;
     border-radius: 15px;
     width: 90%;
-    height: 10%;
+    height: 7%;
     cursor: pointer;
 }
 </style>
