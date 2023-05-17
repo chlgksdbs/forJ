@@ -12,7 +12,7 @@
 |[@chlgksdbs](https://github.com/chlgksdbs)|[@zosunny](https://github.com/zosunny)|
 
 
-## 📂 Folder Structure
+<!-- ## 📂 Folder Structure
 
 ```javascript
 📂 forj
@@ -84,7 +84,7 @@
     |    ├── 📄 registerSuccess.jsp         
     📄 README.md
     📄 pom.xml
-```
+``` -->
 
 
 ## 🔧 사용 기술
@@ -94,7 +94,6 @@
 | ----------------- | ------------------------------------------------------------------------------- |
 | Language          | - Javascript                                                                    |
 | Framework         | - Vue                                                                           |
-| CSS               | - Styled Components                                                         |
 
 ### Back-end
 | Category          | Stack                                                                           |
@@ -102,7 +101,7 @@
 | Framework         | - Spring Boot 2.7.11                                                            |
 | Test              | - JUnit 5                                                                       |
 | Infra             | - Docker <br>- AWS EC2 <br>- Jenkins <br>                                       |
-| Database          | - MySql <br>- 공공데이터                                                         |
+| Database          | - MySql <br>- 공공데이터                                                           |
 
 ### Communication
 | Category          | Stack                                                                           |
