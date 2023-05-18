@@ -1,11 +1,10 @@
 package com.forj.jwt;
 
-import java.security.Key;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.DatatypeConverter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
@@ -47,7 +45,7 @@ public class JwtService {
 				// (5) Claim에 들어갈 key, data 정보 설정 (여기서는 key: "userId", data: userId)
 				.claim(key, data)
 				// (6) Signature 설정: secret key를 활용한 암호화
-				.signWith(this.generateKey(), SignatureAlgorithm.HS256)
+				.signWith(SignatureAlgorithm.HS256,this.generateKey())
 				// (7) 직렬화 처리
 				.compact();
 		
@@ -64,24 +62,20 @@ public class JwtService {
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
 				.claim(key, data)
-				.signWith(this.generateKey(), SignatureAlgorithm.HS256)
+				.signWith(SignatureAlgorithm.HS256, this.generateKey())
 				.compact();
 		
 		return refreshToken;
 	}
 	
 	// Signature 설정에 들어갈 key 생성
-	private Key generateKey() {
+	private byte[] generateKey() {
 		
-		byte[] bytekey = null;
-		Key key = null;
+		byte[] key = null;
 		
 		try {
-//			bytekey = SALT.getBytes("UTF-8"); // charset 설정 안하면 사용자 플랫폼의 기본 인코딩 설정으로 인코딩됨
-			bytekey = DatatypeConverter.parseBase64Binary(SALT);
-			key = Keys.hmacShaKeyFor(bytekey);
-//		} catch (UnsupportedEncodingException e) {
-		} catch (Exception e) {
+			key = SALT.getBytes("UTF-8"); // charset 설정 안하면 사용자 플랫폼의 기본 인코딩 설정으로 인코딩됨
+		} catch (UnsupportedEncodingException e) {
 			if (logger.isInfoEnabled()) {
 				e.printStackTrace();
 			}
@@ -100,9 +94,9 @@ public class JwtService {
 			
 			// Json Web Signature란?
 			// -> 서버에서 인증을 근거로 인증 정보를 서버의 private key로 서명한 것을 토큰화한 것
-			Jws<Claims> claims = Jwts.parserBuilder()
+			Jws<Claims> claims = Jwts.parser()
 					// (1) JWS 서명 검증을 위한 secret key 설정
-					.setSigningKey(this.generateKey()).build()
+					.setSigningKey(this.generateKey())
 					// (2) 파싱하여 원본 Jws 생성
 					.parseClaimsJws(token);
 			
@@ -134,8 +128,8 @@ public class JwtService {
 		Jws<Claims> claims = null;
 		
 		try {
-			claims = Jwts.parserBuilder()
-					.setSigningKey(this.generateKey()).build()
+			claims = Jwts.parser()
+					.setSigningKey(this.generateKey())
 					.parseClaimsJws(token);
 		} catch (Exception e) {
 			// TODO: handle exception
