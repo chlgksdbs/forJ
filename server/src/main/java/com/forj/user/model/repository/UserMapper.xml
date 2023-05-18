@@ -2,13 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.forj.user.model.repository.UserMapper">
 
-	<insert id="join" parameterType="com.forj.user.model.dto.UserDto">
-		INSERT INTO forj_user
-			(user_id, user_pw, user_name, user_gender, user_phone, user_email)
-		VALUES
-			(#{userId}, #{userPw}, #{userName}, #{userGender}, #{userPhone}, #{userEmail})
-	</insert>
-
 	<select id="login" parameterType="com.forj.user.model.dto.UserDto" resultType="com.forj.user.model.dto.UserDto">
 		SELECT 
 			user_id as userId, user_name as userName, user_email as userEmail
@@ -17,5 +10,21 @@
 		WHERE 
 			user_id=#{userId} and user_pw=#{userPw}
 	</select>
+	
+	<update id="logout" parameterType="map">
+		UPDATE
+			forj_user
+		SET
+			user_refresh_token=#{refreshToken, jdbcType=VARCHAR}
+		WHERE 
+			user_id=#{userId}
+	</update>
+	
+	<insert id="join" parameterType="com.forj.user.model.dto.UserDto">
+		INSERT INTO forj_user
+			(user_id, user_pw, user_name, user_gender, user_phone, user_email)
+		VALUES
+			(#{userId}, #{userPw}, #{userName}, #{userGender}, #{userPhone}, #{userEmail})
+	</insert>
 	
 </mapper>
