@@ -3,7 +3,7 @@
     <!-- 댓글 목록 div -->
     <div class="detail_comment_content_box">
       <div class="comment_profile_img_box">
-        <img src="@/assets/img/detail_profile.jpg">
+        <img src="@/assets/img/profile.jpg">
       </div>
       <div class="comment_content_box">
         <div class="comment_content_header">

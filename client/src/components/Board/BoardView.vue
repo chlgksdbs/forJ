@@ -1,7 +1,7 @@
 <template>
   <div id="BoardView">
     <div class="detail_header">
-      <img src="@/assets/img/detail_logo.jpg" class="detail_logo" />
+      <img src="@/assets/img/detail_logo.png" class="detail_logo" />
     </div>
     <div class="detail_title">
       <h1>{{ boardItem.title }}</h1>
@@ -55,7 +55,7 @@
       <div class="comment_title">댓글</div>
       <div class="comment_body">
         <div class="comment_profile_img_box">
-          <img src="@/assets/img/detail_profile.jpg">
+          <img src="@/assets/img/profile.jpg">
         </div>
         <div class="comment_content_box">
           <input type="text" placeholder="댓글을 입력하세요." />
