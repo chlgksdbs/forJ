@@ -7,11 +7,11 @@
       </div>
       <div class="comment_content_box">
         <div class="comment_content_header">
-          <div>단대복학생</div>
-          <div>2023-05-04 18:05:12</div>
+          <div>{{ commentItem.userId }}</div>
+          <div>{{ commentItem.writeDate }}</div>
         </div>
         <div class="comment_content_body">
-          <p>우와 너무 좋은 코스인 것 같아요!! 여자친구랑 가도 좋을 것 같네요~ㅎㅎ</p>
+          <p>{{ commentItem.content }}</p>
         </div>
       </div>
     </div>
@@ -26,6 +26,9 @@ export default {
     return {
       message: '',
     };
+  },
+  props: {
+    commentItem: Object,
   },
   created() {},
   methods: {},
@@ -67,6 +70,7 @@ export default {
   line-height: 30px;
 }
 .comment_content_body p {
+  text-align: left;
   margin: 5px 0;
 }
 #BoardCommentItem {

@@ -3,8 +3,9 @@
 <mapper namespace="com.forj.board.model.repository.CommentMapper">
 
 	<select id="selectAll" parameterType="int" resultType="com.forj.board.model.dto.CommentDto">
-		select comment_id as commentId, board_id as boardId, user_id as userId, content, write_date as writeDate
-		from forj_comment
+		select comment_id as commentId, board_id as boardId, fu.user_nickname as userId, content, write_date as writeDate
+		from forj_comment as fc join forj_user as fu
+		using(user_id)
 		where board_id = #{boardId}
 	</select>
 	
