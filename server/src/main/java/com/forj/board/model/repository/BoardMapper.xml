@@ -3,7 +3,7 @@
 <mapper namespace="com.forj.board.model.repository.BoardMapper">
 	
 	<select id="selectAll" resultType="com.forj.board.model.dto.BoardDto">
-		select board_id as boardId, title, fu.user_nickname as writer, write_date as writeDate
+		select board_id as boardId, title, fu.user_nickname as writer, write_date as writeDate, hit
 		from forj_board as fb join forj_user as fu
 		on fb.writer = fu.user_id
 	</select>
@@ -19,6 +19,12 @@
 		on fb.writer = fu.user_id
 		where board_id=#{boardId}
 	</select>
+	
+	<update id="updateHit" parameterType="int">
+		update forj_board
+		set hit = hit + 1
+		where board_id=#{boardId}
+	</update>
 	
 	<update id="update" parameterType="com.forj.board.model.dto.BoardDto">
 		update forj_board
