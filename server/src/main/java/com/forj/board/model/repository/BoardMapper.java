@@ -18,6 +18,9 @@ public interface BoardMapper {
 	// 상세 조회
 	BoardDto selectOne(int boardId);
 	
+	// 글 조회수 증가
+	void updateHit(int boardId);
+	
 	// 글 수정
 	void update(BoardDto board);
 	

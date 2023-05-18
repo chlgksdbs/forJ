@@ -34,6 +34,11 @@ public class BoardService {
 		return boardMapper.selectOne(boardId);
 	}
 	
+	// 글 조회수 증가
+	public void updateViewCount(int boardId) {
+		boardMapper.updateHit(boardId);
+	}
+	
 	// 글 수정
 	public void modifyBoard(BoardDto board) {
 		boardMapper.update(board);
@@ -47,6 +52,21 @@ public class BoardService {
 	// 댓글 전체 조회
 	public List<CommentDto> commentList(int boardId){
 		return commentMapper.selectAll(boardId);
+	}
+	
+	// 댓글 조회
+	public CommentDto viewComment(int commentId) {
+		return commentMapper.selectOne(commentId);
+	}
+	
+	// 댓글 삭제
+	public void deleteComment(int commentId) {
+		commentMapper.delete(commentId);
+	}
+	
+	// 댓글 수정
+	public void modifyComment(CommentDto commentDto) {
+		commentMapper.update(commentDto);
 	}
 	
 	// 댓글 작성

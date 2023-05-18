@@ -9,6 +9,25 @@
 		where board_id = #{boardId}
 	</select>
 	
+	<select id="selectOne" parameterType="int" resultType="com.forj.board.model.dto.CommentDto">
+		select comment_id as commentId, board_id as boardId, fu.user_nickname as userId, content, write_date as writeDate
+		from forj_comment as fc join forj_user as fu
+		using(user_id)
+		where comment_id = #{commentId}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete
+		from forj_comment
+		where comment_id=#{commentId}
+	</delete>
+	
+	<update id="update" parameterType="com.forj.board.model.dto.CommentDto" >
+		update forj_comment
+		set content=#{content}
+		where comment_id=#{commentId}
+	</update>
+	
 	<insert id="insert" parameterType="com.forj.board.model.dto.CommentDto">
 		insert into forj_comment(board_id, user_id, content, write_date)
 		values(#{boardId}, #{userId}, #{content}, now())
