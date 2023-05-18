@@ -1,7 +1,12 @@
 <template>
   <div id="PlanSearchList">
     <div class="img_box">
-      <img :src="img">
+      <div v-if="img">
+        <img class="img_box_img" :src="img">
+      </div>
+      <div v-else>
+        <img class="img_box_no_img" src="@/assets/img/no-photos.png">
+      </div>
     </div>
     <div class="text_box">
       <h5>{{ title }}</h5>
@@ -33,12 +38,31 @@ export default {
 
 <style scoped>
 .img_box {
-    width: 20%;
-    height: 95%;
-    margin: auto 15px auto 0;
+  position: relative;
+    /* width: 20%;
+    height: 95%; */
+    width: 100px;
+    height:80px;
 }
-.img_box img {
+.img_box > div{
   height: 100%;
+  width: 100%;
+}
+.img_box_img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  
+}
+.img_box_no_img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 45%;
+  width: 45%;
+  padding: 23%;
 }
 .text_box {
     width: 40%;

@@ -1,98 +1,107 @@
-package com.forj.area.model.dto;
-
-public class AreaDto {
-	private int id;
-	private String addr;
-	private String areacode;
-	private String contentid;
-	private String contenttypeid;
-	private String createdtime;
-	private String mapx;
-	private String mapy;
-	private String sigungucode;
-	private String title;
-
-	public AreaDto() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getAddr() {
-		return addr;
-	}
-
-	public void setAddr(String addr) {
-		this.addr = addr;
-	}
-
-	public String getAreacode() {
-		return areacode;
-	}
-
-	public void setAreacode(String areacode) {
-		this.areacode = areacode;
-	}
-
-	public String getContentid() {
-		return contentid;
-	}
-
-	public void setContentid(String contentid) {
-		this.contentid = contentid;
-	}
-
-	public String getContenttypeid() {
-		return contenttypeid;
-	}
-
-	public void setContenttypeid(String contenttypeid) {
-		this.contenttypeid = contenttypeid;
-	}
-
-	public String getCreatedtime() {
-		return createdtime;
-	}
-
-	public void setCreatedtime(String createdtime) {
-		this.createdtime = createdtime;
-	}
-
-	public String getMapx() {
-		return mapx;
-	}
-
-	public void setMapx(String mapx) {
-		this.mapx = mapx;
-	}
-
-	public String getMapy() {
-		return mapy;
-	}
-
-	public void setMapy(String mapy) {
-		this.mapy = mapy;
-	}
-
-	public String getSigungucode() {
-		return sigungucode;
-	}
-
-	public void setSigungucode(String sigungucode) {
-		this.sigungucode = sigungucode;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-}
+//package com.forj.area.model.dto;
+//
+//public class AreaDto {
+//	private int areaId;
+//	private String addr;
+//	private String areaCode;
+//	private String contentId;
+//	private String contenttypeId;
+//	private String areaImg;
+//	private String mapX;
+//	private String mapY;
+//	private String sigunguCode;
+//	private String areaName;
+//
+//	public AreaDto() {
+//	}
+//
+//	public int getAreaId() {
+//		return areaId;
+//	}
+//
+//	public void setAreaId(int areaId) {
+//		this.areaId = areaId;
+//	}
+//
+//	public String getAddr() {
+//		return addr;
+//	}
+//
+//	public void setAddr(String addr) {
+//		this.addr = addr;
+//	}
+//
+//	public String getAreaCode() {
+//		return areaCode;
+//	}
+//
+//	public void setAreaCode(String areaCode) {
+//		this.areaCode = areaCode;
+//	}
+//
+//	public String getContentId() {
+//		return contentId;
+//	}
+//
+//	public void setContentId(String contentId) {
+//		this.contentId = contentId;
+//	}
+//
+//	public String getContenttypeId() {
+//		return contenttypeId;
+//	}
+//
+//	public void setContenttypeId(String contenttypeId) {
+//		this.contenttypeId = contenttypeId;
+//	}
+//
+//	public String getAreaImg() {
+//		return areaImg;
+//	}
+//
+//	public void setAreaImg(String areaImg) {
+//		this.areaImg = areaImg;
+//	}
+//
+//	public String getMapX() {
+//		return mapX;
+//	}
+//
+//	public void setMapX(String mapX) {
+//		this.mapX = mapX;
+//	}
+//
+//	public String getMapY() {
+//		return mapY;
+//	}
+//
+//	public void setMapY(String mapY) {
+//		this.mapY = mapY;
+//	}
+//
+//	public String getSigunguCode() {
+//		return sigunguCode;
+//	}
+//
+//	public void setSigunguCode(String sigunguCode) {
+//		this.sigunguCode = sigunguCode;
+//	}
+//
+//	public String getAreaName() {
+//		return areaName;
+//	}
+//
+//	public void setAreaName(String areaName) {
+//		this.areaName = areaName;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "AreaDto [areaId=" + areaId + ", addr=" + addr + ", areaCode=" + areaCode + ", contentId=" + contentId
+//				+ ", contenttypeId=" + contenttypeId + ", areaImg=" + areaImg + ", mapX=" + mapX + ", mapY=" + mapY
+//				+ ", sigunguCode=" + sigunguCode + ", areaName=" + areaName + "]";
+//	}
+//	
+//	
+//
+//}
