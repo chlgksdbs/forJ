@@ -43,8 +43,7 @@ public class WebSecurityConfig {
 			.formLogin().disable()
 			.httpBasic().disable()
 			.authorizeRequests()
-			.antMatchers("/user/**").permitAll()
-			.antMatchers("/board/**").permitAll()
+			.antMatchers("/**").permitAll()
 			.anyRequest().authenticated();
 //			.and()
 //			.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);

@@ -33,16 +33,17 @@
         <div class="plan_right_category">
             <plan-category-btn :title="'호텔'" @click.native="setContentTypeId(32)"></plan-category-btn>
             <plan-category-btn :title="'식당'" @click.native="setContentTypeId(39)"></plan-category-btn>
-            <plan-category-btn :title="'쇼핑'" @click.native="setContentTypeId(8)"></plan-category-btn>
+            <plan-category-btn :title="'쇼핑'" @click.native="setContentTypeId(38)"></plan-category-btn>
             <plan-category-btn :title="'여행지'" @click.native="setContentTypeId(12)"></plan-category-btn>
         </div>
-        <div class="plan_right_card">
-            <plan-search-list :img="require('@/assets/img/ex_img1.png')" :title="'충남대학교'"></plan-search-list>
+        <div v-for="item in itemList" :key="item.contentId" class="plan_right_card">
+            <!-- <plan-search-list :img="require('@/assets/img/ex_img1.png')" :title="'충남대학교'"></plan-search-list>
             <plan-search-list :img="require('@/assets/img/ex_img2.png')" :title="'유성온천역'"></plan-search-list>
             <plan-search-list :img="require('@/assets/img/ex_img3.png')" :title="'대전월드컵경기장'"></plan-search-list>
             <plan-search-list :img="require('@/assets/img/ex_img4.png')" :title="'한밭대학교'"></plan-search-list>
             <plan-search-list :img="require('@/assets/img/ex_img5.png')" :title="'삼성화재 유성연수원'"></plan-search-list>
-            <plan-search-list :img="require('@/assets/img/ex_img6.png')" :title="'에이트'"></plan-search-list>
+            <plan-search-list :img="require('@/assets/img/ex_img6.png')" :title="'에이트'"></plan-search-list> -->
+            <plan-search-list :img="item.firstimage" :title="item.title"></plan-search-list>
         </div>
       </div>
     </div>
@@ -101,6 +102,7 @@ export default {
       categoryTitle: '',
       contentTypeId: 0,
       itemList: [],
+      areaList:[],
     };
   },
   created() {},
@@ -152,11 +154,23 @@ export default {
         this.contentTypeId = typeid;
     },
     // 검색어 입력 후, 엔터키를 치거나 버튼 누른 후의 작업을 수행하는 메서드
-    searchCategoryTitle() {
+      searchCategoryTitle() {
+
+        // let areaInfo = {
+        //     'addr': '',
+        //     'areaCode': '',
+        //     'contentId': '',
+        //     'contenttypeId': '',
+        //     'areaImg': '',
+        //     'mapX': '',
+        //     'mapY': '',
+        //     'sigunguCode': '',
+        //     'areaName': '',
+        // }
+        
         console.log(this.categoryTitle);
         console.log(this.contentTypeId);
-        try {
-            // 디비에서 정보 검색
+          try {
             // 공공api에서 호출
             const baseUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1`;
             const serviceKey = `%2BO%2FI7nNhPkcVOh2FuthiaVSbtU9Yvs0HFf0f%2FMd3vSqVsR1UzoM0jbIqd9rAaN7AHHG2S2IpTqcBq1q8aLlkCA%3D%3D`;
@@ -168,10 +182,24 @@ export default {
 
             axios.get(url)
                 .then((resp) => {
-                    console.log(resp.data);
+                    // console.log(resp.da
                     this.itemList = resp.data.response.body.items.item;
                     console.log(this.itemList);
-            })
+
+                    // // 객체에 담아 DB에 저장
+                    // for (var i in this.itemList) {
+                    //     areaInfo.addr = this.itemList[i].addr1;
+                    //     areaInfo.areaCode = this.itemList[i].areacode;
+                    //     areaInfo.contentId = this.itemList[i].contentid;
+                    //     areaInfo.contenttypeId = this.itemList[i].contenttypeid;
+                    //     areaInfo.areaImg = this.itemList[i].firstimage;
+                    //     areaInfo.mapX = this.itemList[i].mapx;
+                    //     areaInfo.mapY = this.itemList[i].mapy;
+                    //     areaInfo.sigunguCode = this.itemList[i].sigungucode;
+                    //     areaInfo.areaName = this.itemList[i].title;
+                    //     axios.post("http://localhost/area/write", areaInfo);
+                    // }
+                })
         } catch {
             // // 공공api에서 호출
             // const baseUrl = `https://apis.data.go.kr/B551011/KorService1`;
