@@ -1,5 +1,8 @@
 package com.forj.user.model.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +15,6 @@ public class UserService {
 	@Autowired
 	private UserMapper userMapper;
 	
-	// 회원가입
-	public void join(UserDto userDto) {
-		
-		userMapper.join(userDto);
-	}
-	
 	// 로그인
 	public UserDto login(UserDto userDto) {
 		
@@ -26,6 +23,21 @@ public class UserService {
 			return null;
 		
 		return userMapper.login(userDto);
+	}
+	
+	// 로그아웃
+	public void logout(String userId) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("refreshToken", null);
+		
+		userMapper.logout(map);
+	}
+	
+	// 회원가입
+	public void join(UserDto userDto) {
+		
+		userMapper.join(userDto);
 	}
 
 }

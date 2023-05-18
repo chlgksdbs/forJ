@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,7 @@ public class UserController {
 	@Autowired
 	private MailSendService mailSendService;
 	
+	// 로그인
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> loginSuccess(@RequestBody UserDto userDto) {
 		
@@ -73,6 +76,27 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
 	
+	// 로그아웃
+	@GetMapping("/logout/{userId}")
+	public ResponseEntity<?> logout(@PathVariable("userId") String userId) {
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		
+		try {
+			userService.logout(userId);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	// 회원가입
 	@PostMapping("/join")
 	public String join(@RequestBody UserDto userDto) {
 		
