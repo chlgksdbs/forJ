@@ -53,8 +53,14 @@
     <!-- 댓글 작성 div -->
     <div class="detail_comment_input_box">
       <div class="comment_title">댓글</div>
-      <div class="comment_profile_img_box">
-        <img src="@/assets/img/detail_profile.jpg">
+      <div class="comment_body">
+        <div class="comment_profile_img_box">
+          <img src="@/assets/img/detail_profile.jpg">
+        </div>
+        <div class="comment_content_box">
+          <input type="text" placeholder="댓글을 입력하세요." />
+          <button id="commentBtn">작성</button>
+        </div>
       </div>
     </div>
     <!-- 댓글 목록 -->
@@ -110,6 +116,9 @@ export default {
 .detail_route_img_box h2 {
   color: #0085ff;
 }
+.detail_route_img_box img {
+  width: 65%;
+}
 .detail_nav_profile_img_box {
   width: 100px;
   height: 100px;
@@ -163,10 +172,17 @@ export default {
   line-height: 160%;
   box-sizing: content-box;
 }
+.detail_comment_input_box {
+  margin: 0 150px;
+}
+.comment_body {
+  display: flex;
+  justify-content: left;
+}
 .comment_profile_img_box {
   width: 55px;
   height: 55px;
-  margin: 0px 50px;
+  margin: auto 20px;
   border-radius: 70%;
   overflow: hidden;
 }
@@ -175,11 +191,38 @@ export default {
   height: 100%;
   object-fit: cover;
 }
+.comment_content_box {
+  width: 80%;
+  margin: auto 5px;
+  text-align: left;
+}
+.comment_content_box input {
+  width: 70%;
+  height: 38px;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  padding: 0 30px;
+}
 #BoardContent {
   margin: 50px 150px;
 }
 #comment_line {
   border-top: 1px solid #eee;
   margin: 16px 0;
+}
+#commentBtn {
+  margin: auto 15px;
+  width: 60px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #40A3FF;
+  background-color: #FFFFFF;
+  color: #40A3FF;
+  cursor: pointer;
+}
+#commentBtn:hover {
+  background-color: #40A3FF;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
 }
 </style>
