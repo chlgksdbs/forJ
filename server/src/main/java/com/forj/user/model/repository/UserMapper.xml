@@ -11,7 +11,7 @@
 
 	<select id="login" parameterType="com.forj.user.model.dto.UserDto" resultType="com.forj.user.model.dto.UserDto">
 		SELECT 
-			user_id as userId, user_pw as userPw, user_email as userEmail
+			user_id as userId, user_name as userName, user_email as userEmail
 		FROM 
 			forj_user
 		WHERE 

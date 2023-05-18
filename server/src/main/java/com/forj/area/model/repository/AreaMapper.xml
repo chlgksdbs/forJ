@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.forj.area.model.repository.AreaMapper">
-	<insert id="insert" parameterType="com.forj.area.model.dto.AreaDto">
-		insert into forj_area(addr, area_code, content_id, contenttype_id, map_x, map_y, sigungu_code, area_name, area_img)
-		values(#{addr}, #{areaCode}, #{contentId}, #{contenttypeId},  #{mapX}, #{mapY}, #{sigunguCode}, #{areaName},#{areaImg})
-	</insert>
-</mapper>
