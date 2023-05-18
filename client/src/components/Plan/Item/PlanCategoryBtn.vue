@@ -27,4 +27,7 @@ export default {
     padding: 5px;
     background-color: #FFF;
 }
+#PlanCategoryBtn:hover{
+    background-color: #40A3FF;
+}
 </style>
