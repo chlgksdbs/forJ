@@ -9,6 +9,9 @@ public class UserDto {
 	private String userGender;
 	private String userPhone;
 	private String userEmail;
+	private int userPlancnt;
+	private String userProfileimg;
+	private String userRefreshToken;
 
 	public UserDto() {
 	}
@@ -68,4 +71,29 @@ public class UserDto {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+
+	public int getUserPlancnt() {
+		return userPlancnt;
+	}
+
+	public void setUserPlancnt(int userPlancnt) {
+		this.userPlancnt = userPlancnt;
+	}
+
+	public String getUserProfileimg() {
+		return userProfileimg;
+	}
+
+	public void setUserProfileimg(String userProfileimg) {
+		this.userProfileimg = userProfileimg;
+	}
+
+	public String getUserRefreshToken() {
+		return userRefreshToken;
+	}
+
+	public void setUserRefreshToken(String userRefreshToken) {
+		this.userRefreshToken = userRefreshToken;
+	}
+
 }
