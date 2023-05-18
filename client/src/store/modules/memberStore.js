@@ -1,5 +1,5 @@
-import jwtDecode from "jwt-decode";
-import router from "@/router";
+// import jwtDecode from "jwt-decode";
+// import router from "@/router";
 
 // vuex life cycle : actions -> mutations -> state
 const memberStore = {
@@ -31,37 +31,37 @@ const memberStore = {
     // actions가 Backend API와 동작하는 부분
     actions: {
         // client의 로그인 요청 처리 메서드
-        async userConfirm({ commit }, user) {
-            await login(
-                user,
-                ({ data }) => {
-                    // Backend에서 넘어온 data 객체 중, message의 값이 success인 경우 (로그인 요청 성공)
-                    if (data.message === "success") {
+        // async userConfirm({ commit }, user) {
+        //     await login(
+        //         user,
+        //         ({ data }) => {
+        //             // Backend에서 넘어온 data 객체 중, message의 값이 success인 경우 (로그인 요청 성공)
+        //             if (data.message === "success") {
 
-                        // data 객체에서 access token과 refresh token 추출
-                        let accessToken = data["access-token"];
-                        let refreshToken = data["refresh-token"];
+        //                 // data 객체에서 access token과 refresh token 추출
+        //                 let accessToken = data["access-token"];
+        //                 let refreshToken = data["refresh-token"];
 
-                        commit("SET_IS_LOGIN", true); // 로그인 성공에 대한 commit
-                        commit("SET_IS_LOGIN_ERROR", false); // 로그인 에러에 대한 commit
-                        commit("SET_IS_VALID_TOKEN", true); // 토큰 유효성에 대한 commit
+        //                 commit("SET_IS_LOGIN", true); // 로그인 성공에 대한 commit
+        //                 commit("SET_IS_LOGIN_ERROR", false); // 로그인 에러에 대한 commit
+        //                 commit("SET_IS_VALID_TOKEN", true); // 토큰 유효성에 대한 commit
 
-                        // access token과 refresh token을 sessionStorage에 설정
-                        sessionStorage.setItem("access-token", accessToken);
-                        sessionStorage.setItem("refresh-token", refreshToken);
-                    }
-                    // message의 값이 fail인 경우 (로그인 요청 실패)
-                    else {
-                        commit("SET_IS_LOGIN", false); // 로그인 실패에 대한 commit
-                        commit("SET_IS_LOGIN_ERROR", true); // 로그인 에러 발생에 대한 commit
-                        commit("SET_IS_VALID_TOKEN", false); // 토큰이 유효하지 않은 것에 대한 commit
-                    }
-                },
-                (error) => {
-                    console.log(error);
-                }
-            )
-        }
+        //                 // access token과 refresh token을 sessionStorage에 설정
+        //                 sessionStorage.setItem("access-token", accessToken);
+        //                 sessionStorage.setItem("refresh-token", refreshToken);
+        //             }
+        //             // message의 값이 fail인 경우 (로그인 요청 실패)
+        //             else {
+        //                 commit("SET_IS_LOGIN", false); // 로그인 실패에 대한 commit
+        //                 commit("SET_IS_LOGIN_ERROR", true); // 로그인 에러 발생에 대한 commit
+        //                 commit("SET_IS_VALID_TOKEN", false); // 토큰이 유효하지 않은 것에 대한 commit
+        //             }
+        //         },
+        //         (error) => {
+        //             console.log(error);
+        //         }
+        //     )
+        // }
     },
 };
 

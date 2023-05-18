@@ -8,6 +8,8 @@ import AppUser from "../views/AppUser.vue";
 import AppBoard from "@/views/AppBoard.vue";
 import AppPlan from "@/views/AppPlan.vue";
 
+// import store from "@/store";
+
 Vue.use(VueRouter);
 
 const routes = [
