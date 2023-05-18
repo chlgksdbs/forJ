@@ -39,19 +39,27 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import axios from 'axios';
+
+const memberStore = "memberStore";
 
 export default {
   name: 'AppLogin',
   components: {},
   data() {
     return {
-      id: '',
-      pw: '',
+      user: {
+        userId: null,
+        userPw: null,
+      },
     };
   },
-  created() {},
+  computed: {
+    ...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
+  },
   methods: {
+    ...mapActions(memberStore, ["userConfirm", "getUseriNfo"]),
     input_delete_id() { 
       this.id='';
     },
