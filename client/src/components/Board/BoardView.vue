@@ -175,6 +175,13 @@ export default {
 .detail_comment_input_box {
   margin: 0 150px;
 }
+.comment_title {
+  color: #555555;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 15px;
+}
 .comment_body {
   display: flex;
   justify-content: left;
@@ -204,7 +211,7 @@ export default {
   padding: 0 30px;
 }
 #BoardContent {
-  margin: 50px 150px;
+  margin: 30px 150px;
 }
 #comment_line {
   border-top: 1px solid #eee;
