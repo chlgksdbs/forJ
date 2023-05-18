@@ -40,6 +40,12 @@ public class UserService {
 		return userMapper.userInfo(userId); 
 	}
 	
+	// refresh token 조회
+	public String getRefreshToken(String userId) {
+		
+		return userMapper.getRefreshToken(userId);
+	}
+	
 	// 회원가입
 	public void join(UserDto userDto) {
 		

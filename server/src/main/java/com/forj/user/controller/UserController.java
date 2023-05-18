@@ -129,6 +129,37 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
 	
+	// Refresh Token을 이용한 Access Token 재발급
+	@PostMapping("/refresh")
+	public ResponseEntity<?> refreshToken(@RequestBody UserDto userDto, HttpServletRequest request) {
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		
+		// client에서 전달받은 request의 Header에 있는 refresh-token 가져오기
+		String refreshToken = request.getHeader("refresh-token");
+		
+		// refresh-token이 유효한 경우
+		if (jwtService.validateToken(refreshToken)) {
+			
+			// client로부터 받아온 유효한 refresh-token이 DB에 저장되어있는 refresh-token과 같은 경우 수행
+			if (refreshToken.equals(userService.getRefreshToken(userDto.getUserId()))) {
+				// access-token 재발급
+				String accessToken = jwtService.createAccessToken("userId", userDto.getUserId());
+				
+				resultMap.put("access-token", accessToken);
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			}
+		}
+		// refresh-token이 유효하지 않은 경우
+		else {
+			status = HttpStatus.UNAUTHORIZED;
+		}
+		
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
 	// 회원가입
 	@PostMapping("/join")
 	public String join(@RequestBody UserDto userDto) {

@@ -18,6 +18,9 @@ public interface UserMapper {
 	// 사용자 정보 조회
 	UserDto userInfo(String userId);
 	
+	// refresh token 조회
+	String getRefreshToken(String userId);
+	
 	// 회원가입
 	void join(UserDto userDto);
 	
