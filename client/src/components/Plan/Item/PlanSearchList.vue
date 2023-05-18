@@ -1,5 +1,5 @@
 <template>
-  <div id="TheSearchListCard">
+  <div id="PlanSearchList">
     <div class="img_box">
       <img :src="img">
     </div>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'TheSearchListCard',
+  name: 'PlanSearchList',
   components: {},
   data() {
     return {
@@ -32,15 +32,6 @@ export default {
 </script>
 
 <style scoped>
-#TheSearchListCard {
-    margin: 10px auto;
-    width: 90%;
-    height: 20%;
-    border: 1px solid #000;
-    display: flex;
-    align-items: center;
-    background-color: #FFF;
-}
 .img_box {
     width: 20%;
     height: 95%;
@@ -60,5 +51,14 @@ export default {
 .btn_box img {
   width:100%;
   margin: 2px 0;
+}
+#PlanSearchList {
+    margin: 10px auto;
+    width: 90%;
+    height: 20%;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    background-color: #FFF;
 }
 </style>

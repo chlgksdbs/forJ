@@ -1,5 +1,5 @@
 <template>
-    <div id="TheSelectListCard">
+    <div id="PlanSelectList">
         <div class="img_box">
             <img :src="img">
         </div>
@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-    name: 'TheSelectListCard',
+    name: 'PlanSelectList',
     props: {
         img: String,  
         title: String,
@@ -21,14 +21,6 @@ export default {
 }
 </script>
 <style scoped>
-#TheSelectListCard {
-    margin: 10px auto;
-    width: 90%;
-    height: 20%;
-    border: 1px solid #000;
-    display: flex;
-    align-items: center;
-}
 .img_box {
     width: 30%;
     margin: auto 15px auto 0;
@@ -46,5 +38,13 @@ export default {
 }
 .btn_box img {
     width: 100%;
+}
+#PlanSelectList {
+    margin: 10px auto;
+    width: 90%;
+    height: 20%;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
 }
 </style>

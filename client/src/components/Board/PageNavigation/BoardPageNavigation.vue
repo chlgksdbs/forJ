@@ -1,5 +1,5 @@
 <template>
-  <div id="ThePageNavigation">
+  <div id="BoardPageNavigation">
     <ul>
       <li>
         <router-link to="#" class="page_pre_btn">이전</router-link>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'ThePageNavigation',
+  name: 'BoardPageNavigation',
   components: {},
   data() {
     return {

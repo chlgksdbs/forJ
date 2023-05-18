@@ -2,10 +2,12 @@
     <div id="TheHeading">
         <div id="header_left"></div>
         <div id="header_center">
-            <img src="@/assets/img/logo.png">
+            <router-link to="/">
+                <img src="@/assets/img/logo.png">
+            </router-link>
         </div>
         <div id="header_right">
-            <router-link to="#">마이페이지</router-link>
+            <router-link to="/mypage">마이페이지</router-link>
             <router-link to="#">로그아웃</router-link>
         </div>
     </div>

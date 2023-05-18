@@ -1,5 +1,5 @@
 <template>
-    <div id="TheBoardList">
+    <div id="BoardListItem">
         <div align="center">
             <table id="board_table" frame="void">
                 <tr id="board_table_top"></tr>
@@ -17,7 +17,7 @@
                 </tr>
                 <tr class="board_table_line" v-for="item in items" :key="item.board_id">
                     <td>{{ item.boardId }}</td>
-                    <td><router-link :to="'/detail/' + item.boardId">{{ item.title }}</router-link></td>
+                    <td><router-link :to="'view/' + item.boardId">{{ item.title }}</router-link></td>
                     <td>{{ item.writer }}</td>
                     <td>{{ dateFormat(item.writeDate) }}</td>
                 </tr>
@@ -30,7 +30,7 @@
 import axios from 'axios';
 
 export default {
-    name: "TheBoardList",
+    name: "BoardListItem",
     data() {
         return {
             items: [],
@@ -71,7 +71,7 @@ td {
 .board_notice {
     background-color: #E9E9E9;
 }
-#TheBoardList {
+#BoardListItem {
     margin: 20px 50px;
 }
 #board_table {

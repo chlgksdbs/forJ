@@ -1,5 +1,5 @@
 <template>
-  <div id="LoginPageView">
+  <div id="AppLogin">
     <div id="logo_box">
       <router-link to="/">
         <img src="@/assets/img/logo.png" id="login_logo" alt="">
@@ -42,7 +42,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'LoginPageView',
+  name: 'AppLogin',
   components: {},
   data() {
     return {

@@ -1,6 +1,5 @@
 <template>
-  <div id="BoardDetailView">
-    <the-heading></the-heading>
+  <div id="BoardView">
     <div class="detail_header">
       <img src="@/assets/img/detail_logo.jpg" class="detail_logo" />
     </div>
@@ -25,23 +24,31 @@
         조회수 : {{ boardItem.hit }}
       </div>
     </div>
-    <the-board-detail :boardItem="boardItem"></the-board-detail>
-    <the-footer></the-footer>
+    <div id="BoardContent">
+      <div class="detail_content">
+        <p class="detail_content_text">
+          <viewer v-if="boardItem.content != null" :initialValue="boardItem.content"/>
+        </p>
+      </div>
+      <div class="detail_route">
+        <div class="detail_route_img_box">
+          <h2>여행 경로 보기</h2>
+          <img src="@/assets/img/detail_map.png">
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import TheHeading from "@/components/Header/TheHeading.vue";
-import TheBoardDetail from "@/components/BoardDetail/TheBoardDetail.vue";
-import TheFooter from "@/components/Footer/TheFooter.vue";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Viewer } from "@toast-ui/vue-editor";
 
 export default {
-  name: 'BoardDetailView',
+  name: 'BoardView',
   components: {
-    TheHeading,
-    TheFooter,
-    TheBoardDetail,
+    Viewer,
   },
   data() {
     return {
@@ -68,7 +75,19 @@ export default {
 .detail_title {
   margin: 40px 0;
 }
-
+.detail_content_text {
+  text-align: left;
+}
+.detail_content_img_box, .detail_route_img_box {
+  margin: 40px 0;
+}
+.detail_content_img_box h2, .detail_route_img_box h2 {
+  text-align: left;
+  color: #0085ff;
+}
+.detail_content_img_box img, .detail_route_img_box img {
+  width: 100%;
+}
 .detail_nav_profile_img_box {
   width: 100px;
   height: 100px;
@@ -103,5 +122,8 @@ export default {
 }
 .detail_nav_profile_write_date {
   text-align: left;
+}
+#BoardContent {
+  margin: 50px 150px;
 }
 </style>
