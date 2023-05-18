@@ -58,13 +58,13 @@
           <img src="@/assets/img/profile.jpg">
         </div>
         <div class="comment_content_box">
-          <input type="text" placeholder="댓글을 입력하세요." />
-          <button id="commentBtn">작성</button>
+          <input type="text" v-model="commentContent" @keyup.enter="commentWrite" placeholder="댓글을 입력하세요." />
+          <button id="commentBtn" @click="commentWrite">작성</button>
         </div>
       </div>
     </div>
     <!-- 댓글 목록 -->
-    <board-comment-item></board-comment-item>
+    <board-comment-item v-for="commentItem in commentItems" :commentItem="commentItem" :key="commentItem.commentId"></board-comment-item>
   </div>
 </template>
 
@@ -84,6 +84,8 @@ export default {
   data() {
     return {
       boardItem: {},
+      commentItems: {},
+      commentContent: '',
     };
   },
   created() {
@@ -93,9 +95,34 @@ export default {
       .then((resp) => {
         // console.log(resp.data); // 디버깅
         this.boardItem = resp.data;
+
+        // axios 비동기 통신으로 server에서 comment 가져오기
+        axios.get('http://localhost/comment/' + this.boardItem.boardId)
+          .then((resp) => {
+            // console.log(resp.data); // 디버깅
+            this.commentItems = resp.data;
+          });
       });
+
   },
-  methods: {},
+  methods: {
+    // 댓글 작성 메서드
+    commentWrite() {
+      let comment = {
+        "boardId": this.boardItem.boardId,
+        "userId": "chlgksdbs",
+        "content": this.commentContent
+      };
+
+      console.log(comment);
+
+      axios.post('http://localhost/comment', comment)
+        .then(() => {
+          // console.log(resp + "댓글 작성 성공!"); // 디버깅
+          this.$router.go(0); // 현재 페이지 새로 고침
+        });
+    }
+  },
 };
 </script>
 

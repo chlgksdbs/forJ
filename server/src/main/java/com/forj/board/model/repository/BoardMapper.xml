@@ -3,8 +3,9 @@
 <mapper namespace="com.forj.board.model.repository.BoardMapper">
 	
 	<select id="selectAll" resultType="com.forj.board.model.dto.BoardDto">
-		select board_id as boardId, title, writer, write_date as writeDate
-		from forj_board
+		select board_id as boardId, title, fu.user_nickname as writer, write_date as writeDate
+		from forj_board as fb join forj_user as fu
+		on fb.writer = fu.user_id
 	</select>
 	
 	<insert id="insert" parameterType="com.forj.board.model.dto.BoardDto">
@@ -13,8 +14,9 @@
 	</insert>
 	
 	<select id="selectOne" parameterType="int" resultType="com.forj.board.model.dto.BoardDto">
-		select board_id as boardId, title, writer, write_date as writeDate, content, hit
-		from forj_board
+		select board_id as boardId, title, fu.user_nickname as writer, write_date as writeDate, content, hit
+		from forj_board as fb join forj_user as fu
+		on fb.writer = fu.user_id
 		where board_id=#{boardId}
 	</select>
 	
