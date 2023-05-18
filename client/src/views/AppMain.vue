@@ -3,7 +3,7 @@
         <the-heading></the-heading>
         <div id="TheCarousel">
             <div>
-                <img src="@/assets/img/main_carousel.jpg" class="img_carousel">
+                <img src="@/assets/img/main_carousel.png" class="img_carousel">
             </div>
         </div>
         <h1>나만의 여행 일정을 만들고 공유</h1>
