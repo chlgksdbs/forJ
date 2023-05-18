@@ -15,6 +15,9 @@ public interface UserMapper {
 	// 로그아웃
 	void logout(Map<String, String> map);
 	
+	// 사용자 정보 조회
+	UserDto userInfo(String userId);
+	
 	// 회원가입
 	void join(UserDto userDto);
 	

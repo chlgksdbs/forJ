@@ -4,6 +4,8 @@ package com.forj.user.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -96,6 +98,37 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
+	// 회원인증: 회원 정보를 담은 token 반환 메서드
+	@GetMapping("/info/{userId}")
+	public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userId") String userId, HttpServletRequest request) {
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+		
+		// client에서 전달받은 request의 Header에 있는 access-token이 유효한 토큰인 경우 
+		if (jwtService.validateToken(request.getHeader("access-token"))) {
+			try {
+				// 로그인 사용자 정보 가져오기 (사용자 이름, 아이디, 이메일 등)
+				UserDto userDto = userService.userInfo(userId);
+				resultMap.put("userInfo", userDto);
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			} catch (Exception e) {
+				// TODO: handle exception
+				// 사용자 정보 조회 실패
+				resultMap.put("message", e.getMessage());
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		}
+		// access-token이 유효하지 않은 토큰(사용 불가능한 토큰)인 경우
+		else {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.UNAUTHORIZED;
+		}
+		
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+	
 	// 회원가입
 	@PostMapping("/join")
 	public String join(@RequestBody UserDto userDto) {
@@ -109,6 +142,7 @@ public class UserController {
 		}
 	}
 	
+	// 회원가입 시, 네이버 메일 전송
 	@PostMapping("/certmail")
 	public String certmail(@RequestBody UserDto userDto) throws Exception {
 		

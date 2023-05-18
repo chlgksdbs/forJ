@@ -8,16 +8,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-//import com.forj.jwt.JwtAuthenticationFilter;
-//import com.forj.jwt.JwtTokenProvider;
-
 @Configuration
 @EnableWebSecurity // Web 보안 활성화를 위한 annotation
 public class WebSecurityConfig {
-	
-	
-//	@Autowired
-//	private JwtTokenProvider jwtTokenProvider;
 	
 	@Bean
 	public BCryptPasswordEncoder encoder() {
