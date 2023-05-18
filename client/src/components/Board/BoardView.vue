@@ -36,6 +36,16 @@
           <img src="@/assets/img/detail_map.png">
         </div>
       </div>
+      <div class="detail_btn_box">
+        <div class="scrap_box">
+          <img src="@/assets/img/icon_scrap.png" />
+          <div class="btn_box_text">스크랩</div>
+        </div>
+        <div class="heart_box">
+          <img src="@/assets/img/icon_heart.png" />
+          <div class="btn_box_text">좋아요</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -122,6 +132,20 @@ export default {
 }
 .detail_nav_profile_write_date {
   text-align: left;
+}
+.detail_btn_box {
+  display: flex;
+  justify-content: right;
+}
+.detail_btn_box div {
+  margin: 5px;
+  cursor: pointer;
+}
+.detail_btn_box div img {
+  width: 25px;
+}
+.btn_box_text {
+  font-size: 14px;
 }
 #BoardContent {
   margin: 50px 150px;
