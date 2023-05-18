@@ -54,6 +54,21 @@ public class BoardService {
 		return commentMapper.selectAll(boardId);
 	}
 	
+	// 댓글 조회
+	public CommentDto viewComment(int commentId) {
+		return commentMapper.selectOne(commentId);
+	}
+	
+	// 댓글 삭제
+	public void deleteComment(int commentId) {
+		commentMapper.delete(commentId);
+	}
+	
+	// 댓글 수정
+	public void modifyComment(CommentDto commentDto) {
+		commentMapper.update(commentDto);
+	}
+	
 	// 댓글 작성
 	public void writeComment(CommentDto comment) {
 		commentMapper.insert(comment);
