@@ -28,7 +28,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
 		final String token = request.getHeader(HEADER_AUTH);
 		
-		if (token != null && jwtService.checkToken(token)) {
+		if (token != null && jwtService.validateToken(token)) {
 			logger.info("토큰 사용 가능: {}", token);
 			return true;
 		}

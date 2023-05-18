@@ -50,8 +50,6 @@ public class BoardController {
 	// 글 수정
 	@PutMapping("/modify")
 	public void modifyBoard(@RequestBody BoardDto board) {
-		System.out.println(board.getBoardId());
-		System.out.println(board.getTitle());
 		boardService.modifyBoard(board);
 	}
 	

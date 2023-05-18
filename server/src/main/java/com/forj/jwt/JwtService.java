@@ -53,6 +53,8 @@ public class JwtService {
 	}
 	
 	// User 정보(userId)를 가지고 RefreshToken을 생성하는 메서드 (AccessToken에 비해 유효기간을 길게 설정)
+	// RefreshToken의 경우, 별도의 data가 필요 없음
+	// RefreshToken을 사용하는 경우, DB의 user 정보 테이블에 RefershToken 저장을 위한 컬럼 생성
 	public String createRefreshToken(String key, String data) {
 		
 		// Refresh Token 생성 (만료시간 : 1000(ms) * 60 * 60 * 24 * 7 => 1주일)

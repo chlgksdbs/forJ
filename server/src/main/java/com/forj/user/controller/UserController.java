@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,10 +46,17 @@ public class UserController {
 			
 			// 로그인 정보가 존재하는 경우
 			if (loginInfo != null) {
-				// JWT 생성 (Key, Data, Subject)
-				String token = jwtService.generateToken("userId", loginInfo.getUserId(), "access-token");
+				// Access Token 생성 (Key, Data)
+				String accessToken = jwtService.createAccessToken("userId", loginInfo.getUserId());
 				
-				resultMap.put("access-token", token);
+				// Refresh Token 생성 (Key, Data)
+				String refreshToken = jwtService.createRefreshToken("userId", loginInfo.getUserId());
+				
+				// Refresh Token -> DB 저장
+//				userService.saveRefreshToken(userDto.getUserId(), refreshToken);
+				
+				resultMap.put("access-token", accessToken);
+				resultMap.put("refresh-token", refreshToken);
 				resultMap.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			}
