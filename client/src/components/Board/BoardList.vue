@@ -40,7 +40,11 @@ a {
     color: #000;
     border: 1px solid #000;
     border-radius: 10px;
-    padding: 10px 15px;
+    padding: 10px 12px;
+}
+a:hover {
+  background-color: #000;
+  color: #FFF;
 }
 input {
     position: absolute;

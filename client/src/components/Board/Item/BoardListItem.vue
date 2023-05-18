@@ -8,18 +8,21 @@
                     <th id="table_head_title">제목</th>
                     <th id="table_head_writer">작성자</th>
                     <th id="table_head_write_date">작성일시</th>
+                    <th id="table_head_hit">조회수</th>
                 </tr>
                 <tr class="board_table_line board_notice">
                     <td><img src="@/assets/img/icon_flag.png" class="icon_flag" /></td>
                     <td>5월 forJ 출석 이벤트</td>
                     <td>admin</td>
                     <td>2023-04-15</td>
+                    <td>23</td>
                 </tr>
                 <tr class="board_table_line" v-for="item in items" :key="item.board_id">
                     <td>{{ item.boardId }}</td>
                     <td><router-link :to="'view/' + item.boardId">{{ item.title }}</router-link></td>
                     <td>{{ item.writer }}</td>
                     <td>{{ dateFormat(item.writeDate) }}</td>
+                    <td>{{ item.hit }}</td>
                 </tr>
                 <tr class="board_table_line"></tr>
             </table>
@@ -54,6 +57,10 @@ export default {
 }
 </script>
 <style scoped>
+a {
+    text-decoration: none;
+    color: #A1A1A1;
+}
 th {
     text-align: center;
     padding: 20px;
@@ -82,15 +89,18 @@ td {
     border-bottom: 1px solid #000000;
 }
 #table_head_board_id {
-    width: 10%;
+    width: 13%;
 }
 #table_head_title {
-    width: 55%;
+    width: 50%;
 }
 #table_head_writer {
-    width: 15%;
+    width: 12%;
 }
 #table_head_write_date {
-    width: 20%;
+    width: 15%;
+}
+#table_head_hit {
+    width: 10%;
 }
 </style>
