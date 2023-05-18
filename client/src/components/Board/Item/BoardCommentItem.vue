@@ -35,7 +35,7 @@ export default {
 <style scoped>
 .detail_comment_content_box {
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 .comment_profile_img_box {
   width: 55px;

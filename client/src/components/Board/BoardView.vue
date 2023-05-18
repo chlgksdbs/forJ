@@ -105,13 +105,10 @@ export default {
 }
 .detail_content_img_box, .detail_route_img_box {
   margin: 40px 0;
+  text-align: left;
 }
 .detail_route_img_box h2 {
-  text-align: left;
   color: #0085ff;
-}
-.detail_route_img_box img {
-  width: 100%;
 }
 .detail_nav_profile_img_box {
   width: 100px;
