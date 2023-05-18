@@ -49,7 +49,7 @@
 <script>
 
 export default {
-  name: 'MyPageModify',
+  name: 'UserModify',
   components: {},
   data() {
     return {

@@ -1,5 +1,5 @@
 <template>
-  <div class="totalMyPage">
+  <div id="AppUser">
     <the-heading></the-heading>
     <div class="MyPage">
       <!-- 카테고리를 이루는 왼쪽 화면 -->
@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import TheHeading from '@/components/Header/TheHeading.vue';
-import TheFooter from '@/components/Footer/TheFooter.vue';
+import TheHeading from '@/components/TheHeading.vue';
+import TheFooter from '@/components/TheFooter.vue';
 
 export default {
-  name: 'MyPageView',
+  name: 'AppUser',
   components: {TheHeading, TheFooter},
   data() {
     return {
@@ -49,9 +49,6 @@ export default {
 </script>
 
 <style scoped>
-.totalMyPage{
-  background-color: #f8f8f8;
-}
 .MyPage{
   display: flex;
   flex-direction: row;
@@ -83,5 +80,8 @@ export default {
 }
 .rightBox{
   width: 45%;
+}
+#AppUser{
+  background-color: #f8f8f8;
 }
 </style>

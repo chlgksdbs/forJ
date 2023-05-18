@@ -1,5 +1,5 @@
 <template>
-  <div id="JoinPageView">
+  <div id="AppJoin">
     <div id="logo_box">
       <router-link to="/">
         <img src="@/assets/img/logo.png" id="join_logo" alt="">
@@ -74,10 +74,10 @@
 
 <script>
 import axios from "axios";
-import TheFooter from "@/components/Footer/TheFooter.vue";
+import TheFooter from "@/components/TheFooter.vue";
 
 export default {
-  name: 'JoinPageView',
+  name: 'AppJoin',
   components: {
     TheFooter,
   },

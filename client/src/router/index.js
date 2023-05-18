@@ -1,19 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import MainPageView from "@/views/MainPageView.vue";
-import MyPageView from "../views/MyPageView.vue";
-import MyPageModify from "../components/MyPage/MyPageModify.vue";
-import MyPageCart from "../components/MyPage/MyPageCart.vue";
-import MyPageQnA from "../components/MyPage/MyPageQnA.vue";
-import MyPageLike from "../components/MyPage/MyPageLike.vue";
-import MyPageMyBoard from "../components/MyPage/MyPageMyBoard.vue";
-import MyPageMyComment from "../components/MyPage/MyPageMyComment.vue";
-import LoginPageView from "@/views/LoginPageView.vue";
-import JoinPageView from "@/views/JoinPageView.vue";
-import BoardPageView from "@/views/BoardPageView.vue";
-import BoardDetailView from "@/views/BoardDetailView.vue";
-import BoardWriteView from "@/views/BoardWriteView.vue";
-import UserPlanView from "@/views/UserPlanView.vue";
+
+import AppMain from "@/views/AppMain.vue";
+import AppLogin from "@/views/AppLogin.vue";
+import AppJoin from "@/views/AppJoin.vue";
+import AppUser from "../views/AppUser.vue";
+import AppBoard from "@/views/AppBoard.vue";
+import AppPlan from "@/views/AppPlan.vue";
 
 Vue.use(VueRouter);
 
@@ -21,75 +14,91 @@ const routes = [
   {
     path: "/",
     name: "main",
-    component: MainPageView,
+    component: AppMain,
   },
   {
     path: "/login",
     name: "login",
-    component: LoginPageView,
+    component: AppLogin,
   },
   {
     path: "/join",
     name: "join",
-    component: JoinPageView,
+    component: AppJoin,
   },
   {
     path: "/mypage",
     name: "mypage",
-    component: MyPageView,
+    component: AppUser,
     redirect: "/mypage/modify",
     children: [
       {
         path: "modify",
         name: "mypagemodify",
-        component: MyPageModify,
+        component: () => import("@/components/User/UserModify"),
       },
       {
         path: "cart",
         name: "mypagecart",
-        component: MyPageCart,
+        component: () => import("@/components/User/UserCart"),
       },
       {
         path: "qna",
         name: "mypageqna",
-        component: MyPageQnA,
+        component: () => import("@/components/User/UserInquiry"),
       },
       {
         path: "like",
         name: "mypagelike",
-        component: MyPageLike,
+        component: () => import("@/components/User/UserLike"),
       },
       {
         path: "myboard",
         name: "mypagemyboard",
-        component: MyPageMyBoard,
+        component: () => import("@/components/User/UserBoard"),
       },
       {
         path: "mycomment",
         name: "mypagemycomment",
-        component: MyPageMyComment,
+        component: () => import("@/components/User/UserComment"),
       },
     ],
   },
   {
     path: "/board",
     name: "board",
-    component: BoardPageView,
-  },
-  {
-    path: "/detail/:boardId",
-    name: "detail",
-    component: BoardDetailView,
-  },
-  {
-    path: "/write",
-    name: "write",
-    component: BoardWriteView,
+    component: AppBoard,
+    redirect: "/board/list",
+    children: [
+      {
+        path: "list",
+        name: "boardlist",
+        component: () => import("@/components/Board/BoardList"),
+      },
+      {
+        path: "write",
+        name: "boardwrite",
+        component: () => import("@/components/Board/BoardWrite"),
+      },
+      {
+        path: "view/:boardId",
+        name: "boardview",
+        component: () => import("@/components/Board/BoardView"),
+      },
+    ],
   },
   {
     path: "/plan",
     name: "plan",
-    component: UserPlanView,
+    component: AppPlan,
+    redirect: "/plan/write",
+    children: [
+      {
+        path: "write",
+        name: "planwrite",
+        component: () => import("@/components/Plan/PlanWrite"),
+      },
+    ],
   },
 ];
 

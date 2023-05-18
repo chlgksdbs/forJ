@@ -1,6 +1,5 @@
 <template>
-  <div id="BoardWriteView">
-    <the-heading></the-heading>
+  <div id="BoardWrite">
     <div id="board_table_box">
       <table id="board_write_table">
         <tr class="board_table_line">
@@ -31,24 +30,19 @@
     <div id="btn_box">
       <button @click="writeBtn" class="write_btn">작성완료</button>
     </div>
-    <the-footer></the-footer>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import TheHeading from "@/components/Header/TheHeading.vue";
-import TheFooter from "@/components/Footer/TheFooter.vue";
 import "@toast-ui/editor/dist/toastui-editor.css";
 
 import { Editor } from "@toast-ui/vue-editor";
 
 export default {
-  name: 'BoardWriteView',
+  name: 'BoardWrite',
   components: {
-    TheHeading,
     Editor,
-    TheFooter,
   },
   data() {
     return {

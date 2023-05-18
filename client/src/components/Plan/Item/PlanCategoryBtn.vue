@@ -1,5 +1,5 @@
 <template>
-    <div id="TheCategoryBtn">
+    <div id="PlanCategoryBtn">
         <div class="text_box">
             <b>{{ title }}</b>
         </div>
@@ -7,14 +7,17 @@
 </template>
 <script>
 export default {
-    name: "TheCategoryBtn",
+    name: "PlanCategoryBtn",
     props: {
         title: String,
     }
 }
 </script>
 <style scoped>
-#TheCategoryBtn {
+.text_box {
+    font-size: 80%;
+}
+#PlanCategoryBtn {
     border: 1px solid #40A3FF;
     border-radius: 10px;
     width: 18%;
@@ -23,8 +26,5 @@ export default {
     margin: 10px auto;
     padding: 5px;
     background-color: #FFF;
-}
-.text_box {
-    font-size: 80%;
 }
 </style>
