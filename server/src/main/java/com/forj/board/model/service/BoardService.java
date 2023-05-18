@@ -34,6 +34,11 @@ public class BoardService {
 		return boardMapper.selectOne(boardId);
 	}
 	
+	// 글 조회수 증가
+	public void updateViewCount(int boardId) {
+		boardMapper.updateHit(boardId);
+	}
+	
 	// 글 수정
 	public void modifyBoard(BoardDto board) {
 		boardMapper.update(board);

@@ -40,6 +40,10 @@ public class BoardController {
 	// 상세 조회
 	@GetMapping("/detail/{bno}")
 	public BoardDto boardDetail(@PathVariable("bno") int boardId) {
+		
+		// 게시글 조회수 증가
+		boardService.updateViewCount(boardId);
+		
 		return boardService.boardDetail(boardId);
 	}
 	
