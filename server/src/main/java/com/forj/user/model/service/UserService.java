@@ -34,6 +34,18 @@ public class UserService {
 		userMapper.logout(map);
 	}
 	
+	// 회원 정보 조회
+	public UserDto userInfo(String userId) {
+		
+		return userMapper.userInfo(userId); 
+	}
+	
+	// refresh token 조회
+	public String getRefreshToken(String userId) {
+		
+		return userMapper.getRefreshToken(userId);
+	}
+	
 	// 회원가입
 	public void join(UserDto userDto) {
 		

@@ -20,6 +20,24 @@
 			user_id=#{userId}
 	</update>
 	
+	<select id="userInfo" parameterType="String" resultType="com.forj.user.model.dto.UserDto">
+		SELECT
+			user_name as userName, user_id as userId, user_email as userEmail
+		FROM
+			forj_user
+		WHERE
+			user_id=#{userId}
+	</select>
+	
+	<select id="getRefreshToken" parameterType="String" resultType="String">
+		SELECT
+			user_refresh_token as userRefreshToken
+		FROM
+			forj_user
+		WHERE
+			user_id=#{userId}
+	</select>
+	
 	<insert id="join" parameterType="com.forj.user.model.dto.UserDto">
 		INSERT INTO forj_user
 			(user_id, user_pw, user_name, user_gender, user_phone, user_email)
