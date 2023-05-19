@@ -25,6 +25,10 @@ public class HeartController {
 		return heartService.count(boardId);
 	}
 	
+//	// 현재 사용자의 게시글에 대한 좋아요 상태를 출력
+//	@GetMapping("/count/{boardId}/{userId}")
+	
+	
 	// 처음 요청은, 게시글에 사용자가 좋아요를 한 번이라도 누른적이 있는 지에 대한 체크
 	@PostMapping("/check")
 	public int heartCheck(@RequestBody HeartDto heartDto) {
