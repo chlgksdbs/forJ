@@ -41,9 +41,10 @@
           <img src="@/assets/img/icon_scrap.png" />
           <div class="btn_box_text">스크랩</div>
         </div>
-        <div class="heart_box">
-          <img src="@/assets/img/icon_heart.png" />
-          <div class="btn_box_text">좋아요</div>
+        <div class="heart_box" @click="heartClick">
+          <span class="material-symbols-outlined" id="heart_icon" style="display: ">favorite</span>
+          <span class="material-symbols-outlined" id="fill_heart_icon" style="display: none;">favorite</span>
+          <div class="btn_box_text">좋아요 {{ heartCount }}</div>
         </div>
       </div>
       <div class="view_line">
@@ -86,6 +87,8 @@ export default {
       boardItem: {},
       commentItems: {},
       commentContent: '',
+      heartStatus: 0,
+      heartCount: 0,
     };
   },
   created() {
@@ -104,6 +107,23 @@ export default {
           });
       });
 
+    // TODO: 현재 사용자의 좋아요 버튼 상태(heartStatus)값 초기화
+
+    // TODO: 좋아요 count값 초기화
+  },
+  watch: {
+    heartStatus(value) {
+      // 좋아요 버튼 활성화
+      if (value == 1) {
+        document.querySelector('#heart_icon').style.display = "none";
+        document.querySelector('#fill_heart_icon').style.display = "";
+      }
+      // 좋아요 버튼 비활성화
+      else {
+        document.querySelector('#heart_icon').style.display = "";
+        document.querySelector('#fill_heart_icon').style.display = "none";
+      }
+    },
   },
   methods: {
     // 댓글 작성 메서드
@@ -120,6 +140,19 @@ export default {
         .then(() => {
           // console.log(resp + "댓글 작성 성공!"); // 디버깅
           this.$router.go(0); // 현재 페이지 새로 고침
+        });
+    },
+    // 좋아요 기능 메서드
+    heartClick() {
+      let heart = {
+        "boardId": this.boardItem.boardId,
+        "userId": "chlgksdbs",
+      }
+
+      axios.post('http://localhost/heart/check', heart)
+        .then((resp) => {
+          // console.log(resp.data); // 디버깅
+          this.heartStatus = resp.data; // 좋아요 상태 변경
         });
     }
   },
@@ -261,5 +294,20 @@ export default {
   background-color: #40A3FF;
   color: #FFFFFF;
   border: 1px solid #FFFFFF;
+}
+#heart_icon {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+#fill_heart_icon {
+  color: red;
+  font-variation-settings:
+  'FILL' 100,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
 }
 </style>

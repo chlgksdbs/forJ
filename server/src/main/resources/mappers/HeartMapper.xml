@@ -1,4 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.forj.model.repository.HeartMapper">
+
+	<select id="selectOne" parameterType="HeartDto" resultType="HeartDto">
+		SELECT
+			heart_id as heartId, user_id as userId, board_id as boardId, heart_status as heartStatus
+		FROM
+			forj_heart
+		WHERE
+			user_id=#{userId} and board_id=#{boardId}
+	</select>
+	
+	<insert id="insert" parameterType="HeartDto">
+		INSERT INTO
+			forj_heart(user_id, board_id)
+		VALUES
+			(#{userId}, #{boardId})
+	</insert>
+	
+	<update id="update" parameterType="HeartDto">
+		UPDATE
+			forj_heart
+		SET
+			heart_status=#{heartStatus}
+		WHERE
+			user_id=#{userId} and board_id=#{boardId}
+	</update>
+
 </mapper>
