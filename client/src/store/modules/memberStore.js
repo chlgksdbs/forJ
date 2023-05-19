@@ -70,7 +70,7 @@ const memberStore = {
         })
         // 에러 발생 시 처리
         .catch((error) => {
-          console.log(error);
+          console.log("OMG", error);
         });
     },
 

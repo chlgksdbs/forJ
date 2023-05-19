@@ -46,6 +46,7 @@ const routes = [
   {
     path: "/",
     name: "main",
+    beforeEnter: onlyAuthUser,
     component: AppMain,
   },
   {
@@ -101,6 +102,7 @@ const routes = [
     path: "/board",
     name: "board",
     component: AppBoard,
+    beforeEnter: onlyAuthUser,
     redirect: "/board/list",
     children: [
       {
@@ -111,13 +113,13 @@ const routes = [
       {
         path: "write",
         name: "boardwrite",
-        beforeEnter: onlyAuthUser,
+        // beforeEnter: onlyAuthUser,
         component: () => import("@/components/Board/BoardWrite"),
       },
       {
         path: "view/:boardId",
         name: "boardview",
-        beforeEnter: onlyAuthUser,
+        // beforeEnter: onlyAuthUser,
         component: () => import("@/components/Board/BoardView"),
       },
     ],

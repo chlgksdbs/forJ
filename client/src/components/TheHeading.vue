@@ -8,23 +8,46 @@
         </div>
         <div id="header_right">
             <router-link to="/mypage">마이페이지</router-link>
-            <router-link to="#">로그아웃</router-link>
+            <span @click="logout">로그아웃</span>
         </div>
     </div>
 </template>
 <script>
+import { mapState, mapActions, mapGetters } from "vuex";
+
+const memberStore = "memberStore";
+
 export default {
     name: "TheHeading",
+    computed: {
+        ...mapState(memberStore, ["isLogin", "userInfo"]),
+        ...mapGetters(["checkUserInfo"]),
+    },
+    methods: {
+        ...mapActions(memberStore, ["userLogout"]),
+        logout() {
+            console.log(this.userInfo);
+
+            this.userLogout(this.userInfo.userId);
+
+            sessionStorage.removeItem("access-token"); // 저장된 access token 삭제
+            sessionStorage.removeItem("refresh-token"); // 저장된 refresh token 삭제
+
+            // 로그인 페이지로 이동
+            if (this.$route.path != "/login") this.$router.push("/login");
+        }
+    },
 }
 </script>
 <style scoped>
 img {
     width: 250px;
 }
-a {
+a, span {
     text-decoration: none;
     color: #888;
     margin: 0 10px;
+    cursor: pointer;
 }
 #TheHeading {
     display: flex;
