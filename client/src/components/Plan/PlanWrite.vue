@@ -38,12 +38,6 @@
         </div>
         <div v-if="itemList.length">
             <div v-for="item in itemList" :key="item.contentId" class="plan_right_card">
-                <!-- <plan-search-list :img="require('@/assets/img/ex_img1.png')" :title="'충남대학교'"></plan-search-list>
-                <plan-search-list :img="require('@/assets/img/ex_img2.png')" :title="'유성온천역'"></plan-search-list>
-                <plan-search-list :img="require('@/assets/img/ex_img3.png')" :title="'대전월드컵경기장'"></plan-search-list>
-                <plan-search-list :img="require('@/assets/img/ex_img4.png')" :title="'한밭대학교'"></plan-search-list>
-                <plan-search-list :img="require('@/assets/img/ex_img5.png')" :title="'삼성화재 유성연수원'"></plan-search-list>
-                <plan-search-list :img="require('@/assets/img/ex_img6.png')" :title="'에이트'"></plan-search-list> -->
                 <plan-search-list :img="item.firstimage" :title="item.title"></plan-search-list>
             </div>
         </div>
@@ -96,8 +90,8 @@ export default {
                   end: { fillMode: 'outline'},
               },
               dates: {
-                  start: new Date(2023, 4, 1),
-                  end: new Date(2023, 4, 3),
+                start: new Date(),
+                end: new Date(),
               },
           },
       ],
@@ -285,6 +279,10 @@ img {
     border: 1px solid #40A3FF;
     margin: 10px auto;
     padding: 15px;
+}
+.plan_left_calendar_phrase{
+    font-size: 15px;
+    color: #0085FF;
 }
 .plan_left_select_list {
     width: 70%;
