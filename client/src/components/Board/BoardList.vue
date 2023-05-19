@@ -68,6 +68,13 @@ img {
     right: 5%;
     transform: translate( -50%, -50% );
 }
+.post_area {
+    margin: 0 65px 10px 0;
+    text-align: right;
+}
+#BoardList {
+  margin: 0 100px;
+}
 #TheSearchBar {
     margin: 0 50px;
 }
@@ -77,9 +84,5 @@ img {
     height: 41px;
     border: 1px solid #dadada;
     border-radius: 10px;
-}
-.post_area {
-    margin: 0 65px 10px 0;
-    text-align: right;
 }
 </style>
