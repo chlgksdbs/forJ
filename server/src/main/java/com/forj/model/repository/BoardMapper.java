@@ -1,10 +1,10 @@
-package com.forj.board.model.repository;
+package com.forj.model.repository;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.forj.board.model.dto.BoardDto;
+import com.forj.model.dto.BoardDto;
 
 @Mapper
 public interface BoardMapper {

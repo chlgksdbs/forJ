@@ -1,4 +1,4 @@
-package com.forj.board.model.dto;
+package com.forj.model.dto;
 
 public class CommentDto {
 	

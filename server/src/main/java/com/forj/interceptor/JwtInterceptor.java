@@ -1,4 +1,4 @@
-package com.forj.jwt;
+package com.forj.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.forj.exception.UnauthorizedException;
+import com.forj.model.service.JwtService;
 
 @Component
 public class JwtInterceptor implements HandlerInterceptor {

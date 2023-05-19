@@ -1,4 +1,4 @@
-package com.forj.user.model.service;
+package com.forj.model.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.forj.user.model.dto.UserDto;
-import com.forj.user.model.repository.UserMapper;
+import com.forj.model.dto.UserDto;
+import com.forj.model.repository.UserMapper;
 
 @Service
 public class UserService {

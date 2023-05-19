@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.forj.board.model.repository.BoardMapper">
+<mapper namespace="com.forj.model.repository.BoardMapper">
 	
-	<select id="selectAll" resultType="com.forj.board.model.dto.BoardDto">
+	<select id="selectAll" resultType="BoardDto">
 		select board_id as boardId, title, fu.user_nickname as writer, write_date as writeDate, hit
 		from forj_board as fb join forj_user as fu
 		on fb.writer = fu.user_id
 	</select>
 	
-	<insert id="insert" parameterType="com.forj.board.model.dto.BoardDto">
+	<insert id="insert" parameterType="BoardDto">
 		insert into forj_board(title, writer, write_date, content)
 		values( #{title}, #{writer}, now(), #{content})
 	</insert>
 	
-	<select id="selectOne" parameterType="int" resultType="com.forj.board.model.dto.BoardDto">
+	<select id="selectOne" parameterType="int" resultType="BoardDto">
 		select board_id as boardId, title, fu.user_nickname as writer, write_date as writeDate, content, hit
 		from forj_board as fb join forj_user as fu
 		on fb.writer = fu.user_id
@@ -26,7 +26,7 @@
 		where board_id=#{boardId}
 	</update>
 	
-	<update id="update" parameterType="com.forj.board.model.dto.BoardDto">
+	<update id="update" parameterType="BoardDto">
 		update forj_board
 		set title=#{title}, content=#{content}
 		where board_id=#{boardId}

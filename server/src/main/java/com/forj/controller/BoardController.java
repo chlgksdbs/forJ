@@ -1,10 +1,9 @@
-package com.forj.board.controller;
+package com.forj.controller;
 
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.forj.board.model.dto.BoardDto;
-import com.forj.board.model.service.BoardService;
+import com.forj.model.dto.BoardDto;
+import com.forj.model.service.BoardService;
 
 @RestController
 @RequestMapping("/board")

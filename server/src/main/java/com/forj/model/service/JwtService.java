@@ -1,4 +1,4 @@
-package com.forj.jwt;
+package com.forj.model.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
