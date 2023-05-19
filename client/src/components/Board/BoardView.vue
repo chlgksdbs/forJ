@@ -110,6 +110,11 @@ export default {
     // TODO: 현재 사용자의 좋아요 버튼 상태(heartStatus)값 초기화
 
     // TODO: 좋아요 count값 초기화
+    axios.get('http://localhost/heart/count/' + this.$route.params.boardId)
+      .then((resp) => {
+        // console.log(resp.data); // 디버깅
+        this.heartCount = resp.data;
+      });
   },
   watch: {
     heartStatus(value) {
@@ -117,11 +122,13 @@ export default {
       if (value == 1) {
         document.querySelector('#heart_icon').style.display = "none";
         document.querySelector('#fill_heart_icon').style.display = "";
+        this.heartCount++;
       }
       // 좋아요 버튼 비활성화
       else {
         document.querySelector('#heart_icon').style.display = "";
         document.querySelector('#fill_heart_icon').style.display = "none";
+        this.heartCount--;
       }
     },
   },

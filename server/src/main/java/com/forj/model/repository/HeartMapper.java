@@ -6,6 +6,9 @@ import com.forj.model.dto.HeartDto;
 
 @Mapper
 public interface HeartMapper {
+	
+	// 좋아요 총 갯수 조회
+	int countAll(int boardId);
 
 	// 좋아요 정보 조회
 	HeartDto selectOne(HeartDto heartDto);

@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.forj.model.repository.HeartMapper">
 
+	<select id="countAll" parameterType="int" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			forj_heart
+		WHERE
+			board_id=#{boardId}
+	</select>
+
 	<select id="selectOne" parameterType="HeartDto" resultType="HeartDto">
 		SELECT
 			heart_id as heartId, user_id as userId, board_id as boardId, heart_status as heartStatus

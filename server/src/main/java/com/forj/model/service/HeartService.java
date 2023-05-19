@@ -12,6 +12,12 @@ public class HeartService {
 	@Autowired
 	private HeartMapper heartMapper;
 	
+	// 좋아요 총 갯수 조회
+	public int count(int boardId) {
+		
+		return heartMapper.countAll(boardId);
+	}
+	
 	// 좋아요 정보 조회
 	public HeartDto selectOne(HeartDto heartDto) {
 		

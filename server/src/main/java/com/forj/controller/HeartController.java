@@ -1,6 +1,8 @@
 package com.forj.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,13 @@ public class HeartController {
 
 	@Autowired
 	private HeartService heartService;
+	
+	// 현재 게시글의 총 좋아요 갯수 출력
+	@GetMapping("/count/{boardId}")
+	public int heartCount(@PathVariable int boardId) {
+		
+		return heartService.count(boardId);
+	}
 	
 	// 처음 요청은, 게시글에 사용자가 좋아요를 한 번이라도 누른적이 있는 지에 대한 체크
 	@PostMapping("/check")
