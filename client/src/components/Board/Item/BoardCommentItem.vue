@@ -15,7 +15,7 @@
         <div class="comment_content_body">
           <p :class="'static_content' + comment.commentId" style="">{{ comment.content }}</p>
           <div :class="'input_content_box' + comment.commentId" style="display: none;">
-            <input type="text" class="input_content" v-model="comment.content" />
+            <input type="text" class="input_content" v-model="comment.content" @keyup.enter="commentModifyApply" />
             <button id="modifyApplyBtn" @click="commentModifyApply">변경</button>
           </div>
         </div>
