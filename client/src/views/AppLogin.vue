@@ -13,13 +13,11 @@
       </div>
       <div class="input_login_box">
         <img src="@/assets/img/icon_pw.png" class="login_icon" alt=""/>
-        <input type="password" placeholder="비밀번호" maxlength="100" v-model="user.userPw" class="input_login"/>
+        <input type="password" placeholder="비밀번호" maxlength="100" v-model="user.userPw" @keyup.enter="loginCheck" class="input_login"/>
         <img src="@/assets/img/icon_delete.png" class="login_delete_icon" alt="" @click="input_delete_pw"/>
       </div>
       <div>
-        <router-link to="#">
-          <button id="loginBtn" @click="loginCheck">로그인</button>
-        </router-link>
+        <button id="loginBtn" @click="loginCheck">로그인</button>
       </div>
       <div class="find_box">
         <router-link to="#" class="find_text">아이디 찾기</router-link>
