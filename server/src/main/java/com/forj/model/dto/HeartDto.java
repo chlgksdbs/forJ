@@ -5,6 +5,7 @@ public class HeartDto {
 	private int heartId;
 	private String userId;
 	private int boardId;
+	private int heartStatus;
 
 	public HeartDto() {
 	}
@@ -31,6 +32,14 @@ public class HeartDto {
 
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
+	}
+
+	public int getHeartStatus() {
+		return heartStatus;
+	}
+
+	public void setHeartStatus(int heartStatus) {
+		this.heartStatus = heartStatus;
 	}
 
 }
