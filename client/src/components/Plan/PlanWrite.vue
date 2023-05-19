@@ -169,22 +169,31 @@ export default {
         
         console.log(this.categoryTitle);
         console.log(this.contentTypeId);
-            // 공공api에서 호출
-            const baseUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1`;
-            const serviceKey = `%2BO%2FI7nNhPkcVOh2FuthiaVSbtU9Yvs0HFf0f%2FMd3vSqVsR1UzoM0jbIqd9rAaN7AHHG2S2IpTqcBq1q8aLlkCA%3D%3D`;
-            const pageNo = 1;
-            // const numOfRows = 5;
-            const keyword = `${encodeURI(this.categoryTitle)}`;
+            // // 공공api에서 호출
+            // const baseUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1`;
+            // const serviceKey = `%2BO%2FI7nNhPkcVOh2FuthiaVSbtU9Yvs0HFf0f%2FMd3vSqVsR1UzoM0jbIqd9rAaN7AHHG2S2IpTqcBq1q8aLlkCA%3D%3D`;
+            // const pageNo = 1;
+            // // const numOfRows = 5;
+            // const keyword = `${encodeURI(this.categoryTitle)}`;
 
-            let url = `${baseUrl}?&pageNo=${pageNo}&MobileOS=ETC&MobileApp=forJ&_type=json&keyword=${keyword}&serviceKey=${serviceKey}`;
+            // let url = `${baseUrl}?&pageNo=${pageNo}&MobileOS=ETC&MobileApp=forJ&_type=json&keyword=${keyword}&serviceKey=${serviceKey}`;
 
-            if (this.contentTypeId != 0) url += `&contentTypeId=${this.contentTypeId}`
+            // if (this.contentTypeId != 0) url += `&contentTypeId=${this.contentTypeId}`
 
-            axios.get(url)
-                .then((resp) => {
-                    // console.log(resp.da
-                    this.itemList = resp.data.response.body.items.item;
-                    console.log(this.itemList);
+            // axios.get(url)
+            //     .then((resp) => {
+            //         // console.log(resp.da
+            //         this.itemList = resp.data.response.body.items.item;
+            //         console.log(this.itemList);
+            //     })
+
+        // DB에서 키워드 선택에 따른 정보 가져오기
+          let url = `http://localhost/area/list/${this.categoryTitle}`
+          if (this.contentTypeId != 0) url += `/${this.contentTypeId}`
+          axios.get(url)
+              .then((resp) => {
+                  this.itemList = resp.data;
+        })
 
                     // // 객체에 담아 DB에 저장
                     // for (var i in this.itemList) {
@@ -199,7 +208,6 @@ export default {
                     //     areaInfo.areaName = this.itemList[i].title;
                     //     axios.post("http://localhost/area/write", areaInfo);
                     // }
-                })
             // // 공공api에서 호출
             // const baseUrl = `https://apis.data.go.kr/B551011/KorService1`;
             // const serviceKey = `%2BO%2FI7nNhPkcVOh2FuthiaVSbtU9Yvs0HFf0f%2FMd3vSqVsR1UzoM0jbIqd9rAaN7AHHG2S2IpTqcBq1q8aLlkCA%3D%3D`;
