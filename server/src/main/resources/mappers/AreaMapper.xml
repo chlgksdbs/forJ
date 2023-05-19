@@ -7,6 +7,12 @@
 		values(#{addr}, #{areaCode}, #{contentId}, #{contenttypeId},  #{mapX}, #{mapY}, #{sigunguCode}, #{areaName},#{areaImg})
 	</insert>  -->
 	
+	<select id="selectMore" parameterType="String" resultType="com.forj.model.dto.AreaDto">
+		select title, addr1 as addr, tel, first_image as areaImg, latitude, longitude
+		from attraction_info
+		where title like concat('%',#{keyword},'%')
+	</select>
+	
 	<select id="selectSome" parameterType="map" resultType="com.forj.model.dto.AreaDto">
 		select title, addr1 as addr, tel, first_image as areaImg, latitude, longitude
 		from attraction_info
