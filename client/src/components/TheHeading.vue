@@ -8,7 +8,7 @@
         </div>
         <!-- 로그인 정보 O -->
         <div id="header_right" v-if="userInfo">
-            <router-link to="/notice">공지사항</router-link>
+            <router-link to="/mypage">마이페이지</router-link>
             <span @click="logout">로그아웃</span>
         </div>
         <!-- 로그인 정보 X -->

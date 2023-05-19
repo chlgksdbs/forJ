@@ -75,6 +75,9 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/vue-editor";
 
 import BoardCommentItem from "./Item/BoardCommentItem.vue";
+import { mapState } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
   name: 'BoardView',
@@ -117,6 +120,9 @@ export default {
         this.heartCount = resp.data;
       });
   },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
+  },
   watch: {
     heartStatus(value) {
       // 좋아요 버튼 활성화
@@ -138,7 +144,7 @@ export default {
     commentWrite() {
       let comment = {
         "boardId": this.boardItem.boardId,
-        "userId": "chlgksdbs",
+        "userId": this.userInfo.userId,
         "content": this.commentContent
       };
 
