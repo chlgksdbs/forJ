@@ -6,9 +6,15 @@
                 <img src="@/assets/img/logo.png">
             </router-link>
         </div>
-        <div id="header_right">
-            <router-link to="/mypage">마이페이지</router-link>
+        <!-- 로그인 정보 O -->
+        <div id="header_right" v-if="userInfo">
+            <router-link to="/notice">공지사항</router-link>
             <span @click="logout">로그아웃</span>
+        </div>
+        <!-- 로그인 정보 X -->
+        <div id="header_right" v-else>
+            <router-link to="/login">로그인</router-link>
+            <router-link to="/join">회원가입</router-link>
         </div>
     </div>
 </template>
