@@ -237,6 +237,9 @@ export default {
   border-radius: 15px;
   padding: 0 30px;
 }
+#BoardView {
+  margin: 0 100px;
+}
 #BoardContent {
   margin: 30px 150px;
 }
