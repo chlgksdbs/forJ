@@ -10,6 +10,15 @@
 		WHERE
 			board_id=#{boardId} and heart_status=1
 	</select>
+	
+	<select id="selectStatus" parameterType="map" resultType="int">
+		SELECT
+			heart_status as heartStatus
+		FROM
+			forj_heart
+		WHERE
+			board_id=#{boardId} and user_id=#{userId}
+	</select>
 
 	<select id="selectOne" parameterType="HeartDto" resultType="HeartDto">
 		SELECT

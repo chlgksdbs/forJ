@@ -1,5 +1,8 @@
 package com.forj.model.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,17 @@ public class HeartService {
 	public int count(int boardId) {
 		
 		return heartMapper.countAll(boardId);
+	}
+	
+	// 현재 사용자의 게시글에 대한 좋아요 상태를 출력
+	public int selectStatus(int boardId, String userId) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("boardId", boardId);
+		map.put("userId", userId);
+		
+		return heartMapper.selectStatus(map);
 	}
 	
 	// 좋아요 정보 조회

@@ -101,22 +101,25 @@ export default {
   },
   created() {
     // console.log(this.$route.params.boardId); // 디버깅
-    // axios 비동기 통신으로 server에서 detail 가져오기
+    // TODO: axios 비동기 통신으로 server에서 detail 가져오기
     axios.get('http://localhost/board/detail/' + this.$route.params.boardId)
       .then((resp) => {
         // console.log(resp.data); // 디버깅
         this.boardItem = resp.data;
 
-        // axios 비동기 통신으로 server에서 comment 가져오기
+        // TODO: axios 비동기 통신으로 server에서 comment 가져오기
         axios.get('http://localhost/comment/' + this.boardItem.boardId)
           .then((resp) => {
             // console.log(resp.data); // 디버깅
             this.commentItems = resp.data;
           });
-      });
 
-    // TODO: 현재 사용자의 좋아요 버튼 상태(heartStatus)값 초기화
-    
+        // TODO: 현재 사용자의 좋아요 버튼 상태(heartStatus)값 초기화
+        axios.get('http://localhost/heart/status/' + this.boardItem.boardId + '/' + this.userInfo.userId)
+          .then((resp) => {
+            this.heartStatus = resp.data;
+          });
+      });
 
     // TODO: 좋아요 count값 초기화
     axios.get('http://localhost/heart/count/' + this.$route.params.boardId)
@@ -134,13 +137,11 @@ export default {
       if (value == 1) {
         document.querySelector('#heart_icon').style.display = "none";
         document.querySelector('#fill_heart_icon').style.display = "";
-        this.heartCount++;
       }
       // 좋아요 버튼 비활성화
       else {
         document.querySelector('#heart_icon').style.display = "";
         document.querySelector('#fill_heart_icon').style.display = "none";
-        this.heartCount--;
       }
     },
   },
@@ -165,7 +166,14 @@ export default {
     heartClick() {
       let heart = {
         "boardId": this.boardItem.boardId,
-        "userId": "chlgksdbs",
+        "userId": this.userInfo.userId,
+      }
+
+      if (this.heartStatus == 1) {
+        this.heartCount--;
+      }
+      else {
+        this.heartCount++;
       }
 
       axios.post('http://localhost/heart/check', heart)
