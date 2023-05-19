@@ -80,7 +80,7 @@ export default {
       if (this.isLogin) {
         // access token을 이용하여 사용자 인증 요청 확인
         await this.getUserInfo(token);
-        this.$router.push({ name: "main" });
+        this.$router.push("/");
       }
     },
   },
