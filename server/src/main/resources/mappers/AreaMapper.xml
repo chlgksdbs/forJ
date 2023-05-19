@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="selectSome" parameterType="map" resultType="com.forj.model.dto.AreaDto">
-		select title, addr1 as addr, tel, first_image as areaImg, latitude, longitude
+		select content_id as contentId, title, addr1 as addr, tel, first_image as areaImg, latitude, longitude
 		from attraction_info
 		where content_type_id = #{typeId} and title like concat('%',#{keyword},'%')
 	</select>
