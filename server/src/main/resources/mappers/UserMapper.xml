@@ -49,9 +49,9 @@
 	
 	<insert id="join" parameterType="UserDto">
 		INSERT INTO forj_user
-			(user_id, user_pw, user_name, user_gender, user_phone, user_email)
+			(user_id, user_pw, user_name, user_nickname, user_gender, user_phone, user_email)
 		VALUES
-			(#{userId}, #{userPw}, #{userName}, #{userGender}, #{userPhone}, #{userEmail})
+			(#{userId}, #{userPw}, #{userName}, #{userName}, #{userGender}, #{userPhone}, #{userEmail})
 	</insert>
 	
 </mapper>

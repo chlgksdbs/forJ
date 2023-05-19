@@ -36,8 +36,11 @@
 <script>
 import axios from 'axios';
 import "@toast-ui/editor/dist/toastui-editor.css";
+import { mapState } from "vuex";
 
 import { Editor } from "@toast-ui/vue-editor";
+
+const memberStore = "memberStore";
 
 export default {
   name: 'BoardWrite',
@@ -47,13 +50,17 @@ export default {
   data() {
     return {
       title: '',
-      writer: 'chlgksdbs',
+      writer: '',
       writeDate: '',
       content: '',
     };
   },
   created() {
     this.writeDate = new Date();
+    this.writer = this.userInfo.userId;
+  },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
   },
   methods: {
     writeBtn() {
