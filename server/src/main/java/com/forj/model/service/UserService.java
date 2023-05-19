@@ -40,6 +40,17 @@ public class UserService {
 		return userMapper.userInfo(userId); 
 	}
 	
+	// refresh token 저장
+	public void saveRefreshToken(String userId, String refreshToken) {
+		
+		// Mapper에 2개 이상의 매개변수를 보내지 말고, Map 형태로 보낼 것
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("refreshToken", refreshToken);
+		
+		userMapper.saveRefreshToken(map);
+	}
+	
 	// refresh token 조회
 	public String getRefreshToken(String userId) {
 		
