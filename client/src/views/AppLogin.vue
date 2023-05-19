@@ -8,18 +8,16 @@
     <div id="login_box">
       <div class="input_login_box">
         <img src="@/assets/img/icon_id.png" class="login_icon" alt=""/>
-        <input type="text" placeholder="아이디" maxlength="45" v-model="id" class="input_login"/>
+        <input type="text" placeholder="아이디" maxlength="45" v-model="user.userId" class="input_login"/>
         <img src="@/assets/img/icon_delete.png" class="login_delete_icon" alt="" @click="input_delete_id"/>
       </div>
       <div class="input_login_box">
         <img src="@/assets/img/icon_pw.png" class="login_icon" alt=""/>
-        <input type="password" placeholder="비밀번호" maxlength="100" v-model="pw" class="input_login"/>
+        <input type="password" placeholder="비밀번호" maxlength="100" v-model="user.userPw" @keyup.enter="loginCheck" class="input_login"/>
         <img src="@/assets/img/icon_delete.png" class="login_delete_icon" alt="" @click="input_delete_pw"/>
       </div>
       <div>
-        <router-link to="#">
-          <button id="loginBtn" @click="loginCheck">로그인</button>
-        </router-link>
+        <button id="loginBtn" @click="loginCheck">로그인</button>
       </div>
       <div class="find_box">
         <router-link to="#" class="find_text">아이디 찾기</router-link>
@@ -40,7 +38,6 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import axios from 'axios';
 
 const memberStore = "memberStore";
 
@@ -59,30 +56,30 @@ export default {
     ...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
   },
   methods: {
-    ...mapActions(memberStore, ["userConfirm", "getUseriNfo"]),
+    ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
     input_delete_id() { 
-      this.id='';
+      this.user.userId='';
     },
     input_delete_pw() {
-      this.pw='';
+      this.user.userPw='';
     },
-    loginCheck() {
-      // 1. 입력이 안된 정보가 있는 지 체크
-      if (this.id.length == 0 || this.pw.length == 0) {
+    // 로그인 메서드
+    async loginCheck() {
+      // 입력이 안된 정보가 있는 지 체크
+      if (this.user.userId.length == 0 || this.user.userPw.length == 0) {
         alert('아이디 또는 비밀번호를 입력하세요');
         return;
       }
 
-      // 2. JSON 객체로 만들어서 Server로 전송
-      let userDto = {
-        "userId": this.id,
-        "userPw": this.pw,
-      }
+      await this.userConfirm(this.user);
+      let token = sessionStorage.getItem("access-token");
 
-      axios.post('http://localhost/user/login', userDto)
-        .then(() => {
-          this.$router.push('/');
-        });
+      // 로그인이 된 상태인 경우
+      if (this.isLogin) {
+        // access token을 이용하여 사용자 인증 요청 확인
+        await this.getUserInfo(token);
+        this.$router.push("/");
+      }
     },
   },
 };

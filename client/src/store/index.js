@@ -1,11 +1,11 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 // module import
-import memberStore from "./modules/memberStore";
+import memberStore from "@/store/modules/memberStore";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
@@ -18,4 +18,4 @@ export default new Vuex.Store({
       storage: sessionStorage,
     }),
   ],
-})
+});

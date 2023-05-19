@@ -18,6 +18,9 @@ public interface UserMapper {
 	// 사용자 정보 조회
 	UserDto userInfo(String userId);
 	
+	// refresh token 저장
+	void saveRefreshToken(Map<String, String> map);
+	
 	// refresh token 조회
 	String getRefreshToken(String userId);
 	

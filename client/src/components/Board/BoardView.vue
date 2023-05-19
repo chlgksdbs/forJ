@@ -108,6 +108,7 @@ export default {
       });
 
     // TODO: 현재 사용자의 좋아요 버튼 상태(heartStatus)값 초기화
+    
 
     // TODO: 좋아요 count값 초기화
     axios.get('http://localhost/heart/count/' + this.$route.params.boardId)
