@@ -1,4 +1,4 @@
-package com.forj.user.model.service;
+package com.forj.model.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Random;

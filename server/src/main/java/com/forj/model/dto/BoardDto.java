@@ -1,4 +1,4 @@
-package com.forj.board.model.dto;
+package com.forj.model.dto;
 
 public class BoardDto {
 
@@ -8,7 +8,6 @@ public class BoardDto {
 	private String writeDate;
 	private String content;
 	private int hit;
-//	private List<FileDto> files = new ArrayList<>(); 
 
 	BoardDto() {
 

@@ -1,4 +1,4 @@
-package com.forj.user.model.dto;
+package com.forj.model.dto;
 
 public class UserDto {
 

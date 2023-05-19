@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.forj.board.model.repository.CommentMapper">
+<mapper namespace="com.forj.model.repository.CommentMapper">
 
-	<select id="selectAll" parameterType="int" resultType="com.forj.board.model.dto.CommentDto">
+	<select id="selectAll" parameterType="int" resultType="CommentDto">
 		select comment_id as commentId, board_id as boardId, fu.user_nickname as userId, content, write_date as writeDate
 		from forj_comment as fc join forj_user as fu
 		using(user_id)
 		where board_id = #{boardId}
 	</select>
 	
-	<select id="selectOne" parameterType="int" resultType="com.forj.board.model.dto.CommentDto">
+	<select id="selectOne" parameterType="int" resultType="CommentDto">
 		select comment_id as commentId, board_id as boardId, fu.user_nickname as userId, content, write_date as writeDate
 		from forj_comment as fc join forj_user as fu
 		using(user_id)
@@ -22,13 +22,13 @@
 		where comment_id=#{commentId}
 	</delete>
 	
-	<update id="update" parameterType="com.forj.board.model.dto.CommentDto" >
+	<update id="update" parameterType="CommentDto" >
 		update forj_comment
 		set content=#{content}
 		where comment_id=#{commentId}
 	</update>
 	
-	<insert id="insert" parameterType="com.forj.board.model.dto.CommentDto">
+	<insert id="insert" parameterType="CommentDto">
 		insert into forj_comment(board_id, user_id, content, write_date)
 		values(#{boardId}, #{userId}, #{content}, now())
 	</insert>
