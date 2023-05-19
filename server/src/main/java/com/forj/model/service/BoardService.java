@@ -1,14 +1,14 @@
-package com.forj.board.model.service;
+package com.forj.model.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.forj.board.model.dto.BoardDto;
-import com.forj.board.model.dto.CommentDto;
-import com.forj.board.model.repository.BoardMapper;
-import com.forj.board.model.repository.CommentMapper;
+import com.forj.model.dto.BoardDto;
+import com.forj.model.dto.CommentDto;
+import com.forj.model.repository.BoardMapper;
+import com.forj.model.repository.CommentMapper;
 
 @Service
 public class BoardService {

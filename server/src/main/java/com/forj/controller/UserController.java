@@ -1,4 +1,4 @@
-package com.forj.user.controller;
+package com.forj.controller;
 
 
 import java.util.HashMap;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.forj.jwt.JwtService;
-import com.forj.user.model.dto.UserDto;
-import com.forj.user.model.service.MailSendService;
-import com.forj.user.model.service.UserService;
+import com.forj.model.dto.UserDto;
+import com.forj.model.service.JwtService;
+import com.forj.model.service.MailSendService;
+import com.forj.model.service.UserService;
 
 @RestController
 @RequestMapping("/user")

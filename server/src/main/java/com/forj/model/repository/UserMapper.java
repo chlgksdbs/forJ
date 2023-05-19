@@ -1,10 +1,10 @@
-package com.forj.user.model.repository;
+package com.forj.model.repository;
 
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.forj.user.model.dto.UserDto;
+import com.forj.model.dto.UserDto;
 
 @Mapper
 public interface UserMapper {
