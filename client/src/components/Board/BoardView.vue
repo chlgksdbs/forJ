@@ -8,8 +8,13 @@
     </div>
     <div class="detail_nav">
       <div class="detail_nav_profile_img_text">
-        <div class="detail_nav_profile_img_box">
-          <img src="@/assets/img/detail_profile.jpg">
+        <!-- 사용자 프로필 사진이 있는 경우 -->
+        <div class="detail_nav_profile_img_box" v-if="boardItem.profileImg">
+          <img :src="boardItem.profileImg">
+        </div>
+        <!-- 사용자 프로필 사진이 없는 경우-->
+        <div class="detail_nav_profile_default_img_box" v-else>
+          <img src="@/assets/img/icon_profile.png">
         </div>
         <div class="detail_nav_profile_text">
           <div class="detail_nav_profile_nickname">
@@ -75,6 +80,9 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/vue-editor";
 
 import BoardCommentItem from "./Item/BoardCommentItem.vue";
+import { mapState } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
   name: 'BoardView',
@@ -93,21 +101,25 @@ export default {
   },
   created() {
     // console.log(this.$route.params.boardId); // 디버깅
-    // axios 비동기 통신으로 server에서 detail 가져오기
+    // TODO: axios 비동기 통신으로 server에서 detail 가져오기
     axios.get('http://localhost/board/detail/' + this.$route.params.boardId)
       .then((resp) => {
         // console.log(resp.data); // 디버깅
         this.boardItem = resp.data;
 
-        // axios 비동기 통신으로 server에서 comment 가져오기
+        // TODO: axios 비동기 통신으로 server에서 comment 가져오기
         axios.get('http://localhost/comment/' + this.boardItem.boardId)
           .then((resp) => {
             // console.log(resp.data); // 디버깅
             this.commentItems = resp.data;
           });
-      });
 
-    // TODO: 현재 사용자의 좋아요 버튼 상태(heartStatus)값 초기화
+        // TODO: 현재 사용자의 좋아요 버튼 상태(heartStatus)값 초기화
+        axios.get('http://localhost/heart/status/' + this.boardItem.boardId + '/' + this.userInfo.userId)
+          .then((resp) => {
+            this.heartStatus = resp.data;
+          });
+      });
 
     // TODO: 좋아요 count값 초기화
     axios.get('http://localhost/heart/count/' + this.$route.params.boardId)
@@ -116,19 +128,20 @@ export default {
         this.heartCount = resp.data;
       });
   },
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
+  },
   watch: {
     heartStatus(value) {
       // 좋아요 버튼 활성화
       if (value == 1) {
         document.querySelector('#heart_icon').style.display = "none";
         document.querySelector('#fill_heart_icon').style.display = "";
-        this.heartCount++;
       }
       // 좋아요 버튼 비활성화
       else {
         document.querySelector('#heart_icon').style.display = "";
         document.querySelector('#fill_heart_icon').style.display = "none";
-        this.heartCount--;
       }
     },
   },
@@ -137,7 +150,7 @@ export default {
     commentWrite() {
       let comment = {
         "boardId": this.boardItem.boardId,
-        "userId": "chlgksdbs",
+        "userId": this.userInfo.userId,
         "content": this.commentContent
       };
 
@@ -153,7 +166,14 @@ export default {
     heartClick() {
       let heart = {
         "boardId": this.boardItem.boardId,
-        "userId": "chlgksdbs",
+        "userId": this.userInfo.userId,
+      }
+
+      if (this.heartStatus == 1) {
+        this.heartCount--;
+      }
+      else {
+        this.heartCount++;
       }
 
       axios.post('http://localhost/heart/check', heart)
@@ -193,6 +213,22 @@ export default {
   border-radius: 70%;
   overflow: hidden;
 }
+.detail_nav_profile_img_box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.detail_nav_profile_default_img_box {
+  width: 65px;
+  height: 65px;
+  margin: 0px 50px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+.detail_nav_profile_default_img_box img {
+  width: 100%;
+  object-fit: cover;
+}
 .detail_nav {
   display: flex;
   justify-content: space-between;
@@ -209,11 +245,6 @@ export default {
 .detail_nav_hit {
   margin: 0px 150px;
   color: #888;
-}
-.detail_nav_profile_img_box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 .detail_nav_profile_nickname {
   text-align: left;

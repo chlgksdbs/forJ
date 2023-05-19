@@ -1,5 +1,7 @@
 package com.forj.model.repository;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.forj.model.dto.HeartDto;
@@ -12,6 +14,9 @@ public interface HeartMapper {
 
 	// 좋아요 정보 조회
 	HeartDto selectOne(HeartDto heartDto);
+	
+	// 현재 사용자의 게시글에 대한 좋아요 상태를 출력
+	int selectStatus(Map<String, Object> map);
 	
 	// 좋아요 생성 (처음 요청)
 	void insert(HeartDto heartDto);

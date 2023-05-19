@@ -22,7 +22,23 @@ public class HeartController {
 	@GetMapping("/count/{boardId}")
 	public int heartCount(@PathVariable int boardId) {
 		
-		return heartService.count(boardId);
+		int heartCount = heartService.count(boardId);
+		System.out.println(heartCount);
+		
+		return heartCount;
+	}
+	
+	// 현재 사용자의 게시글에 대한 좋아요 상태를 출력
+	@GetMapping("/status/{boardId}/{userId}")
+	public int statusCheck(@PathVariable int boardId, @PathVariable String userId) {
+		
+		try {
+			int status = heartService.selectStatus(boardId, userId);
+			return status;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return 0;
+		}
 	}
 	
 	// 처음 요청은, 게시글에 사용자가 좋아요를 한 번이라도 누른적이 있는 지에 대한 체크

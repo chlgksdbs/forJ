@@ -58,7 +58,7 @@ public class UserController {
 				String refreshToken = jwtService.createRefreshToken("userId", loginInfo.getUserId());
 				
 				// Refresh Token -> DB 저장
-//				userService.saveRefreshToken(userDto.getUserId(), refreshToken);
+				userService.saveRefreshToken(userDto.getUserId(), refreshToken);
 				
 				resultMap.put("access-token", accessToken);
 				resultMap.put("refresh-token", refreshToken);

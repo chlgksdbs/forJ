@@ -188,8 +188,8 @@ export default {
             //     })
 
         // DB에서 키워드 선택에 따른 정보 가져오기
-          let url = `http://localhost/area/list/${this.categoryTitle}`
-          if (this.contentTypeId != 0) url += `/${this.contentTypeId}`
+          let url = `http://localhost/area/list/${this.categoryTitle}/${this.contentTypeId}`;
+        //   if (this.contentTypeId != 0) url += `/${this.contentTypeId}`
           axios.get(url)
               .then((resp) => {
                   this.itemList = resp.data;
