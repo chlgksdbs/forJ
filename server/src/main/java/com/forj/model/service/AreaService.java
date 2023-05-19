@@ -31,6 +31,12 @@ public class AreaService {
 		map.put("keyword", keyword);
 		map.put("typeId", typeId);
 		
-		return mapper.selectSome(map);
+		// 키워드버튼을 선택하지 않았으면
+		if(typeId==0) {
+			return mapper.selectMore(keyword);
+		}else {
+			return mapper.selectSome(map);			
+		}
+		
 	}
 }

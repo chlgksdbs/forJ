@@ -1,13 +1,17 @@
 <template>
     <div id="PlanSelectList">
-        <div class="img_box">
-            <img :src="img">
-        </div>
+        <!-- <div v-if="img"> -->
+            <div class="img_box">
+                <img :src="img">
+            </div>
+        <!-- </div>
+        <div v-else>
+            <div class="btn_box">
+                <img src="@/assets/img/icon_nobox_delete.png">
+            </div>
+        </div> -->
         <div class="text_box">
             <h5>{{ title }}</h5>
-        </div>
-        <div class="btn_box">
-            <img src="@/assets/img/icon_nobox_delete.png">
         </div>
     </div>
 </template>

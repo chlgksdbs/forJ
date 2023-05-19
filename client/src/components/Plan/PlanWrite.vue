@@ -38,7 +38,7 @@
         </div>
         <div v-if="itemList.length">
             <div v-for="item in itemList" :key="item.contentId" class="plan_right_card">
-                <plan-search-list :img="item.firstimage" :title="item.title"></plan-search-list>
+                <plan-search-list :img="item.areaImg" :title="item.title"></plan-search-list>
             </div>
         </div>
         <div v-else class="phrase">
@@ -193,6 +193,7 @@ export default {
           axios.get(url)
               .then((resp) => {
                   this.itemList = resp.data;
+                  console.log(this.itemList);
         })
 
                     // // 객체에 담아 DB에 저장

@@ -16,6 +16,9 @@ public interface AreaMapper {
 //	void insert(AreaDto area);
 	
 	// 여행지 정보 get
+	// 키워드버튼을 선택하지 않았으면
+	List<AreaDto> selectMore(String keyword);
+	// 키워드버튼을 선택했으면
 	List<AreaDto> selectSome(Map<String, Object> map);
 
 }
