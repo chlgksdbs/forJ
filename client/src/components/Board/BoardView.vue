@@ -8,8 +8,13 @@
     </div>
     <div class="detail_nav">
       <div class="detail_nav_profile_img_text">
-        <div class="detail_nav_profile_img_box">
-          <img src="@/assets/img/detail_profile.jpg">
+        <!-- 사용자 프로필 사진이 있는 경우 -->
+        <div class="detail_nav_profile_img_box" v-if="boardItem.profileImg">
+          <img :src="boardItem.profileImg">
+        </div>
+        <!-- 사용자 프로필 사진이 없는 경우-->
+        <div class="detail_nav_profile_default_img_box" v-else>
+          <img src="@/assets/img/icon_profile.png">
         </div>
         <div class="detail_nav_profile_text">
           <div class="detail_nav_profile_nickname">
@@ -200,6 +205,22 @@ export default {
   border-radius: 70%;
   overflow: hidden;
 }
+.detail_nav_profile_img_box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.detail_nav_profile_default_img_box {
+  width: 65px;
+  height: 65px;
+  margin: 0px 50px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+.detail_nav_profile_default_img_box img {
+  width: 100%;
+  object-fit: cover;
+}
 .detail_nav {
   display: flex;
   justify-content: space-between;
@@ -216,11 +237,6 @@ export default {
 .detail_nav_hit {
   margin: 0px 150px;
   color: #888;
-}
-.detail_nav_profile_img_box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 .detail_nav_profile_nickname {
   text-align: left;

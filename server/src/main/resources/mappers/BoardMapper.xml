@@ -14,7 +14,7 @@
 	</insert>
 	
 	<select id="selectOne" parameterType="int" resultType="BoardDto">
-		select board_id as boardId, title, fu.user_nickname as writer, write_date as writeDate, content, hit
+		select board_id as boardId, title, fu.user_nickname as writer, fu.user_profileimg as profileImg, write_date as writeDate, content, hit
 		from forj_board as fb join forj_user as fu
 		on fb.writer = fu.user_id
 		where board_id=#{boardId}

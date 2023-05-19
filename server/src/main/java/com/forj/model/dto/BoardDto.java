@@ -5,6 +5,7 @@ public class BoardDto {
 	private int boardId;
 	private String title;
 	private String writer;
+	private String profileImg;
 	private String writeDate;
 	private String content;
 	private int hit;
@@ -35,6 +36,14 @@ public class BoardDto {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
 	}
 
 	public String getWriteDate() {
