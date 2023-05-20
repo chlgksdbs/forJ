@@ -6,7 +6,7 @@
                 :autoplay="true"
                 :autoplaySpeed="6500"
                 :speed="2500"
-                :dots="true"
+                :dots="false"
                 :rows="1"
                 :slidesToShow="1"
             >
@@ -17,6 +17,35 @@
             <div class="carousel_three">
             </div>
         </vue-slick-carousel>
+        <div class="main_nav_bar">
+            <div class="main_nav">
+                <router-link to="/plan" class="main_menu_bar">MAKE PLAN</router-link>
+            </div>
+            <span style="color: #dadada">|</span>
+            <div class="main_nav">
+                <router-link to="/board" class="main_menu_bar">SHARE PLAN</router-link>
+            </div>
+            <span style="color: #dadada">|</span>
+            <div class="main_nav">
+                <router-link to="/mypage/cart" class="main_menu_bar">MY PLAN</router-link>
+            </div>
+        </div>
+        <div class="main_nav_user_bar" v-if="userInfo">
+            <div class="main_nav">
+                <router-link to="/mypage" class="main_menu_bar">마이페이지</router-link>
+            </div>
+            <div class="main_nav">
+                <a class="main_menu_bar" @click="logout">로그아웃</a>
+            </div>
+        </div>
+        <div class="main_nav_nouser_bar" v-else>
+            <div class="main_nav">
+                <router-link to="/login" class="main_menu_bar">로그인</router-link>
+            </div>
+            <div class="main_nav">
+                <router-link to="/join" class="main_menu_bar">회원가입</router-link>
+            </div>
+        </div>
         <div class="carousel_text_box">
             <h1 class="carousel_text">FOR MBTI J</h1>
             <h2 class="carousel_text_subtitle">당신만의 여행 플래너</h2>
@@ -26,7 +55,7 @@
                         <img src="@/assets/img/icon_search.png" width="24" height="24">
                     </div>
                     <div style="flex: 1; position: relative;">
-                        <input type="text" class="banner_search_input" placeholder="어디로 놀러가세요?" style="outline: none;" />
+                        <input type="text" class="banner_search_input" placeholder="원하는 여행지를 입력하세요." style="outline: none;" />
                     </div>
                 </div>
                 <div class="banner_search_button">
@@ -40,19 +69,19 @@
                 <div class="card_box">
                     <router-link to="/plan">
                         <img src="@/assets/img/main_card1.png" class="img_card">
-                        <h1 class="img_card_text">여행 일정 만들기</h1>
+                        <h1 class="img_card_text">MAKE PLAN</h1>
                     </router-link>
                 </div>
                 <div class="card_box">
                     <router-link to="/board">
                         <img src="@/assets/img/main_card2.png" class="img_card">
-                        <h1 class="img_card_text">일정 공유 게시판</h1>
+                        <h1 class="img_card_text">SHARE PLAN</h1>
                     </router-link>
                 </div>
                 <div class="card_box">
                     <router-link to="/mypage/cart">
                         <img src="@/assets/img/main_card3.png" class="img_card">
-                        <h1 class="img_card_text">장바구니</h1>
+                        <h1 class="img_card_text">MY PLAN</h1>
                     </router-link>
                 </div>
             </div>
@@ -65,7 +94,10 @@ import VueSlickCarousel from "vue-slick-carousel";
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
 
+import { mapState, mapGetters, mapActions } from "vuex";
 import TheFooter from "@/components/TheFooter.vue";
+
+const memberStore = "memberStore";
 
 export default {
     name: "AppMain",
@@ -73,9 +105,62 @@ export default {
         VueSlickCarousel,
         TheFooter
     },
+    computed: {
+        ...mapState(memberStore, ["isLogin", "userInfo"]),
+        ...mapGetters(["checkUserInfo"]),
+    },
+    methods: {
+        ...mapActions(memberStore, ["userLogout"]),
+        logout() {
+            console.log(this.userInfo);
+
+            this.userLogout(this.userInfo.userId);
+
+            sessionStorage.removeItem("access-token"); // 저장된 access token 삭제
+            sessionStorage.removeItem("refresh-token"); // 저장된 refresh token 삭제
+
+            // 로그인 페이지로 이동
+            if (this.$route.path != "/login") this.$router.push("/login");
+        }
+    },
 }
 </script>
 <style scoped>
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+.main_nav_bar {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+    width: 450px;
+    display: flex;
+    justify-content: space-between;
+}
+.main_nav_user_bar {
+    position: absolute;
+    top: 10%;
+    left: 90%;
+    transform: translate( -50%, -50% );
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+.main_nav_nouser_bar {
+    position: absolute;
+    top: 10%;
+    left: 90%;
+    transform: translate( -50%, -50% );
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+}
+.main_menu_bar {
+  font-size: 17px;
+  color: #FFF;
+}
 .carousel_box {
     margin: 0px;
 }
@@ -238,8 +323,8 @@ export default {
     right: 10px;
     z-index: 99;
 }
-.slick-dots {
+/* .slick-dots {
     position: static;
-}
+} */
 /* slick 설정 End */
 </style>
