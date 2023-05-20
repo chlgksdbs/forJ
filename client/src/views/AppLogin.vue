@@ -89,7 +89,7 @@ export default {
 
 <style scoped>
 div {
-  margin: 12px 0 0;
+  padding: 5px 0 0 0;
 }
 a {
   text-decoration: none;
@@ -137,6 +137,9 @@ a {
 .find_text+.find_text::before {
   content: " | ";
   color: #dadada;
+}
+#AppLogin {
+  height: 100vh;
 }
 #logo_box {
   margin-bottom: 50px;

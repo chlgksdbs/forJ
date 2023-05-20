@@ -132,16 +132,22 @@ a {
 }
 .main_nav_bar {
     position: absolute;
-    top: 10%;
+    top: 8%;
     left: 50%;
     transform: translate( -50%, -50% );
     width: 450px;
     display: flex;
     justify-content: space-between;
 }
+.main_nav_bar div {
+    transition: all 0.2s linear;
+}
+.main_nav_bar div:hover {
+    transform: scale(1.1);
+}
 .main_nav_user_bar {
     position: absolute;
-    top: 10%;
+    top: 8%;
     left: 90%;
     transform: translate( -50%, -50% );
     width: 150px;
@@ -150,7 +156,7 @@ a {
 }
 .main_nav_nouser_bar {
     position: absolute;
-    top: 10%;
+    top: 8%;
     left: 90%;
     transform: translate( -50%, -50% );
     width: 120px;
@@ -158,8 +164,8 @@ a {
     justify-content: space-between;
 }
 .main_menu_bar {
-  font-size: 17px;
-  color: #FFF;
+    font-size: 17px;
+    color: #FFF;
 }
 .carousel_box {
     margin: 0px;
@@ -186,7 +192,7 @@ a {
     display: flex;
     flex-direction: column;
     width: 100vw;
-    height: 80vh;
+    height: 85vh;
     background: url("@/assets/img/main_carousel1.jpg");
     background-size: cover;
     text-align: center;
@@ -199,7 +205,7 @@ a {
     display: flex;
     flex-direction: column;
     width: 100vw;
-    height: 80vh;
+    height: 85vh;
     background: url("@/assets/img/main_carousel2.jpg");
     background-size: cover;
     text-align: center;
@@ -212,7 +218,7 @@ a {
     display: flex;
     flex-direction: column;
     width: 100vw;
-    height: 80vh;
+    height: 85vh;
     background: url("@/assets/img/main_carousel3.jpg");
     background-size: cover;
     text-align: center;
