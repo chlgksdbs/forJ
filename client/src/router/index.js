@@ -33,6 +33,7 @@ const onlyAuthUser = async (to, from, next) => {
   // (2) 토큰이 유효하지 않거나, user 정보가 없는 경우
   if (!checkToken || checkUserInfo == null) {
     // 로그인 페이지로 이동
+    alert('로그인이 필요한 페이지입니다.');
     router.push("/login");
   }
   // (3) 토큰과 user 정보 둘다 유효한 경우
