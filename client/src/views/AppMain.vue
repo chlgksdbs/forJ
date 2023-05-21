@@ -66,6 +66,125 @@
         </div>
         <div id="MainContent">
             <!-- MainContent 중, 지역별 여행 정보 영역-->
+            <div class="main_content_region_wrap">
+                <div class="main_content_region">
+                    <h2>인기있는 여행지</h2>
+                    <vue-slick-carousel
+                        :infinite="true"
+                        :initialSlide="2"
+                        :speed="500"
+                        :slidesToShow="4"
+                        :slidesToScroll="1"
+                        :swipeToSlide="true"
+                    >
+                        <div class="main_content_region_item">
+                            <router-link to="#">
+                                <span class="main_content_region_item_img">
+                                    <img src="@/assets/img/region_seoul.jpg">
+                                </span>
+                                <span class="main_content_region_item_area">
+                                    <span>
+                                        서울
+                                        <p>대한민국의 수도</p>
+                                        <br>
+                                        <p>지역보기</p>
+                                    </span>
+                                </span>
+                            </router-link>
+                        </div>
+                        <div class="main_content_region_item">
+                            <router-link to="#">
+                                <span class="main_content_region_item_img">
+                                    <img src="@/assets/img/region_busan.jpg">
+                                </span>
+                                <span class="main_content_region_item_area">
+                                    <span>
+                                        부산
+                                        <p>한국 제 2의 수도</p>
+                                        <br>
+                                        <p>지역보기</p>
+                                    </span>
+                                </span>
+                            </router-link>
+                        </div>
+                        <div class="main_content_region_item">
+                            <router-link to="#">
+                                <span class="main_content_region_item_img">
+                                    <img src="@/assets/img/region_gangneung.jpg">
+                                </span>
+                                <span class="main_content_region_item_area">
+                                    <span>
+                                        강릉
+                                        <p>아름다운 동해안 해안도로 도시</p>
+                                        <br>
+                                        <p>지역보기</p>
+                                    </span>
+                                </span>
+                            </router-link>
+                        </div>
+                        <div class="main_content_region_item">
+                            <router-link to="#">
+                                <span class="main_content_region_item_img">
+                                    <img src="@/assets/img/region_jeju.jpg">
+                                </span>
+                                <span class="main_content_region_item_area">
+                                    <span>
+                                        제주
+                                        <p>한라산의 도시</p>
+                                        <br>
+                                        <p>지역보기</p>
+                                    </span>
+                                </span>
+                            </router-link>
+                        </div>
+                        <div class="main_content_region_item">
+                            <router-link to="#">
+                                <span class="main_content_region_item_img">
+                                    <img src="@/assets/img/region_incheon.jpg">
+                                </span>
+                                <span class="main_content_region_item_area">
+                                    <span>
+                                        인천
+                                        <p>서울에서 가장 가까운 바다 도시</p>
+                                        <br>
+                                        <p>지역보기</p>
+                                    </span>
+                                </span>
+                            </router-link>
+                        </div>
+                        <div class="main_content_region_item">
+                            <router-link to="#">
+                                <span class="main_content_region_item_img">
+                                    <img src="@/assets/img/region_gyeongju.jpg">
+                                </span>
+                                <span class="main_content_region_item_area">
+                                    <span>
+                                        경주
+                                        <p>신라의 수도, 문화재의 도시</p>
+                                        <br>
+                                        <p>지역보기</p>
+                                    </span>
+                                </span>
+                            </router-link>
+                        </div>
+                        <div class="main_content_region_item">
+                            <router-link to="#">
+                                <span class="main_content_region_item_img">
+                                    <img src="@/assets/img/region_jeonju.jpg">
+                                </span>
+                                <span class="main_content_region_item_area">
+                                    <span>
+                                        전주
+                                        <p>한옥 마을과 비빔밥의 도시</p>
+                                        <br>
+                                        <p>지역보기</p>
+                                    </span>
+                                </span>
+                            </router-link>
+                        </div>
+                    </vue-slick-carousel>
+                </div>
+            </div>
             <!-- MainContent 중, 여행 후기 영역 -->
             <div class="main_content_review_wrap">
                 <div class="best_tour_review_box">
@@ -298,7 +417,65 @@ a {
     margin-left: 16px;
     padding: 0 40px;
 }
-/* 인기있는 여행 후기 CSS Start */
+/* Main Content: 지역별 여행 정보 카드 CSS Start */
+.main_content_region_wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.main_content_region {
+    position: relative;
+    width: 800px;
+}
+
+.main_content_region h2 {
+    font-size: 28px;
+    text-align: left;
+}
+.main_content_region_item {
+    float: left;
+    width: 198px;
+    height: 180px;
+    border-radius: 10px;
+}
+.main_content_region_item a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.main_content_region_item_img img {
+    border-radius: 10px;
+    width: 95%;
+    height: 100%;
+    opacity: 0.9;
+}
+.main_content_region_item_area {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 20px;
+    display: table;
+}
+.main_content_region_item_area > span {
+    padding: 0 20px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.08em;
+}
+.main_content_region_item_area > span > p {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+/* Main Content: 지역별 여행 정보 카드 CSS End */
+/* Main Content: 인기있는 여행 후기 CSS Start */
 .main_content_review_wrap {
     display: flex;
     justify-content: center;
@@ -384,7 +561,7 @@ a {
     bottom: 0;
     color: #a6a6a6;
 }
-/* 인기있는 여행 후기 CSS End*/
+/* Main Content: 인기있는 여행 후기 CSS End*/
 #MainContent {
     margin: 50px 100px;
 }
