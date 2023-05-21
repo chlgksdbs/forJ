@@ -65,23 +65,26 @@
         </div>
         </div>
         <div id="MainContent">
-            <div id="TheCard">
-                <div class="card_box">
-                    <router-link to="/plan">
-                        <img src="@/assets/img/main_card1.png" class="img_card">
-                        <h1 class="img_card_text">MAKE PLAN</h1>
-                    </router-link>
-                </div>
-                <div class="card_box">
-                    <router-link to="/board">
-                        <img src="@/assets/img/main_card2.png" class="img_card">
-                        <h1 class="img_card_text">SHARE PLAN</h1>
-                    </router-link>
-                </div>
-                <div class="card_box">
-                    <router-link to="/mypage/cart">
-                        <img src="@/assets/img/main_card3.png" class="img_card">
-                        <h1 class="img_card_text">MY PLAN</h1>
+            <!-- MainContent 중, 지역별 여행 정보 영역-->
+            <!-- MainContent 중, 여행 후기 영역 -->
+            <div class="main_content_review_wrap">
+                <div class="best_tour_review_box">
+                    <h2>인기있는 여행 후기</h2>
+                    <div class="more_plus">
+                        <router-link to="/board">더보기</router-link>
+                    </div>
+                    <router-link to="/board/view/3">
+                        <div class="best_tour_review">
+                            <div class="best_tour_img">
+                                <img src="@/assets/img/best_tour_img.jpg" width="300px" height="200px">
+                            </div>
+                            <div class="best_tour_info">
+                                <h3 class="tour_title">2박 3일 부산 커플 여행 일정 공유해요~!!</h3>
+                                <p class="tour_date">2023.05.01(월) ~ 2023.05.03(수) 2박 3일</p>
+                                <p class="tour_content">휴가 기간에, 2박 3일로 부산 여행을 다녀왔다. 이번에 다녀온 여행지는 ...</p>
+                                <p class="tour_writer">김** | 2023.05.04</p>
+                            </div>
+                        </div>
                     </router-link>
                 </div>
             </div>
@@ -128,6 +131,7 @@ export default {
 <style scoped>
 a {
   text-decoration: none;
+  color: #000;
   cursor: pointer;
 }
 .main_nav_bar {
@@ -294,27 +298,95 @@ a {
     margin-left: 16px;
     padding: 0 40px;
 }
-.card_box {
-    margin: 0 20px;
-    position: relative;
-}
-.img_card {
-    width: 100%;
-}
-.img_card_text {
-    font-size: 110%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate( -50%, -50% );
-    color: white;
-}
-#MainContent {
-    margin: 50px 100px;
-}
-#TheCard {
+/* 인기있는 여행 후기 CSS Start */
+.main_content_review_wrap {
     display: flex;
     justify-content: center;
+}
+.best_tour_review_box {
+    position: relative;
+    width: 800px;
+}
+.best_tour_review_box h2 {
+    font-size: 28px;
+    text-align: left;
+}
+.more_plus {
+    position: absolute;
+    right: 0;
+    top: 10%;
+}
+.more_plus a {
+    display: block;
+    color: #595959;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 16px;
+}
+.more_plus a::before {
+    content: '+';
+    display: inline-block;
+    color: #595959;
+    font-size: 25px;
+    font-weight: 700;
+    width: 14px;
+    height: 22px;
+    line-height: 1;
+    vertical-align: bottom;
+    margin-right: 8px;
+}
+.best_tour_review {
+    cursor: pointer;
+}
+.best_tour_img {
+    float: left;
+    width: 300px;
+    height: 200px;
+}
+.best_tour_info {
+    position: relative;
+    border: 1px solid #ddd;
+    margin-left: 300px;
+    min-height: 200px;
+}
+.tour_title {
+    font-size: 20px;
+    margin: 30px 0 0 0;
+}
+.tour_date {
+    position: relative;
+    color: #005bd7;
+    padding-bottom: 15px;
+    margin: 5px 0 15px 0;
+    width: 70%;
+    left: 15%;
+    font-weight: bold;
+}
+.tour_date:after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: #ebebeb;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.tour_content {
+    position: relative;
+    left: 15%;
+    width: 70%;
+}
+.tour_writer {
+    font-size: 14px;
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    color: #a6a6a6;
+}
+/* 인기있는 여행 후기 CSS End*/
+#MainContent {
+    margin: 50px 100px;
 }
 </style>
 
@@ -329,8 +401,5 @@ a {
     right: 10px;
     z-index: 99;
 }
-/* .slick-dots {
-    position: static;
-} */
 /* slick 설정 End */
 </style>
