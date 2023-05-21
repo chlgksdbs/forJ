@@ -109,6 +109,16 @@ const routes = [
         component: () => import("@/components/Board/BoardList"),
       },
       {
+        path: "notice",
+        name: "boardnotice",
+        component: () => import('@/components/Board/BoardNotice'),
+      },
+      {
+        path: "qna",
+        name: "boardqna",
+        component: () => import('@/components/Board/BoardQna'),
+      },
+      {
         path: "write",
         name: "boardwrite",
         beforeEnter: onlyAuthUser,

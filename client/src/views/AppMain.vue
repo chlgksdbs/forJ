@@ -437,12 +437,17 @@ a {
     width: 198px;
     height: 180px;
     border-radius: 10px;
+    overflow: hidden;
 }
 .main_content_region_item a {
     position: relative;
     display: block;
     width: 100%;
     height: 100%;
+    transition: all 0.25s linear;
+}
+.main_content_region_item a:hover {
+    transform: scale(1.05);
 }
 .main_content_region_item_img img {
     border-radius: 10px;
@@ -563,7 +568,7 @@ a {
 }
 /* Main Content: 인기있는 여행 후기 CSS End*/
 #MainContent {
-    margin: 50px 100px;
+    margin: 65px 100px;
 }
 </style>
 
