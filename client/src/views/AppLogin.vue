@@ -66,13 +66,15 @@ export default {
     // 로그인 메서드
     async loginCheck() {
       // 입력이 안된 정보가 있는 지 체크
-      if (this.user.userId.length == 0 || this.user.userPw.length == 0) {
-        alert('아이디 또는 비밀번호를 입력하세요');
-        return;
-      }
+      // if (this.user.userId.length == 0 || this.user.userPw.length == 0) {
+      //   alert('아이디 또는 비밀번호를 입력하세요');
+      //   return;
+      // }
 
       await this.userConfirm(this.user);
+
       let token = sessionStorage.getItem("access-token");
+      console.log(token);
 
       // 로그인이 된 상태인 경우
       if (this.isLogin) {
@@ -87,7 +89,7 @@ export default {
 
 <style scoped>
 div {
-  margin: 12px 0 0;
+  padding: 5px 0 0 0;
 }
 a {
   text-decoration: none;
@@ -135,6 +137,9 @@ a {
 .find_text+.find_text::before {
   content: " | ";
   color: #dadada;
+}
+#AppLogin {
+  height: 100vh;
 }
 #logo_box {
   margin-bottom: 50px;
