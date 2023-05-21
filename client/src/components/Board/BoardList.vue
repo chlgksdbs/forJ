@@ -2,8 +2,8 @@
   <div id="BoardList">
     <div id="TheSearchBar" align="right">
       <div id="input_search_bar">
-          <input type="text" placeholder="검색어를 입력하세요." maxlength="45" />
-          <img src="@/assets/img/icon_search.png">
+          <input type="text" placeholder="검색어를 입력하세요." @keyup.enter="searchShareBoard" maxlength="45" />
+          <img src="@/assets/img/icon_search.png" @click="searchShareBoard">
       </div>
     </div>
     <board-list-item></board-list-item>
@@ -29,8 +29,13 @@ export default {
       message: '',
     };
   },
-  created() {},
-  methods: {},
+  created() {
+    this.$emit("setTitle", "자유 게시판");
+  },
+  methods: {
+    // TODO: 자유 게시판(여행 계획 공유 게시판) 검색바 이벤트 메서드
+    searchShareBoard() {},
+  },
 };
 </script>
 
@@ -49,9 +54,9 @@ a:hover {
 input {
     position: absolute;
     border: none;
-    width: 180px;
+    width: 160px;
     top: 50%;
-    left: 50%;
+    left: 45%;
     transform: translate( -50%, -50% );
 }
 input:focus {
@@ -80,7 +85,7 @@ img {
 }
 #input_search_bar {
     position: relative;
-    width: 300px;
+    width: 250px;
     height: 41px;
     border: 1px solid #dadada;
     border-radius: 10px;

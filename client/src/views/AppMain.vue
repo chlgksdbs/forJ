@@ -568,7 +568,7 @@ a {
 }
 /* Main Content: 인기있는 여행 후기 CSS End*/
 #MainContent {
-    margin: 50px 100px;
+    margin: 65px 100px;
 }
 </style>
 
