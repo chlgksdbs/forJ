@@ -1,20 +1,28 @@
 package com.forj.controller;
 
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.forj.model.dto.UserDto;
 import com.forj.model.service.JwtService;
@@ -39,7 +47,7 @@ public class UserController {
 	@Autowired
 	private MailSendService mailSendService;
 	
-	// 로그인
+	// API 1. 로그인
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> loginSuccess(@RequestBody UserDto userDto) {
 		
@@ -78,7 +86,7 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
 	
-	// 로그아웃
+	// API 2. 로그아웃
 	@GetMapping("/logout/{userId}")
 	public ResponseEntity<?> logout(@PathVariable("userId") String userId) {
 		
@@ -98,7 +106,7 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
-	// 회원인증: 회원 정보를 담은 token 반환 메서드
+	// API 3. 회원인증: 회원 정보를 담은 token 반환 메서드
 	@GetMapping("/info/{userId}")
 	public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userId") String userId, HttpServletRequest request) {
 		
@@ -129,7 +137,7 @@ public class UserController {
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
 	
-	// Refresh Token을 이용한 Access Token 재발급
+	// API 4. Refresh Token을 이용한 Access Token 재발급
 	@PostMapping("/refresh")
 	public ResponseEntity<?> refreshToken(@RequestBody UserDto userDto, HttpServletRequest request) {
 		
@@ -160,7 +168,7 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
-	// 회원가입
+	// API 5. 회원가입
 	@PostMapping("/join")
 	public String join(@RequestBody UserDto userDto) {
 		
@@ -173,7 +181,7 @@ public class UserController {
 		}
 	}
 	
-	// 회원가입 시, 네이버 메일 전송
+	// API 6. 회원가입 시, 네이버 메일 전송
 	@PostMapping("/certmail")
 	public String certmail(@RequestBody UserDto userDto) throws Exception {
 		
@@ -181,5 +189,41 @@ public class UserController {
 		System.out.println(code);
 		
 		return code;
+	}
+	
+	// API 7. 프로필 이미지 변경
+	// (1) FileUpload에 대한 전체적인 설명: https://blog.naver.com/PostView.naver?blogId=xxhayoxx&logNo=221803768375&parentCategoryNo=&categoryNo=24&viewDate=&isShowPopularPosts=true&from=search
+	// (2) (Backend) consumes에 대한 설명: https://superbono-2020.tistory.com/174
+	// (3) (Frontend) formData에 대한 설명: https://jw910911.tistory.com/117
+	@PutMapping(value = "/profileImg", consumes = { MediaType.APPLICATION_JSON_VALUE,
+														   MediaType.MULTIPART_FORM_DATA_VALUE })
+	public void modifyImg(@RequestPart("userId") String userId, @RequestPart("profileImg") MultipartFile profileImg) {
+		
+//		System.out.println(userId); // 사용자 ID 디버깅
+//		System.out.println(profileImg.getOriginalFilename()); // 파일 이름 디버깅
+		
+		userService.setProfileImg(userId, profileImg);
+		
+//		return "Profile Image Setting"; // Frontend 디버깅
+	}
+	
+	// API 8. 프로필 이미지 출력
+	// 이미지는 byte 배열 형태를 띄고 있기 때문에, return 값은 byte
+	// (1) Profile 이미지 출력: https://velog.io/@brince/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%EB%A1%9C-%ED%94%84%EB%A1%9C%ED%95%84-%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A5%BC-%EB%B3%80%EA%B2%BD%ED%95%B4%EB%B3%B4%EC%9E%90-%ED%8C%8C%EC%9D%BC-%EC%9E%85%EC%B6%9C%EB%A0%A5
+	// (2) Profile 이미지 출력: https://redbinalgorithm.tistory.com/382
+	@GetMapping(value = "/profileImg/{userId}")
+	public byte[] getImg(@PathVariable("userId") String userId) throws IOException {
+		
+		UserDto userDto = userService.getImg(userId);
+		
+		// (1) InputStream으로 image 파일을 읽어오기
+		InputStream inputStream = new FileInputStream("C:\\forj\\" + userDto.getUserProfileimg());
+		
+		// (2) 읽어온 파일을 byte 형태로 변환
+		byte[] imageByteArray = IOUtils.toByteArray(inputStream);
+		inputStream.close();
+		
+		// 프론트에서 프로필 이미지를 byte 배열로 전달받아야 함
+		return imageByteArray;
 	}
 }

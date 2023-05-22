@@ -54,4 +54,21 @@
 			(#{userId}, #{userPw}, #{userName}, #{userName}, #{userGender}, #{userPhone}, #{userEmail})
 	</insert>
 	
+	<update id="setProfileImg" parameterType="map">
+		UPDATE
+			forj_user
+		SET
+			user_profileimg=#{profileImg}
+		WHERE
+			user_id=#{userId}
+	</update>
+	
+	<select id="selectProfileImg" parameterType="String" resultType="UserDto">
+		SELECT
+			user_profileimg as userProfileimg
+		FROM
+			forj_user
+		WHERE
+			user_id=#{userId}
+	</select>
 </mapper>

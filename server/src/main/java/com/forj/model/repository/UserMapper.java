@@ -27,4 +27,9 @@ public interface UserMapper {
 	// 회원가입
 	void join(UserDto userDto);
 	
+	// 프로필 이미지 변경
+	void setProfileImg(Map<String, Object> map);
+	
+	// 프로필 이미지 출력
+	UserDto selectProfileImg(String userId);
 }

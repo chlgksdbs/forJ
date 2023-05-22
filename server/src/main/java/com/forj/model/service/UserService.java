@@ -1,10 +1,17 @@
 package com.forj.model.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.forj.model.dto.UserDto;
 import com.forj.model.repository.UserMapper;
@@ -61,6 +68,45 @@ public class UserService {
 	public void join(UserDto userDto) {
 		
 		userMapper.join(userDto);
+	}
+	
+	// 프로필 이미지 변경
+	public void setProfileImg(String userId, MultipartFile profileImg) {
+		
+		// (1) 파일을 저장할 폴더 설정 -> 서버에 배포 시, 경로 변경 필요!!!!!
+		String dirPath = "C:\\forj\\";
+		File dir = new File(dirPath);
+		
+		// 만약, 폴더가 없는 경우 생성
+		if (!dir.exists()) {
+			dir.mkdir();
+		}
+		
+		// (2) 파일 이름 암호화(고유 식별) 및 위에서 설정한 폴더에 파일 저장
+		UUID uuid = UUID.randomUUID(); // 범용 고유 식별자 생성
+		String uuidFileName = uuid + "_" + profileImg.getOriginalFilename();
+		
+		// nio 객체: 사진, 동영상, 스트리밍 모두 지원
+		Path filePath = Paths.get(dirPath + uuidFileName);
+		try {
+			Files.write(filePath, profileImg.getBytes());
+			// 옵션은 application.properties에서 걸기 때문에 여기서 걸지 않음
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// (3) 파일 DB에 저장
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("profileImg", uuidFileName);
+		
+		userMapper.setProfileImg(map);
+	}
+	
+	// 프로필 이미지 출력
+	public UserDto getImg(String userId) {
+		
+		return userMapper.selectProfileImg(userId);
 	}
 
 }
