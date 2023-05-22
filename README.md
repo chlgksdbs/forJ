@@ -100,7 +100,7 @@
 | ----------------- | ------------------------------------------------------------------------------- |
 | Framework         | - Spring Boot 2.7.11                                                            |
 | Test              | - JUnit 5                                                                       |
-| Infra             | - Docker <br>- AWS EC2 <br>- Jenkins <br>                                       |
+| Infra             | - Docker <br>- AWS EC2 <br>- Maven <br>                                         |
 | Database          | - MySql <br>- 공공데이터                                                           |
 
 ### Communication
