@@ -273,7 +273,7 @@ a {
     top: 8%;
     left: 90%;
     transform: translate( -50%, -50% );
-    width: 150px;
+    width: 180px;
     display: flex;
     justify-content: space-between;
 }
@@ -282,7 +282,7 @@ a {
     top: 8%;
     left: 90%;
     transform: translate( -50%, -50% );
-    width: 120px;
+    width: 150px;
     display: flex;
     justify-content: space-between;
 }

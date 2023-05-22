@@ -68,10 +68,10 @@ export default {
 }
 .modifyBox{
   display: block;
-  border: 1px solid rgb(255, 255, 255);
-  border-radius: 10px;
   width: 800px;
   height: 555px;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
   background-color: #fff;
 }
 .modifyBox>div{
@@ -97,7 +97,7 @@ export default {
   background-color: transparent;
 }
 .modifyBox>div>span:nth-child(2)>input:focus{
-  outline: 1px solid #0085FF;
+  outline: 1px solid #40A3FF;
 }
 .modifyBox>div>span:nth-child(3){
   display: inline-block;
@@ -108,13 +108,16 @@ export default {
   margin: 0px 30px;
   width: 50px;
   height: 25px;
-  background-color: white;
-  border: 1px solid #0085FF;
+  background-color: #FFFFFF;
+  color: #40A3FF;
+  border: 1px solid #40A3FF;
   border-radius: 5px;
+  cursor: pointer;
 }
 .modifyBox>div>span:nth-child(3)>button:hover{
-  border: 1px solid #90dfff;
-  background-color: #90dfff;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  background-color: #40A3FF;
 }
 .imgmodify{
   width: 100px;
