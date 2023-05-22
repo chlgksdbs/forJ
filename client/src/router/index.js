@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 
 import AppMain from "@/views/AppMain.vue";
 import AppLogin from "@/views/AppLogin.vue";
-import AppJoin from "@/views/AppJoin.vue";
+import AppAuth from "@/views/AppAuth.vue";
 import AppUser from "../views/AppUser.vue";
 import AppBoard from "@/views/AppBoard.vue";
 import AppPlan from "@/views/AppPlan.vue";
@@ -55,9 +55,26 @@ const routes = [
     component: AppLogin,
   },
   {
-    path: "/join",
-    name: "join",
-    component: AppJoin,
+    path: "/auth",
+    name: "auth",
+    component: AppAuth,
+    children: [
+      {
+        path: "join",
+        name: "join",
+        component: () => import("@/components/Auth/AuthJoin"),
+      },
+      {
+        path: "findid",
+        name: "findid",
+        component: () => import("@/components/Auth/AuthFindId"),
+      },
+      {
+        path: "findpw",
+        name: "findpw",
+        component: () => import("@/components/Auth/AuthFindPw"),
+      },
+    ],
   },
   {
     path: "/mypage",

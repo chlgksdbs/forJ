@@ -20,9 +20,9 @@
         <button id="loginBtn" @click="loginCheck">로그인</button>
       </div>
       <div class="find_box">
-        <router-link to="#" class="find_text">아이디 찾기</router-link>
-        <router-link to="#" class="find_text">비밀번호 찾기</router-link>
-        <router-link to="/join" class="find_text">회원가입</router-link>
+        <router-link to="/auth/findid" class="find_text">아이디 찾기</router-link>
+        <router-link to="/auth/findpw" class="find_text">비밀번호 찾기</router-link>
+        <router-link to="/auth/join" class="find_text">회원가입</router-link>
       </div>
       <div>
         <router-link to="#">

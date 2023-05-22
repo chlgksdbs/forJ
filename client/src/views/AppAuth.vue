@@ -1,73 +1,11 @@
 <template>
-  <div id="AppJoin">
+  <div id="AppAuth">
     <div id="logo_box">
       <router-link to="/">
         <img src="@/assets/img/logo.png" id="join_logo" alt="">
       </router-link>
     </div>
-    <div id="form_box">
-      <div>
-        <div class="form_text">아이디</div>
-        <div class="form_input_box">
-          <input type="text" v-model="userId" maxlength="45">
-        </div>
-      </div>
-      <div>
-        <div class="form_text">비밀번호</div>
-        <div class="form_input_box">
-          <input type="password" v-model="userPw" maxlength="100">
-        </div>
-      </div>
-      <div>
-        <div class="form_text">비밀번호 재확인</div>
-        <div class="form_input_box">
-          <input type="password" v-model="userPwCheck" maxlength="100">
-        </div>
-        <span class="login_error_message" v-if="userPw != userPwCheck">비밀번호가 일치하지 않습니다.</span>
-      </div>
-      <div>
-        <div class="form_text">이름</div>
-        <div class="form_input_box">
-          <input type="text" v-model="userName" maxlength="45">
-        </div>
-      </div>
-      <div>
-        <div class="form_text">성별</div>
-        <div class="form_input_box">
-          <select name="gender" v-model="userGender">
-            <option>성별</option>
-            <option>남자</option>
-            <option>여자</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <div class="form_text">휴대전화</div>
-        <div class="form_input_box">
-          <input type="number" v-model="userPhone" maxlength="45">
-        </div>
-      </div>
-      <div>
-        <div class="form_text">이메일</div>
-        <div class="form_email_box">
-          <input type="email" v-model="userEmail" id="email_text" maxlength="100">
-        </div>
-        <router-link to="#">
-          <button id="certBtn" @click="emailCheck">인증번호 받기</button>
-        </router-link>
-      </div>
-      <div>
-        <div class="form_input_box">
-          <input type="number" v-model="certNumber" placeholder="인증번호를 입력하세요.">
-        </div>
-        <span class="login_error_message" v-if="certNumber != secretCertNumber">인증번호가 일치하지 않습니다.</span>
-      </div>
-      <div>
-        <router-link to="#">
-          <button id="joinBtn" @click="joinCheck">가입하기</button>
-        </router-link>
-      </div>
-    </div>
+    <router-view></router-view>
     <the-footer></the-footer>
   </div>
 </template>
@@ -77,7 +15,7 @@ import axios from "axios";
 import TheFooter from "@/components/TheFooter.vue";
 
 export default {
-  name: 'AppJoin',
+  name: 'AppAuth',
   components: {
     TheFooter,
   },
