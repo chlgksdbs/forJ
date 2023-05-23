@@ -23,22 +23,22 @@ const onlyAuthUser = async (to, from, next) => {
 
   // sessionStorage에 존재하는 access token 정보 불러오기
   let token = sessionStorage.getItem("access-token");
-  console.log("로그인 처리 전", checkUserInfo, token);
+  // console.log("로그인 처리 전", checkUserInfo, token);
 
   // (1) user 정보가 존재하며, access token이 유효한 경우
   if (checkUserInfo != null && token) {
-    console.log("토큰 유효성 체크하러 가자!!!");
+    // console.log("토큰 유효성 체크하러 가자!!!");
     await store.dispatch("memberStore/getUserInfo", token);
   }
   // (2) 토큰이 유효하지 않거나, user 정보가 없는 경우
   if (!checkToken || checkUserInfo == null) {
     // 로그인 페이지로 이동
-    alert('로그인이 필요한 페이지입니다.');
+    alert("로그인이 필요한 페이지입니다.");
     router.push("/login");
   }
   // (3) 토큰과 user 정보 둘다 유효한 경우
   else {
-    console.log("로그인 성공!");
+    // console.log("로그인 성공!");
     next();
   }
 };
@@ -128,13 +128,13 @@ const routes = [
       },
       {
         path: "notice",
-        name: "boardnotice",
-        component: () => import('@/components/Board/BoardNotice'),
+        name: "notice",
+        component: () => import("@/components/Notice/NoticeList"),
       },
       {
         path: "qna",
         name: "boardqna",
-        component: () => import('@/components/Board/BoardQna'),
+        component: () => import("@/components/Board/BoardQna"),
       },
       {
         path: "write",
@@ -143,10 +143,33 @@ const routes = [
         component: () => import("@/components/Board/BoardWrite"),
       },
       {
+        path: "noticewrite",
+        name: "noticewrite",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/Notice/NoticeWrite"),
+      },
+      {
+        path: "modify/:boardId",
+        name: "boardmodify",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/Board/BoardModify"),
+      },
+      {
+        path: "noticemodify/:noticeId",
+        name: "noticemodify",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/Notice/NoticeModify"),
+      },
+      {
         path: "view/:boardId",
         name: "boardview",
         beforeEnter: onlyAuthUser,
         component: () => import("@/components/Board/BoardView"),
+      },
+      {
+        path: "noticeview/:noticeId",
+        name: "noticeview",
+        component: () => import("@/components/Notice/NoticeView"),
       },
     ],
   },

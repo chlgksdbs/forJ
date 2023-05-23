@@ -1,6 +1,5 @@
 package com.forj.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,64 +14,53 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.forj.model.dto.BoardDto;
 import com.forj.model.dto.NoticeDto;
-import com.forj.model.service.BoardService;
 import com.forj.model.service.NoticeService;
 
 @RestController
-@RequestMapping("/board")
-// @CrossOrigin("*") // CorsConfig로 처리
-public class BoardController {
-	
-	@Autowired
-	private BoardService boardService;
-	
+@RequestMapping("/notice")
+public class NoticeController {
+
 	@Autowired
 	private NoticeService noticeService;
-	
-	// 전체 조회
+
+	// 공지사항 전체 조회
 	@GetMapping("/list")
-	public List<BoardDto> boardList() {
-		return boardService.boardList();
+	public List<NoticeDto> noticeList() {
+		return noticeService.noticeList();
 	}
-	
-	// 글 작성
-	@PostMapping("/write")
-	public void insertBoard(@RequestBody BoardDto board) {
-		boardService.insertBoard(board);
-	}
-	
+
 	// 상세 조회
 	@GetMapping("/detail/{bno}")
-	public BoardDto boardDetail(@PathVariable("bno") int boardId) {
-		
+	public NoticeDto boardDetail(@PathVariable("bno") int noticeId) {
+
 		// 게시글 조회수 증가
-		boardService.updateViewCount(boardId);
-		
-		return boardService.boardDetail(boardId);
+		noticeService.updateViewCount(noticeId);
+
+		return noticeService.noticeDetail(noticeId);
 	}
-	
+
+	// 글 작성
+	@PostMapping("/write")
+	public void insertBoard(@RequestBody NoticeDto notice) {
+		noticeService.insertNotice(notice);
+	}
+
 	// 글 수정
 	@PutMapping("/modify")
-	public void modifyBoard(@RequestBody BoardDto board) {
-		boardService.modifyBoard(board);
+	public void modifyBoard(@RequestBody NoticeDto notice) {
+		noticeService.modifyNotice(notice);
 	}
-	
+
 	// 글 삭제
 	@DeleteMapping("/delete/{bno}")
-	public void deleteBoard(@PathVariable("bno") int boardId) {
-		boardService.deleteBoard(boardId);
+	public void deleteBoard(@PathVariable("bno") int noticeId) {
+		noticeService.deleteNotice(noticeId);
 	}
-	
-	// 공지사항 최신 글 5개 불러오기
-	@GetMapping("/notice/list")
-	public List<NoticeDto> noticeList() {
-		return noticeService.noticeLimitList();
-	}
-	
+
 	// 검색어로 들어온 키워드 리스트 출력
 	@GetMapping("/search/{text}")
-	public List<BoardDto> searchList(@PathVariable("text") String text) {
-		return boardService.searchList(text);
+	public List<NoticeDto> searchList(@PathVariable("text") String text) {
+		return noticeService.searchList(text);
 	}
-	
+
 }

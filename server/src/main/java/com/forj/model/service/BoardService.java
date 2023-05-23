@@ -73,4 +73,9 @@ public class BoardService {
 	public void writeComment(CommentDto comment) {
 		commentMapper.insert(comment);
 	}
+	
+	// 검색어로 들어온 키워드 리스트 출력
+	public List<BoardDto> searchList(String text) {
+		return boardMapper.selectSearchAll(text);
+	}
 }

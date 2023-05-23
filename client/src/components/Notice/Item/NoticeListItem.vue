@@ -1,6 +1,6 @@
 <template>
-    <div id="BoardListItem">
-        <div align="center">
+  <div id="NoticeListItem">
+    <div align="center">
             <table id="board_table" frame="void">
                 <tr id="board_table_top"></tr>
                 <tr class="board_table_line">
@@ -10,66 +10,38 @@
                     <th id="table_head_write_date">작성일시</th>
                     <th id="table_head_hit">조회수</th>
                 </tr>
-                <tr class="board_table_line board_notice" v-for="(notice, idx) in notices" :key="idx">
-                    <td><img src="@/assets/img/icon_flag.png" class="icon_flag" /></td>
-                    <td><router-link :to="'noticeview/' + notice.noticeId">{{ notice.noticeTitle }}</router-link></td>
-                    <td>{{ notice.noticeWriter }}</td>
-                    <td>{{ dateFormat(notice.noticeDate) }}</td>
-                    <td>{{ notice.noticeHit }}</td>
-                </tr>
-                <tr class="board_table_line" v-for="(item, idx) in items" :key="3 + idx">
-                    <td>{{ item.boardId }}</td>
-                    <td><router-link :to="'view/' + item.boardId">{{ item.title }}</router-link></td>
-                    <td>{{ item.writer }}</td>
-                    <td>{{ dateFormat(item.writeDate) }}</td>
-                    <td>{{ item.hit }}</td>
+                <tr class="board_table_line board_notice" v-for="item in items" :key="item.noticeId">
+                    <td>{{ item.noticeId }}</td>
+                    <td><router-link :to="'noticeview/' + item.noticeId">{{ item.noticeTitle }}</router-link></td>
+                    <td>{{ item.noticeWriter }}</td>
+                    <td>{{ dateFormat(item.noticeDate) }}</td>
+                    <td>{{ item.noticeHit }}</td>
                 </tr>
                 <tr class="board_table_line"></tr>
             </table>
         </div>
-    </div>
+  </div>
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-    name: "BoardListItem",
-    data() {
+  name: "NoticeListItem",
+  data() {
         return {
             items: [],
-            notices: [],
         }
     },
     props: {
         searchItems: Array,
     },
     created() {
-        // axios 비동기 통신으로 server에서 list 가져오기
-        axios.get('http://localhost/board/list')
+        // axios 비동기 통신으로 server에서 notice 가져오기
+        axios.get('http://localhost/notice/list')
             .then((resp) => {
-                // console.log(resp); // 디버깅
+                // console.log(resp.data); // 디버깅
                 this.items = resp.data;
             });
-        // axios 비동기 통신으로 server에서 notice list 가져오기
-        axios.get('http://localhost/board/notice/list')
-            .then((resp) => {
-                this.notices = resp.data;
-            });
-    },
-    watch: {
-        searchItems(arr) {
-            if (arr != null) {
-                this.items = arr;
-                // console.log(this.items); // 디버깅
-            }
-            else {
-                axios.get('http://localhost/board/list')
-                .then((resp) => {
-                    // console.log(resp); // 디버깅
-                    this.items = resp.data;
-                });
-            }
-        },
     },
     methods: {
         // 날짜 포맷을 변경하는 메서드 (시, 분, 초 제외)
@@ -78,12 +50,27 @@ export default {
             return dateFormat;
         },
     },
+    watch: {
+        searchItems(arr) {
+            if (arr != null) {
+                this.items = arr;
+                // console.log(this.items); // 디버깅
+            }
+            else {
+                axios.get('http://localhost/notice/list')
+                .then((resp) => {
+                    // console.log(resp); // 디버깅
+                    this.items = resp.data;
+                });
+            }
+        },
+    },
 }
 </script>
 <style scoped>
 a {
     text-decoration: none;
-    color: #A1A1A1;
+    color: #000000;
 }
 th {
     text-align: center;
@@ -102,10 +89,7 @@ td {
 .board_notice {
     background-color: #E9E9E9;
 }
-.board_notice a {
-    color: #000;
-}
-#BoardListItem {
+#NoticeListItem {
     margin: 20px 50px;
 }
 #board_table {

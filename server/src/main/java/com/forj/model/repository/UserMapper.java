@@ -32,4 +32,13 @@ public interface UserMapper {
 	
 	// 프로필 이미지 출력
 	UserDto selectProfileImg(String userId);
+	
+	// 이메일 정보를 가지고, 사용자 아이디 찾기
+	UserDto selectUserId(String userEmail);
+	
+	// 아이디와 이메일 정보를 가지고, 사용자의 비밀번호 찾기
+	UserDto selectUserPw(Map<String, String> map);
+	
+	// 아이디와 이메일 정보를 가지고, 사용자 찾기
+	UserDto checkUserAuth(Map<String, String> map);
 }

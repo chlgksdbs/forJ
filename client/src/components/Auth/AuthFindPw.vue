@@ -48,27 +48,48 @@ export default {
   methods: {
     // 인증번호 받기 버튼 클릭 시, 수행하는 함수
     emailCheck() {
-      // 이메일이 유효한 지 체크
-      if (this.userEmail.length == 0) {
-        alert('이메일을 입력하세요.');
+      // 아이디와 이메일이 유효한 지 체크
+      if (this.userId.length == 0 || this.userEmail.length == 0) {
+        alert('입력 항목을 모두 입력하세요.');
         return;
       }
 
-      // JSON 형태로 전송
-      let userDto = {
-        "userEmail": this.userEmail,
-      };
-
-      axios.post('http://localhost/user/certmail', userDto)
+      axios.get('http://localhost/user/check/' + this.userId + "/" + this.userEmail)
         .then((resp) => {
-          alert('인증번호가 전송되었습니다.');
-          this.secretCertNumber = resp.data;
+          // error 값이 넘어온 경우, 에러창 발생
+          if (resp.data == "error") {
+            alert('아이디와 이메일 정보가 일치하지 않습니다.');
+            return;
+          }
+          else {
+            alert('인증번호가 전송되었습니다.');
+            this.secretCertNumber = resp.data;
+            return;
+          }
         });
       },
-    // TODO: 비밀번호 찾기 버튼 클릭 시, 인증번호 확인 후 이메일에 해당하는 아이디 alert 출력
-    // 출력 후, 로그인 페이지로 redirect
+    // TODO: 비밀번호 찾기 버튼 클릭 시, 아이디와 이메일 유효성 및 이메일 인증번호 확인
+    // 새로운 비밀번호 설정 페이지로 redirect
+    // 설정 후, 로그인 페이지로 redirect
     findPw() {
-        
+        // 1. 입력란에 공백이 있지 않은 지 확인
+        if (this.userId.length == 0 || this.userEmail.length == 0) {
+            alert('모든 항목란은 필수 입력입니다.');
+            return;
+        }
+        // 2. 인증번호가 일치하지 않는 경우
+        if (this.certNumber != this.secretCertNumber) {
+            alert('인증번호를 확인해주세요!');
+            return;
+        }
+        // 3. 인증번호가 일치하는 경우
+        if (this.certNumber == this.secretCertNumber) {
+          axios.get('http://localhost/user/findpw/' + this.userId + "/" + this.userEmail)
+            .then((resp) => {
+              alert('회원님의 비밀번호는 (' + resp.data.userPw + ') 입니다.');
+              this.$router.push("/login");
+            });
+        }
     },
   },
 };
@@ -119,8 +140,9 @@ input:focus, select:focus {
   font-size: 15px;
   color: #888;
 }
-#join_logo {
-  width: 250px;
+#AuthFindPw {
+  height: 500px;
+  padding-top: 50px;
 }
 #form_box {
   width: 460px;

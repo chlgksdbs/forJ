@@ -27,4 +27,6 @@ public interface BoardMapper {
 	// 글 삭제
 	void delete(int boardId);
 	
+	// 검색어로 들어온 키워드 리스트 출력
+	List<BoardDto> selectSearchAll(String text);
 }

@@ -62,13 +62,22 @@ export default {
       // 출력 후, 로그인 페이지로 redirect
       findId() {
         // 1. 입력란에 공백이 있지 않은 지 확인
-        if (this.userId.length == 0 || this.userEmail.length == 0) {
+        if (this.userEmail.length == 0) {
             alert('모든 항목란은 필수 입력입니다.');
             return;
         }
+        // 2. 인증번호가 일치하지 않는 경우
         if (this.certNumber != this.secretCertNumber) {
             alert('인증번호를 확인해주세요!');
             return;
+        }
+        // 3. 인증번호가 일치하는 경우
+        if (this.certNumber == this.secretCertNumber) {
+          axios.get('http://localhost/user/findid/' + this.userEmail)
+            .then((resp) => {
+              alert('회원님의 아이디는 (' + resp.data.userId + ') 입니다.');
+              this.$router.push("/login");
+            });
         }
       },
   },
@@ -120,8 +129,9 @@ input:focus, select:focus {
   font-size: 15px;
   color: #888;
 }
-#join_logo {
-  width: 250px;
+#AuthFindId {
+  height: 500px;
+  padding-top: 50px;
 }
 #form_box {
   width: 460px;
