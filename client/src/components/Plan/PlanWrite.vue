@@ -16,29 +16,41 @@
         <div class="plan_left_select_list">
             <h3>선택 목록</h3>
             <button class="plan_left_delete_btn" @click="deleteAllCard">장소 전체 삭제</button>
-            <plan-select-list v-for="selectItem in selectItems" :key="selectItem.no" :img="selectItem.img" :title="selectItem.title"></plan-select-list>
-            <button class="plan_left_create_btn">일정 생성</button>
+            <plan-select-list v-for="selectItem in selectItems" :key="selectItem.contentId" :img="selectItem.img" :title="selectItem.title" :contentId="selectItem.contentId"></plan-select-list>
+            <button v-if="selectItems.length" class="plan_left_create_btn">일정 생성</button>
         </div>
       </div>
       <div id="PlanMap">
         <div id="map" class="naver_map" ref="map"></div>
       </div>
       <div id="PlanRightBar">
+        <div class="plan_right_sido">
+            <select class="sido_select_bar" v-model="sidocode">
+                <option value="" selected>지역을 선택해주세요.</option>
+                <option class="sido_select_option" v-for="sido in sidos" :key="sido.code" :value="sido.code">{{ sido.name }}</option>
+            </select>
+        </div>
+        <div class="plan_right_category">
+            <div class="PlanCategoryBtn">
+                <div v-if="contentTypeId==32" class="text_box click_color" @click="setContentTypeId(32)">호텔</div>
+                <div v-else class="text_box non_click_color" @click="setContentTypeId(32)">호텔</div>
+                <div v-if="contentTypeId==39" class="text_box click_color" @click="setContentTypeId(39)">식당</div>
+                <div v-else class="text_box non_click_color" @click="setContentTypeId(39)">식당</div>
+                <div v-if="contentTypeId==38" class="text_box click_color" @click="setContentTypeId(38)">쇼핑</div>
+                <div v-else class="text_box non_click_color" @click="setContentTypeId(38)">쇼핑</div>
+                <div v-if="contentTypeId==12" class="text_box click_color" @click="setContentTypeId(12)">여행지</div>
+                <div v-else class="text_box non_click_color" @click="setContentTypeId(12)">여행지</div>
+            </div>
+        </div>
         <div class="plan_right_search_bar">
             <div id="input_search_bar">
                 <input type="text" v-model="categoryTitle" @keyup.enter="searchCategoryTitle" placeholder="검색어를 입력하세요." maxlength="45" />
                 <img src="@/assets/img/icon_search.png" @click="searchCategoryTitle">
             </div>
         </div>
-        <div class="plan_right_category">
-            <plan-category-btn :title="'호텔'" @click.native="setContentTypeId(32)"></plan-category-btn>
-            <plan-category-btn :title="'식당'" @click.native="setContentTypeId(39)"></plan-category-btn>
-            <plan-category-btn :title="'쇼핑'" @click.native="setContentTypeId(38)"></plan-category-btn>
-            <plan-category-btn :title="'여행지'" @click.native="setContentTypeId(12)"></plan-category-btn>
-        </div>
         <div v-if="itemList.length">
             <div v-for="item in itemList" :key="item.contentId" class="plan_right_card">
-                <plan-search-list :img="item.areaImg" :title="item.title"></plan-search-list>
+                <plan-search-list :img="item.areaImg" :title="item.title" :contentId="item.contentId" @addArea="setSelectList"></plan-search-list>
             </div>
         </div>
         <div v-else class="phrase">
@@ -52,35 +64,38 @@
 <script>
 import axios from 'axios';
 import PlanSelectList from "./Item/PlanSelectList.vue";
-import PlanCategoryBtn from "./Item/PlanCategoryBtn.vue";
 import PlanSearchList from "./Item/PlanSearchList.vue";
 
 export default {
   name: 'PlanWrite',
   components: {
     PlanSelectList,
-    PlanCategoryBtn,
     PlanSearchList,
   },
   data() {
     return {
-      openmodal: false,
-      selectItems: [
-          {
-              no: 1,
-              title: '삼성화재 유성연수원',
-              img: require('@/assets/img/ex_img5.png')
-          },
-          {
-              no: 2,
-              title: '유성온천역',
-              img: require('@/assets/img/ex_img2.png')
-          },
-          {
-              no: 3,
-              title: '충남대학교',
-              img: require('@/assets/img/ex_img1.png')
-          },
+        openmodal: false,
+        selectItems: [
+        //   {
+        //       contentId: 0,
+        //       title: '',
+        //       img: '',
+        //   },
+        //   {
+        //       contentId: 1,
+        //       title: '삼성화재 유성연수원',
+        //       img: require('@/assets/img/ex_img5.png')
+        //   },
+        //   {
+        //     contentId: 2,
+        //       title: '유성온천역',
+        //       img: require('@/assets/img/ex_img2.png')
+        //   },
+        //   {
+        //     contentId: 3,
+        //       title: '충남대학교',
+        //       img: require('@/assets/img/ex_img1.png')
+        //   },
       ],
       attr: [
           {
@@ -101,9 +116,56 @@ export default {
       categoryTitle: '',
       contentTypeId: 0,
       itemList: [],
-      areaList:[],
+        areaList: [],
+        sidocode: '',
+        sidos: [
+            {
+                code: 1,
+                name: '서울'
+            },
+            {
+                code: 2,
+                name: '인천'
+            },
+            {
+                code: 3,
+                name: '대전'
+            },
+            {
+                code: 4,
+                name: '대구'
+            },
+            {
+                code: 5,
+                name: '광주'
+            },
+            {
+                code: 6,
+                name: '부산'
+            },
+            {
+                code: 7,
+                name: '울산'
+            },
+            {
+                code: 8,
+                name: '세종틀별자치시'
+            },
+            {
+                code: 31,
+                name: '경기도'
+            },
+            {
+                code: 32,
+                name: '강원도'
+            },
+            {
+                code: 39,
+                name: '제주도'
+            },
+        ]
     };
-  },
+    },
   created() {},
   methods: {
     // 캘린더 모달창 On, Off하는 메서드
@@ -151,9 +213,9 @@ export default {
     },
     setContentTypeId(typeid) {
         this.contentTypeId = typeid;
-    },
+      },
     // 검색어 입력 후, 엔터키를 치거나 버튼 누른 후의 작업을 수행하는 메서드
-      searchCategoryTitle() {
+    searchCategoryTitle() {
 
         // let areaInfo = {
         //     'addr': '',
@@ -188,13 +250,19 @@ export default {
             //     })
 
         // DB에서 키워드 선택에 따른 정보 가져오기
-          let url = `http://localhost/area/list/${this.categoryTitle}/${this.contentTypeId}`;
+        if (this.sidocode == '') {
+            alert("지역을 선택해주세요.");
+        } else {
+            let url = `http://localhost/area/list/${this.categoryTitle}/${this.contentTypeId}/${this.sidocode}`;
         //   if (this.contentTypeId != 0) url += `/${this.contentTypeId}`
           axios.get(url)
               .then((resp) => {
                   this.itemList = resp.data;
                   console.log(this.itemList);
         })
+        }
+
+          
 
                     // // 객체에 담아 DB에 저장
                     // for (var i in this.itemList) {
@@ -223,7 +291,15 @@ export default {
             //     .then((resp) => {
             //         console.log(resp);
             // })
-    },
+      },
+      setSelectList(item) {
+          let selectItem = {
+              'contentId': item.addContentId,
+              'title': item.addTitle,
+              'img': item.addImg,
+        }
+          this.selectItems.push(selectItem);
+      },
   },
   mounted() {
     var naver = window.naver; // window 객체의 naver를 변수로서 선언
@@ -282,7 +358,7 @@ img {
     z-index: 9999999;
 }
 .plan_left_calendar {
-    width: 70%;
+    width: 75%;
     height: 25%;
     background-color: #FFFFFF;
     border: 1px solid #40A3FF;
@@ -294,7 +370,7 @@ img {
     color: #0085FF;
 }
 .plan_left_select_list {
-    width: 70%;
+    width: 75%;
     height: 60%;
     background-color: #FFFFFF;
     border: 1px solid #40A3FF;
@@ -341,6 +417,42 @@ img {
 .plan_right_category {
     display: flex;
 }
+.plan_right_sido{
+    width: 100%;
+}
+.sido_select_bar{
+    width: 95%;
+    height: 25px;
+    margin: 5px 0 10px;
+}
+.text_box {
+    font-size: 80%;
+    margin: 0 2%;
+    padding: 1%;
+    border-radius: 10px;
+    width: 20%;
+    height: 13%;
+}
+.PlanCategoryBtn {
+    display: flex;
+    justify-content: space-between;
+    /* border-radius: 10px; */
+    width: 100%;
+    height: 15%;
+    /* border: 1px solid #40A3FF;
+    background-color: #FFF; */
+    cursor: pointer;
+    /* margin: 10px auto;
+    padding: 5px; */
+}
+
+.non_click_color{
+    border: 1px solid #40A3FF;
+    background-color: #FFF;
+}
+.click_color {
+    background-color: #40A3FF;
+}
 .phrase{
     display: inline-block;
     font-size: 15px;
@@ -350,11 +462,11 @@ img {
 #PlanLeftBar {
     margin: auto;
     background-color: #F5F5F5;
-    width: 15%;
+    width: 20%;
     height: 661px;
 }
 #PlanMap {
-    width: 57%;
+    width: 52%;
 }
 #input_search_bar {
     margin: 5px;

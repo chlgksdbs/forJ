@@ -13,7 +13,7 @@
     </div>
     <div class="btn_box">
       <img src="@/assets/img/icon_info.png">
-      <img src="@/assets/img/icon_nobox_plus.png">
+      <img src="@/assets/img/icon_nobox_plus.png" @click="addItem" style="cursor: pointer;">
     </div>
   </div>
 </template>
@@ -30,9 +30,23 @@ export default {
   props: {
     img: String,
     title: String,
+    contentId: Number,
   },
   created() {},
-  methods: {},
+  methods: {
+    // 선택목록에 선택한 장소 추가
+    addItem() {
+      let addInfo = {
+        'addImg': this.img,
+        'addTitle': this.title,
+        'addContentId': this.contentId,
+      }
+      console.log(addInfo.addImg);
+      console.log(addInfo.addTitle);
+      console.log(addInfo.addContentId);
+      this.$emit("addArea",addInfo);
+    }
+  },
 };
 </script>
 
@@ -54,7 +68,6 @@ export default {
   left: 0;
   height: 100%;
   width: 100%;
-  
 }
 .img_box_no_img{
   position: absolute;
