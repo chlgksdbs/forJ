@@ -16,8 +16,8 @@
         <div class="plan_left_select_list">
             <h3>선택 목록</h3>
             <button class="plan_left_delete_btn" @click="deleteAllCard">장소 전체 삭제</button>
-            <plan-select-list v-for="selectItem in selectItems" :key="selectItem.no" :img="selectItem.img" :title="selectItem.title"></plan-select-list>
-            <button class="plan_left_create_btn">일정 생성</button>
+            <plan-select-list v-for="selectItem in selectItems" :key="selectItem.contentId" :img="selectItem.img" :title="selectItem.title" :contentId="selectItem.contentId"></plan-select-list>
+            <button v-if="selectItems.length" class="plan_left_create_btn">일정 생성</button>
         </div>
       </div>
       <div id="PlanMap">
@@ -26,6 +26,7 @@
       <div id="PlanRightBar">
         <div class="plan_right_sido">
             <select class="sido_select_bar" v-model="sidocode">
+                <option value="" selected>지역을 선택해주세요.</option>
                 <option class="sido_select_option" v-for="sido in sidos" :key="sido.code" :value="sido.code">{{ sido.name }}</option>
             </select>
         </div>
@@ -49,7 +50,7 @@
         </div>
         <div v-if="itemList.length">
             <div v-for="item in itemList" :key="item.contentId" class="plan_right_card">
-                <plan-search-list :img="item.areaImg" :title="item.title"></plan-search-list>
+                <plan-search-list :img="item.areaImg" :title="item.title" :contentId="item.contentId" @addArea="setSelectList"></plan-search-list>
             </div>
         </div>
         <div v-else class="phrase">
@@ -73,23 +74,28 @@ export default {
   },
   data() {
     return {
-      openmodal: false,
-      selectItems: [
-          {
-              no: 1,
-              title: '삼성화재 유성연수원',
-              img: require('@/assets/img/ex_img5.png')
-          },
-          {
-              no: 2,
-              title: '유성온천역',
-              img: require('@/assets/img/ex_img2.png')
-          },
-          {
-              no: 3,
-              title: '충남대학교',
-              img: require('@/assets/img/ex_img1.png')
-          },
+        openmodal: false,
+        selectItems: [
+        //   {
+        //       contentId: 0,
+        //       title: '',
+        //       img: '',
+        //   },
+        //   {
+        //       contentId: 1,
+        //       title: '삼성화재 유성연수원',
+        //       img: require('@/assets/img/ex_img5.png')
+        //   },
+        //   {
+        //     contentId: 2,
+        //       title: '유성온천역',
+        //       img: require('@/assets/img/ex_img2.png')
+        //   },
+        //   {
+        //     contentId: 3,
+        //       title: '충남대학교',
+        //       img: require('@/assets/img/ex_img1.png')
+        //   },
       ],
       attr: [
           {
@@ -285,7 +291,15 @@ export default {
             //     .then((resp) => {
             //         console.log(resp);
             // })
-    },
+      },
+      setSelectList(item) {
+          let selectItem = {
+              'contentId': item.addContentId,
+              'title': item.addTitle,
+              'img': item.addImg,
+        }
+          this.selectItems.push(selectItem);
+      },
   },
   mounted() {
     var naver = window.naver; // window 객체의 naver를 변수로서 선언
@@ -344,7 +358,7 @@ img {
     z-index: 9999999;
 }
 .plan_left_calendar {
-    width: 70%;
+    width: 75%;
     height: 25%;
     background-color: #FFFFFF;
     border: 1px solid #40A3FF;
@@ -356,7 +370,7 @@ img {
     color: #0085FF;
 }
 .plan_left_select_list {
-    width: 70%;
+    width: 75%;
     height: 60%;
     background-color: #FFFFFF;
     border: 1px solid #40A3FF;
@@ -448,11 +462,11 @@ img {
 #PlanLeftBar {
     margin: auto;
     background-color: #F5F5F5;
-    width: 15%;
+    width: 20%;
     height: 661px;
 }
 #PlanMap {
-    width: 57%;
+    width: 52%;
 }
 #input_search_bar {
     margin: 5px;
