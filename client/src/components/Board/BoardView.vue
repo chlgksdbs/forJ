@@ -379,6 +379,10 @@ export default {
   color: #2ecc71;
   height: 30px;
 }
+#boardModifyBtn:hover {
+  background-color: #2ecc71;
+  color: #FFF;
+}
 #boardDeleteBtn {
   margin-left: 10px;
   cursor: pointer;
@@ -386,5 +390,9 @@ export default {
   background-color: #FFF;
   color: #e74c3c;
   height: 30px;
+}
+#boardDeleteBtn:hover {
+  background-color: #e74c3c;
+  color: #FFF;
 }
 </style>

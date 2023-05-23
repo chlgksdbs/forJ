@@ -155,6 +155,10 @@ export default {
   background-color: #FFF;
   color: #2ecc71;
 }
+#modifyBtn:hover {
+  background-color: #2ecc71;
+  color: #FFF;
+}
 #deleteBtn {
   margin-left: 10px;
   cursor: pointer;
@@ -162,11 +166,20 @@ export default {
   background-color: #FFF;
   color: #e74c3c;
 }
+#deleteBtn:hover {
+  background-color: #e74c3c;
+  color: #FFF;
+}
 #modifyApplyBtn {
   background-color: #FFF;
   margin-left: 10px;
   cursor: pointer;
   border: 1px solid;
   color: #3498db;
+  height: 30px;
+}
+#modifyApplyBtn:hover {
+  background-color: #3498db;
+  color: #FFF;
 }
 </style>
