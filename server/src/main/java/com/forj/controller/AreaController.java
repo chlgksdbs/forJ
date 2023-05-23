@@ -30,10 +30,10 @@ public class AreaController {
 //	}
 	
 	// 여행지 정보 get
-	@GetMapping("/list/{word}/{id}/{code}")
-	public List<AreaDto> list(@PathVariable("word") String keyword, @PathVariable("id") String typeId, @PathVariable("code") String sido){
+	@GetMapping("/list/{id}/{code}/{word}")
+	public List<AreaDto> list(@PathVariable("id") String typeId, @PathVariable("code") String sido, @PathVariable("word") String keyword){
 		List<AreaDto> SearchList = service.list(keyword, Integer.parseInt(typeId), Integer.parseInt(sido));
-		System.out.println(SearchList);
+		System.out.println(keyword);
 		return SearchList;
 	}
 }

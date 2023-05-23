@@ -1,21 +1,21 @@
 <template>
     <div id="PlanSelectList">
         <div class="img_box">
-            <!-- <div v-if="img">
+            <div v-if="img">
                 <img class="img_box_img" :src="img">
             </div>
             <div v-else>
                 <img class="img_box_no_img" src="@/assets/img/no-photos.png">
-            </div> -->
-            <div>
-                <img class="img_box_img" :src="img">
             </div>
+            <!-- <div>
+                <img class="img_box_img" :src="img">
+            </div> -->
         </div>
         <div class="text_box">
             <h5>{{ title }}</h5>
         </div>
         <div class="btn_box">
-            <img src="@/assets/img/icon_nobox_delete.png">
+            <img src="@/assets/img/icon_nobox_delete.png" @click="deleteOne" style="cursor: pointer;">
         </div>
     </div>
 </template>
@@ -27,10 +27,11 @@ export default {
         title: String,
         contentId: Number,
     },
-    created() {
-        console.log(this.img);
-        console.log(this.title);
-        console.log(this.contentId);
+    methods: {
+        // 삭제하고 싶은 장소의 title 값을 부모로 보내는 메서드
+        deleteOne() {
+            this.$emit("deleteId", this.title);
+        }
     }
 }
 </script>
