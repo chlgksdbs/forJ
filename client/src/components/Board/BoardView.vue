@@ -198,7 +198,20 @@ export default {
     },
     // TODO: 게시글 삭제 버튼 이벤트 베서드
     boardDelete() {
-
+      // 현재 로그인된 사용자와 글쓴 사용자가 같은 경우 실행
+      if (this.userInfo.userId == this.boardItem.writerId) {
+        axios.delete('http://localhost/board/delete/' + this.boardItem.boardId)
+          .then(() => {
+            if (confirm('정말로 삭제하시겠습니까?')) {
+              alert('게시글 삭제가 완료되었습니다.')
+              this.$router.push("/board");
+            }
+          });
+      }
+      // 다른 경우, 에러 처리
+      else {
+        alert('해당 게시글에 대한 권한이 없습니다.');
+      }
     },
   },
 };
