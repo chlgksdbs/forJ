@@ -26,16 +26,17 @@ public class AreaService {
 //	}
 	
 	// 여헹지 정보 get
-	public List<AreaDto> list(String keyword, int typeId){
+	public List<AreaDto> list(String keyword, int typeId, int sidoCode){
 		Map<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);
 		map.put("typeId", typeId);
+		map.put("sidoCode", sidoCode);
 		
 		// 키워드버튼을 선택하지 않았으면
 		if(typeId==0) {
 			return mapper.selectMore(keyword);
 		}else {
-			return mapper.selectSome(map);			
+			return mapper.selectSome(map);		
 		}
 		
 	}

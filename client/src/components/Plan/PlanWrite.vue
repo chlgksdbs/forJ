@@ -24,14 +24,12 @@
         <div id="map" class="naver_map" ref="map"></div>
       </div>
       <div id="PlanRightBar">
-        <div class="plan_right_search_bar">
-            <div id="input_search_bar">
-                <input type="text" v-model="categoryTitle" @keyup.enter="searchCategoryTitle" placeholder="검색어를 입력하세요." maxlength="45" />
-                <img src="@/assets/img/icon_search.png" @click="searchCategoryTitle">
-            </div>
+        <div class="plan_right_sido">
+            <select class="sido_select_bar" v-model="sidocode">
+                <option class="sido_select_option" v-for="sido in sidos" :key="sido.code" :value="sido.code">{{ sido.name }}</option>
+            </select>
         </div>
         <div class="plan_right_category">
-
             <div class="PlanCategoryBtn">
                 <div v-if="contentTypeId==32" class="text_box click_color" @click="setContentTypeId(32)">호텔</div>
                 <div v-else class="text_box non_click_color" @click="setContentTypeId(32)">호텔</div>
@@ -42,17 +40,12 @@
                 <div v-if="contentTypeId==12" class="text_box click_color" @click="setContentTypeId(12)">여행지</div>
                 <div v-else class="text_box non_click_color" @click="setContentTypeId(12)">여행지</div>
             </div>
-
-
-
-            <!-- <plan-category-btn :title="'호텔'" :checkClick="check1"  @click.native="setContentTypeId(32)"></plan-category-btn> -->
-            <!-- <plan-category-btn :title="'호텔'" v-else  :checkClick="false" @click.native="setContentTypeId(32)"></plan-category-btn> -->
-            <!-- <plan-category-btn :title="'식당'" :checkClick="check2" @click.native="setContentTypeId(39)"></plan-category-btn> -->
-            <!-- <plan-category-btn :title="'식당'" v-else  :checkClick="false" @click.native="setContentTypeId(39)"></plan-category-btn> -->
-            <!-- <plan-category-btn :title="'쇼핑'" :checkClick="check3" @click.native="setContentTypeId(38)"></plan-category-btn> -->
-            <!-- <plan-category-btn :title="'쇼핑'" v-else  :checkClick="false" @click.native="setContentTypeId(38)"></plan-category-btn> -->
-            <!-- <plan-category-btn :title="'여행지'" :checkClick="check4" @click.native="setContentTypeId(12)"></plan-category-btn> -->
-            <!-- <plan-category-btn :title="'여행지'" v-else :checkClick="false" @click.native="setContentTypeId(12)"></plan-category-btn> -->
+        </div>
+        <div class="plan_right_search_bar">
+            <div id="input_search_bar">
+                <input type="text" v-model="categoryTitle" @keyup.enter="searchCategoryTitle" placeholder="검색어를 입력하세요." maxlength="45" />
+                <img src="@/assets/img/icon_search.png" @click="searchCategoryTitle">
+            </div>
         </div>
         <div v-if="itemList.length">
             <div v-for="item in itemList" :key="item.contentId" class="plan_right_card">
@@ -70,14 +63,12 @@
 <script>
 import axios from 'axios';
 import PlanSelectList from "./Item/PlanSelectList.vue";
-// import PlanCategoryBtn from "./Item/PlanCategoryBtn.vue";
 import PlanSearchList from "./Item/PlanSearchList.vue";
 
 export default {
   name: 'PlanWrite',
   components: {
     PlanSelectList,
-    // PlanCategoryBtn,
     PlanSearchList,
   },
   data() {
@@ -120,42 +111,55 @@ export default {
       contentTypeId: 0,
       itemList: [],
         areaList: [],
-        // click1: '',
-        // click2: '',
-        // click3: '',
-        // click4: '',
+        sidocode: '',
+        sidos: [
+            {
+                code: 1,
+                name: '서울'
+            },
+            {
+                code: 2,
+                name: '인천'
+            },
+            {
+                code: 3,
+                name: '대전'
+            },
+            {
+                code: 4,
+                name: '대구'
+            },
+            {
+                code: 5,
+                name: '광주'
+            },
+            {
+                code: 6,
+                name: '부산'
+            },
+            {
+                code: 7,
+                name: '울산'
+            },
+            {
+                code: 8,
+                name: '세종틀별자치시'
+            },
+            {
+                code: 31,
+                name: '경기도'
+            },
+            {
+                code: 32,
+                name: '강원도'
+            },
+            {
+                code: 39,
+                name: '제주도'
+            },
+        ]
     };
     },
-    // watch: {
-    //     contentTypeId(value) {
-    //         if(value)
-    //     }
-    // },
-//     watch: {
-//         contentId(value) {
-//             if (value == 32) {
-//                 this.click1 = true;
-//                 this.click2 = false;
-//                 this.click3 = false;
-//                 this.click4 = false;
-//             } else if (value == 39) {
-//                 this.click1 = false;
-//                 this.click2 = true;
-//                 this.click3 = false;
-//                 this.click4 = false;
-//         }else if (value == 38) {
-//                 this.click1 = false;
-//                 this.click2 = false;
-//                 this.click3 = true;
-//                 this.click4 = false;
-//         }else if (value == 12) {
-//                 this.click1 = false;
-//                 this.click2 = false;
-//                 this.click3 = false;
-//                 this.click4 = true;
-//         }
-//     }
-//   },
   created() {},
   methods: {
     // 캘린더 모달창 On, Off하는 메서드
@@ -240,7 +244,7 @@ export default {
             //     })
 
         // DB에서 키워드 선택에 따른 정보 가져오기
-          let url = `http://localhost/area/list/${this.categoryTitle}/${this.contentTypeId}`;
+          let url = `http://localhost/area/list/${this.categoryTitle}/${this.contentTypeId}/${this.sidocode}`;
         //   if (this.contentTypeId != 0) url += `/${this.contentTypeId}`
           axios.get(url)
               .then((resp) => {
@@ -393,6 +397,14 @@ img {
 .plan_right_category {
     display: flex;
 }
+.plan_right_sido{
+    width: 100%;
+}
+.sido_select_bar{
+    width: 95%;
+    height: 25px;
+    margin: 5px 0 10px;
+}
 .text_box {
     font-size: 80%;
     margin: 0 2%;
@@ -413,9 +425,7 @@ img {
     /* margin: 10px auto;
     padding: 5px; */
 }
-.PlanCategoryBtn:hover{
-    /* background-color: #40A3FF; */
-}
+
 .non_click_color{
     border: 1px solid #40A3FF;
     background-color: #FFF;

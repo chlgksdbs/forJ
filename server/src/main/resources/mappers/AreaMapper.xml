@@ -14,9 +14,10 @@
 	</select>
 	
 	<select id="selectSome" parameterType="map" resultType="com.forj.model.dto.AreaDto">
-		select content_id as contentId, title, addr1 as addr, tel, first_image as areaImg, latitude, longitude
-		from attraction_info
-		where content_type_id = #{typeId} and title like concat('%',#{keyword},'%')
+		select ai.content_id as contentId, ai.title, addr1 as addr, ai.tel, ai.first_image as areaImg, ai.latitude, ai.longitude
+		from attraction_info ai join sido s
+		using(sido_code)
+		where ai.content_type_id = #{typeId} and ai.title like concat('%',#{keyword},'%') and ai.sido_code = #{sidoCode}
 	</select>
 	
 </mapper> 
