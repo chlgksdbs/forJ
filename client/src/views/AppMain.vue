@@ -234,7 +234,7 @@ export default {
     methods: {
         ...mapActions(memberStore, ["userLogout"]),
         logout() {
-            console.log(this.userInfo);
+            // console.log(this.userInfo);
 
             this.userLogout(this.userInfo.userId);
 

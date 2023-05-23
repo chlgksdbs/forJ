@@ -10,7 +10,7 @@
           <div>{{ comment.writer }}</div>
           <div>{{ comment.writeDate }}</div>
           <button id="modifyBtn" @click="commentModify" v-if="userInfo.userId == comment.userId">수정</button>
-          <button id="deleteBtn" @click="commentDelete" v-if="userInfo.userId == comment.userId">삭제</button>
+          <button id="deleteBtn" @click="commentDelete" v-if="userInfo.userId == comment.userId || userInfo.userId == 'admin'">삭제</button>
         </div>
         <div class="comment_content_body">
           <p :class="'static_content' + comment.commentId" style="">{{ comment.content }}</p>

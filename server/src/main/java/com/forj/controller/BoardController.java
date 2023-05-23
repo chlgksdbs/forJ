@@ -69,4 +69,10 @@ public class BoardController {
 		return noticeService.noticeLimitList();
 	}
 	
+	// 검색어로 들어온 키워드 리스트 출력
+	@GetMapping("/search/{text}")
+	public List<BoardDto> searchList(@PathVariable("text") String text) {
+		return boardService.searchList(text);
+	}
+	
 }

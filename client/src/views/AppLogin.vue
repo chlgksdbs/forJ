@@ -74,7 +74,7 @@ export default {
       await this.userConfirm(this.user);
 
       let token = sessionStorage.getItem("access-token");
-      console.log(token);
+      // console.log(token);
 
       // 로그인이 된 상태인 경우
       if (this.isLogin) {

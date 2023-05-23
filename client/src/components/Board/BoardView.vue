@@ -31,7 +31,7 @@
     </div>
     <div class="detail_btn_bar">
       <button id="boardModifyBtn" @click="boardModify" v-if="userInfo.userId == boardItem.writerId">수정</button>
-      <button id="boardDeleteBtn" @click="boardDelete" v-if="userInfo.userId == boardItem.writerId">삭제</button>
+      <button id="boardDeleteBtn" @click="boardDelete" v-if="userInfo.userId == boardItem.writerId || userInfo.userId == 'admin'">삭제</button>
     </div>
     <div id="BoardContent">
       <div class="detail_content">
@@ -199,7 +199,7 @@ export default {
     // TODO: 게시글 삭제 버튼 이벤트 베서드
     boardDelete() {
       // 현재 로그인된 사용자와 글쓴 사용자가 같은 경우 실행
-      if (this.userInfo.userId == this.boardItem.writerId) {
+      if (this.userInfo.userId == this.boardItem.writerId || this.userInfo.userId == 'admin') {
         axios.delete('http://localhost/board/delete/' + this.boardItem.boardId)
           .then(() => {
             if (confirm('정말로 삭제하시겠습니까?')) {
