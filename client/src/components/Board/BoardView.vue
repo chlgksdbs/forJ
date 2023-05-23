@@ -9,8 +9,8 @@
     <div class="detail_nav">
       <div class="detail_nav_profile_img_text">
         <!-- 사용자 프로필 사진이 있는 경우 -->
-        <div class="detail_nav_profile_img_box" v-if="boardItem.profileImg">
-          <img :src="boardItem.profileImg">
+        <div class="detail_nav_profile_img_box" v-if="imageUrl.length != 0">
+          <img :src="imageUrl">
         </div>
         <!-- 사용자 프로필 사진이 없는 경우-->
         <div class="detail_nav_profile_default_img_box" v-else>
@@ -65,7 +65,8 @@
       <div class="comment_title">댓글</div>
       <div class="comment_body">
         <div class="comment_profile_img_box">
-          <img src="@/assets/img/profile.jpg">
+          <img src="@/assets/img/default_profile_img.png" v-if="commentImageUrl.length == 0">
+          <img :src="commentImageUrl" v-else>
         </div>
         <div class="comment_content_box">
           <input type="text" v-model="commentContent" @keyup.enter="commentWrite" placeholder="댓글을 입력하세요." />
@@ -101,6 +102,8 @@ export default {
       commentContent: '',
       heartStatus: 0,
       heartCount: 0,
+      imageUrl: '',
+      commentImageUrl: '',
     };
   },
   created() {
@@ -123,6 +126,22 @@ export default {
           .then((resp) => {
             this.heartStatus = resp.data;
           });
+
+        // TODO: 게시글 작성자의 프로필 이미지 가져오기
+        axios.get('http://localhost/user/profileimg/' + this.boardItem.writerId, { responseType: 'blob'})
+          .then((resp) => {
+            // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              this.imageUrl = reader.result;
+            };
+            reader.readAsDataURL(resp.data);
+            console.log(this.imageUrl);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       });
 
     // TODO: 좋아요 count값 초기화
@@ -130,6 +149,22 @@ export default {
       .then((resp) => {
         // console.log(resp.data); // 디버깅
         this.heartCount = resp.data;
+      });
+
+    // TODO: 로그인 중인 사용자의 프로필 이미지 가져오기
+    axios.get('http://localhost/user/profileimg/' + this.userInfo.userId, { responseType: 'blob'})
+      .then((resp) => {
+        // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.commentImageUrl = reader.result;
+        };
+        reader.readAsDataURL(resp.data);
+        console.log(this.imageUrl);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   },
   computed: {

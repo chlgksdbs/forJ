@@ -3,7 +3,8 @@
     <!-- 댓글 목록 div -->
     <div class="detail_comment_content_box">
       <div class="comment_profile_img_box">
-        <img src="@/assets/img/profile.jpg">
+        <img src="@/assets/img/default_profile_img.png" v-if="imageUrl.length == 0">
+        <img :src="imageUrl">
       </div>
       <div class="comment_content_box">
         <div class="comment_content_header">
@@ -42,6 +43,7 @@ export default {
         "content": '',
         "writeDate": ''
       },
+      imageUrl: '',
     };
   },
   props: {
@@ -49,6 +51,20 @@ export default {
   },
   created() {
     this.comment = this.commentItem;
+    // TODO: 프로필 이미지 변경 후, 이미지를 띄우기
+    axios.get('http://localhost/user/profileimg/' + this.comment.userId, { responseType: 'blob'})
+      .then((resp) => {
+        // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.imageUrl = reader.result;
+        };
+        reader.readAsDataURL(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   computed: {
     ...mapState(memberStore, ['userInfo']),
