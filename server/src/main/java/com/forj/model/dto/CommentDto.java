@@ -1,9 +1,10 @@
 package com.forj.model.dto;
 
 public class CommentDto {
-	
+
 	private int commentId;
 	private int boardId;
+	private String writer;
 	private String userId;
 	private String content;
 	private String writeDate;
@@ -26,6 +27,14 @@ public class CommentDto {
 
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public String getUserId() {

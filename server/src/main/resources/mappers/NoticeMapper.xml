@@ -7,6 +7,8 @@
 			notice_id as noticeId, notice_title as noticeTitle, notice_writer as noticeWriter, notice_date as noticeDate, notice_content as noticeContent, notice_hit as noticeHit
 		FROM
 			forj_notice
+		ORDER BY
+			notice_date desc
 	</select>
 	
 	<select id="selectLimitAll" resultType="NoticeDto">
@@ -17,7 +19,7 @@
 		ORDER BY
 			notice_date desc
 		LIMIT
-			5
+			3
 	</select>
 
 </mapper>

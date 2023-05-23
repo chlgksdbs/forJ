@@ -1,24 +1,24 @@
 <template>
-    <div id="BoardNotice">
+    <div id="NoticeList">
         <div id="TheSearchBar" align="right">
             <div id="input_search_bar">
                 <input type="text" placeholder="검색어를 입력하세요." maxlength="45" />
                 <img src="@/assets/img/icon_search.png">
             </div>
         </div>
-        <board-notice-item></board-notice-item>
+        <notice-list-item></notice-list-item>
         <div class="post_area">
             <router-link to="/notice/write">글작성</router-link>
         </div>
     </div>
 </template>
 <script>
-import BoardNoticeItem from "../Board/Item/BoardNoticeItem.vue";
+import NoticeListItem from "../Board/Item/NoticeListItem.vue";
 
 export default {
-    name: "BoardNotice",
+    name: "NoticeList",
     components: {
-        BoardNoticeItem,
+        NoticeListItem,
     },
     created() {
         this.$emit("setTitle", "공지사항");
@@ -63,7 +63,7 @@ img {
     margin: 0 65px 10px 0;
     text-align: right;
 }
-#BoardNotice {
+#NoticeList {
   margin: 0 100px;
 }
 #TheSearchBar {

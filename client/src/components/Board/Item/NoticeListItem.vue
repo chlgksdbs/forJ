@@ -1,5 +1,5 @@
 <template>
-  <div id="BoardNoticeItem">
+  <div id="NoticeListItem">
     <div align="center">
             <table id="board_table" frame="void">
                 <tr id="board_table_top"></tr>
@@ -26,7 +26,7 @@
 import axios from "axios";
 
 export default {
-  name: "BoardNoticeItem",
+  name: "NoticeListItem",
   data() {
         return {
             items: [],
@@ -71,7 +71,7 @@ td {
 .board_notice {
     background-color: #E9E9E9;
 }
-#BoardNoticeItem {
+#NoticeListItem {
     margin: 20px 50px;
 }
 #board_table {

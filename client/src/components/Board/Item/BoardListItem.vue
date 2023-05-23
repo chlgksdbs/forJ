@@ -10,14 +10,14 @@
                     <th id="table_head_write_date">작성일시</th>
                     <th id="table_head_hit">조회수</th>
                 </tr>
-                <tr class="board_table_line board_notice" v-for="notice in notices" :key="notice.noticeId">
+                <tr class="board_table_line board_notice" v-for="(notice, idx) in notices" :key="idx">
                     <td><img src="@/assets/img/icon_flag.png" class="icon_flag" /></td>
                     <td>{{ notice.noticeTitle }}</td>
                     <td>{{ notice.noticeWriter }}</td>
                     <td>{{ dateFormat(notice.noticeDate) }}</td>
                     <td>{{ notice.noticeHit }}</td>
                 </tr>
-                <tr class="board_table_line" v-for="item in items" :key="item.boardId">
+                <tr class="board_table_line" v-for="(item, idx) in items" :key="3 + idx">
                     <td>{{ item.boardId }}</td>
                     <td><router-link :to="'view/' + item.boardId">{{ item.title }}</router-link></td>
                     <td>{{ item.writer }}</td>

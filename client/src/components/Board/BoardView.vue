@@ -29,6 +29,10 @@
         조회수 : {{ boardItem.hit }}
       </div>
     </div>
+    <div class="detail_btn_bar">
+      <button id="boardModifyBtn" v-if="userInfo.userId == boardItem.writerId">수정</button>
+      <button id="boardDeleteBtn" v-if="userInfo.userId == boardItem.writerId">삭제</button>
+    </div>
     <div id="BoardContent">
       <div class="detail_content">
         <p class="detail_content_text">
@@ -104,7 +108,7 @@ export default {
     // TODO: axios 비동기 통신으로 server에서 detail 가져오기
     axios.get('http://localhost/board/detail/' + this.$route.params.boardId)
       .then((resp) => {
-        // console.log(resp.data); // 디버깅
+        // console.log(resp.data.writerId); // 디버깅
         this.boardItem = resp.data;
 
         // TODO: axios 비동기 통신으로 server에서 comment 가져오기
@@ -150,7 +154,7 @@ export default {
     commentWrite() {
 
       if (this.commentContent.length == 0) {
-        alert('댓글을 입력하세요!');
+        alert('댓글을 입력하세요.');
         return;
       }
 
@@ -258,6 +262,11 @@ export default {
 .detail_nav_profile_write_date {
   text-align: left;
 }
+.detail_btn_bar {
+  display: flex;
+  justify-content: right;
+  margin: 0px 150px;
+}
 .detail_btn_box {
   display: flex;
   justify-content: right;
@@ -353,5 +362,21 @@ export default {
   'wght' 400,
   'GRAD' 0,
   'opsz' 48
+}
+#boardModifyBtn {
+  margin-left: 10px;
+  cursor: pointer;
+  border: 1px solid;
+  background-color: #FFF;
+  color: #2ecc71;
+  height: 30px;
+}
+#boardDeleteBtn {
+  margin-left: 10px;
+  cursor: pointer;
+  border: 1px solid;
+  background-color: #FFF;
+  color: #e74c3c;
+  height: 30px;
 }
 </style>
