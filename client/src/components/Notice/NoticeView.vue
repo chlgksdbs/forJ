@@ -1,7 +1,7 @@
 <template>
   <div id="NoticeView">
     <div class="detail_header">
-      <img src="@/assets/img/detail_logo.png" class="detail_logo" />
+      <img src="@/assets/img/board_nav.png" class="detail_logo" />
     </div>
     <div class="detail_title">
       <h1>{{ noticeItem.noticeTitle }}</h1>
