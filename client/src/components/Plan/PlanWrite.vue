@@ -17,7 +17,7 @@
             <h3>선택 목록</h3>
             <button class="plan_left_delete_btn" @click="deleteAllCard">장소 전체 삭제</button>
             <plan-select-list v-for="selectItem in selectItems" :key="selectItem.contentId" :img="selectItem.img" :title="selectItem.title" :contentId="selectItem.contentId"  @deleteId="deleteOneCard"></plan-select-list>
-            <button v-if="selectItems.length" class="plan_left_create_btn">일정 생성</button>
+            <router-link to="/plan/check"><button v-if="selectItems.length" class="plan_left_create_btn" @click="sendDates">일정 생성</button></router-link>
         </div>
       </div>
       <div id="PlanMap">
@@ -212,6 +212,7 @@ export default {
         this.selectItems.splice(0);
         alert("선택 장소가 모두 삭제되었습니다.");
       },
+      // 선택 목록에 있는 the-select-list-card를 개별 삭제하는 메서드
       deleteOneCard(delTitle) {
           for (let i = 0; i < this.selectItems.length; i++){
               if (this.selectItems[i].title == delTitle) {
@@ -221,6 +222,7 @@ export default {
           }
           alert(delTitle + "이 삭제되었습니다.");
       },
+      // 찾을 contentTypeId 결정
     setContentTypeId(typeid) {
         this.contentTypeId = typeid;
       },
@@ -307,6 +309,7 @@ export default {
             //         console.log(resp);
             // })
       },
+      // 서치목록에서 추가 클릭한 장소를 선택목록에 추가하는 메서드
       setSelectList(item) {
           let selectItem = {
               'contentId': item.addContentId,
@@ -316,6 +319,15 @@ export default {
           this.selectItems.push(selectItem);
           console.log(this.selectItems);
       },
+      // PlanCheck페이지에서 여행일자를 알기위해 부모로 보내는 날짜 정보 메서드
+      sendDates() {
+          let dateInfo = {
+              'period': Math.abs((this.attr[0].dates.end - this.attr[0].dates.start) / (1000 * 60 * 60 * 24)),
+              'start': this.attr[0].dates.start,
+              'end': this.attr[0].dates.end,
+          }
+          this.$emit("dateInfo", dateInfo);
+      }
   },
   mounted() {
     var naver = window.naver; // window 객체의 naver를 변수로서 선언

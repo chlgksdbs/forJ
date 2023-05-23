@@ -28,6 +28,7 @@ export default {
         contentId: Number,
     },
     methods: {
+        // 삭제하고 싶은 장소의 title 값을 부모로 보내는 메서드
         deleteOne() {
             this.$emit("deleteId", this.title);
         }
