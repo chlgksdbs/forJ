@@ -31,10 +31,28 @@
             </div>
         </div>
         <div class="plan_right_category">
-            <plan-category-btn :title="'호텔'" @click.native="setContentTypeId(32)"></plan-category-btn>
-            <plan-category-btn :title="'식당'" @click.native="setContentTypeId(39)"></plan-category-btn>
-            <plan-category-btn :title="'쇼핑'" @click.native="setContentTypeId(38)"></plan-category-btn>
-            <plan-category-btn :title="'여행지'" @click.native="setContentTypeId(12)"></plan-category-btn>
+
+            <div class="PlanCategoryBtn">
+                <div v-if="contentTypeId==32" class="text_box click_color" @click="setContentTypeId(32)">호텔</div>
+                <div v-else class="text_box non_click_color" @click="setContentTypeId(32)">호텔</div>
+                <div v-if="contentTypeId==39" class="text_box click_color" @click="setContentTypeId(39)">식당</div>
+                <div v-else class="text_box non_click_color" @click="setContentTypeId(39)">식당</div>
+                <div v-if="contentTypeId==38" class="text_box click_color" @click="setContentTypeId(38)">쇼핑</div>
+                <div v-else class="text_box non_click_color" @click="setContentTypeId(38)">쇼핑</div>
+                <div v-if="contentTypeId==12" class="text_box click_color" @click="setContentTypeId(12)">여행지</div>
+                <div v-else class="text_box non_click_color" @click="setContentTypeId(12)">여행지</div>
+            </div>
+
+
+
+            <!-- <plan-category-btn :title="'호텔'" :checkClick="check1"  @click.native="setContentTypeId(32)"></plan-category-btn> -->
+            <!-- <plan-category-btn :title="'호텔'" v-else  :checkClick="false" @click.native="setContentTypeId(32)"></plan-category-btn> -->
+            <!-- <plan-category-btn :title="'식당'" :checkClick="check2" @click.native="setContentTypeId(39)"></plan-category-btn> -->
+            <!-- <plan-category-btn :title="'식당'" v-else  :checkClick="false" @click.native="setContentTypeId(39)"></plan-category-btn> -->
+            <!-- <plan-category-btn :title="'쇼핑'" :checkClick="check3" @click.native="setContentTypeId(38)"></plan-category-btn> -->
+            <!-- <plan-category-btn :title="'쇼핑'" v-else  :checkClick="false" @click.native="setContentTypeId(38)"></plan-category-btn> -->
+            <!-- <plan-category-btn :title="'여행지'" :checkClick="check4" @click.native="setContentTypeId(12)"></plan-category-btn> -->
+            <!-- <plan-category-btn :title="'여행지'" v-else :checkClick="false" @click.native="setContentTypeId(12)"></plan-category-btn> -->
         </div>
         <div v-if="itemList.length">
             <div v-for="item in itemList" :key="item.contentId" class="plan_right_card">
@@ -52,14 +70,14 @@
 <script>
 import axios from 'axios';
 import PlanSelectList from "./Item/PlanSelectList.vue";
-import PlanCategoryBtn from "./Item/PlanCategoryBtn.vue";
+// import PlanCategoryBtn from "./Item/PlanCategoryBtn.vue";
 import PlanSearchList from "./Item/PlanSearchList.vue";
 
 export default {
   name: 'PlanWrite',
   components: {
     PlanSelectList,
-    PlanCategoryBtn,
+    // PlanCategoryBtn,
     PlanSearchList,
   },
   data() {
@@ -101,9 +119,43 @@ export default {
       categoryTitle: '',
       contentTypeId: 0,
       itemList: [],
-      areaList:[],
+        areaList: [],
+        // click1: '',
+        // click2: '',
+        // click3: '',
+        // click4: '',
     };
-  },
+    },
+    // watch: {
+    //     contentTypeId(value) {
+    //         if(value)
+    //     }
+    // },
+//     watch: {
+//         contentId(value) {
+//             if (value == 32) {
+//                 this.click1 = true;
+//                 this.click2 = false;
+//                 this.click3 = false;
+//                 this.click4 = false;
+//             } else if (value == 39) {
+//                 this.click1 = false;
+//                 this.click2 = true;
+//                 this.click3 = false;
+//                 this.click4 = false;
+//         }else if (value == 38) {
+//                 this.click1 = false;
+//                 this.click2 = false;
+//                 this.click3 = true;
+//                 this.click4 = false;
+//         }else if (value == 12) {
+//                 this.click1 = false;
+//                 this.click2 = false;
+//                 this.click3 = false;
+//                 this.click4 = true;
+//         }
+//     }
+//   },
   created() {},
   methods: {
     // 캘린더 모달창 On, Off하는 메서드
@@ -151,9 +203,9 @@ export default {
     },
     setContentTypeId(typeid) {
         this.contentTypeId = typeid;
-    },
+      },
     // 검색어 입력 후, 엔터키를 치거나 버튼 누른 후의 작업을 수행하는 메서드
-      searchCategoryTitle() {
+    searchCategoryTitle() {
 
         // let areaInfo = {
         //     'addr': '',
@@ -340,6 +392,36 @@ img {
 }   
 .plan_right_category {
     display: flex;
+}
+.text_box {
+    font-size: 80%;
+    margin: 0 2%;
+    padding: 1%;
+    border-radius: 10px;
+    width: 20%;
+    height: 13%;
+}
+.PlanCategoryBtn {
+    display: flex;
+    justify-content: space-between;
+    /* border-radius: 10px; */
+    width: 100%;
+    height: 15%;
+    /* border: 1px solid #40A3FF;
+    background-color: #FFF; */
+    cursor: pointer;
+    /* margin: 10px auto;
+    padding: 5px; */
+}
+.PlanCategoryBtn:hover{
+    /* background-color: #40A3FF; */
+}
+.non_click_color{
+    border: 1px solid #40A3FF;
+    background-color: #FFF;
+}
+.click_color {
+    background-color: #40A3FF;
 }
 .phrase{
     display: inline-block;

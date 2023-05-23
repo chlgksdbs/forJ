@@ -1,6 +1,6 @@
 <template>
     <div class="PlanCategoryBtn">
-        <div class="text_box non_click_color" @click="click">
+        <div id="text_box" class="non_click_color" @click="click">
             {{ title }}
         </div>
     </div>
@@ -10,30 +10,84 @@ export default {
     name: "PlanCategoryBtn",
     data() {
         return {
-            flag:'',
+            // flag:'',
         }
     },
     props: {
         title: String,
+        checkClick: String,
+    },
+    watch: {
+        // checkClick(value) {
+        //     if (value == true) {
+        //         document.getElementById("text_box").classList.replace("non_click_color", "click_color");
+        //      }else {
+        //         document.getElementById("text_box").classList.replace("click_color", "non_click_color");
+        //     }
+        // },
     },
     methods: {
-        click(event) {
-            if (event.target.classList.contains("non_click_color")) {
-                event.target.classList.remove("non_click_color");
-                event.target.classList.add("click_color");
-                this.flag = true;
+        click() {
+            if (this.checkClick == true) {
+                document.getElementById("text_box").classList.replace("non_click_color", "click_color");
+             }else {
+                document.getElementById("text_box").classList.replace("click_color", "non_click_color");
             }
-            // } else {
+        },
+        // click(event) {
+        //     if (this.checkClick===32 && event.target.classList.contains("non_click_color")) {
+        //         event.target.classList.remove("non_click_color");
+        //         event.target.classList.add("click_color");
+        //         this.flag = true;
+        //     }else {
+        //         event.target.classList.remove("click_color");
+        //         event.target.classList.add("non_click_color");
+        //     }
+
+        //     if (this.checkClick===39 && event.target.classList.contains("non_click_color")) {
+        //         event.target.classList.remove("non_click_color");
+        //         event.target.classList.add("click_color");
+        //         this.flag = true;
+        //     }else {
+        //         event.target.classList.remove("click_color");
+        //         event.target.classList.add("non_click_color");
+        //     }
+
+        //     if (this.checkClick===38 && event.target.classList.contains("non_click_color")) {
+        //         event.target.classList.remove("non_click_color");
+        //         event.target.classList.add("click_color");
+        //         this.flag = true;
+        //     }else {
+        //         event.target.classList.remove("click_color");
+        //         event.target.classList.add("non_click_color");
+        //     }
+
+        //     if (this.checkClick===12 && event.target.classList.contains("non_click_color")) {
+        //         event.target.classList.remove("non_click_color");
+        //         event.target.classList.add("click_color");
+        //         this.flag = true;
+        //     }else {
+        //         event.target.classList.remove("click_color");
+        //         event.target.classList.add("non_click_color");
+        //     }
+
+
+        // }
+        // isClick(event) {
+            // if (this.checkClick===true) {
+            //     event.target.classList.remove("non_click_color");
+            //     event.target.classList.add("click_color");
+            // }else {
             //     event.target.classList.remove("click_color");
             //     event.target.classList.add("non_click_color");
             // }
-            
-        }
-    }
+             
+        // }
+    },
 }
 </script>
 <style scoped>
-.text_box {
+#text_box {
     font-size: 80%;
     margin: 10px 7%;
     padding: 5px;
