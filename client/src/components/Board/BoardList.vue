@@ -2,11 +2,11 @@
   <div id="BoardList">
     <div id="TheSearchBar" align="right">
       <div id="input_search_bar">
-          <input type="text" placeholder="검색어를 입력하세요." @keyup.enter="searchShareBoard" maxlength="45" />
-          <img src="@/assets/img/icon_search.png" @click="searchShareBoard">
+          <input type="text" v-model="searchText" placeholder="검색어를 입력하세요." @keyup.enter="searchBoard" maxlength="45" />
+          <img src="@/assets/img/icon_search.png" @click="searchBoard">
       </div>
     </div>
-    <board-list-item></board-list-item>
+    <board-list-item :searchItems="searchItems"></board-list-item>
     <div class="post_area">
         <router-link to="/board/write">글작성</router-link>
     </div>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 import BoardListItem from "../Board/Item/BoardListItem.vue";
 import BoardPageNavigation from "./PageNavigation/BoardPageNavigation.vue";
 
@@ -26,7 +28,8 @@ export default {
   },
   data() {
     return {
-      message: '',
+      searchText: '',
+      searchItems: [],
     };
   },
   created() {
@@ -34,7 +37,17 @@ export default {
   },
   methods: {
     // TODO: 자유 게시판(여행 계획 공유 게시판) 검색바 이벤트 메서드
-    searchShareBoard() {},
+    searchBoard() {
+      if (this.searchText.length != 0) {
+        axios.get('http://localhost/board/search/' + this.searchText)
+          .then((resp) => {
+            this.searchItems = resp.data;
+          });
+      }
+      else {
+        this.searchItems = null;
+      }
+    },
   },
 };
 </script>

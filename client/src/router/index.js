@@ -129,7 +129,7 @@ const routes = [
       {
         path: "notice",
         name: "notice",
-        component: () => import("@/components/Board/NoticeList"),
+        component: () => import("@/components/Notice/NoticeList"),
       },
       {
         path: "qna",
@@ -143,16 +143,33 @@ const routes = [
         component: () => import("@/components/Board/BoardWrite"),
       },
       {
+        path: "noticewrite",
+        name: "noticewrite",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/Notice/NoticeWrite"),
+      },
+      {
         path: "modify/:boardId",
         name: "boardmodify",
         beforeEnter: onlyAuthUser,
         component: () => import("@/components/Board/BoardModify"),
       },
       {
+        path: "noticemodify/:noticeId",
+        name: "noticemodify",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/Notice/NoticeModify"),
+      },
+      {
         path: "view/:boardId",
         name: "boardview",
         beforeEnter: onlyAuthUser,
         component: () => import("@/components/Board/BoardView"),
+      },
+      {
+        path: "noticeview/:noticeId",
+        name: "noticeview",
+        component: () => import("@/components/Notice/NoticeView"),
       },
     ],
   },

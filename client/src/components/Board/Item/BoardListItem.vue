@@ -12,7 +12,7 @@
                 </tr>
                 <tr class="board_table_line board_notice" v-for="(notice, idx) in notices" :key="idx">
                     <td><img src="@/assets/img/icon_flag.png" class="icon_flag" /></td>
-                    <td>{{ notice.noticeTitle }}</td>
+                    <td><router-link :to="'noticeview/' + notice.noticeId">{{ notice.noticeTitle }}</router-link></td>
                     <td>{{ notice.noticeWriter }}</td>
                     <td>{{ dateFormat(notice.noticeDate) }}</td>
                     <td>{{ notice.noticeHit }}</td>
@@ -40,6 +40,9 @@ export default {
             notices: [],
         }
     },
+    props: {
+        searchItems: Array,
+    },
     created() {
         // axios 비동기 통신으로 server에서 list 가져오기
         axios.get('http://localhost/board/list')
@@ -52,6 +55,21 @@ export default {
             .then((resp) => {
                 this.notices = resp.data;
             });
+    },
+    watch: {
+        searchItems(arr) {
+            if (arr != null) {
+                this.items = arr;
+                // console.log(this.items); // 디버깅
+            }
+            else {
+                axios.get('http://localhost/board/list')
+                .then((resp) => {
+                    // console.log(resp); // 디버깅
+                    this.items = resp.data;
+                });
+            }
+        },
     },
     methods: {
         // 날짜 포맷을 변경하는 메서드 (시, 분, 초 제외)
@@ -83,6 +101,9 @@ td {
 }
 .board_notice {
     background-color: #E9E9E9;
+}
+.board_notice a {
+    color: #000;
 }
 #BoardListItem {
     margin: 20px 50px;

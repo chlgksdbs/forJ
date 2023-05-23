@@ -12,7 +12,7 @@
                 </tr>
                 <tr class="board_table_line board_notice" v-for="item in items" :key="item.noticeId">
                     <td>{{ item.noticeId }}</td>
-                    <td><router-link :to="'view/' + item.noticeId">{{ item.noticeTitle }}</router-link></td>
+                    <td><router-link :to="'noticeview/' + item.noticeId">{{ item.noticeTitle }}</router-link></td>
                     <td>{{ item.noticeWriter }}</td>
                     <td>{{ dateFormat(item.noticeDate) }}</td>
                     <td>{{ item.noticeHit }}</td>
@@ -32,6 +32,9 @@ export default {
             items: [],
         }
     },
+    props: {
+        searchItems: Array,
+    },
     created() {
         // axios 비동기 통신으로 server에서 notice 가져오기
         axios.get('http://localhost/notice/list')
@@ -45,6 +48,21 @@ export default {
         dateFormat(date) {
             let dateFormat = date.substring(0, 10);
             return dateFormat;
+        },
+    },
+    watch: {
+        searchItems(arr) {
+            if (arr != null) {
+                this.items = arr;
+                // console.log(this.items); // 디버깅
+            }
+            else {
+                axios.get('http://localhost/notice/list')
+                .then((resp) => {
+                    // console.log(resp); // 디버깅
+                    this.items = resp.data;
+                });
+            }
         },
     },
 }

@@ -39,4 +39,17 @@
 		where board_id = #{boardId}
 	</delete>
 	
+	<select id="selectSearchAll" parameterType="String" resultType="BoardDto">
+		SELECT
+			board_id as boardId, title, fu.user_nickname as writer, writer as writerId, write_date as writeDate, hit
+		FROM
+			forj_board as fb join forj_user as fu
+		ON
+			fb.writer = fu.user_id
+		WHERE
+			title like concat('%', #{text}, '%')
+		ORDER BY
+			write_date desc
+	</select>
+	
 </mapper>

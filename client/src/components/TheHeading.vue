@@ -32,7 +32,7 @@ export default {
     methods: {
         ...mapActions(memberStore, ["userLogout"]),
         logout() {
-            console.log(this.userInfo);
+            // console.log(this.userInfo); // 디버깅
 
             this.userLogout(this.userInfo.userId);
 
