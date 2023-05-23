@@ -2,17 +2,19 @@
     <div id="NoticeList">
         <div id="TheSearchBar" align="right">
             <div id="input_search_bar">
-                <input type="text" placeholder="검색어를 입력하세요." maxlength="45" />
-                <img src="@/assets/img/icon_search.png">
+                <input type="text" v-model="searchText" placeholder="검색어를 입력하세요." @keyup.enter="searchNotice" maxlength="45" />
+                <img src="@/assets/img/icon_search.png" @click="searchNotice">
             </div>
         </div>
-        <notice-list-item></notice-list-item>
+        <notice-list-item :searchItems="searchItems"></notice-list-item>
         <div class="post_area" v-if="userInfo.userId == 'admin'">
             <router-link to="/board/noticewrite">글작성</router-link>
         </div>
     </div>
 </template>
 <script>
+import axios from "axios";
+
 import NoticeListItem from "../Notice/Item/NoticeListItem.vue";
 import { mapState } from "vuex";
 
@@ -23,11 +25,31 @@ export default {
     components: {
         NoticeListItem,
     },
+    data() {
+        return {
+            searchText: '',
+            searchItems: [],
+        }
+    },
     created() {
         this.$emit("setTitle", "공지사항");
     },
     computed: {
         ...mapState(memberStore, ['userInfo']),
+    },
+    methods: {
+        // TODO: 공지사항 검색바 이벤트 메서드
+        searchNotice() {
+        if (this.searchText.length != 0) {
+            axios.get('http://localhost/notice/search/' + this.searchText)
+            .then((resp) => {
+                this.searchItems = resp.data;
+            });
+        }
+        else {
+            this.searchItems = null;
+        }
+        },
     },
 }
 </script>

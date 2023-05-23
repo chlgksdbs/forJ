@@ -59,7 +59,7 @@
 		WHERE
 			notice_title like concat('%', #{text}, '%')
 		ORDER BY
-			write_date desc
+			notice_date desc
 	</select>
 
 </mapper>
