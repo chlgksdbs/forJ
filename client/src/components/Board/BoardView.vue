@@ -148,6 +148,12 @@ export default {
   methods: {
     // 댓글 작성 메서드
     commentWrite() {
+
+      if (this.commentContent.length == 0) {
+        alert('댓글을 입력하세요!');
+        return;
+      }
+
       let comment = {
         "boardId": this.boardItem.boardId,
         "userId": this.userInfo.userId,

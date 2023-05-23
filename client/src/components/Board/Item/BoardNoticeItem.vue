@@ -1,6 +1,6 @@
 <template>
-    <div id="BoardListItem">
-        <div align="center">
+  <div id="BoardNoticeItem">
+    <div align="center">
             <table id="board_table" frame="void">
                 <tr id="board_table_top"></tr>
                 <tr class="board_table_line">
@@ -10,40 +10,33 @@
                     <th id="table_head_write_date">작성일시</th>
                     <th id="table_head_hit">조회수</th>
                 </tr>
-                <tr class="board_table_line board_notice">
-                    <td><img src="@/assets/img/icon_flag.png" class="icon_flag" /></td>
-                    <td>5월 forJ 출석 이벤트</td>
-                    <td>admin</td>
-                    <td>2023-04-15</td>
-                    <td>23</td>
-                </tr>
-                <tr class="board_table_line" v-for="item in items" :key="item.boardId">
-                    <td>{{ item.boardId }}</td>
-                    <td><router-link :to="'view/' + item.boardId">{{ item.title }}</router-link></td>
-                    <td>{{ item.writer }}</td>
-                    <td>{{ dateFormat(item.writeDate) }}</td>
-                    <td>{{ item.hit }}</td>
+                <tr class="board_table_line board_notice" v-for="item in items" :key="item.noticeId">
+                    <td>{{ item.noticeId }}</td>
+                    <td><router-link :to="'view/' + item.noticeId">{{ item.noticeTitle }}</router-link></td>
+                    <td>{{ item.noticeWriter }}</td>
+                    <td>{{ dateFormat(item.noticeDate) }}</td>
+                    <td>{{ item.noticeHit }}</td>
                 </tr>
                 <tr class="board_table_line"></tr>
             </table>
         </div>
-    </div>
+  </div>
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-    name: "BoardListItem",
-    data() {
+  name: "BoardNoticeItem",
+  data() {
         return {
             items: [],
         }
     },
     created() {
-        // axios 비동기 통신으로 server에서 list 가져오기
-        axios.get('http://localhost/board/list')
+        // axios 비동기 통신으로 server에서 notice 가져오기
+        axios.get('http://localhost/notice/list')
             .then((resp) => {
-                // console.log(resp); // 디버깅
+                console.log(resp.data); // 디버깅
                 this.items = resp.data;
             });
     },
@@ -59,7 +52,7 @@ export default {
 <style scoped>
 a {
     text-decoration: none;
-    color: #A1A1A1;
+    color: #000000;
 }
 th {
     text-align: center;
@@ -78,7 +71,7 @@ td {
 .board_notice {
     background-color: #E9E9E9;
 }
-#BoardListItem {
+#BoardNoticeItem {
     margin: 20px 50px;
 }
 #board_table {
