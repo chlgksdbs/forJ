@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forj.model.repository.NoticeMapper">
+
+	<select id="selectAll" resultType="NoticeDto">
+		SELECT
+			notice_id as noticeId, notice_title as noticeTitle, notice_writer as noticeWriter, notice_date as noticeDate, notice_content as noticeContent, notice_hit as noticeHit
+		FROM
+			forj_notice
+		ORDER BY
+			notice_date desc
+	</select>
+	
+	<select id="selectLimitAll" resultType="NoticeDto">
+		SELECT
+			notice_id as noticeId, notice_title as noticeTitle, notice_writer as noticeWriter, notice_date as noticeDate, notice_content as noticeContent, notice_hit as noticeHit
+		FROM
+			forj_notice
+		ORDER BY
+			notice_date desc
+		LIMIT
+			3
+	</select>
+
+</mapper>

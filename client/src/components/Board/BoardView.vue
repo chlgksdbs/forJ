@@ -29,6 +29,10 @@
         조회수 : {{ boardItem.hit }}
       </div>
     </div>
+    <div class="detail_btn_bar">
+      <button id="boardModifyBtn" @click="boardModify" v-if="userInfo.userId == boardItem.writerId">수정</button>
+      <button id="boardDeleteBtn" @click="boardDelete" v-if="userInfo.userId == boardItem.writerId">삭제</button>
+    </div>
     <div id="BoardContent">
       <div class="detail_content">
         <p class="detail_content_text">
@@ -104,7 +108,7 @@ export default {
     // TODO: axios 비동기 통신으로 server에서 detail 가져오기
     axios.get('http://localhost/board/detail/' + this.$route.params.boardId)
       .then((resp) => {
-        // console.log(resp.data); // 디버깅
+        // console.log(resp.data.writerId); // 디버깅
         this.boardItem = resp.data;
 
         // TODO: axios 비동기 통신으로 server에서 comment 가져오기
@@ -133,12 +137,12 @@ export default {
   },
   watch: {
     heartStatus(value) {
-      // 좋아요 버튼 활성화
+      // TODO: 좋아요 버튼 활성화
       if (value == 1) {
         document.querySelector('#heart_icon').style.display = "none";
         document.querySelector('#fill_heart_icon').style.display = "";
       }
-      // 좋아요 버튼 비활성화
+      // TODO: 좋아요 버튼 비활성화
       else {
         document.querySelector('#heart_icon').style.display = "";
         document.querySelector('#fill_heart_icon').style.display = "none";
@@ -146,8 +150,14 @@ export default {
     },
   },
   methods: {
-    // 댓글 작성 메서드
+    // TODO: 댓글 작성 메서드
     commentWrite() {
+
+      if (this.commentContent.length == 0) {
+        alert('댓글을 입력하세요.');
+        return;
+      }
+
       let comment = {
         "boardId": this.boardItem.boardId,
         "userId": this.userInfo.userId,
@@ -162,7 +172,7 @@ export default {
           this.$router.go(0); // 현재 페이지 새로 고침
         });
     },
-    // 좋아요 기능 메서드
+    // TODO: 좋아요 기능 메서드
     heartClick() {
       let heart = {
         "boardId": this.boardItem.boardId,
@@ -181,7 +191,28 @@ export default {
           // console.log(resp.data); // 디버깅
           this.heartStatus = resp.data; // 좋아요 상태 변경
         });
-    }
+    },
+    // TODO: 게시글 수정 버튼 이벤트 메서드
+    boardModify() {
+      this.$router.push("/board/modify/" + this.boardItem.boardId);
+    },
+    // TODO: 게시글 삭제 버튼 이벤트 베서드
+    boardDelete() {
+      // 현재 로그인된 사용자와 글쓴 사용자가 같은 경우 실행
+      if (this.userInfo.userId == this.boardItem.writerId) {
+        axios.delete('http://localhost/board/delete/' + this.boardItem.boardId)
+          .then(() => {
+            if (confirm('정말로 삭제하시겠습니까?')) {
+              alert('게시글 삭제가 완료되었습니다.')
+              this.$router.push("/board");
+            }
+          });
+      }
+      // 다른 경우, 에러 처리
+      else {
+        alert('해당 게시글에 대한 권한이 없습니다.');
+      }
+    },
   },
 };
 </script>
@@ -251,6 +282,11 @@ export default {
 }
 .detail_nav_profile_write_date {
   text-align: left;
+}
+.detail_btn_bar {
+  display: flex;
+  justify-content: right;
+  margin: 0px 150px;
 }
 .detail_btn_box {
   display: flex;
@@ -347,5 +383,29 @@ export default {
   'wght' 400,
   'GRAD' 0,
   'opsz' 48
+}
+#boardModifyBtn {
+  margin-left: 10px;
+  cursor: pointer;
+  border: 1px solid;
+  background-color: #FFF;
+  color: #2ecc71;
+  height: 30px;
+}
+#boardModifyBtn:hover {
+  background-color: #2ecc71;
+  color: #FFF;
+}
+#boardDeleteBtn {
+  margin-left: 10px;
+  cursor: pointer;
+  border: 1px solid;
+  background-color: #FFF;
+  color: #e74c3c;
+  height: 30px;
+}
+#boardDeleteBtn:hover {
+  background-color: #e74c3c;
+  color: #FFF;
 }
 </style>

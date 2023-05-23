@@ -7,10 +7,10 @@
       </div>
       <div class="comment_content_box">
         <div class="comment_content_header">
-          <div>{{ comment.userId }}</div>
+          <div>{{ comment.writer }}</div>
           <div>{{ comment.writeDate }}</div>
-          <button id="modifyBtn" @click="commentModify">수정</button>
-          <button id="deleteBtn" @click="commentDelete">삭제</button>
+          <button id="modifyBtn" @click="commentModify" v-if="userInfo.userId == comment.userId">수정</button>
+          <button id="deleteBtn" @click="commentDelete" v-if="userInfo.userId == comment.userId">삭제</button>
         </div>
         <div class="comment_content_body">
           <p :class="'static_content' + comment.commentId" style="">{{ comment.content }}</p>
@@ -26,6 +26,9 @@
 
 <script>
 import axios from "axios";
+import { mapState } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
   name: 'BoardCommentItem',
@@ -47,6 +50,9 @@ export default {
   created() {
     this.comment = this.commentItem;
   },
+  computed: {
+    ...mapState(memberStore, ['userInfo']),
+  },
   methods: {
     // 댓글 수정 모드 메서드
     commentModify() {
@@ -66,14 +72,18 @@ export default {
     },
     // 댓글 수정 메서드
     commentModifyApply() {
-      console.log(this.comment); // 디버깅
+      // console.log(this.comment); // 디버깅
+      if (this.comment.content.length == 0) {
+        alert('댓글을 입력하세요.');
+        return;
+      }
       axios.put("http://localhost/comment", this.comment)
         .then(() => {
-          console.log(this.comment.commentId);
+          // console.log(this.comment.commentId);
           // 수정 후, 조회
           axios.get("http://localhost/comment/view/" + this.comment.commentId)
             .then((resp) => {
-              console.log(resp); // 디버깅
+              // console.log(resp); // 디버깅
               this.comment = resp.data;
             });
         });
@@ -141,22 +151,35 @@ export default {
 #modifyBtn {
   margin-left: 10px;
   cursor: pointer;
-  border: none;
+  border: 1px solid;
   background-color: #FFF;
   color: #2ecc71;
+}
+#modifyBtn:hover {
+  background-color: #2ecc71;
+  color: #FFF;
 }
 #deleteBtn {
   margin-left: 10px;
   cursor: pointer;
-  border: none;
+  border: 1px solid;
   background-color: #FFF;
   color: #e74c3c;
+}
+#deleteBtn:hover {
+  background-color: #e74c3c;
+  color: #FFF;
 }
 #modifyApplyBtn {
   background-color: #FFF;
   margin-left: 10px;
   cursor: pointer;
-  border: none;
+  border: 1px solid;
   color: #3498db;
+  height: 30px;
+}
+#modifyApplyBtn:hover {
+  background-color: #3498db;
+  color: #FFF;
 }
 </style>

@@ -181,7 +181,7 @@ public class UserController {
 		}
 	}
 	
-	// API 6. 회원가입 시, 네이버 메일 전송
+	// API 6. 회원가입 및 아이디 찾기 시, 네이버 메일 전송
 	@PostMapping("/certmail")
 	public String certmail(@RequestBody UserDto userDto) throws Exception {
 		
@@ -225,5 +225,37 @@ public class UserController {
 		
 		// 프론트에서 프로필 이미지를 byte 배열로 전달받아야 함
 		return imageByteArray;
+	}
+	
+	// API 9. 이메일을 입력받아, 사용자의 아이디 정보 받아오기
+	@GetMapping(value = "/findid/{userEmail}")
+	public UserDto findId(@PathVariable("userEmail") String userEmail) {
+		
+		return userService.findId(userEmail);
+	}
+	
+	// API 10. 아이디와 이메일 정보를 입력받아, 사용자의 비밀번호 정보 받아오기
+	@GetMapping(value = "/findpw/{userId}/{userEmail}")
+	public UserDto findPw(@PathVariable("userId") String userId, @PathVariable("userEmail") String userEmail) {
+		
+		return userService.findPw(userId, userEmail);
+	}
+	
+	// API 11. 사용자의 아이디와 이메일이 DB에 일치한 지 확인
+	// 일치하다면 certmail을 동작하여 인증번호 전달
+	// 일치하지 않다면, 에러메시지 전달
+	@GetMapping(value = "/check/{userId}/{userEmail}")
+	public String coincideIdEmail(@PathVariable("userId") String userId, @PathVariable("userEmail") String userEmail) throws Exception {
+		
+		UserDto userDto = userService.coincideIdEmail(userId, userEmail);
+		
+		// 아이디와 이메일 정보가 일치하는 사용자 정보가 없는 경우
+		if (userDto == null) {
+			return "error";
+		}
+		// 아이디와 이메일 정보가 일치하는 사용자 정보가 있는 경우
+		else {
+			return mailSendService.sendMail(userEmail);
+		}
 	}
 }

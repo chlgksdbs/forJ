@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.forj.model.dto.BoardDto;
+import com.forj.model.dto.NoticeDto;
 import com.forj.model.service.BoardService;
+import com.forj.model.service.NoticeService;
 
 @RestController
 @RequestMapping("/board")
@@ -23,6 +25,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private NoticeService noticeService;
 	
 	// 전체 조회
 	@GetMapping("/list")
@@ -56,6 +61,12 @@ public class BoardController {
 	@DeleteMapping("/delete/{bno}")
 	public void deleteBoard(@PathVariable("bno") int boardId) {
 		boardService.deleteBoard(boardId);
+	}
+	
+	// 공지사항 최신 글 5개 불러오기
+	@GetMapping("/notice/list")
+	public List<NoticeDto> noticeList() {
+		return noticeService.noticeLimitList();
 	}
 	
 }

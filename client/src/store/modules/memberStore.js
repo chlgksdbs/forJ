@@ -45,7 +45,7 @@ const memberStore = {
         // 로그인은 post 요청
         .post("/user/login", user)
         .then(({ data }) => {
-          console.log("From Backend", data); // 디버깅
+          // console.log("From Backend", data); // 디버깅
 
           // Backend에서 넘어온 data 객체 중, message의 값이 success인 경우 (로그인 요청 성공)
           if (data.message == "success") {
@@ -70,7 +70,7 @@ const memberStore = {
         })
         // 에러 발생 시 처리
         .catch((error) => {
-          console.log("OMG", error);
+          console.log(error); // 디버깅
         });
     },
 
@@ -90,12 +90,12 @@ const memberStore = {
           }
           // Backend에서 넘어온 data 객체 중, message의 값이 success가 아닌 경우 (회원 인증 실패)
           else {
-            console.log("유저 정보 없음!!!");
+            // console.log("유저 정보 없음!!!"); // 디버깅
           }
         })
         .catch((error) => {
           console.log(
-            "getUserInfo() error code [토큰 만료되어 사용 불가능.] :::",
+            // "getUserInfo() error code [토큰 만료되어 사용 불가능.] :::", // 디버깅
             error.response.status
           );
           commit("SET_IS_VALID_TOKEN", false); // 토큰이 유효하지 않은 것에 대한 commit
@@ -107,7 +107,7 @@ const memberStore = {
 
     // (3) refresh token을 이용한 access token 재발급 메서드
     tokenRegeneration({ commit, state }) {
-      console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token"));
+      // console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token")); // 디버깅
 
       // Backend로 보내는 요청의 Header부분에 refresh-token을 포함
       http.defaults.headers["refresh-token"] = sessionStorage.getItem("refresh-token");
@@ -119,7 +119,7 @@ const memberStore = {
             // Backend로부터 새로 발급받은 access token 추출
             let accessToken = data["access-token"];
 
-            console.log("재발급 완료 >> 새로운 토큰 : {}", accessToken);
+            // console.log("재발급 완료 >> 새로운 토큰 : {}", accessToken); // 디버깅
             // 새로운 access token을 sessionStorage에 저장
             sessionStorage.setItem("access-token", accessToken);
             commit("SET_IS_VALID_TOKEN", true);
@@ -135,9 +135,9 @@ const memberStore = {
               .get("/user/logout/" + state.userInfo.userId)
               .then(({ data }) => {
                 if (data.message == "success") {
-                  console.log("refresh token 제거 성공!");
+                  // console.log("refresh token 제거 성공!"); // 디버깅
                 } else {
-                  console.log("refresh token 제거 실패...");
+                  // console.log("refresh token 제거 실패..."); // 디버깅
                 }
                 alert("RefreshToken 기간 만료!!! 다시 로그인 해주세요.");
 
@@ -167,7 +167,7 @@ const memberStore = {
             commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);
           } else {
-            console.log("유저 정보 없음!!!");
+            // console.log("유저 정보 없음!!!"); // 디버깅
           }
         })
         .catch((error) => {

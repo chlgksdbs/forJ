@@ -23,7 +23,7 @@ public class HeartController {
 	public int heartCount(@PathVariable int boardId) {
 		
 		int heartCount = heartService.count(boardId);
-		System.out.println(heartCount);
+//		System.out.println(heartCount);
 		
 		return heartCount;
 	}

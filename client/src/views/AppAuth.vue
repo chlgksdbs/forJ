@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import TheFooter from "@/components/TheFooter.vue";
 
 export default {
@@ -20,84 +19,10 @@ export default {
     TheFooter,
   },
   data() {
-    return {
-      userId: '',
-      userPw: '',
-      userPwCheck: '',
-      userName: '',
-      userGender: '',
-      userPhone: '',
-      userEmail: '',
-      certNumber: '',
-      secretCertNumber: '',
-    };
+    return {};
   },
   created() {},
-  methods: {
-    // 인증번호 받기 버튼 클릭 시, 수행하는 함수
-    emailCheck() {
-      // 이메일이 유효한 지 체크
-      if (this.userEmail.length == 0) {
-        alert('이메일을 입력하세요.');
-        return;
-      }
-
-      // JSON 형태로 전송
-      let userDto = {
-        "userEmail": this.userEmail,
-      };
-
-      axios.post('http://localhost/user/certmail', userDto)
-        .then((resp) => {
-          alert('인증번호가 전송되었습니다.');
-          this.secretCertNumber = resp.data;
-        });
-    },
-    // 가입하기 버튼 클릭 시, 수행하는 함수
-    joinCheck() {
-      // 1. 입력란에 공백이 있지 않은 지 확인
-      if (this.userId.length == 0 || this.userName.length == 0 || this.userPhone.length == 0 || this.userEmail.length == 0) {
-        alert('모든 항목란은 필수 입력입니다.');
-        return;
-      }
-
-      // 2. 성별을 입력했는 지 확인
-      if (this.userGender.length == 0 || this.userGender == '성별') {
-        alert('성별을 입력해주세요.');
-        return;
-      }
-
-      // 3. 비밀번호와 비밀번호 재확인이 동일한 지 체크
-      if (this.userPw.length == 0 || this.userPw !== this.userPwCheck) {
-        alert('비밀번호를 확인해주세요!');
-        return;
-      }
-
-      // 4. 이메일 인증번호가 유효한 지 체크
-      if (this.certNumber != this.secretCertNumber) {
-        alert('인증번호를 확인해주세요!');
-        return;
-      }
-
-      // 5. 사용자 정보 백엔드로 보내서 유효한 지 체크 후 가입
-      // 사용자 정보 JSON 형태로 전송
-      let userDto = {
-        "userId": this.userId,
-        "userPw": this.userPw,
-        "userName": this.userName,
-        "userGender": this.userGender,
-        "userPhone": this.userPhone,
-        "userEmail": this.userEmail,
-      }
-
-      axios.post('http://localhost/user/join', userDto)
-        .then(() => {
-          alert('(' + this.userName + ')님 forJ에 가입하신걸 환영합니다!');
-          this.$router.push('/login');
-        });
-
-    }
-  },
+  methods: {},
 };
 </script>
 
@@ -105,72 +30,7 @@ export default {
 div {
   margin: 8px 0 0;
 }
-input, select {
-  border: none;
-  width: 95%;
-  height: 30px;
-  margin: 12px 0;
-  font-size: 13px;
-}
-input::-webkit-inner-spin-button {
-  appearance: none;
-}
-input:focus, select:focus {
-  outline: none;
-}
-.form_input_box {
-  width: 100%;
-  height: 49px;
-  border: 1px solid #dadada;
-}
-.login_error_message {
-  display: block;
-  margin: 9px 0 2px;
-  font-size: 12px;
-  line-height: 14px;
-  color: red;
-  text-align: left;
-}
-.form_email_box {
-  display: inline-block;
-  width: 72%;
-  margin-right: 5px;
-  height: 50px;
-  border: 1px solid #dadada;
-}
-.form_input_box:focus-within, .form_email_box:focus-within {
-  border: 1px solid #2E75B6;
-}
-.form_text {
-  text-align: left;
-  font-size: 15px;
-  color: #888;
-}
 #join_logo {
   width: 250px;
-}
-#form_box {
-  width: 460px;
-  margin: auto;
-}
-#form_box div input[type="email"] {
-  width: 90%;
-  margin-right: 10px;
-}
-#certBtn {
-  width: 120px;
-  height: 50px;
-  background-color: #2E75B6;
-  color: #FFFFFF;
-  cursor: pointer;
-  border: none;
-}
-#joinBtn {
-  width: 100%;
-  height: 50px;
-  background-color: #2E75B6;
-  color: #FFFFFF;
-  cursor: pointer;
-  border: none;
 }
 </style>
