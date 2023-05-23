@@ -22,7 +22,7 @@
 	
 	<select id="userInfo" parameterType="String" resultType="UserDto">
 		SELECT
-			user_name as userName, user_id as userId, user_email as userEmail
+			user_name as userName, user_id as userId, user_email as userEmail, user_nickname as userNickname, user_profileimg as userProfileimg, user_phone as userPhone
 		FROM
 			forj_user
 		WHERE
