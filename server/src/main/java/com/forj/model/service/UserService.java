@@ -108,5 +108,31 @@ public class UserService {
 		
 		return userMapper.selectProfileImg(userId);
 	}
+	
+	// 이메일 정보를 가지고, 사용자 아이디 찾기
+	public UserDto findId(String userEmail) {
+		
+		return userMapper.selectUserId(userEmail);
+	}
+	
+	// 아이디와 이메일 정보를 가지고, 사용자의 비밀번호 찾기
+	public UserDto findPw(String userId, String userEmail) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("userEmail", userEmail);
+		
+		return userMapper.selectUserPw(map);
+	}
+	
+	// 아이디와 이메일 정보를 가지고, 사용자 찾기
+	public UserDto coincideIdEmail(String userId, String userEmail) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("userEmail", userEmail);
+		
+		return userMapper.checkUserAuth(map);
+	}
 
 }

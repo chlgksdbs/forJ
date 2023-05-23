@@ -28,12 +28,12 @@ public class MailSendService {
 		MimeMessage message = mailSender.createMimeMessage();
 		
 		message.addRecipients(Message.RecipientType.TO, to); // 보내는 대상
-		message.setSubject("[forJ] 회원가입 이메일 인증번호"); // 메일 제목
+		message.setSubject("[forJ] 이메일 인증번호"); // 메일 제목
 		
 		String content = ""; // 메일 본문
 		content += "<div>";
 		content += "<h2>안녕하세요. forJ 관리자 입니다.</h2>";
-		content += "<h2>회원가입 인증번호는 다음과 같습니다.</h2>";
+		content += "<h2>인증번호는 다음과 같습니다.</h2>";
 		content += "<hr>";
 		content += "<h2 style='color: blue;'>인증번호 : <strong>" + certKey;
 		content += "</strong></h2>";

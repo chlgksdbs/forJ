@@ -103,10 +103,10 @@ export default {
 
               // https://okky.kr/articles/245037 -> 이걸로 도전...
 
-              // let blob = new Blob([new Uint8Array(resp.data)], { type: 'image/jpg' });
+              let blob = new Blob([new Uint8Array(resp.data)], { type: 'image/jpg' });
 
-              // const imageURL = window.URL.createObjectURL(blob);
-              // this.profileImg = imageURL;
+              const imageURL = window.URL.createObjectURL(blob);
+              this.profileImg = imageURL;
             });
           // TODO: 프로필 이미지 업로드 시, .jpg와 .png만 가능하도록 설정하고, 크기 제한 걸기
         });

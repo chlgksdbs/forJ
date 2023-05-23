@@ -71,4 +71,31 @@
 		WHERE
 			user_id=#{userId}
 	</select>
+	
+	<select id="selectUserId" parameterType="String" resultType="UserDto">
+		SELECT
+			user_id as userId
+		FROM
+			forj_user
+		WHERE 
+			user_email=#{userEmail}
+	</select>
+	
+	<select id="selectUserPw" parameterType="map" resultType="UserDto">
+		SELECT
+			user_id as userId, user_pw as userPw
+		FROM
+			forj_user
+		WHERE
+			user_id=#{userId} and user_email=#{userEmail}
+	</select>
+	
+	<select id="checkUserAuth" parameterType="map" resultType="UserDto">
+		SELECT
+			user_id as userId, user_email as userEmail
+		FROM
+			forj_user
+		WHERE
+			user_id=#{userId} and user_email=#{userEmail}
+	</select>
 </mapper>
