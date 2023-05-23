@@ -36,7 +36,7 @@ export default {
         // axios 비동기 통신으로 server에서 notice 가져오기
         axios.get('http://localhost/notice/list')
             .then((resp) => {
-                console.log(resp.data); // 디버깅
+                // console.log(resp.data); // 디버깅
                 this.items = resp.data;
             });
     },

@@ -10,12 +10,12 @@
                     <th id="table_head_write_date">작성일시</th>
                     <th id="table_head_hit">조회수</th>
                 </tr>
-                <tr class="board_table_line board_notice">
+                <tr class="board_table_line board_notice" v-for="notice in notices" :key="notice.noticeId">
                     <td><img src="@/assets/img/icon_flag.png" class="icon_flag" /></td>
-                    <td>5월 forJ 출석 이벤트</td>
-                    <td>admin</td>
-                    <td>2023-04-15</td>
-                    <td>23</td>
+                    <td>{{ notice.noticeTitle }}</td>
+                    <td>{{ notice.noticeWriter }}</td>
+                    <td>{{ dateFormat(notice.noticeDate) }}</td>
+                    <td>{{ notice.noticeHit }}</td>
                 </tr>
                 <tr class="board_table_line" v-for="item in items" :key="item.boardId">
                     <td>{{ item.boardId }}</td>
@@ -37,6 +37,7 @@ export default {
     data() {
         return {
             items: [],
+            notices: [],
         }
     },
     created() {
@@ -45,6 +46,11 @@ export default {
             .then((resp) => {
                 // console.log(resp); // 디버깅
                 this.items = resp.data;
+            });
+        // axios 비동기 통신으로 server에서 notice list 가져오기
+        axios.get('http://localhost/board/notice/list')
+            .then((resp) => {
+                this.notices = resp.data;
             });
     },
     methods: {

@@ -18,4 +18,9 @@ public class NoticeService {
 	public List<NoticeDto> noticeList() {
 		return noticeMapper.selectAll();
 	}
+	
+	// 공지사항 최신 글 5개 불러오기
+	public List<NoticeDto> noticeLimitList() {
+		return noticeMapper.selectLimitAll();
+	}
 }

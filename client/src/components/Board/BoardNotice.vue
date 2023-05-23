@@ -8,7 +8,7 @@
         </div>
         <board-notice-item></board-notice-item>
         <div class="post_area">
-            <router-link to="/board/write">글작성</router-link>
+            <router-link to="/notice/write">글작성</router-link>
         </div>
     </div>
 </template>

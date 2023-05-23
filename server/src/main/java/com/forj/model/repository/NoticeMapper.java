@@ -11,4 +11,7 @@ public interface NoticeMapper {
 
 	// 공지사항 전체 조회
 	List<NoticeDto> selectAll();
+	
+	// 공지사항 최신 글 5개 불러오기
+	List<NoticeDto> selectLimitAll();
 }
