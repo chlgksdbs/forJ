@@ -244,13 +244,19 @@ export default {
             //     })
 
         // DB에서 키워드 선택에 따른 정보 가져오기
-          let url = `http://localhost/area/list/${this.categoryTitle}/${this.contentTypeId}/${this.sidocode}`;
+        if (this.sidocode == '') {
+            alert("지역을 선택해주세요.");
+        } else {
+            let url = `http://localhost/area/list/${this.categoryTitle}/${this.contentTypeId}/${this.sidocode}`;
         //   if (this.contentTypeId != 0) url += `/${this.contentTypeId}`
           axios.get(url)
               .then((resp) => {
                   this.itemList = resp.data;
                   console.log(this.itemList);
         })
+        }
+
+          
 
                     // // 객체에 담아 DB에 저장
                     // for (var i in this.itemList) {
