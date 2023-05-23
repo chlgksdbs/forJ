@@ -12,37 +12,38 @@
       </div>
       <div>
         <span>이름</span>
-        <span><input type="text" /></span>
+        <span><input type="text" v-model="userInfo.userName" /></span>
         <span><button>수정</button></span>
       </div>
       <div>
         <span>닉네임</span>
-        <span><input type="text" /></span>
+        <span><input type="text" v-model="userInfo.userNickname" /></span>
         <span><button>변경</button></span>
       </div>
       <div>
         <span>아이디</span>
-        <span><input type="text" /></span>
+        <span><input type="text" v-model="userInfo.userId" /></span>
         <span><button>변경</button></span>
       </div>
       <div>
         <span>비밀번호</span>
-        <span><input type="text" /></span>
-        <span><button>변경</button></span>
+        <span><input type="password" /></span>
+        <span></span>
       </div>
       <div>
         <span>비밀번호 재확인</span>
         <span><input type="text" /></span>
-        <span><button>변경</button></span>
+        <span><button>확인</button></span>
+        <!-- TODO: 비밀번호 확인 버튼 클릭 시, 아래 숨겨진 div display (새로운 비밀번호 입력 칸)-->
       </div>
       <div>
         <span>이메일</span>
-        <span><input type="text" /></span>
+        <span><input type="text" v-model="userInfo.userEmail" /></span>
         <span><button>변경</button></span>
       </div>
       <div>
         <span>휴대전화</span>
-        <span><input type="text" /></span>
+        <span><input type="text" v-model="userInfo.userPhone" /></span>
         <span><button>변경</button></span>
       </div>
     </div>
