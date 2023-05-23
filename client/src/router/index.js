@@ -143,6 +143,12 @@ const routes = [
         component: () => import("@/components/Board/BoardWrite"),
       },
       {
+        path: "modify/:boardId",
+        name: "boardmodify",
+        beforeEnter: onlyAuthUser,
+        component: () => import("@/components/Board/BoardModify"),
+      },
+      {
         path: "view/:boardId",
         name: "boardview",
         beforeEnter: onlyAuthUser,

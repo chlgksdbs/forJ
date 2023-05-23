@@ -3,9 +3,9 @@
 <mapper namespace="com.forj.model.repository.BoardMapper">
 	
 	<select id="selectAll" resultType="BoardDto">
-		select board_id as boardId, title, fu.user_nickname as writer, writer_id as writerId, write_date as writeDate, hit
+		select board_id as boardId, title, fu.user_nickname as writer, writer as writerId, write_date as writeDate, hit
 		from forj_board as fb join forj_user as fu
-		on fb.writer_id = fu.user_id
+		on fb.writer = fu.user_id
 		order by write_date desc
 	</select>
 	
@@ -15,9 +15,9 @@
 	</insert>
 	
 	<select id="selectOne" parameterType="int" resultType="BoardDto">
-		select board_id as boardId, title, fu.user_nickname as writer, writer_id as writerId, fu.user_profileimg as profileImg, write_date as writeDate, content, hit
+		select board_id as boardId, title, fu.user_nickname as writer, writer as writerId, fu.user_profileimg as profileImg, write_date as writeDate, content, hit
 		from forj_board as fb join forj_user as fu
-		on fb.writer_id = fu.user_id
+		on fb.writer = fu.user_id
 		where board_id=#{boardId}
 	</select>
 	
@@ -29,7 +29,7 @@
 	
 	<update id="update" parameterType="BoardDto">
 		update forj_board
-		set title=#{title}, content=#{content}
+		set title=#{title}, content=#{content}, write_date=now()
 		where board_id=#{boardId}
 	</update>
 	
