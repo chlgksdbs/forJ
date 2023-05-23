@@ -7,13 +7,16 @@
             </div>
         </div>
         <notice-list-item></notice-list-item>
-        <div class="post_area">
-            <router-link to="/notice/write">글작성</router-link>
+        <div class="post_area" v-if="userInfo.userId == 'admin'">
+            <router-link to="/board/noticewrite">글작성</router-link>
         </div>
     </div>
 </template>
 <script>
-import NoticeListItem from "../Board/Item/NoticeListItem.vue";
+import NoticeListItem from "../Notice/Item/NoticeListItem.vue";
+import { mapState } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
     name: "NoticeList",
@@ -22,6 +25,9 @@ export default {
     },
     created() {
         this.$emit("setTitle", "공지사항");
+    },
+    computed: {
+        ...mapState(memberStore, ['userInfo']),
     },
 }
 </script>

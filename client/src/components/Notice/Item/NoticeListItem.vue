@@ -12,7 +12,7 @@
                 </tr>
                 <tr class="board_table_line board_notice" v-for="item in items" :key="item.noticeId">
                     <td>{{ item.noticeId }}</td>
-                    <td><router-link :to="'view/' + item.noticeId">{{ item.noticeTitle }}</router-link></td>
+                    <td><router-link :to="'noticeview/' + item.noticeId">{{ item.noticeTitle }}</router-link></td>
                     <td>{{ item.noticeWriter }}</td>
                     <td>{{ dateFormat(item.noticeDate) }}</td>
                     <td>{{ item.noticeHit }}</td>

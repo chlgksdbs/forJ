@@ -21,5 +21,45 @@
 		LIMIT
 			3
 	</select>
+	
+	<insert id="insert" parameterType="NoticeDto">
+		insert into forj_notice(notice_title, notice_writer, notice_date, notice_content)
+		values( #{noticeTitle}, #{noticeWriter}, now(), #{noticeContent})
+	</insert>
+	
+	<select id="selectOne" parameterType="int" resultType="NoticeDto">
+		select notice_id as noticeId, notice_title as noticeTitle, notice_writer as noticeWriter, notice_date as noticeDate, notice_content as noticeContent, notice_hit as noticeHit
+		from forj_notice
+		where notice_id=#{noticeId}
+	</select>
+	
+	<update id="updateHit" parameterType="int">
+		update forj_notice
+		set notice_hit = notice_hit + 1
+		where notice_id=#{noticeId}
+	</update>
+	
+	<update id="update" parameterType="NoticeDto">
+		update forj_notice
+		set notice_title=#{noticeTitle}, notice_content=#{noticeContent}, notice_date=now()
+		where notice_id=#{noticeId}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete
+		from forj_notice
+		where notice_id = #{noticeId}
+	</delete>
+	
+	<select id="selectSearchAll" parameterType="String" resultType="NoticeDto">
+		SELECT
+			notice_id as noticeId, notice_title as noticeTitle, notice_writer as noticeWriter, notice_date as noticeDate, notice_hit as noticeHit
+		FROM
+			forj_notice
+		WHERE
+			notice_title like concat('%', #{text}, '%')
+		ORDER BY
+			write_date desc
+	</select>
 
 </mapper>
