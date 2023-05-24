@@ -2,7 +2,7 @@
   <div>
     <h2 class="modifyTitle">내가 쓴 댓글</h2>
     <div class="modifyBox">
-      <div align="center">
+      <div align="center" style="overflow: scroll; overflow-x:hidden; height: 90%;">
         <table id="board_table" frame="void">
             <tr id="board_table_top"></tr>
             <tr class="board_table_line">
@@ -61,6 +61,7 @@ export default {
 <style scoped>
 .modifyBox {
   margin: 20px 0;
+  height: 90%;
 }
 a {
     text-decoration: none;

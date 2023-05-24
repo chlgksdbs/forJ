@@ -2,7 +2,7 @@
   <div>
     <h2 class="modifyTitle">내가 쓴 게시글</h2>
     <div class="modifyBox">
-      <div align="center">
+      <div align="center" style="overflow: scroll; overflow-x:hidden; height: 90%;">
           <table id="board_table" frame="void">
               <tr id="board_table_top"></tr>
               <tr class="board_table_line">
@@ -72,6 +72,7 @@ td {
 }
 .modifyBox {
     margin: 20px 0px;
+    height: 90%;
 }
 .board_table_line {
     border-bottom: 1px solid #dadada;

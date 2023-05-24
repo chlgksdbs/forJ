@@ -118,6 +118,7 @@ export default {
 }
 .rightBox{
   width: 800px;
+  height: 800px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 15px;
