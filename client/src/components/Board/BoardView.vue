@@ -39,12 +39,12 @@
           <viewer v-if="boardItem.content != null" :initialValue="boardItem.content"/>
         </p>
       </div>
-      <div class="detail_route">
+      <!-- <div class="detail_route">
         <div class="detail_route_img_box">
           <h2>여행 경로 보기</h2>
           <img src="@/assets/img/detail_map.png">
         </div>
-      </div>
+      </div> -->
       <div class="detail_btn_box">
         <div class="scrap_box">
           <img src="@/assets/img/icon_scrap.png" />
@@ -140,7 +140,7 @@ export default {
               this.imageUrl = reader.result;
             };
             reader.readAsDataURL(resp.data);
-            console.log(this.imageUrl);
+            // console.log(this.imageUrl);
           })
           .catch((error) => {
             console.log(error);
@@ -167,7 +167,7 @@ export default {
           this.commentImageUrl = reader.result;
         };
         reader.readAsDataURL(resp.data);
-        console.log(this.imageUrl);
+        // console.log(this.imageUrl);
       })
       .catch((error) => {
         console.log(error);
@@ -205,7 +205,7 @@ export default {
         "content": this.commentContent
       };
 
-      console.log(comment);
+      // console.log(comment);
 
       axios.post('http://localhost/comment', comment)
         .then(() => {
