@@ -19,7 +19,7 @@
                 </tr>
                 <tr class="board_table_line board_notice" v-for="(notice, idx) in notices" :key="idx">
                     <td><img src="@/assets/img/icon_flag.png" class="icon_flag" /></td>
-                    <td><router-link :to="'noticeview/' + notice.noticeId">{{ notice.noticeTitle }}</router-link></td>
+                    <td><router-link :to="'/board/noticeview/' + notice.noticeId">{{ notice.noticeTitle }}</router-link></td>
                     <td>{{ notice.noticeWriter }}</td>
                     <td>{{ dateFormat(notice.noticeDate) }}</td>
                     <td>{{ notice.noticeHit }}</td>
