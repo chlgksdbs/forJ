@@ -1,6 +1,7 @@
 package com.forj.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,11 @@ public class HeartService {
 	public void update(HeartDto heartDto) {
 		
 		heartMapper.update(heartDto);
+	}
+	
+	// 내가 좋아요 한 게시글 리스트 출력
+	public List<HeartDto> myList(String userId) {
+		
+		return heartMapper.selectMyList(userId);
 	}
 }

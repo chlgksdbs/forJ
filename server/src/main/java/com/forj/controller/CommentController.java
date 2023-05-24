@@ -53,4 +53,10 @@ public class CommentController {
 		boardService.writeComment(comment);
 	}
 	
+	// 내가 쓴 댓글 리스트 출력
+	@GetMapping("/mylist/{userId}")
+	public List<CommentDto> myList(@PathVariable("userId") String userId) {
+		return boardService.myCommentList(userId);
+	}
+	
 }

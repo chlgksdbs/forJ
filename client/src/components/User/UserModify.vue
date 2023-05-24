@@ -5,7 +5,9 @@
       <div>
         <span style="vertical-align: top;">프로필 사진</span>
         <span>
-          <img :src="imageUrl" class="imgmodify"/>
+          <div class="imgmodify">
+            <img :src="imageUrl"/>
+          </div>
           <input type="file" @change="onInputImage" ref="newProfileImg" />
         </span>
         <span><button @click="modifyImg">변경</button></span>
@@ -309,7 +311,15 @@ export default {
   background-color: #40A3FF;
 }
 .imgmodify{
-  width: 100px;
-  border-radius: 15px;
+  width: 80px;
+  height: 80px;
+  margin: 5px 20px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+.imgmodify img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

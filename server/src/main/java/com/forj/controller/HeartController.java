@@ -1,5 +1,7 @@
 package com.forj.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,5 +71,11 @@ public class HeartController {
 			heartService.insert(heartDto); // HEART_STATUS의 default값은 1
 			return 1;
 		}
+	}
+	
+	// 내가 좋아요 한 게시글 리스트 출력
+	@GetMapping("/mylist/{userId}")
+	public List<HeartDto> myList(@PathVariable("userId") String userId) {
+		return heartService.myList(userId);
 	}
 }

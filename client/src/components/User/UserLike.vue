@@ -19,4 +19,20 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+    text-decoration: none;
+    color: #A1A1A1;
+}
+th {
+    text-align: center;
+    padding: 5px;
+}
+td {
+    text-align: center;
+    padding: 5px;
+}
+.modifyBox {
+  margin: 20px 0;
+}
+</style>

@@ -1,5 +1,6 @@
 package com.forj.model.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -23,4 +24,7 @@ public interface HeartMapper {
 	
 	// 좋아요 수정 (0 -> 1 or 1 -> 0)
 	void update(HeartDto heartDto);
+	
+	// 내가 좋아요 한 게시글 리스트 출력
+	List<HeartDto> selectMyList(String userId);
 }

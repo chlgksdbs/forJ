@@ -5,8 +5,10 @@
       <!-- 카테고리를 이루는 왼쪽 화면 -->
       <div class="leftBox">
         <!-- User 프로필 사진 -->
-        <img src="@/assets/img/default_profile_img.png" class="profileBox" alt="profile" v-if="imageUrl == 0"/>
-        <img :src="imageUrl" class="profileBox" alt="profile" v-else/>
+        <div class="img_box">
+          <img src="@/assets/img/default_profile_img.png" alt="profile" v-if="imageUrl == 0"/>
+          <img :src="imageUrl" alt="profile" v-else/>
+        </div>
         <!-- 이름 -->
         <div style="color: blue; font-weight: bold;">{{ userInfo.userNickname }}</div>
         <!-- Category List -->
@@ -89,9 +91,18 @@ export default {
   border-radius: 15px;
   padding: 20px 0;
 }
-.profileBox{
-  border-radius: 15px;
-  width: 150px;
+.img_box {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+  border-radius: 70%;
+  overflow: hidden;
+}
+.img_box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  text-align: center;
 }
 .MyPgCateBox{
   width: 150px;

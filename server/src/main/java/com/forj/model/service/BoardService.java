@@ -83,4 +83,9 @@ public class BoardService {
 	public List<BoardDto> myList(String userId) {
 		return boardMapper.selectMyList(userId);
 	}
+	
+	// 내가 쓴 댓글 리스트 출력
+	public List<CommentDto> myCommentList(String userId) {
+		return commentMapper.selectMyList(userId);
+	}
 }
