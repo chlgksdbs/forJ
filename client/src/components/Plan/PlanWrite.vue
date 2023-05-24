@@ -92,7 +92,7 @@ export default {
       ],
       clickCount: 0,
       map: null,
-      marker: null,
+      markers: [],
       categoryTitle: '',
       contentTypeId: 0,
       itemList: [],
@@ -312,6 +312,9 @@ export default {
               'longitude': item.addLongitude,
         }
           this.selectItems.push(selectItem);
+
+          // 지도에 마커를 추가하는 메서드 호출
+          this.addMarker(selectItem.latitude, selectItem.longitude);
         //   console.log(this.selectItems);
       },
       // PlanCheck페이지에서 선택한 여행일자와 여행지 정보를 알기위해 부모로 보내는 메서드
@@ -335,28 +338,40 @@ export default {
     //       this.$emit("AreaItems", this.selectItems);
     //       console.log(this.selectItems);
     //   }
+
+    // TODO: 선택 목록에 장소가 추가됨에 따라, 지도에 마커를 추가하는 메서드 구현
+      addMarker(latitude, longitude) {
+        // 매개변수로 위도, 경도 값
+
+        var naver = window.naver; // window 객체의 naver를 변수로서 선언
+          const marker = new naver.maps.Marker({
+              position: new naver.maps.LatLng(latitude, longitude),
+              map: this.map,
+          });
+          this.markers.push(marker); // markers 배열에 marker 값 추가
+    },
   },
   mounted() {
     var naver = window.naver; // window 객체의 naver를 변수로서 선언
-    var mapDiv = this.$refs.map;
+    var mapDiv = this.$refs.map; // ref값이 map인 태그를 참조
 
-    // Naver 그린팩토리를 중심점으로 하는 옵션
+    // 서울 시청을 중심점으로 하는 옵션
     var mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        center: new naver.maps.LatLng(37.5666805, 126.9784147),
         zoom: 14,
     };
 
     this.map = new naver.maps.Map(mapDiv, mapOptions);
-    this.marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(37.3595704, 127.105399),
-        map: this.map,
-    });
+    // this.marker = new naver.maps.Marker({
+    //     position: new naver.maps.LatLng(37.3595704, 127.105399),
+    //     map: this.map,
+    // });
 
-    // 지도 클릭 이벤트 핸들러
-    naver.maps.Event.addListener(this.map, 'click', (e) => {
-        const latlng = new naver.maps.LatLng(e.coord.y, e.coord.x);
-        this.marker.setPosition(latlng); // 마커 위치 변경
-    });
+    // // 지도 클릭 이벤트 핸들러
+    // naver.maps.Event.addListener(this.map, 'click', (e) => {
+    //     const latlng = new naver.maps.LatLng(e.coord.y, e.coord.x);
+    //     this.marker.setPosition(latlng); // 마커 위치 변경
+    // });
   },
 };
 </script>
