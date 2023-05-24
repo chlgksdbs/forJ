@@ -363,12 +363,8 @@ export default {
               position: new naver.maps.LatLng(latitude, longitude),
               map: this.map,
           });
-          this.markers.push({ contentId, marker}); // markers 배열에 marker 값 추가
+          this.markers.push({ contentId, marker }); // markers 배열에 marker 값 추가
       },
-    // TODO: 선택 목록에 장소가 제거됨에 따라, 지도에 마커를 제거하는 메서드 구현
-      removeMarker() {
-        
-    },
   },
   mounted() {
     var naver = window.naver; // window 객체의 naver를 변수로서 선언
@@ -376,8 +372,13 @@ export default {
 
     // 서울 시청을 중심점으로 하는 옵션
     var mapOptions = {
-        center: new naver.maps.LatLng(37.5666805, 126.9784147),
-        zoom: 14,
+        center: new naver.maps.LatLng(37.5666805, 126.9784147), // 지도의 초기 중심 좌표
+        zoom: 13, // 지도의 초기 zoom level
+        zoomControl: true, // zoom 컨트롤의 표시 여부
+        zoomControlOptions: { // zoom 컨트롤의 옵션
+            position: naver.maps.Position.TOP_RIGHT,
+        },
+        mapTypeControl: true, // 지도 유형 컨트롤의 표시 여부
     };
 
     this.map = new naver.maps.Map(mapDiv, mapOptions);
