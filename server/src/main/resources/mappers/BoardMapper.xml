@@ -3,10 +3,16 @@
 <mapper namespace="com.forj.model.repository.BoardMapper">
 	
 	<select id="selectAll" resultType="BoardDto">
-		select board_id as boardId, title, fu.user_nickname as writer, writer as writerId, write_date as writeDate, hit
-		from forj_board as fb join forj_user as fu
-		on fb.writer = fu.user_id
-		order by write_date desc
+		select 
+			board_id as boardId, title, fu.user_nickname as writer, writer as writerId, write_date as writeDate, hit
+		from 
+			forj_board as fb join forj_user as fu
+		on 
+			fb.writer = fu.user_id
+		order by 
+			write_date desc
+		limit
+			#{startRow}, 10;
 	</select>
 	
 	<insert id="insert" parameterType="BoardDto">
@@ -59,6 +65,13 @@
 			forj_board
 		WHERE
 			writer=#{userId}
+	</select>
+	
+	<select id="selectTotalCount" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			forj_board		
 	</select>
 	
 </mapper>

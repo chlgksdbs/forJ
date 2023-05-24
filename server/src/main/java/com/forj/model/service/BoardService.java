@@ -1,6 +1,8 @@
 package com.forj.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +21,45 @@ public class BoardService {
 	@Autowired
 	private CommentMapper commentMapper;
 	
-	// 게시글 전체 조회
-	public List<BoardDto> boardList(){
-		return boardMapper.selectAll();
+//	// 게시글 전체 조회
+//	public List<BoardDto> boardList(){
+//		return boardMapper.selectAll();
+//	}
+	
+	// 페이지 네비게이션을 통한 전체 조회
+	public Map<String, Object> boardList(int curPage) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// (1) 현재 페이지 정보 삽입
+		map.put("curPage", curPage);
+		
+		int startRange = (curPage - 1) / 10 * 10 + 1; // 페이지 시작 범위 계산
+		// (2) 페이지 시작 범위 정보 삽입
+		map.put("startRange", startRange);
+		
+		int totalCount = boardMapper.selectTotalCount(); // 총 게시글의 수 계산
+		int totalPage = totalCount / 10; // 총 페이지의 수 계산
+		if (totalPage % 10 > 0) { // 나머지 게시글이 존재하는 경우, 페이지 수 증가
+			totalPage++;
+		}
+		// (3) 총 페이지 수 정보 삽입
+		map.put("totalPage", totalPage);
+		
+		int endRange = startRange + 9; // 페이지 마지막 범위 계산 (페이지 범위 10개로 세팅)
+		if (endRange > totalPage) { // 페이지 마지막 범위가 총 페이지 수보다 많은 경우, 갱신
+			endRange = totalPage;
+		}
+		// (4) 페이지 마지막 범위 정보 삽입
+		map.put("endRange", endRange);
+		
+		// 현재 페이지에서 보여질 게시글의 시작 범위 계산
+		int startRow = (curPage - 1) * 10; // limit 0, 10 || limit 10, 10 ...
+		List<BoardDto> boardList = boardMapper.selectAll(startRow);
+		// (5) 게시글 10개에 대한 정보 삽입
+		map.put("boardList", boardList);
+		
+		return map;
 	}
 	
 	// 글 작성

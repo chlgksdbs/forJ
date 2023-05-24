@@ -51,9 +51,4 @@ public class HeartService {
 		heartMapper.update(heartDto);
 	}
 	
-	// 내가 좋아요 한 게시글 리스트 출력
-	public List<HeartDto> myList(String userId) {
-		
-		return heartMapper.selectMyList(userId);
-	}
 }

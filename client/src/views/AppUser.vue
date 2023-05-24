@@ -16,9 +16,9 @@
           <div>
             <h3>회원정보</h3>
             <router-link to="/mypage/modify" class="MyPgcateList" >회원정보 수정</router-link><br/>
-            <router-link to="/mypage/cart" class="MyPgcateList" >My 장바구니</router-link><br/>
+            <router-link to="/mypage/calendar" class="MyPgcateList" >나의 여행일정</router-link><br/>
+            <router-link to="/mypage/cart" class="MyPgcateList" >나의 장바구니</router-link><br/>
             <router-link to="/mypage/qna" class="MyPgcateList" >1:1 문의</router-link><br/>
-            <router-link to="/mypage/like" class="MyPgcateList" >좋아요</router-link><br/>
           </div>
           <div style="border-top: 1px solid #ddd; margin-top: 10px;">
             <h3>커뮤니티</h3>

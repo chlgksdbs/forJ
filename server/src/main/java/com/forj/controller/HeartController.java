@@ -72,10 +72,5 @@ public class HeartController {
 			return 1;
 		}
 	}
-	
-	// 내가 좋아요 한 게시글 리스트 출력
-	@GetMapping("/mylist/{userId}")
-	public List<HeartDto> myList(@PathVariable("userId") String userId) {
-		return heartService.myList(userId);
-	}
+
 }
