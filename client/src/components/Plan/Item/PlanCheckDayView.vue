@@ -1,17 +1,20 @@
 <template>
   <div>
-    <div>출력</div>
+    <div></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PlanCheckDayView',
+  name: "PlanCheckDayView",
   components: {},
   data() {
     return {
-      message: '',
+      message: "",
     };
+  },
+  props: {
+    selectAreaItems: Array,
   },
   created() {},
   methods: {},
