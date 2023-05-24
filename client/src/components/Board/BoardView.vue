@@ -132,6 +132,9 @@ export default {
           .then((resp) => {
             // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
 
+            // 파일의 크기가 0인 경우(backend에서 넘어온 데이터가 없는 경우), 종료
+          if (resp.data.size == 0) return;
+
             const reader = new FileReader();
             reader.onloadend = () => {
               this.imageUrl = reader.result;
@@ -155,6 +158,9 @@ export default {
     axios.get('http://localhost/user/profileimg/' + this.userInfo.userId, { responseType: 'blob'})
       .then((resp) => {
         // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
+
+        // 파일의 크기가 0인 경우(backend에서 넘어온 데이터가 없는 경우), 종료
+        if (resp.data.size == 0) return;
 
         const reader = new FileReader();
         reader.onloadend = () => {

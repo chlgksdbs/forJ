@@ -53,18 +53,18 @@ export default {
   },
   created() {
     // TODO: 프로필 이미지 변경 후, 이미지를 띄우기
-    axios.get('http://localhost/user/profileimg/' + this.userInfo.userId, { responseType: 'blob'})
+    axios.get('http://localhost/user/profileimg/' + this.userInfo.userId, { responseType: 'blob' })
       .then((resp) => {
         // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
+
+        // 파일의 크기가 0인 경우(backend에서 넘어온 데이터가 없는 경우), 종료
+        if (resp.data.size == 0) return;
 
         const reader = new FileReader();
         reader.onloadend = () => {
           this.imageUrl = reader.result;
         };
         reader.readAsDataURL(resp.data);
-      })
-      .catch(() => {
-        // console.log(error);
       });
   },
   methods: {
