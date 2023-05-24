@@ -1,25 +1,27 @@
 <template>
   <div id="PlanSelectList">
-      <div class="img_box">
-          <div v-if="img">
-              <img class="img_box_img" :src="img">
-          </div>
-          <div v-else>
-              <img class="img_box_no_img" src="@/assets/img/no-photos.png">
-          </div>
+    <div class="img_box">
+      <div v-if="img">
+        <img class="img_box_img" :src="img" />
       </div>
-      <div class="text_box">
-          <h5>{{ title }}</h5>
+      <div v-else>
+        <img class="img_box_no_img" src="@/assets/img/no-photos.png" />
       </div>
-      <div class="btn_box">
-          <div class="material-symbols-outlined" style="cursor: pointer;" @click="setCost">monetization_on</div>
+    </div>
+    <div class="text_box">
+      <h5>{{ title }}</h5>
+    </div>
+    <div class="btn_box">
+      <div class="material-symbols-outlined" style="cursor: pointer" @click="setCost">
+        monetization_on
       </div>
-      <div ref="PlanCost" class="PlanCost">
-        <div style="font-size: 11px; text-align: left; margin: 5% 10% 2%;">예상경비</div>
-        <input type="text" class="cost_input" v-model="cost" placeholder="예상경비를 작성하세요."/>원
-        <div class="inputEnd" @click="storeCost">완료</div>
-      </div>
-      <!-- <div ref="PlanTime" class="PlanTime">
+    </div>
+    <div ref="PlanCost" class="PlanCost">
+      <div style="font-size: 11px; text-align: left; margin: 5% 10% 2%">예상경비</div>
+      <input type="text" class="cost_input" v-model="cost" placeholder="예상경비를 작성하세요." />원
+      <div class="inputEnd" @click="storeCost">완료</div>
+    </div>
+    <!-- <div ref="PlanTime" class="PlanTime">
         <div style="font-size: 11px; text-align: left; margin: 15px 15px 5px;">예상시간</div>
         <input type="text" class="time_input" v-model="time" placeholder="예상소요시간를 작성하세요."/>
         <div class="inputEnd" @click="storeTime">완료</div>
@@ -27,19 +29,18 @@
   </div>
 </template>
 <script>
-
 export default {
-  name: 'PlanSelectList',
+  name: "PlanSelectList",
   props: {
-      img: String,  
-      title: String,
-      contentId: Number,
+    img: String,
+    title: String,
+    contentId: Number,
   },
   data() {
     return {
       cost: 0,
       // costList: [],
-    }
+    };
   },
   methods: {
     //   // 삭제하고 싶은 장소의 title 값을 부모로 보내는 메서드
@@ -48,13 +49,13 @@ export default {
     // },
     // 예상 경비 작성 블럭을 보이게하는 메서드
     setCost() {
-      this.$refs.PlanCost.style.display = 'block';
+      this.$refs.PlanCost.style.display = "block";
     },
-    // // 각 장소별 예상 시간을 작성 및 저장하는 메서드 
+    // // 각 장소별 예상 시간을 작성 및 저장하는 메서드
     // setTime() {
     //   document.querySelector("#PlanTime").style.display = 'block';
     // },
-    // 각 장소별 예상 경비를 작성 및 저장하는 메서드 
+    // 각 장소별 예상 경비를 작성 및 저장하는 메서드
     storeCost() {
       // 중복 방지. 이미 있는 contentId면 값만 변경
       // let flag = 0;
@@ -75,17 +76,17 @@ export default {
       // console.log(this.costList);
 
       let list = {
-        'contentId': this.contentId,
-        'cost': this.cost,
-      }
+        contentId: this.contentId,
+        cost: this.cost,
+      };
       // 부모한테 보내야됨
       this.$emit("storeCost", list);
 
       // 다시 안보이게
-      this.$refs.PlanCost.style.display = 'none';
+      this.$refs.PlanCost.style.display = "none";
     },
-  }
-}
+  },
+};
 </script>
 <style scoped>
 #PlanSelectList {
@@ -97,7 +98,7 @@ export default {
   display: flex;
   align-items: center;
 }
-.PlanCost{
+.PlanCost {
   display: none;
   position: absolute;
   margin: 5px auto;
@@ -107,12 +108,12 @@ export default {
   align-items: center;
   background-color: #f5f5f5;
 }
-.cost_input{
+.cost_input {
   width: 70%;
   height: 15px;
   margin: auto;
 }
-.inputEnd{
+.inputEnd {
   /* width: 27px; */
   /* height: 27px; */
   border: 2px solid #6ab2ed;
@@ -122,7 +123,7 @@ export default {
   text-align: right;
   /* margin-right: 10px 15px 5px; */
   background-color: #6ab2ed;
-  color: #fFF;
+  color: #fff;
   font-size: 70%;
   margin: 2% 23% 2% 77%;
   padding: 1%;
@@ -145,30 +146,30 @@ export default {
   margin: auto;
 } */
 .img_box {
-position: relative;
+  position: relative;
   width: 50%;
-  height:80px;
+  height: 80px;
 }
-.img_box_img{
-position: absolute;
-top: 0;
-left: 0;
-height: 100%;
-width: 100%;
+.img_box_img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
-.img_box_no_img{
-position: absolute;
-top: 0;
-left: 0;
-height: 45%;
-width: 45%;
-padding: 23%;
+.img_box_no_img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 45%;
+  width: 45%;
+  padding: 23%;
 }
 .text_box {
   width: 40%;
   margin: auto 5px auto 5px;
 }
-.material-symbols-outlined{
+.material-symbols-outlined {
   margin: 5px 0;
 }
 .btn_box {
