@@ -189,18 +189,33 @@ export default {
     },
     // 선택 목록에 있는 the-select-list-card를 전체 삭제하는 메서드
     deleteAllCard() {
-        this.selectItems.splice(0);
-        alert("선택 장소가 모두 삭제되었습니다.");
+        if (confirm("선택 목록을 모두 제거하시겠습니까?")) {
+            this.selectItems.splice(0);
+    
+            // 지도에서 마커를 제거
+            for (let i = 0; i < this.markers.length; i++) {
+                this.markers[i].marker.setMap(null);
+            }
+            this.markers.splice(0);
+        }
       },
       // 선택 목록에 있는 the-select-list-card를 개별 삭제하는 메서드
-      deleteOneCard(delTitle) {
+      deleteOneCard(delContentId, delTitle) {
           for (let i = 0; i < this.selectItems.length; i++){
-              if (this.selectItems[i].title == delTitle) {
+              if (this.selectItems[i].contentId == delContentId) {
+                // 제거하려는 contentId와 동일한 marker 제거
+                  for (let j = 0; j < this.markers.length; j++) {
+                      if (delContentId == this.markers[j].contentId) {
+                          this.markers[j].marker.setMap(null);
+                          break;
+                    }
+                  }
                   this.selectItems.splice(i, 1);
                   i--;
+                  alert(delTitle + "이 삭제되었습니다.");
+                  break;
             }
           }
-          alert(delTitle + "이 삭제되었습니다.");
       },
       // 찾을 contentTypeId 결정
     setContentTypeId(typeid) {
@@ -314,7 +329,7 @@ export default {
           this.selectItems.push(selectItem);
 
           // 지도에 마커를 추가하는 메서드 호출
-          this.addMarker(selectItem.latitude, selectItem.longitude);
+          this.addMarker(selectItem.contentId, selectItem.latitude, selectItem.longitude);
         //   console.log(this.selectItems);
       },
       // PlanCheck페이지에서 선택한 여행일자와 여행지 정보를 알기위해 부모로 보내는 메서드
@@ -340,7 +355,7 @@ export default {
     //   }
 
     // TODO: 선택 목록에 장소가 추가됨에 따라, 지도에 마커를 추가하는 메서드 구현
-      addMarker(latitude, longitude) {
+      addMarker(contentId, latitude, longitude) {
         // 매개변수로 위도, 경도 값
 
         var naver = window.naver; // window 객체의 naver를 변수로서 선언
@@ -348,7 +363,11 @@ export default {
               position: new naver.maps.LatLng(latitude, longitude),
               map: this.map,
           });
-          this.markers.push(marker); // markers 배열에 marker 값 추가
+          this.markers.push({ contentId, marker}); // markers 배열에 marker 값 추가
+      },
+    // TODO: 선택 목록에 장소가 제거됨에 따라, 지도에 마커를 제거하는 메서드 구현
+      removeMarker() {
+        
     },
   },
   mounted() {
