@@ -31,6 +31,8 @@ export default {
     img: String,
     title: String,
     contentId: Number,
+    latitude: String,
+    longitude: String,
   },
   created() {},
   methods: {
@@ -40,6 +42,8 @@ export default {
         'addImg': this.img,
         'addTitle': this.title,
         'addContentId': this.contentId,
+        'latitude': this.latitude,
+        'longitude': this.longitude,
       }
       // console.log(addInfo.addImg);
       // console.log(addInfo.addTitle);

@@ -227,11 +227,11 @@ public class UserController {
 		try {
 			UserDto userDto = userService.getImg(userId);
 			
-//		System.out.println(userDto.getUserProfileimg()); // 디버깅
+//			System.out.println(userDto.getUserProfileimg()); // 디버깅
 			
 			// (1) InputStream으로 image 파일을 읽어오기
-			InputStream inputStream = new FileInputStream("C:\\forj\\" + userDto.getUserProfileimg());
-//		InputStream inputStream = new FileInputStream("/Users/hanyoon/Desktop/upload/" + userDto.getUserProfileimg());
+//			InputStream inputStream = new FileInputStream("C:\\forj\\" + userDto.getUserProfileimg());
+			InputStream inputStream = new FileInputStream("/Users/hanyoon/Desktop/upload/" + userDto.getUserProfileimg());
 			
 			// (2) 읽어온 파일을 byte 형태로 변환
 			byte[] imageByteArray = IOUtils.toByteArray(inputStream);

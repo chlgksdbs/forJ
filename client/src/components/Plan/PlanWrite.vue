@@ -51,7 +51,7 @@
         </div>
         <div v-if="itemList.length">
             <div v-for="item in itemList" :key="item.contentId" class="plan_right_card">
-                <plan-search-list :img="item.areaImg" :title="item.title" :contentId="item.contentId" @addArea="setSelectList"></plan-search-list>
+                <plan-search-list :img="item.areaImg" :title="item.title" :contentId="item.contentId" :latitude="item.latitude" :longitude="item.longitude" @addArea="setSelectList"></plan-search-list>
             </div>
         </div>
         <div v-else class="phrase">
@@ -295,9 +295,11 @@ export default {
               'contentId': item.addContentId,
               'title': item.addTitle,
               'img': item.addImg,
+              'latitude': item.latitude,
+              'longitude': item.longitude,
         }
           this.selectItems.push(selectItem);
-        //   console.log(this.selectItems);
+          console.log(this.selectItems);
       },
       // PlanCheck페이지에서 선택한 여행일자와 여행지 정보를 알기위해 부모로 보내는 메서드
       sendSelectInfo() {
