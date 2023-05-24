@@ -224,20 +224,26 @@ public class UserController {
 	@GetMapping(value = "/profileimg/{userId}", produces = { MediaType.IMAGE_JPEG_VALUE })
 	public @ResponseBody byte[] getImg(@PathVariable("userId") String userId) throws IOException {
 
-		UserDto userDto = userService.getImg(userId);
-		
+		try {
+			UserDto userDto = userService.getImg(userId);
+			
 //		System.out.println(userDto.getUserProfileimg()); // 디버깅
-
-		// (1) InputStream으로 image 파일을 읽어오기
-		InputStream inputStream = new FileInputStream("C:\\forj\\" + userDto.getUserProfileimg());
+			
+			// (1) InputStream으로 image 파일을 읽어오기
+			InputStream inputStream = new FileInputStream("C:\\forj\\" + userDto.getUserProfileimg());
 //		InputStream inputStream = new FileInputStream("/Users/hanyoon/Desktop/upload/" + userDto.getUserProfileimg());
-
-		// (2) 읽어온 파일을 byte 형태로 변환
-		byte[] imageByteArray = IOUtils.toByteArray(inputStream);
-		inputStream.close();
-
-		// 프론트에서 프로필 이미지를 byte 배열로 전달받아야 함
-		return imageByteArray;
+			
+			// (2) 읽어온 파일을 byte 형태로 변환
+			byte[] imageByteArray = IOUtils.toByteArray(inputStream);
+			inputStream.close();
+			
+			// 프론트에서 프로필 이미지를 byte 배열로 전달받아야 함
+			return imageByteArray;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// API 9. 이메일을 입력받아, 사용자의 아이디 정보 받아오기
