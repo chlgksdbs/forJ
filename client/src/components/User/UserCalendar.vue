@@ -2,7 +2,9 @@
   <div>
     <h2 class="modifyTitle">나의 여행일정</h2>
     <div class="modifyBox">
-      <FullCalendar :options="calendarOptions"></FullCalendar>
+      <FullCalendar 
+      :options="calendarOptions"
+      />
     </div>
   </div>
 </template>
@@ -21,7 +23,18 @@ export default {
     return {
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
-        initialView: 'dayGridMonth'
+        initialView: 'dayGridMonth',
+        events: [
+          {
+            title: '전주 여행',
+            start: '2023-05-21',
+          },
+          {
+            title: '제주 여행',
+            start: '2023-05-29',
+            end: '2023-06-01',
+          },
+        ],
       }
     };
   },
