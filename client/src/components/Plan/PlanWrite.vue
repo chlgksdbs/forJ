@@ -291,15 +291,28 @@ export default {
       },
       // 서치목록에서 추가 클릭한 장소를 선택목록에 추가하는 메서드
       setSelectList(item) {
+
+        // 추가된 장소가 기존에 선택목록에 존재하는 지 중복 검사
+          for (let i = 0; i < this.selectItems.length; i++) {
+              if (this.selectItems[i].contentId == item.addContentId) {
+                  if (!confirm('이미 존재하는 장소입니다! 추가하시겠습니까?')) {
+                      return;
+                }
+                  else {
+                      break;
+                }
+            }
+          }
+
           let selectItem = {
               'contentId': item.addContentId,
               'title': item.addTitle,
               'img': item.addImg,
-              'latitude': item.latitude,
-              'longitude': item.longitude,
+              'latitude': item.addLatitude,
+              'longitude': item.addLongitude,
         }
           this.selectItems.push(selectItem);
-          console.log(this.selectItems);
+        //   console.log(this.selectItems);
       },
       // PlanCheck페이지에서 선택한 여행일자와 여행지 정보를 알기위해 부모로 보내는 메서드
       sendSelectInfo() {

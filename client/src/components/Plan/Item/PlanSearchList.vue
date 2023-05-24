@@ -42,8 +42,8 @@ export default {
         'addImg': this.img,
         'addTitle': this.title,
         'addContentId': this.contentId,
-        'latitude': this.latitude,
-        'longitude': this.longitude,
+        'addLatitude': this.latitude,
+        'addLongitude': this.longitude,
       }
       // console.log(addInfo.addImg);
       // console.log(addInfo.addTitle);
