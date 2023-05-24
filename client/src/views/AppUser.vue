@@ -5,8 +5,10 @@
       <!-- 카테고리를 이루는 왼쪽 화면 -->
       <div class="leftBox">
         <!-- User 프로필 사진 -->
-        <img src="@/assets/img/default_profile_img.png" class="profileBox" alt="profile" v-if="imageUrl == 0"/>
-        <img :src="imageUrl" class="profileBox" alt="profile" v-else/>
+        <div class="img_box">
+          <img src="@/assets/img/default_profile_img.png" alt="profile" v-if="imageUrl == 0"/>
+          <img :src="imageUrl" alt="profile" v-else/>
+        </div>
         <!-- 이름 -->
         <div style="color: blue; font-weight: bold;">{{ userInfo.userNickname }}</div>
         <!-- Category List -->
@@ -14,9 +16,9 @@
           <div>
             <h3>회원정보</h3>
             <router-link to="/mypage/modify" class="MyPgcateList" >회원정보 수정</router-link><br/>
-            <router-link to="/mypage/cart" class="MyPgcateList" >My 장바구니</router-link><br/>
+            <router-link to="/mypage/calendar" class="MyPgcateList" >나의 여행일정</router-link><br/>
+            <router-link to="/mypage/cart" class="MyPgcateList" >나의 장바구니</router-link><br/>
             <router-link to="/mypage/qna" class="MyPgcateList" >1:1 문의</router-link><br/>
-            <router-link to="/mypage/like" class="MyPgcateList" >좋아요</router-link><br/>
           </div>
           <div style="border-top: 1px solid #ddd; margin-top: 10px;">
             <h3>커뮤니티</h3>
@@ -60,20 +62,9 @@ export default {
           this.imageUrl = reader.result;
         };
         reader.readAsDataURL(resp.data);
-        // Blob 데이터로 이미지 URL 생성 후 표시하기
-        // (1) https://aljjabaegi.tistory.com/443
-        // (2) https://kyounghwan01.github.io/blog/JS/JSbasic/Blob-url/
-
-        // https://okky.kr/articles/245037 -> 이걸로 도전...
-
-        // let blob = new Blob([new Uint8Array(resp.data)], { type: 'image/jpg' });
-
-        // const imageURL = window.URL.createObjectURL(blob);
-        // this.profileImg = imageURL;
-        // console.log(this.imageUrl);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   },
   methods: {
@@ -90,7 +81,7 @@ export default {
   /* flex-direction: row; */
   /* flex-wrap: wrap; */
   justify-content: center;
-  width: 1200px;
+  width: 100%;
 }
 .leftBox{
   width: 220px;
@@ -100,9 +91,18 @@ export default {
   border-radius: 15px;
   padding: 20px 0;
 }
-.profileBox{
-  border-radius: 15px;
-  width: 150px;
+.img_box {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+  border-radius: 70%;
+  overflow: hidden;
+}
+.img_box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  text-align: center;
 }
 .MyPgCateBox{
   width: 150px;
@@ -118,6 +118,7 @@ export default {
 }
 .rightBox{
   width: 800px;
+  height: 800px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 15px;

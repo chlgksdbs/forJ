@@ -229,8 +229,8 @@ public class UserController {
 //		System.out.println(userDto.getUserProfileimg()); // 디버깅
 
 		// (1) InputStream으로 image 파일을 읽어오기
-//		InputStream inputStream = new FileInputStream("C:\\forj\\" + userDto.getUserProfileimg());
-		InputStream inputStream = new FileInputStream("/Users/hanyoon/Desktop/upload/" + userDto.getUserProfileimg());
+		InputStream inputStream = new FileInputStream("C:\\forj\\" + userDto.getUserProfileimg());
+//		InputStream inputStream = new FileInputStream("/Users/hanyoon/Desktop/upload/" + userDto.getUserProfileimg());
 
 		// (2) 읽어온 파일을 byte 형태로 변환
 		byte[] imageByteArray = IOUtils.toByteArray(inputStream);
@@ -271,5 +271,42 @@ public class UserController {
 		else {
 			return mailSendService.sendMail(userEmail);
 		}
+	}
+	
+	// API 12. 사용자 닉네임 변경 API
+	@PutMapping(value = "/modify/nickname")
+	public void modifyNickname(@RequestBody UserDto userDto) {
+		
+		userService.modifyNickname(userDto);
+	}
+	
+	// API 13. 사용자 비밀번호 체크 API
+	@PostMapping(value = "/check/pw")
+	public String checkPw(@RequestBody UserDto userDto) {
+		
+		// DB에 아이디와 비밀번호가 일치하는 사용자가 있는 지 체크
+		UserDto userInfo = userService.checkPw(userDto);
+		
+		// 존재하지 않는 사용자인 경우
+		if (userInfo == null) {
+			return "error";
+		}
+		else {
+			return "success";
+		}
+	}
+	
+	// API 14. 사용자 비밀번호 변경 API
+	@PutMapping(value = "/modify/pw")
+	public void modifyPw(@RequestBody UserDto userDto) {
+		
+		userService.modifyPw(userDto);
+	}
+	
+	// API 15. 사용자 이메일 변경 API
+	@PutMapping(value = "/modify/email")
+	public void modifyEmail(@RequestBody UserDto userDto) {
+		
+		userService.modifyEmail(userDto);
 	}
 }

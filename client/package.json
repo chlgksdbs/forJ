@@ -8,6 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.7",
+    "@fullcalendar/daygrid": "^6.1.7",
+    "@fullcalendar/interaction": "^6.1.7",
+    "@fullcalendar/vue": "^6.1.7",
     "@toast-ui/editor": "^3.2.2",
     "@toast-ui/vue-editor": "^3.2.3",
     "axios": "^1.4.0",

@@ -1,14 +1,19 @@
 <template>
   <div>
-    <h2 class="modifyTitle">My 장바구니</h2>
+    <h2 class="modifyTitle">나의 장바구니</h2>
     <div class="modifyBox">
+      <the-construction></the-construction>
     </div>
   </div>
 </template>
 
 <script>
+import TheConstruction from "../TheConstruction.vue";
+
 export default {
-  components: {},
+  components: {
+    TheConstruction,
+  },
   data() {
     return {
       message: '',
@@ -19,4 +24,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.modifyBox{
+  margin: 20px 0;
+}
+</style>

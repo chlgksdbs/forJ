@@ -4,6 +4,7 @@ public class CommentDto {
 
 	private int commentId;
 	private int boardId;
+	private String boardTitle;
 	private String writer;
 	private String userId;
 	private String content;
@@ -27,6 +28,14 @@ public class CommentDto {
 
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
+	}
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
 
 	public String getWriter() {

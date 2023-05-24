@@ -2,6 +2,7 @@ package com.forj.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,10 +30,23 @@ public class BoardController {
 	@Autowired
 	private NoticeService noticeService;
 	
-	// 전체 조회
-	@GetMapping("/list")
-	public List<BoardDto> boardList() {
-		return boardService.boardList();
+//	// 전체 조회
+//	@GetMapping("/list")
+//	public List<BoardDto> boardList() {
+//		return boardService.boardList();
+//	}
+	
+	// 페이지 네비게이션을 통한 전체 조회
+	@GetMapping("/list/{page}")
+	public Map<String, Object> boardList(@PathVariable("page") String page) {
+		
+		int curPage = 1;
+		
+		if (page != null && page.length() > 0) {
+			curPage = Integer.parseInt(page);
+		}
+		
+		return boardService.boardList(curPage);
 	}
 	
 	// 글 작성
@@ -73,6 +87,12 @@ public class BoardController {
 	@GetMapping("/search/{text}")
 	public List<BoardDto> searchList(@PathVariable("text") String text) {
 		return boardService.searchList(text);
+	}
+	
+	// 내가 쓴 게시글 리스트 출력
+	@GetMapping("/mylist/{userId}")
+	public List<BoardDto> myList(@PathVariable("userId") String userId) {
+		return boardService.myList(userId);
 	}
 	
 }
