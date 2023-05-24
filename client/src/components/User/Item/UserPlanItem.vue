@@ -1,7 +1,8 @@
 <template>
   <div id="UserPlanItem">
     <div class="item_wrap">
-      <table class="item_table">
+      <!-- (1) 여행 계획 전체 보기 -->
+      <table class="item_table" v-if="flag">
         <colgroup>
           <col style="width: 25%">
           <col style="width: 75%">
@@ -20,7 +21,30 @@
         </tr>
         <tr>
           <td>여행 계획</td>
-          <td><button class="item_detail_btn">상세보기</button></td>
+          <td><button class="item_detail_btn" @click="flag = !flag">상세보기</button></td>
+        </tr>
+      </table>
+      <!-- (2) 여행 계획 상세 보기 -->
+      <table class="item_table" v-else>
+        <colgroup>
+          <col style="width: 25%">
+          <col style="width: 75%">
+        </colgroup>
+        <tr class="item_title">
+          <td>여행 일정</td>
+          <td>{{ planItem.date }}</td>
+        </tr>
+        <tr>
+          <td>여행 장소</td>
+          <td>{{ planItem.location }}</td>
+        </tr>
+        <tr>
+          <td>여행 경비</td>
+          <td>{{ planItem.budget }}</td>
+        </tr>
+        <tr>
+          <td>여행 계획</td>
+          <td><button class="item_detail_btn" @click="flag = !flag">돌아가기</button></td>
         </tr>
       </table>
     </div>
@@ -33,7 +57,7 @@ export default {
   components: {},
   data() {
     return {
-      message: '',
+      flag: true, // 여행 계획 상세보기 페이지 view에 대한 변수 값
     };
   },
   props: {

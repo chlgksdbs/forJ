@@ -51,7 +51,7 @@
         </div>
         <div v-if="itemList.length">
             <div v-for="item in itemList" :key="item.contentId" class="plan_right_card">
-                <plan-search-list :img="item.areaImg" :title="item.title" :contentId="item.contentId" @addArea="setSelectList"></plan-search-list>
+                <plan-search-list :img="item.areaImg" :title="item.title" :contentId="item.contentId" :latitude="item.latitude" :longitude="item.longitude" @addArea="setSelectList"></plan-search-list>
             </div>
         </div>
         <div v-else class="phrase">
@@ -92,7 +92,7 @@ export default {
       ],
       clickCount: 0,
       map: null,
-      marker: null,
+      markers: [],
       categoryTitle: '',
       contentTypeId: 0,
       itemList: [],
@@ -189,18 +189,33 @@ export default {
     },
     // 선택 목록에 있는 the-select-list-card를 전체 삭제하는 메서드
     deleteAllCard() {
-        this.selectItems.splice(0);
-        alert("선택 장소가 모두 삭제되었습니다.");
+        if (confirm("선택 목록을 모두 제거하시겠습니까?")) {
+            this.selectItems.splice(0);
+    
+            // 지도에서 마커를 제거
+            for (let i = 0; i < this.markers.length; i++) {
+                this.markers[i].marker.setMap(null);
+            }
+            this.markers.splice(0);
+        }
       },
       // 선택 목록에 있는 the-select-list-card를 개별 삭제하는 메서드
-      deleteOneCard(delTitle) {
+      deleteOneCard(delContentId, delTitle) {
           for (let i = 0; i < this.selectItems.length; i++){
-              if (this.selectItems[i].title == delTitle) {
+              if (this.selectItems[i].contentId == delContentId) {
+                // 제거하려는 contentId와 동일한 marker 제거
+                  for (let j = 0; j < this.markers.length; j++) {
+                      if (delContentId == this.markers[j].contentId) {
+                          this.markers[j].marker.setMap(null);
+                          break;
+                    }
+                  }
                   this.selectItems.splice(i, 1);
                   i--;
+                  alert(delTitle + "이 삭제되었습니다.");
+                  break;
             }
           }
-          alert(delTitle + "이 삭제되었습니다.");
       },
       // 찾을 contentTypeId 결정
     setContentTypeId(typeid) {
@@ -291,12 +306,30 @@ export default {
       },
       // 서치목록에서 추가 클릭한 장소를 선택목록에 추가하는 메서드
       setSelectList(item) {
+
+        // 추가된 장소가 기존에 선택목록에 존재하는 지 중복 검사
+          for (let i = 0; i < this.selectItems.length; i++) {
+              if (this.selectItems[i].contentId == item.addContentId) {
+                  if (!confirm('이미 존재하는 장소입니다! 추가하시겠습니까?')) {
+                      return;
+                }
+                  else {
+                      break;
+                }
+            }
+          }
+
           let selectItem = {
               'contentId': item.addContentId,
               'title': item.addTitle,
               'img': item.addImg,
+              'latitude': item.addLatitude,
+              'longitude': item.addLongitude,
         }
           this.selectItems.push(selectItem);
+
+          // 지도에 마커를 추가하는 메서드 호출
+          this.addMarker(selectItem.contentId, selectItem.latitude, selectItem.longitude);
         //   console.log(this.selectItems);
       },
       // PlanCheck페이지에서 선택한 여행일자와 여행지 정보를 알기위해 부모로 보내는 메서드
@@ -320,28 +353,45 @@ export default {
     //       this.$emit("AreaItems", this.selectItems);
     //       console.log(this.selectItems);
     //   }
+
+    // TODO: 선택 목록에 장소가 추가됨에 따라, 지도에 마커를 추가하는 메서드 구현
+      addMarker(contentId, latitude, longitude) {
+        // 매개변수로 위도, 경도 값
+
+        var naver = window.naver; // window 객체의 naver를 변수로서 선언
+          const marker = new naver.maps.Marker({
+              position: new naver.maps.LatLng(latitude, longitude),
+              map: this.map,
+          });
+          this.markers.push({ contentId, marker }); // markers 배열에 marker 값 추가
+      },
   },
   mounted() {
     var naver = window.naver; // window 객체의 naver를 변수로서 선언
-    var mapDiv = this.$refs.map;
+    var mapDiv = this.$refs.map; // ref값이 map인 태그를 참조
 
-    // Naver 그린팩토리를 중심점으로 하는 옵션
+    // 서울 시청을 중심점으로 하는 옵션
     var mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 14,
+        center: new naver.maps.LatLng(37.5666805, 126.9784147), // 지도의 초기 중심 좌표
+        zoom: 13, // 지도의 초기 zoom level
+        zoomControl: true, // zoom 컨트롤의 표시 여부
+        zoomControlOptions: { // zoom 컨트롤의 옵션
+            position: naver.maps.Position.TOP_RIGHT,
+        },
+        mapTypeControl: true, // 지도 유형 컨트롤의 표시 여부
     };
 
     this.map = new naver.maps.Map(mapDiv, mapOptions);
-    this.marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(37.3595704, 127.105399),
-        map: this.map,
-    });
+    // this.marker = new naver.maps.Marker({
+    //     position: new naver.maps.LatLng(37.3595704, 127.105399),
+    //     map: this.map,
+    // });
 
-    // 지도 클릭 이벤트 핸들러
-    naver.maps.Event.addListener(this.map, 'click', (e) => {
-        const latlng = new naver.maps.LatLng(e.coord.y, e.coord.x);
-        this.marker.setPosition(latlng); // 마커 위치 변경
-    });
+    // // 지도 클릭 이벤트 핸들러
+    // naver.maps.Event.addListener(this.map, 'click', (e) => {
+    //     const latlng = new naver.maps.LatLng(e.coord.y, e.coord.x);
+    //     this.marker.setPosition(latlng); // 마커 위치 변경
+    // });
   },
 };
 </script>
