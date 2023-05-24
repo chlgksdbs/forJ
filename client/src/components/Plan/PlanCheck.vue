@@ -8,18 +8,16 @@
         <!-- 왼쪽 계획 일정 카테고리 -->
         <div class="left_plan_list_category">
           <div class="cateDay"><router-link class="cateDayWord" :to="'/plan/check/day/all'">전체보기</router-link></div>
-          <!-- <div class="cateDay"><router-link class="cateDayWord" :to="'/plan/check/day/all'">전체보기</router-link></div> -->
             <div v-for="day in setselectInfo[0].period+1" :key="day">
               <div class="cateDay"><router-link class="cateDayWord" :to="'/plan/check/day/' + day ">{{ day }} 일차</router-link></div>
             </div>
         </div>
         <!-- 왼쪽 계획 일정 내용 -->
         <div class="left_plan_list_content">
-          <!-- <router-view :selectAreaItems="areaItems"></router-view> -->
           <router-view :selectAreaItems="setselectInfo"></router-view>
         </div>
       </div>
-      <div><button class="plan_left_define_btn">일정 확정</button></div>
+      <div><button class="plan_left_define_btn" @click="sendPlanInfo">일정 확정</button></div>
     </div>
     <!-- 일정 경로 맵 -->
     <div id="right_plan_map">
@@ -29,7 +27,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 
 export default {
   name: 'PlanCheck',
@@ -78,7 +76,33 @@ export default {
     // console.log(this.areaItems);
   },
   methods: {
-  },
+    // DB로 확정 여행 계획 정보 보내기
+    sendPlanInfo() {
+      let definePlans = [];
+      let planInfo = {
+        'contentId': 0,
+        'startDate': '',
+        'endDate': '',
+        'title': '',
+        'addr': '',
+        'budget': 0,
+      }
+      for (let i = 1; i < this.setselectInfo.length; i++){
+        planInfo.contentId = this.setselectInfo[i].title;
+        planInfo.startDate = this.setselectInfo[0].start;
+        planInfo.endDate = this.setselectInfo[0].end;
+        planInfo.title = this.setselectInfo[0].title;
+        planInfo.addr = this.setselectInfo[0].addr;
+        planInfo.budget = this.setselectInfo[0].budget;
+
+        definePlans.push(planInfo);
+      }
+      axios.post("http://localhost/plan/write", definePlans)
+        .then(() => {
+          alert("일정 생성이 완료되었습니다");
+        })
+      }
+    },
 };
 </script>
 
@@ -142,10 +166,10 @@ export default {
     overflow-x: hidden;
   }
   .plan_left_define_btn {
-    color: #6ab2ed;
+    color: #fff;
     font-weight: bold;
-    background-color: #fff;
-    border: 1px solid #6ab2ed;
+    background-color: #6ab2ed;
+    border: 1px solid #fff;
     border-radius: 15px;
     width: 70%;
     height: 37px;
@@ -153,10 +177,7 @@ export default {
     margin-left: 23%;
 }
 .plan_left_define_btn:hover {
-    color: #fff;
-    font-weight: bold;
-    background-color: #6ab2ed;
-    border: 1px solid #6ab2ed;
+    border: 2px solid #6ab2ed;
 }
   #right_plan_map {
     margin: 0 5% 0 0;

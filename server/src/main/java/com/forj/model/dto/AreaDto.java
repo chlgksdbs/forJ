@@ -9,6 +9,9 @@ public class AreaDto {
 	private String latitude;
 	private String longitude;
 
+	public AreaDto() {
+	}
+
 	public int getContentId() {
 		return contentId;
 	}

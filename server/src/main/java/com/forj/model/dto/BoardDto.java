@@ -11,7 +11,7 @@ public class BoardDto {
 	private String content;
 	private int hit;
 
-	BoardDto() {
+	public BoardDto() {
 
 	}
 
