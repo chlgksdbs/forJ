@@ -15,9 +15,11 @@
         </div>
         <!-- 왼쪽 계획 일정 내용 -->
         <div class="left_plan_list_content">
-          <router-view :selectAreaItems="areaItems"></router-view>
+          <!-- <router-view :selectAreaItems="areaItems"></router-view> -->
+          <router-view :selectAreaItems="setselectInfo"></router-view>
         </div>
       </div>
+      <div><button class="plan_left_define_btn">일정 확정</button></div>
     </div>
     <!-- 일정 경로 맵 -->
     <div id="right_plan_map">
@@ -97,6 +99,7 @@ export default {
   }
   .left_plan_list{
     display: flex;
+    height: 85%;
   }
   .left_plan_list_category {
     width: 25%;
@@ -105,11 +108,12 @@ export default {
   .cateDay{
     width: 75px;
     height: 20px;
+    border-width: 2px 0 2px 2px;
     border: 2px solid #6ab2ed;
     border-radius: 8px;
     padding: 10px 5px;
     margin-bottom: -1px;
-    margin-right: -5px;
+    margin-right: -8px;
     text-decoration-line: none;
     background-color: #fff;
   }
@@ -130,8 +134,27 @@ export default {
     border: 2px solid #6ab2ed;
     /* width: 75%; */
     width: 250px;
-    height: 545px;
+    height: 495px;
+    overflow: scroll;
+    overflow-x: hidden;
   }
+  .plan_left_define_btn {
+    color: #6ab2ed;
+    font-weight: bold;
+    background-color: #fff;
+    border: 1px solid #6ab2ed;
+    border-radius: 15px;
+    width: 70%;
+    height: 37px;
+    cursor: pointer;
+    margin-left: 23%;
+}
+.plan_left_define_btn:hover {
+    color: #fff;
+    font-weight: bold;
+    background-color: #6ab2ed;
+    border: 1px solid #6ab2ed;
+}
   #right_plan_map {
     margin: 0 5% 0 0;
     width: 60%;

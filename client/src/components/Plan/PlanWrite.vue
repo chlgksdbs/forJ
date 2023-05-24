@@ -15,7 +15,7 @@
         </div>
         <div class="plan_left_select_list">
             <h3>선택 목록</h3>
-            <button class="plan_left_delete_btn" @click="deleteAllCard">장소 전체 삭제</button>
+            <button v-if="selectItems.length" class="plan_left_delete_btn" @click="deleteAllCard">장소 전체 삭제</button>
             <plan-select-list v-for="selectItem in selectItems" :key="selectItem.contentId" :img="selectItem.img" :title="selectItem.title" :contentId="selectItem.contentId"  @deleteId="deleteOneCard"></plan-select-list>
             <!-- <router-link to="/plan/check"><button v-if="selectItems.length" class="plan_left_create_btn" @click="sendDates, sendItems">일정 생성</button></router-link> -->
             <router-link to="/plan/check"><button v-if="selectItems.length" class="plan_left_create_btn" @click="sendSelectInfo">일정 생성</button></router-link>
