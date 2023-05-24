@@ -2,18 +2,21 @@
   <div id="check_plan_container">
     <!-- 왼쪽 계획 일정 컨테이너 -->
     <div id="left_plan_list_container">
-      <!-- 왼쪽 계획 일정 카테고리 -->
-      <div class="left_plan_list_category">
-        <ui>
-          <!-- <router-link to="/plan/check/day"><li v-for="day in setDatesInfo" :key="day.start">{{ day.period }}</li></router-link> -->
-          <div v-for="day in setDatesInfo.period" :key="day">
-            <router-link :to="'/plan/check/day/' + day">{{ day }} 일차</router-link>
-          </div>
-        </ui>
-      </div>
-      <!-- 왼쪽 계획 일정 내용 -->
-      <div class="left_plan_list_content">
-        <router-view></router-view>
+      <!-- 왼쪽 계획 일정 타이틀 -->
+      <div class="left_plan_list_title"><b>여행 일정</b></div>
+      <div class="left_plan_list">
+        <!-- 왼쪽 계획 일정 카테고리 -->
+        <div class="left_plan_list_category">
+          <div class="cateDay"><router-link class="cateDayWord" :to="'/plan/check/day/all'">전체보기</router-link></div>
+          <!-- <div class="cateDay"><router-link class="cateDayWord" :to="'/plan/check/day/all'">전체보기</router-link></div> -->
+            <div v-for="day in setselectInfo[0].period+1" :key="day">
+              <div class="cateDay"><router-link class="cateDayWord" :to="'/plan/check/day/' + day ">{{ day }} 일차</router-link></div>
+            </div>
+        </div>
+        <!-- 왼쪽 계획 일정 내용 -->
+        <div class="left_plan_list_content">
+          <router-view :selectAreaItems="areaItems"></router-view>
+        </div>
       </div>
     </div>
     <!-- 일정 경로 맵 -->
@@ -29,15 +32,19 @@ export default {
   components: {},
   data() {
     return {
-      // message: '',
+      areaItems: [],
     };
   },
   props: {
-    setDatesInfo : Object,
+    // setDatesInfo: Object,
+    // setAreaInfo: Array,
+    setselectInfo: Array,
   },
-  created() {
-   },
+  created() {},
   mounted() {
+
+    // console.log(this.setselectInfo);
+
     var naver = window.naver; // window 객체의 naver를 변수로서 선언
     var mapDiv = this.$refs.map;
 
@@ -58,8 +65,15 @@ export default {
         const latlng = new naver.maps.LatLng(e.coord.y, e.coord.x);
         this.marker.setPosition(latlng); // 마커 위치 변경
     });
+
+    // 가져온 선택 일자와 여행지 정보중 여행지 정보만 분리해서 담는 메서드
+    for (let i = 1; i < this.setselectInfo.length; i++){
+      this.areaItems.push(this.setselectInfo[i]);
+    }
+    // console.log(this.areaItems);
   },
-  methods: {},
+  methods: {
+  },
 };
 </script>
 
@@ -70,20 +84,53 @@ export default {
     justify-content: center;
   }
   #left_plan_list_container{
-    display: flex;
     margin: 0 5%;
-    width: 35%;
-    height: 661px;
+    /* width: 40%; */
+    width: 338px;
+    height: 600px;
+    background-color: #f5f5f5;
+    padding: 10px;
+  }
+  .left_plan_list_title{
+    margin: 10px 15px 15px;
+    font-size: 20px;
+  }
+  .left_plan_list{
+    display: flex;
   }
   .left_plan_list_category {
-    background-color: #ffd9d9;
     width: 25%;
-    height: 661px;
+    height: 600px;
+  }
+  .cateDay{
+    width: 75px;
+    height: 20px;
+    border: 2px solid #6ab2ed;
+    border-radius: 8px;
+    padding: 10px 5px;
+    margin-bottom: -1px;
+    margin-right: -5px;
+    text-decoration-line: none;
+    background-color: #fff;
+  }
+  .cateDayWord{
+    color: #5b5b5b;
+    text-decoration-line: none;
+  }
+  .cateDay:hover{
+    border: 4px solid #6ab2ed;
+    background-color: #6ab2ed;
+  }
+  .cateDay:active{
+    border: 4px solid #6ab2ed;
+    background-color: #6ab2ed;
   }
   .left_plan_list_content{
-    background-color: #afa8a8;
-    width: 75%;
-    height: 661px;
+    background-color: #fff;
+    border: 2px solid #6ab2ed;
+    /* width: 75%; */
+    width: 250px;
+    height: 545px;
   }
   #right_plan_map {
     margin: 0 5% 0 0;
@@ -91,6 +138,6 @@ export default {
   }
   .naver_map {
     width: 100%;
-    height: 661px;
+    height: 620px;
   }
 </style>

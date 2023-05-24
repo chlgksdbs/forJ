@@ -41,9 +41,9 @@ export default {
         'addTitle': this.title,
         'addContentId': this.contentId,
       }
-      console.log(addInfo.addImg);
-      console.log(addInfo.addTitle);
-      console.log(addInfo.addContentId);
+      // console.log(addInfo.addImg);
+      // console.log(addInfo.addTitle);
+      // console.log(addInfo.addContentId);
       this.$emit("addArea",addInfo);
     }
   },

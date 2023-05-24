@@ -17,7 +17,8 @@
             <h3>선택 목록</h3>
             <button class="plan_left_delete_btn" @click="deleteAllCard">장소 전체 삭제</button>
             <plan-select-list v-for="selectItem in selectItems" :key="selectItem.contentId" :img="selectItem.img" :title="selectItem.title" :contentId="selectItem.contentId"  @deleteId="deleteOneCard"></plan-select-list>
-            <router-link to="/plan/check"><button v-if="selectItems.length" class="plan_left_create_btn" @click="sendDates">일정 생성</button></router-link>
+            <!-- <router-link to="/plan/check"><button v-if="selectItems.length" class="plan_left_create_btn" @click="sendDates, sendItems">일정 생성</button></router-link> -->
+            <router-link to="/plan/check"><button v-if="selectItems.length" class="plan_left_create_btn" @click="sendSelectInfo">일정 생성</button></router-link>
         </div>
       </div>
       <div id="PlanMap">
@@ -75,28 +76,7 @@ export default {
   data() {
     return {
         openmodal: false,
-        selectItems: [
-        //   {
-        //       contentId: 0,
-        //       title: '',
-        //       img: '',
-        //   },
-        //   {
-        //       contentId: 1,
-        //       title: '삼성화재 유성연수원',
-        //       img: require('@/assets/img/ex_img5.png')
-        //   },
-        //   {
-        //     contentId: 2,
-        //       title: '유성온천역',
-        //       img: require('@/assets/img/ex_img2.png')
-        //   },
-        //   {
-        //     contentId: 3,
-        //       title: '충남대학교',
-        //       img: require('@/assets/img/ex_img1.png')
-        //   },
-      ],
+        selectItems: [],
       attr: [
           {
               highlight: {
@@ -241,8 +221,8 @@ export default {
         //     'areaName': '',
         // }
         
-        console.log(this.categoryTitle);
-        console.log(this.contentTypeId);
+        // console.log(this.categoryTitle);
+        // console.log(this.contentTypeId);
             // // 공공api에서 호출
             // const baseUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1`;
             // const serviceKey = `%2BO%2FI7nNhPkcVOh2FuthiaVSbtU9Yvs0HFf0f%2FMd3vSqVsR1UzoM0jbIqd9rAaN7AHHG2S2IpTqcBq1q8aLlkCA%3D%3D`;
@@ -271,11 +251,11 @@ export default {
             if (this.categoryTitle == '') keyword = 'null';
             else keyword = this.categoryTitle;
             let url = `http://localhost/area/list/${this.contentTypeId}/${this.sidocode}/${keyword}`;
-            console.log(url);
+            // console.log(url);
           axios.get(url)
               .then((resp) => {
                   this.itemList = resp.data;
-                  console.log(this.itemList);
+                //   console.log(this.itemList);
         })
         }
 
@@ -317,17 +297,29 @@ export default {
               'img': item.addImg,
         }
           this.selectItems.push(selectItem);
-          console.log(this.selectItems);
+        //   console.log(this.selectItems);
       },
-      // PlanCheck페이지에서 여행일자를 알기위해 부모로 보내는 날짜 정보 메서드
-      sendDates() {
+      // PlanCheck페이지에서 선택한 여행일자와 여행지 정보를 알기위해 부모로 보내는 메서드
+      sendSelectInfo() {
           let dateInfo = {
               'period': Math.abs((this.attr[0].dates.end - this.attr[0].dates.start) / (1000 * 60 * 60 * 24)),
               'start': this.attr[0].dates.start,
               'end': this.attr[0].dates.end,
           }
-          this.$emit("dateInfo", dateInfo);
-      }
+        //   console.log(dateInfo);
+          let selectInfo = [];
+          selectInfo.push(dateInfo);
+          for (let i = 0; i < this.selectItems.length; i++){
+              selectInfo.push(this.selectItems[i]);
+          }
+        //   console.log(selectInfo);
+          this.$emit("selectInfo", selectInfo);
+      },
+      // PlanCheck페이지에서 선택한 여행지 정보를 알기위해 부모로 보내는 메서드
+    //   sendItems() {
+    //       this.$emit("AreaItems", this.selectItems);
+    //       console.log(this.selectItems);
+    //   }
   },
   mounted() {
     var naver = window.naver; // window 객체의 naver를 변수로서 선언

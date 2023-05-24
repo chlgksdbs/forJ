@@ -188,12 +188,18 @@ const routes = [
       {
         path: "check",
         name: "plancheck",
+        redirect: "check/day/all",
         component: () => import("@/components/Plan/PlanCheck"),
         children: [
           {
-            path: "day",
-            name: "plancheckday",
-            component: () => import("@/components/Plan/Item/PlanCheckDay"),
+            path: "day/all",
+            name: "plancheckdayview",
+            component: () => import("@/components/Plan/Item/PlanCheckAllDayView"),
+          },
+          {
+            path: "day/:dayNumber",
+            name: "plancheckdayview",
+            component: () => import("@/components/Plan/Item/PlanCheckDayView"),
           }
         ]
       },

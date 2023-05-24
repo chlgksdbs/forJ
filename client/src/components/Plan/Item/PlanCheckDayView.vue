@@ -1,10 +1,12 @@
 <template>
-  <div></div>
+  <div>
+    <div>출력</div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'PlanCheckDay',
+  name: 'PlanCheckDayView',
   components: {},
   data() {
     return {
