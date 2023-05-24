@@ -99,9 +99,9 @@ const routes = [
         component: () => import("@/components/User/UserInquiry"),
       },
       {
-        path: "like",
-        name: "mypagelike",
-        component: () => import("@/components/User/UserLike"),
+        path: "calendar",
+        name: "mycalendar",
+        component: () => import("@/components/User/UserCalendar"),
       },
       {
         path: "myboard",
@@ -119,10 +119,10 @@ const routes = [
     path: "/board",
     name: "board",
     component: AppBoard,
-    redirect: "/board/list",
+    redirect: "/board/list/1",
     children: [
       {
-        path: "list",
+        path: "list/:currentPage",
         name: "boardlist",
         component: () => import("@/components/Board/BoardList"),
       },

@@ -74,8 +74,8 @@ public class UserService {
 	public void setProfileImg(String userId, MultipartFile profileImg) {
 
 		// (1) 파일을 저장할 폴더 설정 -> 서버에 배포 시, 경로 변경 필요!!!!!
-//		String dirPath = "C:\\forj\\";
-		String dirPath = "/Users/hanyoon/Desktop/upload/";
+		String dirPath = "C:\\forj\\";
+//		String dirPath = "/Users/hanyoon/Desktop/upload/";
 		File dir = new File(dirPath);
 
 		// 만약, 폴더가 없는 경우 생성
@@ -134,6 +134,30 @@ public class UserService {
 		map.put("userEmail", userEmail);
 
 		return userMapper.checkUserAuth(map);
+	}
+	
+	// 사용자 닉네임 변경
+	public void modifyNickname(UserDto userDto) {
+		
+		userMapper.updateNickname(userDto);
+	}
+	
+	// 사용자 비밀번호 체크
+	public UserDto checkPw(UserDto userDto) {
+		
+		return userMapper.selectPw(userDto);
+	}
+	
+	// 사용자 비밀번호 변경
+	public void modifyPw(UserDto userDto) {
+		
+		userMapper.updatePw(userDto);
+	}
+	
+	// 사용자 이메일 변경
+	public void modifyEmail(UserDto userDto) {
+		
+		userMapper.updateEmail(userDto);
 	}
 
 }

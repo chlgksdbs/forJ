@@ -23,4 +23,7 @@ public interface CommentMapper {
 	
 	// 댓글 작성
 	void insert(CommentDto comment);
+	
+	// 내가 쓴 댓글 리스트 출력
+	List<CommentDto> selectMyList(String userId);
 }

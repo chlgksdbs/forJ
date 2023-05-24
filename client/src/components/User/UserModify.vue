@@ -5,46 +5,58 @@
       <div>
         <span style="vertical-align: top;">프로필 사진</span>
         <span>
-          <img :src="imageUrl" class="imgmodify"/>
+          <div class="imgmodify">
+            <img :src="imageUrl"/>
+          </div>
           <input type="file" @change="onInputImage" ref="newProfileImg" />
         </span>
         <span><button @click="modifyImg">변경</button></span>
       </div>
       <div>
         <span>이름</span>
-        <span><input type="text" v-model="userInfo.userName" /></span>
-        <span><button>수정</button></span>
+        <span><input type="text" v-model="userInfo.userName" readonly /></span>
+        <span></span>
       </div>
       <div>
         <span>닉네임</span>
         <span><input type="text" v-model="userInfo.userNickname" /></span>
-        <span><button>변경</button></span>
+        <span><button @click="modifyNickname">변경</button></span>
       </div>
       <div>
         <span>아이디</span>
-        <span><input type="text" v-model="userInfo.userId" /></span>
-        <span><button>변경</button></span>
+        <span><input type="text" v-model="userInfo.userId" readonly /></span>
+        <span></span>
       </div>
       <div>
         <span>비밀번호</span>
-        <span><input type="password" /></span>
+        <span><input type="password" v-model="userPw" /></span>
         <span></span>
       </div>
       <div>
         <span>비밀번호 재확인</span>
-        <span><input type="text" /></span>
-        <span><button>확인</button></span>
-        <!-- TODO: 비밀번호 확인 버튼 클릭 시, 아래 숨겨진 div display (새로운 비밀번호 입력 칸)-->
+        <span><input type="password" v-model="userPwCheck" /></span>
+        <span><button @click="checkPw">확인</button></span>
+      </div>
+      <!-- TODO: 비밀번호 확인 버튼 클릭 시, 아래 숨겨진 div display (새로운 비밀번호 입력 칸)-->
+      <div class="password_wrap" style="display: none;">
+        <span>새로운 비밀번호</span>
+        <span><input type="password" v-model="newPw" /></span>
+        <span><button @click="modifyPw">변경</button></span>
       </div>
       <div>
         <span>이메일</span>
         <span><input type="text" v-model="userInfo.userEmail" /></span>
-        <span><button>변경</button></span>
+        <span><button @click="checkEmail">변경</button></span>
+      </div>
+      <div class="email_wrap" style="display: none;">
+        <span>이메일 인증번호</span>
+        <span><input type="text" v-model="certNo" /></span>
+        <span><button @click="modifyEmail">변경</button></span>
       </div>
       <div>
         <span>휴대전화</span>
-        <span><input type="text" v-model="userInfo.userPhone" /></span>
-        <span><button>변경</button></span>
+        <span><input type="text" v-model="userInfo.userPhone" readonly /></span>
+        <span></span>
       </div>
     </div>
   </div>
@@ -52,7 +64,7 @@
 
 <script>
 import axios from "axios";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const memberStore = "memberStore";
 
@@ -63,6 +75,11 @@ export default {
     return {
       photoFile: '',
       imageUrl: require('@/assets/img/default_profile_img.png'),
+      userPw: '',
+      userPwCheck: '',
+      newPw: '',
+      certNo: '',
+      secretCertNumber: '',
     };
   },
   computed: {
@@ -73,6 +90,9 @@ export default {
     axios.get('http://localhost/user/profileimg/' + this.userInfo.userId, { responseType: 'blob'})
       .then((resp) => {
         // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
+
+        // 파일의 크기가 0인 경우(backend에서 넘어온 데이터가 없는 경우), 종료
+        if (resp.data.size == 0) return;
 
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -90,11 +110,12 @@ export default {
         // const imageURL = window.URL.createObjectURL(blob);
         // this.profileImg = imageURL;
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   },
   methods: {
+    ...mapActions(memberStore, ["userLogout"]),
     // TODO: 현재 input type="file"에 있는 이미지 링크를 data에 있는 profileImg 변수에 추가
     onInputImage() {
       this.photoFile = this.$refs.newProfileImg.files[0];
@@ -106,40 +127,143 @@ export default {
     },
     // TODO: 프로필 이미지 변경 메서드 구현
     modifyImg() {
-      // 파일 업로드를 위한 FormData 객체 생성 (Key, Value)
-      let formData = new FormData();
-      formData.append("profileImg", this.photoFile);
-      formData.append("userId", this.userInfo.userId); // 사용자 ID 첨부
+      if (confirm('프로필 사진을 변경하시겠습니까?')) {
+        // 파일 업로드를 위한 FormData 객체 생성 (Key, Value)
+        let formData = new FormData();
+        formData.append("profileImg", this.photoFile);
+        formData.append("userId", this.userInfo.userId); // 사용자 ID 첨부
+  
+        // console.log(formData); // 디버깅
+  
+        // formData와 headers부분의 content-type을 보냄
+        axios.put('http://localhost/user/profileimg', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data; charset=UTF-8'
+            },
+          })
+          .then(() => {
+            this.$router.go(0); // 현재 페이지 새로 고침
+            // TODO: 프로필 이미지 업로드 시, .jpg와 .png만 가능하도록 설정하고, 크기 제한 걸기
+          });
+        // .then((resp) => {
+        //   console.log(resp); // 백엔드와 디버깅
+        // });
+      }
+    },
+    // TODO: 닉네임 변경 메서드 구현
+    modifyNickname() {
 
-      // console.log(formData); // 디버깅
+      if (this.userInfo.userNickname.length == 0) {
+        alert('변경할 이메일을 입력해주세요.');
+      }
+      else {
+        if (confirm('닉네임을 (' + this.userInfo.userNickname + ')으로 변경하시겠습니까?'))
+        axios.put('http://localhost/user/modify/nickname', this.userInfo)
+          .then(() => {
+            alert('닉네임이 변경완료되었습니다.');
+          });
+        }
+      },
+    // TODO: 현재 비밀번호와 일치하는지 확인하는 메서드 구현
+    checkPw() {
+      if (this.userPw == this.userPwCheck) {
 
-      // formData와 headers부분의 content-type을 보냄
-      axios.put('http://localhost/user/profileimg', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data; charset=UTF-8'
-          },
-        })
-        .then(() => {
-          this.$router.go(0); // 현재 페이지 새로 고침
-          // TODO: 프로필 이미지 업로드 시, .jpg와 .png만 가능하도록 설정하고, 크기 제한 걸기
-        });
-      // .then((resp) => {
-      //   console.log(resp); // 백엔드와 디버깅
-      // });
-    }
+        let userDto = {
+          "userId": this.userInfo.userId,
+          "userPw": this.userPw,
+        }
+
+        // console.log(userDto); // 디버깅
+
+        axios.post('http://localhost/user/check/pw', userDto)
+          .then((resp) => {
+            if (resp.data == "success") {
+              document.querySelector('.password_wrap').style.display = "";
+            }
+            else {
+              alert('기존 비밀번호와 일치하지 않습니다.');
+            }
+          });
+      }
+      else {
+        alert('비밀번호와 비밀번호 재확인 칸이 일치하지 않습니다.');
+      }
+    },
+    // TODO: 비밀번호 변경 메서드 구현
+    modifyPw() {
+      if (this.newPw.length == 0) {
+        alert('변경할 비밀번호를 입력해주세요.');
+      }
+      else {
+
+        let userDto = {
+          "userId": this.userInfo.userId,
+          "userPw": this.newPw,
+        }
+
+        axios.put('http://localhost/user/modify/pw', userDto)
+          .then(() => {
+            alert('비밀번호가 변경되었습니다. 다시 로그인해주세요.');
+
+            this.userLogout(this.userInfo.userId);
+
+            sessionStorage.removeItem("access-token"); // 저장된 access token 삭제
+            sessionStorage.removeItem("refresh-token"); // 저장된 refresh token 삭제
+
+            // 로그인 페이지로 이동
+            if (this.$route.path != "/login") this.$router.push("/login");
+          });
+      }
+    },
+    // TODO: 새로운 이메일에 대한 인증 메서드 구현
+    checkEmail() {
+      if (this.userInfo.userEmail.length == 0) {
+        alert('변경할 이메일을 입력해주세요.');
+      }
+      else {
+        if (confirm('이메일을 (' + this.userInfo.userEmail + ')으로 변경하시겠습니까?')) {
+          // JSON 형태로 전송
+          let userDto = {
+            "userEmail": this.userInfo.userEmail,
+          };
+
+          axios.post('http://localhost/user/certmail', userDto)
+            .then((resp) => {
+              alert('인증번호가 전송되었습니다.');
+              this.secretCertNumber = resp.data;
+            });
+
+          document.querySelector('.email_wrap').style.display = "";
+        }
+      }
+    },
+    // TODO: 이메일 변경 메서드 구현
+    modifyEmail() {
+          if (this.certNo == this.secretCertNumber) {
+            axios.put('http://localhost/user/modify/email', this.userInfo)
+              .then(() => {
+                alert('이메일이 변경완료되었습니다.');
+              })
+              .catch(() => {
+                alert("이미 존재하는 이메일입니다!");
+              });
+          }
+          else {
+            alert('인증번호가 일치하지 않습니다.');
+          }
+      }
   },
 };
 </script>
 
 <style>
 .modifyTitle{
-  text-align: left;
-  margin-top: 0px;
+  margin: 20px 0;
 }
 .modifyBox{
   display: block;
   width: 800px;
-  height: 555px;
+  height: 650px;
   border: 1px solid rgb(255, 255, 255);
   border-radius: 10px;
   background-color: #fff;
@@ -190,7 +314,15 @@ export default {
   background-color: #40A3FF;
 }
 .imgmodify{
-  width: 100px;
-  border-radius: 15px;
+  width: 80px;
+  height: 80px;
+  margin: 5px 20px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+.imgmodify img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

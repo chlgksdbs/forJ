@@ -2,13 +2,18 @@
   <div>
     <h2 class="modifyTitle">1:1 문의</h2>
     <div class="modifyBox">
+      <the-construction></the-construction>
     </div>
   </div>
 </template>
 
 <script>
+import TheConstruction from "../TheConstruction.vue";
+
 export default {
-  components: {},
+  components: {
+    TheConstruction,
+  },
   data() {
     return {
       message: '',
@@ -19,4 +24,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.modifyBox {
+  margin: 20px 0;
+}
+</style>

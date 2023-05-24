@@ -98,4 +98,40 @@
 		WHERE
 			user_id=#{userId} and user_email=#{userEmail}
 	</select>
+	
+	<update id="updateNickname" parameterType="UserDto">
+		UPDATE
+			forj_user
+		SET
+			user_nickname=#{userNickname}
+		WHERE
+			user_id=#{userId}
+	</update>
+	
+	<select id="selectPw" parameterType="UserDto" resultType="UserDto">
+		SELECT
+			user_id as userId
+		FROM
+			forj_user
+		WHERE
+			user_id=#{userId} and user_pw=#{userPw}
+	</select>
+	
+	<update id="updatePw" parameterType="UserDto">
+		UPDATE
+			forj_user
+		SET
+			user_pw=#{userPw}
+		WHERE
+			user_id=#{userId}
+	</update>
+	
+	<update id="updateEmail" parameterType="UserDto">
+		UPDATE
+			forj_user
+		SET
+			user_email=#{userEmail}
+		WHERE
+			user_id=#{userId}
+	</update>
 </mapper>

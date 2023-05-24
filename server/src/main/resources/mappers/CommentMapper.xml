@@ -33,4 +33,15 @@
 		values(#{boardId}, #{userId}, #{content}, now())
 	</insert>
 	
+	<select id="selectMyList" parameterType="String" resultType="CommentDto">
+		SELECT
+			fc.board_id as boardId, fb.title as boardTitle, fc.content, fc.write_date as writeDate
+		FROM
+			forj_comment fc join forj_board fb
+		USING 
+			(board_id)
+		WHERE
+			fc.user_id=#{userId}
+	</select>
+	
 </mapper>

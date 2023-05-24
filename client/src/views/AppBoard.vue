@@ -8,7 +8,7 @@
                     <div class="board_category_menu_item" v-if="boardTitle == '공지사항'" style="color: #000; text-decoration: underline; text-underline-offset : 5px;">공지사항</div>
                     <div class="board_category_menu_item" v-else>공지사항</div>
                 </router-link>
-                <router-link to="/board/list">
+                <router-link to="/board/list/1">
                     <div class="board_category_menu_item" v-if="boardTitle == '자유 게시판'" style="color: #000; text-decoration: underline; text-underline-offset : 5px;">자유 게시판</div>
                     <div class="board_category_menu_item" v-else>자유 게시판</div>
                 </router-link>

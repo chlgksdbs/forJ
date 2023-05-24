@@ -41,4 +41,16 @@ public interface UserMapper {
 	
 	// 아이디와 이메일 정보를 가지고, 사용자 찾기
 	UserDto checkUserAuth(Map<String, String> map);
+	
+	// 사용자 닉네임 변경
+	void updateNickname(UserDto userDto);
+	
+	// 사용자 비밀번호 체크
+	UserDto selectPw(UserDto userDto);
+	
+	// 사용자 비밀번호 변경
+	void updatePw(UserDto userDto);
+	
+	// 사용자 이메일 변경
+	void updateEmail(UserDto userDto);
 }

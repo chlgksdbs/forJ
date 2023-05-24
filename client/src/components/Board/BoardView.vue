@@ -39,12 +39,12 @@
           <viewer v-if="boardItem.content != null" :initialValue="boardItem.content"/>
         </p>
       </div>
-      <div class="detail_route">
+      <!-- <div class="detail_route">
         <div class="detail_route_img_box">
           <h2>여행 경로 보기</h2>
           <img src="@/assets/img/detail_map.png">
         </div>
-      </div>
+      </div> -->
       <div class="detail_btn_box">
         <div class="scrap_box">
           <img src="@/assets/img/icon_scrap.png" />
@@ -132,12 +132,15 @@ export default {
           .then((resp) => {
             // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
 
+            // 파일의 크기가 0인 경우(backend에서 넘어온 데이터가 없는 경우), 종료
+          if (resp.data.size == 0) return;
+
             const reader = new FileReader();
             reader.onloadend = () => {
               this.imageUrl = reader.result;
             };
             reader.readAsDataURL(resp.data);
-            console.log(this.imageUrl);
+            // console.log(this.imageUrl);
           })
           .catch((error) => {
             console.log(error);
@@ -156,12 +159,15 @@ export default {
       .then((resp) => {
         // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
 
+        // 파일의 크기가 0인 경우(backend에서 넘어온 데이터가 없는 경우), 종료
+        if (resp.data.size == 0) return;
+
         const reader = new FileReader();
         reader.onloadend = () => {
           this.commentImageUrl = reader.result;
         };
         reader.readAsDataURL(resp.data);
-        console.log(this.imageUrl);
+        // console.log(this.imageUrl);
       })
       .catch((error) => {
         console.log(error);
@@ -199,7 +205,7 @@ export default {
         "content": this.commentContent
       };
 
-      console.log(comment);
+      // console.log(comment);
 
       axios.post('http://localhost/comment', comment)
         .then(() => {
