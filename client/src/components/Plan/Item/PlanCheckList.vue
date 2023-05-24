@@ -27,6 +27,7 @@
   </div>
 </template>
 <script>
+
 export default {
   name: 'PlanSelectList',
   props: {

@@ -29,9 +29,12 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'PlanCheck',
-  components: {},
+  components: {
+  },
   data() {
     return {
       areaItems: [],

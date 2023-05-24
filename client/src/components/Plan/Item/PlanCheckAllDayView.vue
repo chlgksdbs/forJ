@@ -2,16 +2,22 @@
   <div>
     <div class="dayViewTitle">{{ dateFormat(selectAreaItems[0].start) }} ~ {{ dateFormat(selectAreaItems[0].end) }}</div>
     <!-- <plan-check-list v-for="item in selectAreaItems" :key="item.contentId" :img="item.img" :title="item.title" :contentId="item.contentId"></plan-check-list> -->
-    <plan-check-list v-for="item in areaItems" :key="item.contentId" :img="item.img" :title="item.title" :contentId="item.contentId" @storeCost="setCost"></plan-check-list>
+    <draggable>
+      <plan-check-list v-for="item in areaItems" :key="item.contentId" :img="item.img" :title="item.title" :contentId="item.contentId" @storeCost="setCost"></plan-check-list>
+    </draggable>
   </div>
 </template>
 
 <script>
 import PlanCheckList from "./PlanCheckList.vue";
+import draggable from 'vuedraggable';
 
 export default {
   name: 'PlanCheckAllDayView',
-  components: {PlanCheckList},
+  components: {
+    PlanCheckList,
+    draggable,
+  },
   data() {
     return {
       areaItems: [],
