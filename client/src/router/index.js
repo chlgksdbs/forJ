@@ -185,6 +185,18 @@ const routes = [
         name: "planwrite",
         component: () => import("@/components/Plan/PlanWrite"),
       },
+      {
+        path: "check",
+        name: "plancheck",
+        component: () => import("@/components/Plan/PlanCheck"),
+        children: [
+          {
+            path: "day",
+            name: "plancheckday",
+            component: () => import("@/components/Plan/Item/PlanCheckDay"),
+          }
+        ]
+      },
     ],
   },
 ];
