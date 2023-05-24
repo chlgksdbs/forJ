@@ -1,7 +1,8 @@
 <template>
     <div id="AppPlan">
         <the-heading></the-heading>
-        <router-view @dateInfo="sendDatesInfo" :setDatesInfo="datesInfo"></router-view>
+        <!-- <router-view @dateInfo="sendDatesInfo" :setDatesInfo="datesInfo"  @AreaItems="sendAreasInfo" :setAreaInfo="areasInfo"></router-view> -->
+        <router-view @selectInfo="sendselectInfo" :setselectInfo="selectInfo"></router-view>
         <the-footer></the-footer>
     </div>
 </template>
@@ -17,20 +18,19 @@ export default {
     },
     data() {
         return {
-            datesInfo: {
-                'period': 0,
-                'start': '',
-                'end': '',
-            },
+            selectInfo: [],
         }
     },
     methods: {
-        sendDatesInfo(info) {
-            this.datesInfo.period = info.period;
-            this.datesInfo.start = info.start;
-            this.datesInfo.end = info.end;
-        }
-    }
+        sendselectInfo(info) {
+            this.selectInfo = info;
+            // console.log(this.datesInfo.period);
+        },
+        // sendAreasInfo(info) {
+        //     this.areasInfo = info;
+        //     console.log(info);
+        // },
+    },
 }
 </script>
 <style scoped>
