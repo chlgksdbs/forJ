@@ -36,6 +36,7 @@ export default {
   data() {
     return {
       areaItems: [],
+      markers: [], // contentId와 marker 객체를 담는 배열
     };
   },
   props: {
@@ -51,31 +52,59 @@ export default {
     var naver = window.naver; // window 객체의 naver를 변수로서 선언
     var mapDiv = this.$refs.map;
 
-    // Naver 그린팩토리를 중심점으로 하는 옵션
+    // 서울 시청을 중심점으로 하는 옵션
     var mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 14,
+      center: new naver.maps.LatLng(37.5666805, 126.9784147), // 지도의 초기 중심 좌표
+      zoom: 13, // 지도의 초기 zoom level
+      zoomControl: true, // zoom 컨트롤의 표시 여부
+      zoomControlOptions: { // zoom 컨트롤의 옵션
+          position: naver.maps.Position.TOP_RIGHT,
+      },
+      mapTypeControl: true, // 지도 유형 컨트롤의 표시 여부
     };
 
     this.map = new naver.maps.Map(mapDiv, mapOptions);
-    this.marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(37.3595704, 127.105399),
-        map: this.map,
-    });
-
-    // 지도 클릭 이벤트 핸들러
-    naver.maps.Event.addListener(this.map, 'click', (e) => {
-        const latlng = new naver.maps.LatLng(e.coord.y, e.coord.x);
-        this.marker.setPosition(latlng); // 마커 위치 변경
-    });
 
     // 가져온 선택 일자와 여행지 정보중 여행지 정보만 분리해서 담는 메서드
     for (let i = 1; i < this.setselectInfo.length; i++){
       this.areaItems.push(this.setselectInfo[i]);
+      // 지도에 마커를 추가하는 메서드 호출
+      this.addMarker(this.setselectInfo[i].contentId, this.setselectInfo[i].latitude, this.setselectInfo[i].longitude);
     }
-    // console.log(this.areaItems);
+
+    // TODO: 지도에 입력된 순으로 폴리라인 설정
+    for (let i = 0; i < this.markers.length - 1; i++) {
+      let start = new naver.maps.LatLng(this.markers[i].latitude, this.markers[i].longitude);
+      let end = new naver.maps.LatLng(this.markers[i + 1].latitude, this.markers[i + 1].longitude);
+
+      // console.log("start: ", start); // 디버깅
+      // console.log("end: ", end); // 디버깅
+      var polyLine = new naver.maps.Polyline({
+        map: this.map,
+        path: [
+          start,
+          end,
+        ],
+        endIcon: naver.maps.PointingIcon.BLOCK_ARROW,
+        endIconSize: 25,
+        strokeColor: '#ff0000',
+        strokeWeight: 3,
+      });
+
+      console.log(polyLine);
+    }
   },
   methods: {
+    // 선택 목록에 장소가 추가됨에 따라, 지도에 마커를 추가하는 메서드 구현
+    addMarker(contentId, latitude, longitude) {
+      // 매개변수로 위도, 경도 값
+      var naver = window.naver; // window 객체의 naver를 변수로서 선언
+      const marker = new naver.maps.Marker({
+          position: new naver.maps.LatLng(latitude, longitude),
+          map: this.map,
+      });
+      this.markers.push({ contentId, latitude, longitude, marker }); // markers 배열에 marker 값 추가
+    },
     // DB로 확정 여행 계획 정보 보내기
     sendPlanInfo() {
       let definePlans = [];
