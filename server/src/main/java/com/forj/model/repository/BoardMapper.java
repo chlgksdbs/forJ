@@ -29,4 +29,7 @@ public interface BoardMapper {
 	
 	// 검색어로 들어온 키워드 리스트 출력
 	List<BoardDto> selectSearchAll(String text);
+	
+	// 내가 쓴 게시글 리스트 출력
+	List<BoardDto> selectMyList(String userId);
 }

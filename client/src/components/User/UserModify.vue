@@ -253,8 +253,7 @@ export default {
 
 <style>
 .modifyTitle{
-  text-align: left;
-  margin-top: 0px;
+  margin: 20px 0;
 }
 .modifyBox{
   display: block;

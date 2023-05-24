@@ -52,4 +52,13 @@
 			write_date desc
 	</select>
 	
+	<select id="selectMyList" parameterType="String" resultType="BoardDto">
+		SELECT
+			board_id as boardId, title, write_date as writeDate, hit
+		FROM
+			forj_board
+		WHERE
+			writer=#{userId}
+	</select>
+	
 </mapper>

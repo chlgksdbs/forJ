@@ -78,4 +78,9 @@ public class BoardService {
 	public List<BoardDto> searchList(String text) {
 		return boardMapper.selectSearchAll(text);
 	}
+	
+	// 내가 쓴 게시글 리스트 출력
+	public List<BoardDto> myList(String userId) {
+		return boardMapper.selectMyList(userId);
+	}
 }

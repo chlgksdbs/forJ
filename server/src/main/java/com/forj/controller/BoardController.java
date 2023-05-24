@@ -75,4 +75,10 @@ public class BoardController {
 		return boardService.searchList(text);
 	}
 	
+	// 내가 쓴 게시글 리스트 출력
+	@GetMapping("/mylist/{userId}")
+	public List<BoardDto> myList(@PathVariable("userId") String userId) {
+		return boardService.myList(userId);
+	}
+	
 }
