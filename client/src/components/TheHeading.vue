@@ -8,8 +8,16 @@
         </div>
         <!-- 로그인 정보 O -->
         <div id="header_right" v-if="userInfo">
-            <router-link to="/mypage">마이페이지</router-link>
-            <span @click="logout">로그아웃</span>
+            <div class="profile_dropdown_box">
+                <img src="@/assets/img/default_profile_img.png" v-if="imageUrl.length == 0">
+                <img :src="imageUrl" v-else >
+            </div>
+            <div>
+                <router-link to="/mypage">마이페이지</router-link>
+            </div>
+            <div>
+                <span @click="logout">로그아웃</span>
+            </div>
         </div>
         <!-- 로그인 정보 X -->
         <div id="header_right" v-else>
@@ -19,15 +27,37 @@
     </div>
 </template>
 <script>
+import axios from "axios";
 import { mapState, mapActions, mapGetters } from "vuex";
 
 const memberStore = "memberStore";
 
 export default {
     name: "TheHeading",
+    data() {
+        return {
+            imageUrl: '',
+        }
+    },
     computed: {
         ...mapState(memberStore, ["isLogin", "userInfo"]),
         ...mapGetters(["checkUserInfo"]),
+    },
+    created() {
+        // TODO: 프로필 이미지 변경 후, 이미지를 띄우기
+        axios.get('http://localhost/user/profileimg/' + this.userInfo.userId, { responseType: 'blob'})
+        .then((resp) => {
+            // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+            this.imageUrl = reader.result;
+            };
+            reader.readAsDataURL(resp.data);
+        })
+        .catch(() => {
+            // console.log(error);
+        });
     },
     methods: {
         ...mapActions(memberStore, ["userLogout"]),
@@ -41,7 +71,7 @@ export default {
 
             // 로그인 페이지로 이동
             if (this.$route.path != "/login") this.$router.push("/login");
-        }
+        },
     },
 }
 </script>
@@ -54,6 +84,18 @@ a, span {
     color: #888;
     margin: 0 10px;
     cursor: pointer;
+}
+.profile_dropdown_box {
+    width: 50px;
+    height: 50px;
+    margin: 0px 20px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile_dropdown_box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 #TheHeading {
     display: flex;
@@ -69,5 +111,8 @@ a, span {
 #header_right {
     width: 25%;
     font-size: 100%;
+}
+#header_right div {
+    display: inline-block;
 }
 </style>

@@ -105,8 +105,8 @@ export default {
         // const imageURL = window.URL.createObjectURL(blob);
         // this.profileImg = imageURL;
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   },
   methods: {

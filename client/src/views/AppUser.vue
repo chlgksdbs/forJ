@@ -61,8 +61,8 @@ export default {
         };
         reader.readAsDataURL(resp.data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   },
   methods: {
