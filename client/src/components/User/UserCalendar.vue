@@ -43,8 +43,8 @@ export default {
         for (let i = 0; i < resp.data.length; i++) {
           this.calendarOptions.events.push({
             'title': resp.data[i].planId + '번째 여행',
-            'start': this.dateFormat(resp.data[i].planStartdate),
-            'end': this.dateFormat(resp.data[i].planEnddate),
+            'start': this.dateFormat(resp.data[i].planStartdate, 'start'),
+            'end': this.dateFormat(resp.data[i].planEnddate, 'end'),
           });
         }
         console.log(this.calendarOptions);
@@ -52,8 +52,50 @@ export default {
   },
   methods: {
     // TODO: 날짜를 형식에 맞게 변환 (yyyy-mm-dd)
-    dateFormat(date) {
-      return date.substr(0, 10);
+    dateFormat(date, val) {
+      // yyyy -> 0, 4
+      // mm -> 5, 7
+      // dd -> 8, 10
+      if (val == 'start') return date.substr(0, 10);
+
+      let dd = parseInt(date.substr(8, 10));
+      let mm = parseInt(date.substr(5, 7));
+      let yy = parseInt(date.substr(0, 4));
+
+      if (dd == 31) {
+        if (mm == 12) {
+          let newdate = (yy + 1) + '-' + '01-01';
+          return newdate;
+        }
+        else {
+          mm += 1;
+          if (mm < 10) {
+            let newdate = yy + '-0' + mm + '-01';
+            return newdate;
+          }
+          else {
+            let newdate = yy + '-' + mm + '-01';
+            return newdate;
+          }
+        }
+      }
+      else {
+        dd += 1;
+        if (mm < 10) {
+          if (dd < 10) {
+            let newdate = yy + '-0' + mm + '-0' + dd;
+            return newdate;
+          }
+          else {
+            let newdate = yy + '-0' + mm + '-' + dd;
+            return newdate;
+          }
+        }
+        else {
+          let newdate = yy + '-' + mm + '-' + dd;
+          return newdate;
+        }
+      }
     },
   },
 };
