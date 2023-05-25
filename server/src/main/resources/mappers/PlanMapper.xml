@@ -38,13 +38,13 @@
 			user_id = #{userId}
 	</select>
 	
-	<select id="selectDetail" parameterType="map" resultType="PLanDto">
+	<select id="selectDetail" parameterType="map" resultType="PlanDto">
 		SELECT
 			plan_content_id as planContentId, plan_dday as planDday, plan_area_title as planAreaTitle, plan_budget as planBudget
 		FROM
 			forj_userplan
 		WHERE
-			plan_writer=#{planWriter} and plan_id=#{planId}
+			plan_writer=#{userId} and plan_id=#{planId}
 	</select>
 
 </mapper>
