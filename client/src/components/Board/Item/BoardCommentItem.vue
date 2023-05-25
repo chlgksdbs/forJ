@@ -80,7 +80,7 @@ export default {
     },
     // 댓글 삭제 메서드
     commentDelete() {
-      console.log(this.comment.commentId);
+      // console.log(this.comment.commentId);
       axios.delete("http://localhost/comment/" + this.comment.commentId)
         .then(() => {
           // console.log('댓글이 성공적으로 삭제되었습니다!'); // 디버깅

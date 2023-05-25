@@ -77,8 +77,8 @@ export default {
         'content': this.content,
       };
       axios.post('http://localhost/board/write', boardDto)
-        .then((resp) => {
-          console.log(resp.data);
+        .then(() => {
+          // console.log(resp.data);
           this.$router.push("/board");
         });
     },

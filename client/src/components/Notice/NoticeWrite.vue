@@ -77,8 +77,8 @@ export default {
         'noticeContent': this.noticeContent,
       };
       axios.post('http://localhost/notice/write', noticeDto)
-        .then((resp) => {
-          console.log(resp.data);
+        .then(() => {
+          // console.log(resp.data);
           this.$router.push("/board/notice");
         });
     },
