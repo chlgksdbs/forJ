@@ -1,3 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mappers.PlanMapper"></mapper>
+<mapper namespace="com.forj.model.repository.PlanMapper">
+
+	<insert id="create" parameterType="PlannerDto">
+		INSERT INTO
+			forj_planner (user_id, plan_startdate, plan_enddate)
+		VALUES
+			(#{userId}, #{planStartdate}, #{planEnddate})
+	</insert>
+	
+	<select id="selectPlanId" parameterType="PlannerDto" resultType="int">
+		SELECT
+			plan_id as planId
+		FROM
+			forj_planner
+		WHERE
+			user_id=#{userId}
+		ORDER BY
+			plan_id desc
+		LIMIT
+			1
+	</select>
+
+	<insert id="insert" parameterType="PlanDto">
+		INSERT INTO
+			forj_userplan (plan_id, plan_content_id, plan_dday, plan_area_title, plan_budget)
+		VALUES
+			(#{planId}, #{planContentId}, #{planDday}, #{planAreaTitle}, #{planBudget})
+	</insert>
+
+</mapper>

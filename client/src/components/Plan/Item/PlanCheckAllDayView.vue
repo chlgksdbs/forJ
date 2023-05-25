@@ -76,14 +76,20 @@ export default {
       costList: [],
       eachDayList: [],
       lists: [], // 장소의 div 이동에 따라 동적으로 저장하는 배열
+      flag: false, // list값 자체의 변화를 감지하기위해 설정하는 의미없는 변수
     };
   },
   props: {
     selectAreaItems: Array,
   },
   watch: {
-    eachDayList(value) {
-      console.log(value);
+    // lists 배열의 변화를 감지
+    flag() {
+      // console.log(this.lists); // 디버깅
+      // Drag & Drop 이벤트가 발생할 때, lists의 id 컬럼이 해당 dday에 맞게 변동됨
+      // 변경이 생길 때 마다, 부모에게 $emit 이벤트 발생
+
+      this.$emit("resultItems", this.lists, this.costList);
     },
   },
   created() {
@@ -103,7 +109,7 @@ export default {
     }
 
     // console.log(this.lists.length); // 디버깅
-    console.log(this.lists); // 디버깅
+    // console.log(this.lists); // 디버깅
   },
   mounted() {
     // console.log(this.selectAreaItems);
@@ -136,33 +142,36 @@ export default {
       if (flag == 0) {
         this.costList.push(costInfo);
       }
+
+      // 리스트의 변화를 주기위해 사용 (의미없는 변수 변경)
+      this.flag = !this.flag;
       // console.log(this.costList);
     },
     // 각각의 div들이 데이터를 전달하는 이벤트 트리거 메서드
     dragStart(event) {
       event.dataTransfer.setData("text/plain", event.target.dataset.contentId);
 
-      console.log(this.eachDayList);
+      // console.log(this.eachDayList);
     },
     // dataTransfer 사용해 드롭된 객체의 contentID를 가져와 이 객체를 새 div의 배열로 이동
     // 기존 배열에서는 해당 객체 제거
-    drop(event) {
-      const itemContentId = event.dataTransfer.getData("text/plain");
-      const item = this.draggableItems.find((item) => item.contentId.toString() == itemContentId);
-      if (item) {
-        const colIdx = parseInt(event.currentTarget.getAttribute("data-column-index"));
-        // 열 없으면 새 열 추가
-        if (!this.eachDayList[colIdx]) {
-          this.eachDayList[colIdx] = [];
-        }
-        // 해당 위치에 item 삽입
-        this.eachDayList[colIdx].splice(0, 0, item);
-        this.areaItems = this.areaItems.filter(
-          (item) => item.contentId.toString() != itemContentId
-        );
-        console.log(this.eachDayList);
-      }
-    },
+    // drop(event) {
+    //   const itemContentId = event.dataTransfer.getData("text/plain");
+    //   const item = this.draggableItems.find((item) => item.contentId.toString() == itemContentId);
+    //   if (item) {
+    //     const colIdx = parseInt(event.currentTarget.getAttribute("data-column-index"));
+    //     // 열 없으면 새 열 추가
+    //     if (!this.eachDayList[colIdx]) {
+    //       this.eachDayList[colIdx] = [];
+    //     }
+    //     // 해당 위치에 item 삽입
+    //     this.eachDayList[colIdx].splice(0, 0, item);
+    //     this.areaItems = this.areaItems.filter(
+    //       (item) => item.contentId.toString() != itemContentId
+    //     );
+    //     console.log(this.eachDayList);
+    //   }
+    // },
 
     // TODO: startDrag 이벤트 메서드 작성
     startDrag(event, item) {
@@ -192,6 +201,9 @@ export default {
       // 기존 리스트에서는 요소를 삭제 (splice() 사용)
       this.lists[colNum].dayList.push(targetItem);
       this.lists[targetIdx].dayList.splice(this.lists[targetIdx].dayList.indexOf(targetItem), 1);
+
+      // 리스트의 변화를 주기위해 사용 (의미없는 변수 변경)
+      this.flag = !this.flag;
     }
   },
 };

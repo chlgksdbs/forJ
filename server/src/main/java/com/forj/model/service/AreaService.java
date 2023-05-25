@@ -15,7 +15,7 @@ import com.forj.model.repository.AreaMapper;
 public class AreaService {
 	
 	@Autowired
-	private AreaMapper mapper;
+	private AreaMapper areaMapper;
 	
 //	// 여행지 정보 insert
 //	public void write(AreaDto areas) {
@@ -33,12 +33,12 @@ public class AreaService {
 		if(keyword.equals("null")) {
 			map.put("typeId", typeId);
 			map.put("sidoCode", sidoCode);
-			return mapper.selectAll(map);
+			return areaMapper.selectAll(map);
 		}else {
 			map.put("keyword", keyword);
 			map.put("typeId", typeId);
 			map.put("sidoCode", sidoCode);
-			return mapper.selectSome(map);
+			return areaMapper.selectSome(map);
 		}
 		
 	}
