@@ -1,5 +1,7 @@
 package com.forj.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,11 @@ public class PlanService {
 	public void write(PlanDto planDto) {
 		
 		planMapper.insert(planDto);
+	}
+	
+	// 사용자 일정 전체 조회
+	public List<PlannerDto> list(String userId) {
+		
+		return planMapper.selectAll(userId);
 	}
 }

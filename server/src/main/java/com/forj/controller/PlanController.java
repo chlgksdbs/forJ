@@ -1,6 +1,10 @@
 package com.forj.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +38,12 @@ public class PlanController {
 	public void planWrite(@RequestBody PlanDto planDto) {
 		
 		planService.write(planDto);
+	}
+	
+	// API 3. 사용자의 일정을 모두 조회하는 메서드
+	@GetMapping("/list/{userId}")
+	public List<PlannerDto> planList(@PathVariable("userId") String userId) {
+		
+		return planService.list(userId);
 	}
 }

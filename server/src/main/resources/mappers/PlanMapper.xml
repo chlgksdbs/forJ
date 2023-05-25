@@ -28,5 +28,14 @@
 		VALUES
 			(#{planId}, #{planContentId}, #{planDday}, #{planAreaTitle}, #{planBudget})
 	</insert>
+	
+	<select id="selectAll" parameterType="String" resultType="PlannerDto">
+		SELECT
+			plan_id as planId, plan_startdate as planStartdate, plan_enddate as planEnddate
+		FROM
+			forj_planner
+		WHERE
+			user_id = #{userId}
+	</select>
 
 </mapper>
