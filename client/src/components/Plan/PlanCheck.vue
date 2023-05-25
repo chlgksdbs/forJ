@@ -91,7 +91,7 @@ export default {
         strokeWeight: 3,
       });
 
-      console.log(polyLine);
+      if (polyLine != null) continue; // 의미없는 변수 사용법
     }
   },
   methods: {
