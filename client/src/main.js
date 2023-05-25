@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VCalendar from "v-calendar";
+import "@/assets/css/fonts.css";
 
 // VCalendar 사용
 Vue.use(VCalendar);

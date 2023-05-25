@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dayViewTitle">
+    <div class="dayViewTitle" style="font-family: OTWelcomeRA">
       {{ dateFormat(selectAreaItems[0].start) }} ~ {{ dateFormat(selectAreaItems[0].end) }}
       <!-- 전체 일정 리스트 -->
     </div>
@@ -35,15 +35,15 @@
     
     <!-- JS로 Drag & Drop 구현 -->
     <div class="dropBox" v-for="(item, idx) in lists" :key="item.id">
-      <div v-if="item.id == 0" style="font-weight: bold;">선택목록</div>
-      <div v-else>DAY {{ item.id }}</div>
+      <div v-if="item.id == 0" style="font-weight: bold; font-family: LINESeedKR-Bd">선택목록</div>
+      <div v-else style="font-family: LINESeedKR-Bd">DAY {{ item.id }}</div>
       <div
         @drop="onDrop($event, idx)"
         @dragenter.prevent
         @dragover.prevent
       >
         <!-- 아이템이 존재하지 않는 경우 (초기 상태 포함) -->
-        <div v-if="item.dayList.length == 0" class="no_item">Drag & Drop</div>
+        <div v-if="item.dayList.length == 0" class="no_item" style="font-family: OTWelcomeRA">Drag & Drop</div>
         <div v-else v-for="(dayItem, idx) in item.dayList" :key="idx"
               @dragstart="startDrag($event, dayItem, item.id)"
               draggable="true"

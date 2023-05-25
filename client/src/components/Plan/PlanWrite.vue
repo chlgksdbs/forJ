@@ -3,9 +3,9 @@
     <div class="user_plan_content">
       <div id="PlanLeftBar">
         <div class="plan_left_calendar">
-            <h3>여행 일정</h3>
-            <p>{{ dateFormat(attr[0].dates.start)}} ~ {{ dateFormat(attr[0].dates.end) }} ({{ calcPeriod(attr[0].dates.start, attr[0].dates.end) }}일)</p>
-            <button class="plan_left_modify_btn" @click="modifyDate">변경</button>
+            <h3 style="font-family: LINESeedKR-Bd">여행 일정</h3>
+            <p style="font-family: OTWelcomeRA">{{ dateFormat(attr[0].dates.start)}} ~ {{ dateFormat(attr[0].dates.end) }} ({{ calcPeriod(attr[0].dates.start, attr[0].dates.end) }}일)</p>
+            <button class="plan_left_modify_btn" @click="modifyDate" style="font-family: LINESeedKR-Bd">변경</button>
             <v-calendar
             class="vcalendar"
             :min-date="new Date()"
@@ -14,7 +14,7 @@
             v-if="openmodal == true" />
         </div>
         <div class="plan_left_select_list">
-            <h3>선택 목록</h3>
+            <h3 style="font-family: LINESeedKR-Bd">선택 목록</h3>
             <button v-if="selectItems.length" class="plan_left_delete_btn" @click="deleteAllCard">장소 전체 삭제</button>
             <plan-select-list v-for="selectItem in selectItems" :key="selectItem.contentId" :img="selectItem.img" :title="selectItem.title" :contentId="selectItem.contentId"  @deleteId="deleteOneCard"></plan-select-list>
             <!-- <router-link to="/plan/check"><button v-if="selectItems.length" class="plan_left_create_btn" @click="sendDates, sendItems">일정 생성</button></router-link> -->
@@ -54,8 +54,8 @@
                 <plan-search-list :img="item.areaImg" :title="item.title" :contentId="item.contentId" :latitude="item.latitude" :longitude="item.longitude" @addArea="setSelectList"></plan-search-list>
             </div>
         </div>
-        <div v-else class="phrase">
-            <div>지역과 키워드 버튼을</div><div>선택해주세요.</div>
+        <div v-else class="phrase" style="font-family: OTWelcomeRA">
+            <div >지역과 키워드 버튼을</div><div>선택해주세요.</div>
         </div>
       </div>
     </div>
@@ -362,6 +362,9 @@ export default {
           const marker = new naver.maps.Marker({
               position: new naver.maps.LatLng(latitude, longitude),
               map: this.map,
+              // 마커 정보 커스텀하는 옵션
+              icon: {
+              },
           });
           this.markers.push({ contentId, marker }); // markers 배열에 marker 값 추가
       },
@@ -379,7 +382,7 @@ export default {
             position: naver.maps.Position.TOP_RIGHT,
         },
         mapTypeControl: true, // 지도 유형 컨트롤의 표시 여부
-    };
+      };
 
     this.map = new naver.maps.Map(mapDiv, mapOptions);
     // this.marker = new naver.maps.Marker({
@@ -508,7 +511,7 @@ img {
 .text_box {
     font-size: 80%;
     margin: 0 2%;
-    padding: 1%;
+    padding-top: 2%;
     border-radius: 10px;
     width: 20%;
     height: 13%;
@@ -517,6 +520,7 @@ img {
     background-color: #40A3FF;
 }
 .PlanCategoryBtn {
+    font-family: "OTWelcomeRA";
     display: flex;
     justify-content: space-between;
     /* border-radius: 10px; */

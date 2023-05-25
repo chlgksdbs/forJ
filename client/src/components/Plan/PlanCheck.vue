@@ -3,13 +3,13 @@
     <!-- 왼쪽 계획 일정 컨테이너 -->
     <div id="left_plan_list_container">
       <!-- 왼쪽 계획 일정 타이틀 -->
-      <div class="left_plan_list_title"><b>여행 일정</b></div>
+      <div class="left_plan_list_title" style="font-family: LINESeedKR-Bd"><b>여행 일정</b></div>
       <div class="left_plan_list">
         <!-- 왼쪽 계획 일정 카테고리 -->
         <div class="left_plan_list_category">
-          <div class="cateDay"><router-link class="cateDayWord" :to="'/plan/check/day/all'">전체보기</router-link></div>
+          <div class="cateDay"><router-link class="cateDayWord" :to="'/plan/check/day/all'" style="font-family: LINESeedKR-Bd">전체보기</router-link></div>
             <div v-for="day in setselectInfo[0].period+1" :key="day">
-              <div class="cateDay"><router-link class="cateDayWord" :to="'/plan/check/day/' + day ">{{ day }} 일차</router-link></div>
+              <div class="cateDay" style="font-family: LINESeedKR-Bd"><router-link class="cateDayWord" :to="'/plan/check/day/' + day ">{{ day }} 일차</router-link></div>
             </div>
         </div>
         <!-- 왼쪽 계획 일정 내용 -->

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="modifyTitle">회원정보 수정</h2>
+    <h2 class="modifyTitle" style="font-family: LINESeedKR-Bd">회원정보 수정</h2>
     <div class="modifyBox">
       <div>
         <span style="vertical-align: top;">프로필 사진</span>

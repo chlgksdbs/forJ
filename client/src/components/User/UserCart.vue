@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="modifyTitle">나의 장바구니</h2>
+    <h2 class="modifyTitle" style="font-family: LINESeedKR-Bd">나의 장바구니</h2>
     <div class="modifyBox" style="overflow: scroll; overflow-x:hidden; height: 90%;">
       <user-plan-item v-for="item in planItems" :key="item.no" :planItem="item"></user-plan-item>
     </div>

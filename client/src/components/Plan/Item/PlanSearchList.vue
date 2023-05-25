@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="text_box">
-      <h5>{{ title }}</h5>
+      <h5 style="font-family: LINESeedKR-Bd">{{ title }}</h5>
     </div>
     <div class="btn_box">
       <img src="@/assets/img/icon_info.png">

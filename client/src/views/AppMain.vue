@@ -32,18 +32,18 @@
         </div>
         <div class="main_nav_user_bar" v-if="userInfo">
             <div class="main_nav">
-                <router-link to="/mypage" class="main_menu_bar">마이페이지</router-link>
+                <router-link to="/mypage" class="main_menu_bar" style="font-family: OTWelcomeRA">마이페이지</router-link>
             </div>
             <div class="main_nav">
-                <a class="main_menu_bar" @click="logout">로그아웃</a>
+                <a class="main_menu_bar" @click="logout" style="font-family: OTWelcomeRA">로그아웃</a>
             </div>
         </div>
         <div class="main_nav_nouser_bar" v-else>
             <div class="main_nav">
-                <router-link to="/login" class="main_menu_bar">로그인</router-link>
+                <router-link to="/login" class="main_menu_bar" style="font-family: OTWelcomeRA">로그인</router-link>
             </div>
             <div class="main_nav">
-                <router-link to="/join" class="main_menu_bar">회원가입</router-link>
+                <router-link to="/join" class="main_menu_bar" style="font-family: OTWelcomeRA">회원가입</router-link>
             </div>
         </div>
         <div class="carousel_text_box">
@@ -68,7 +68,7 @@
             <!-- MainContent 중, 지역별 여행 정보 영역-->
             <div class="main_content_region_wrap">
                 <div class="main_content_region">
-                    <h2>인기있는 여행지</h2>
+                    <h2 style="font-family: LINESeedKR-Bd">인기있는 여행지</h2>
                     <vue-slick-carousel
                         :infinite="true"
                         :initialSlide="2"
@@ -188,7 +188,7 @@
             <!-- MainContent 중, 여행 후기 영역 -->
             <div class="main_content_review_wrap">
                 <div class="best_tour_review_box">
-                    <h2>인기있는 여행 후기</h2>
+                    <h2 style="font-family: LINESeedKR-Bd">인기있는 여행 후기</h2>
                     <div class="more_plus">
                         <router-link to="/board">더보기</router-link>
                     </div>

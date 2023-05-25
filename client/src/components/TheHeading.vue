@@ -13,16 +13,16 @@
                 <img :src="imageUrl" v-else >
             </div>
             <div>
-                <router-link to="/mypage">마이페이지</router-link>
+                <router-link to="/mypage" style="font-family: OTWelcomeRA">마이페이지</router-link>
             </div>
             <div>
-                <span @click="logout">로그아웃</span>
+                <span @click="logout" style="font-family: OTWelcomeRA">로그아웃</span>
             </div>
         </div>
         <!-- 로그인 정보 X -->
         <div id="header_right" v-else>
-            <router-link to="/login">로그인</router-link>
-            <router-link to="/join">회원가입</router-link>
+            <router-link to="/login" style="font-family: OTWelcomeRA">로그인</router-link>
+            <router-link to="/join" style="font-family: OTWelcomeRA">회원가입</router-link>
         </div>
     </div>
 </template>

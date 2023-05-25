@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="modifyTitle">내가 쓴 댓글</h2>
+    <h2 class="modifyTitle" style="font-family: LINESeedKR-Bd">내가 쓴 댓글</h2>
     <div class="modifyBox">
       <div align="center" style="overflow: scroll; overflow-x:hidden; height: 90%;">
         <table id="board_table" frame="void">

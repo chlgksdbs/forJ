@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="modifyTitle">나의 여행일정</h2>
+    <h2 class="modifyTitle" style="font-family: LINESeedKR-Bd">나의 여행일정</h2>
     <div class="modifyBox">
       <FullCalendar 
       :options="calendarOptions"
