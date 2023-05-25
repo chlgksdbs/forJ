@@ -134,7 +134,7 @@ export default {
       axios.post('http://localhost/plan/create', planner)
         .then((resp) => {
           planId = resp.data;
-          console.log(planId); // 디버깅
+          // console.log(planId); // 디버깅
 
           let planInfo = {
             'planId': planId,
