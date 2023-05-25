@@ -23,7 +23,11 @@
 
 
 ## 🧍 유스케이스 다이어그램
+![_forJ_Usecase_Diagram drawio](https://github.com/chlgksdbs/forJ/assets/96401350/5094c071-c462-4df6-a2cf-4f6173f2a117)
 
+
+## 📋 클래스 다이어그램
+![Class Diagram](https://github.com/chlgksdbs/forJ/assets/96401350/abc319f2-3e6b-4f43-942b-0f4ecb83fda1)
 
 
 ## 🔧 사용 기술
