@@ -4,7 +4,7 @@ public class PlanDto {
 	private int planNo;
 	private int planId;
 	private int planContentId;
-
+	private String planWriter;
 	private int planDday;
 	private String planAreaTitle;
 	private String planAreaAddr;
@@ -38,6 +38,14 @@ public class PlanDto {
 
 	public void setPlanContentId(int planContentId) {
 		this.planContentId = planContentId;
+	}
+
+	public String getPlanWriter() {
+		return planWriter;
+	}
+
+	public void setPlanWriter(String planWriter) {
+		this.planWriter = planWriter;
 	}
 
 	public int getPlanDday() {

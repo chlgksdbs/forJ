@@ -1,6 +1,8 @@
 package com.forj.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +38,17 @@ public class PlanService {
 	public List<PlannerDto> list(String userId) {
 		
 		return planMapper.selectAll(userId);
+	}
+	
+	// 사용자 일정 상세 조회
+	public List<PlanDto> detail(int planId, String userId) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("planId", planId);
+		map.put("userId", userId);
+		
+		return planMapper.selectDetail(map);
+		
 	}
 }

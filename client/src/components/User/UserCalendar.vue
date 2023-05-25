@@ -47,6 +47,7 @@ export default {
             'end': this.dateFormat(resp.data[i].planEnddate),
           });
         }
+        console.log(this.calendarOptions);
       });
   },
   methods: {

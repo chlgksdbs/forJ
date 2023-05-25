@@ -1,6 +1,7 @@
 package com.forj.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,4 +21,7 @@ public interface PlanMapper {
 	
 	// 사용자 일정 전체 조회
 	List<PlannerDto> selectAll(String userId);
+	
+	// 사용자 일정 상세 조회
+	List<PlanDto> selectDetail(Map<String, Object> map);
 }

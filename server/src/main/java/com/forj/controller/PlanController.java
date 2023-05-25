@@ -46,4 +46,11 @@ public class PlanController {
 		
 		return planService.list(userId);
 	}
+	
+	// API 4. 사용자 일정을 상세 조회하는 메서드
+	@GetMapping("/detail/{planId}/{userId}")
+	public List<PlanDto> planDetail(@PathVariable("planId") int planId, @PathVariable("userId") String userId) {
+		
+		return planService.detail(planId, userId);
+	}
 }

@@ -136,13 +136,14 @@ export default {
           console.log(planId); // 디버깅
 
           let planInfo = {
-        'planId': planId,
-        'planContentId': 0,
-        'planDday': 0,
-        'planAreaTitle': '',
-        // 'planAreaAddr': '',
-        'planBudget': 0,
-      }
+            'planId': planId,
+            'planWriter': this.userInfo.userId,
+            'planContentId': 0,
+            'planDday': 0,
+            'planAreaTitle': '',
+            // 'planAreaAddr': '',
+            'planBudget': 0,
+          }
 
       // 여행 일정의 day에 대한 반복문 (일정만큼 반복)
       for (let i = 1; i < this.resultItems.length; i++){

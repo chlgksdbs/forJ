@@ -24,9 +24,9 @@
 
 	<insert id="insert" parameterType="PlanDto">
 		INSERT INTO
-			forj_userplan (plan_id, plan_content_id, plan_dday, plan_area_title, plan_budget)
+			forj_userplan (plan_id, plan_writer, plan_content_id, plan_dday, plan_area_title, plan_budget)
 		VALUES
-			(#{planId}, #{planContentId}, #{planDday}, #{planAreaTitle}, #{planBudget})
+			(#{planId}, #{planWriter}, #{planContentId}, #{planDday}, #{planAreaTitle}, #{planBudget})
 	</insert>
 	
 	<select id="selectAll" parameterType="String" resultType="PlannerDto">
@@ -36,6 +36,15 @@
 			forj_planner
 		WHERE
 			user_id = #{userId}
+	</select>
+	
+	<select id="selectDetail" parameterType="map" resultType="PLanDto">
+		SELECT
+			plan_content_id as planContentId, plan_dday as planDday, plan_area_title as planAreaTitle, plan_budget as planBudget
+		FROM
+			forj_userplan
+		WHERE
+			plan_writer=#{planWriter} and plan_id=#{planId}
 	</select>
 
 </mapper>
