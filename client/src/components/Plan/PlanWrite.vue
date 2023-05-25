@@ -362,9 +362,6 @@ export default {
           const marker = new naver.maps.Marker({
               position: new naver.maps.LatLng(latitude, longitude),
               map: this.map,
-              // 마커 정보 커스텀하는 옵션
-              icon: {
-              },
           });
           this.markers.push({ contentId, marker }); // markers 배열에 marker 값 추가
       },
