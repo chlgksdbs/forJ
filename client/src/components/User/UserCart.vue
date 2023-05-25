@@ -38,19 +38,19 @@ export default {
           // TODO: 여행 상세정보 DB로부터 가져오기
           let sumBudget = 0;
           axios.get('http://localhost/plan/detail/' + resp.data[i].planId + '/' + this.userInfo.userId)
-            .then((resp) => {
-              console.log(resp.data);
-              for (let j = 0; j < resp.data.length; j++) {
-                sumBudget += resp.data[i].planBudget;
+            .then((val) => {
+              // console.log(val.data);
+              for (let j = 0; j < val.data.length; j++) {
+                sumBudget += val.data[j].planBudget;
               }
+              this.planItems.push({
+                'no': resp.data[i].planId,
+                'date': this.dateFormat(resp.data[i].planStartdate) + ' ~ ' + this.dateFormat(resp.data[i].planEnddate),
+                'location': resp.data[i].planId + '번째 여행',
+                'budget': sumBudget,
+              });
             });
           
-          this.planItems.push({
-            'no': resp.data[i].planId,
-            'date': this.dateFormat(resp.data[i].planStartdate) + ' ~ ' + this.dateFormat(resp.data[i].planEnddate),
-            'location': resp.data[i].planId + '번째 여행',
-            'budget': sumBudget,
-          });
         }
       });
   },
