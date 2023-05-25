@@ -56,6 +56,8 @@ export default {
       .then((resp) => {
         // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
 
+        if (resp.data.size == 0) return;
+
         const reader = new FileReader();
         reader.onloadend = () => {
           this.imageUrl = reader.result;
@@ -78,7 +80,7 @@ export default {
     },
     // 댓글 삭제 메서드
     commentDelete() {
-      console.log(this.comment.commentId);
+      // console.log(this.comment.commentId);
       axios.delete("http://localhost/comment/" + this.comment.commentId)
         .then(() => {
           // console.log('댓글이 성공적으로 삭제되었습니다!'); // 디버깅
