@@ -41,7 +41,7 @@ export default {
             .then((val) => {
               // console.log(val.data);
               for (let j = 0; j < val.data.length; j++) {
-                sumBudget += val.data[i].planBudget;
+                sumBudget += val.data[j].planBudget;
               }
               this.planItems.push({
                 'no': resp.data[i].planId,
