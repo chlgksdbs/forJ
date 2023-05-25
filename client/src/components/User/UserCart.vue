@@ -8,7 +8,12 @@
 </template>
 
 <script>
+import axios from "axios";
+import { mapState } from "vuex";
+
 import UserPlanItem from "./Item/UserPlanItem.vue";
+
+const memberStore = "memberStore";
 
 export default {
   components: {
@@ -17,24 +22,44 @@ export default {
   data() {
     return {
       message: '',
-      planItems: [
-        {
-          'no': 1,
-          'date': '2023-05-21',
-          'location': '전주',
-          'budget': '50,000원',
-        },
-        {
-          'no': 2,
-          'date': '2023-05-29 ~ 2023-05-31',
-          'location': '제주',
-          'budget': '250,000원',
-        },
-      ],
+      planItems: [],
     };
   },
-  created() {},
-  methods: {},
+  computed: {
+    ...mapState(memberStore, ['userInfo']),
+  },
+  created() {
+
+    // TODO: 여행 리스트 DB로부터 가져오기
+    axios.get('http://localhost/plan/list/' + this.userInfo.userId)
+      .then((resp) => {
+        // console.log(resp.data[0]); // 디버깅
+        for (let i = 0; i < resp.data.length; i++) {
+          // TODO: 여행 상세정보 DB로부터 가져오기
+          let sumBudget = 0;
+          axios.get('http://localhost/plan/detail/' + resp.data[i].planId + '/' + this.userInfo.userId)
+            .then((resp) => {
+              console.log(resp.data);
+              for (let j = 0; j < resp.data.length; j++) {
+                sumBudget += resp.data[i].planBudget;
+              }
+            });
+          
+          this.planItems.push({
+            'no': resp.data[i].planId,
+            'date': this.dateFormat(resp.data[i].planStartdate) + ' ~ ' + this.dateFormat(resp.data[i].planEnddate),
+            'location': resp.data[i].planId + '번째 여행',
+            'budget': sumBudget,
+          });
+        }
+      });
+  },
+  methods: {
+    // TODO: 날짜를 형식에 맞게 변환 (yyyy-mm-dd)
+    dateFormat(date) {
+      return date.substr(0, 10);
+    },
+  },
 };
 </script>
 

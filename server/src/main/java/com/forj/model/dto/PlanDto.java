@@ -1,10 +1,10 @@
 package com.forj.model.dto;
 
 public class PlanDto {
+	private int planNo;
 	private int planId;
 	private int planContentId;
-	private String planStartdate;
-	private String planEnddate;
+	private String planWriter;
 	private int planDday;
 	private String planAreaTitle;
 	private String planAreaAddr;
@@ -14,6 +14,14 @@ public class PlanDto {
 	private int planMovedist;
 
 	public PlanDto() {
+	}
+
+	public int getPlanNo() {
+		return planNo;
+	}
+
+	public void setPlanNo(int planNo) {
+		this.planNo = planNo;
 	}
 
 	public int getPlanId() {
@@ -32,20 +40,12 @@ public class PlanDto {
 		this.planContentId = planContentId;
 	}
 
-	public String getPlanStartdate() {
-		return planStartdate;
+	public String getPlanWriter() {
+		return planWriter;
 	}
 
-	public void setPlanStartdate(String planStartdate) {
-		this.planStartdate = planStartdate;
-	}
-
-	public String getPlanEnddate() {
-		return planEnddate;
-	}
-
-	public void setPlanEnddate(String planEnddate) {
-		this.planEnddate = planEnddate;
+	public void setPlanWriter(String planWriter) {
+		this.planWriter = planWriter;
 	}
 
 	public int getPlanDday() {

@@ -14,7 +14,7 @@
         </div>
         <!-- 왼쪽 계획 일정 내용 -->
         <div class="left_plan_list_content">
-          <router-view :selectAreaItems="setselectInfo"></router-view>
+          <router-view :selectAreaItems="setselectInfo" @resultItems="storeValues"></router-view>
         </div>
       </div>
       <div><button class="plan_left_define_btn" @click="sendPlanInfo">일정 확정</button></div>
@@ -28,6 +28,9 @@
 
 <script>
 import axios from 'axios';
+import { mapState } from "vuex";
+
+const memberStore = "memberStore";
 
 export default {
   name: 'PlanCheck',
@@ -37,6 +40,8 @@ export default {
     return {
       areaItems: [],
       markers: [], // contentId와 marker 객체를 담는 배열
+      resultItems: [], // PlanCheckAllDayView에서 넘어온 데이터 값을 저장하는 배열
+      constList: [], // PlanCheckAllDayView에서 넘어온 비용 데이터 값을 저장하는 배열
     };
   },
   props: {
@@ -44,7 +49,10 @@ export default {
     // setAreaInfo: Array,
     setselectInfo: Array,
   },
-  created() {},
+  created() { },
+  computed: {
+    ...mapState(memberStore, ['userInfo']),
+  },
   mounted() {
 
     // console.log(this.setselectInfo);
@@ -91,7 +99,7 @@ export default {
         strokeWeight: 3,
       });
 
-      console.log(polyLine);
+      if (polyLine != null) continue; // 의미없는 변수 사용법
     }
   },
   methods: {
@@ -105,32 +113,78 @@ export default {
       });
       this.markers.push({ contentId, latitude, longitude, marker }); // markers 배열에 marker 값 추가
     },
-    // DB로 확정 여행 계획 정보 보내기
+    // TODO: DB로 확정 여행 계획 정보 보내기
     sendPlanInfo() {
-      let definePlans = [];
-      let planInfo = {
-        'contentId': 0,
-        'startDate': '',
-        'endDate': '',
-        'title': '',
-        'addr': '',
-        'budget': 0,
-      }
-      for (let i = 1; i < this.setselectInfo.length; i++){
-        planInfo.contentId = this.setselectInfo[i].title;
-        planInfo.startDate = this.setselectInfo[0].start;
-        planInfo.endDate = this.setselectInfo[0].end;
-        planInfo.title = this.setselectInfo[0].title;
-        planInfo.addr = this.setselectInfo[0].addr;
-        planInfo.budget = this.setselectInfo[0].budget;
 
-        definePlans.push(planInfo);
+      // 선택목록에 아직 장소가 존재하는 경우
+      if (this.resultItems.length == 0 || this.resultItems[0].dayList.length != 0) {
+        alert('여행 장소를 일정에 모두 삽입해주세요!');
+        return;
       }
-      axios.post("http://localhost/plan/write", definePlans)
-        .then(() => {
-          alert("일정 생성이 완료되었습니다");
-        })
+
+      let planner = {
+        'userId': this.userInfo.userId,
+        'planStartdate': this.setselectInfo[0].start,
+        'planEnddate': this.setselectInfo[0].end,
       }
+
+      let planId = 0;
+
+      axios.post('http://localhost/plan/create', planner)
+        .then((resp) => {
+          planId = resp.data;
+          console.log(planId); // 디버깅
+
+          let planInfo = {
+            'planId': planId,
+            'planWriter': this.userInfo.userId,
+            'planContentId': 0,
+            'planDday': 0,
+            'planAreaTitle': '',
+            // 'planAreaAddr': '',
+            'planBudget': 0,
+          }
+
+      // 여행 일정의 day에 대한 반복문 (일정만큼 반복)
+      for (let i = 1; i < this.resultItems.length; i++){
+
+        // console.log(this.resultItems[i]); // 디버깅
+
+        // 해당 여행 일정의 존재하는 여행지에 대한 반복문 (여행지만큼 반복)
+        for (let j = 0; j < this.resultItems[i].dayList.length; j++) {
+          planInfo.planContentId = this.resultItems[i].dayList[j].contentId;
+          planInfo.planDday = this.resultItems[i].id;
+          planInfo.planAreaTitle = this.resultItems[i].dayList[j].title;
+          // planInfo.planAreaAddr = this.resultItems[i].dayList[j].addr;
+
+          // 현재 여행 일정의 contentId와 같은 값의 저장되어 있는 비용 찾기
+          for (let k = 0; k < this.costList.length; k++) {
+            // console.log(planInfo.planContentId);
+            // console.log(this.costList);
+            if (planInfo.planContentId == this.costList[k].contentId) {
+              planInfo.planBudget = this.costList[k].cost;
+            }
+            // 값이 존재하지 않다면, 0을 전달
+          }
+
+          // console.log(planInfo);
+          // 일정 하나에 대해 삽입
+          axios.post("http://localhost/plan/write", planInfo);
+        }
+      }
+
+      alert('일정 생성이 완료되었습니다!');
+      this.$router.push("/mypage/calendar"); // 나의 여행일정으로 redirect
+        });
+    },
+
+    // TODO: PlanCheckAllDayView에서 넘어온 변경된 lists값 받기
+    storeValues(lists, costList) {
+      // console.log(lists); // 디버깅
+      // console.log(costList); // 디버깅
+      this.resultItems = lists;
+      this.costList = costList;
+    },
     },
 };
 </script>
