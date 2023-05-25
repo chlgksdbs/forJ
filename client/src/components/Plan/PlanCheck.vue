@@ -124,9 +124,10 @@ export default {
 
       let planner = {
         'userId': this.userInfo.userId,
-        'planStartdate': this.setselectInfo[0].start,
-        'planEnddate': this.setselectInfo[0].end,
+        'planStartdate': this.dateFormat(this.setselectInfo[0].start),
+        'planEnddate': this.dateFormat(this.setselectInfo[0].end),
       }
+      // console.log(planner);
 
       let planId = 0;
 
@@ -184,6 +185,14 @@ export default {
       // console.log(costList); // 디버깅
       this.resultItems = lists;
       this.costList = costList;
+    },
+    // TODO: 날자 변경 포맷
+    dateFormat(date) {
+      let dateFormat = date.getFullYear() +
+    '-' + ( (date.getMonth()+1) < 9 ? "0" + (date.getMonth()+1) : (date.getMonth()+1) )+
+    '-' + ( (date.getDate()) < 9 ? "0" + (date.getDate()) : (date.getDate()) );
+
+      return dateFormat;
     },
     },
 };
