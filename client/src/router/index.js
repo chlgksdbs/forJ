@@ -193,15 +193,15 @@ const routes = [
         children: [
           {
             path: "day/all",
-            name: "plancheckdayview",
+            name: "plancheckall",
             component: () => import("@/components/Plan/Item/PlanCheckAllDayView"),
           },
           {
             path: "day/:dayNumber",
-            name: "plancheckdayview",
+            name: "plancheckday",
             component: () => import("@/components/Plan/Item/PlanCheckDayView"),
-          }
-        ]
+          },
+        ],
       },
     ],
   },
