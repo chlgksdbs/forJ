@@ -1,8 +1,12 @@
 # forJ
 일상에서 계획을 수립하는걸 좋아하는 MBTI J를 위한 웹 플래닝 서비스
 
+
 ## 📆 개발 기간
 > 2023.04.03 ~ 2023.05.26
+
+
+## 💻 홈페이지
 
 
 ## 👫 TEAM: 내 손을 JAVA
@@ -12,79 +16,14 @@
 |[@chlgksdbs](https://github.com/chlgksdbs)|[@zosunny](https://github.com/zosunny)|
 
 
-<!-- ## 📂 Folder Structure
+## 🌳 기능
+사용자의 니즈를 파악하기 위해 요구사항 명세서를 작성했다. 주요 기능을 모두 구현하고, 나머지는 명세서의 90% 정도까지 개발을 완료하는 것을 목표로 잡았다.
+![명세서 (1)](https://github.com/chlgksdbs/forJ/assets/96401350/771af4fd-125c-4e79-8ff4-cc1d51a98b12)
+![명세서 (2)](https://github.com/chlgksdbs/forJ/assets/96401350/f5a492be-0cd3-4df7-9ebd-1abd88678ae5)
 
-```javascript
-📂 forj
-    📂 Java Resources
-     └── 📂 src
-     |    ├── 📂 Controller
-     |    |    ├── 📄 TourController.java
-     |    |    ├── 📄 UserController.java
-     |    ├── 📂 dao
-     |    |    ├── 📄 TourDao.java
-     |    |    ├── 📄 UserDao.java
-     |    └── 📂 dto
-     |    |    ├── 📄 SidoDto.java
-     |    |    ├── 📄 TourDto.java
-     |    |    ├── 📄 UserDto.java
-     |    ├── 📂 service
-     |    |    ├── 📄 TourService.java
-     |    |    ├── 📄 UserService.java
-     |    ├── 📂 util
-     |    |    ├── 📄 DBUtil.java
-     |    |    ├── 📄 PageNavigation.java
-     |    |    ├── 📄 ParameterCheck.java
-     |    |    ├── 📄 SizeConstant.java
-     |    |    ├── 📄 SHA256.java
-    📂 resources
-    ├── 📄 database.sql
-    ├── 📄 enjoytrip_er_diagram.png
-    📂 WebContent
-    ├── 📄 index.jsp
-    └── 📂 assets
-         └── 📂 css
-         |    ├── 📄 login.css
-         |    ├── 📄 main.css
-         |    ├── 📄 search.css
-         └── 📂 img
-         |    ├── 📄 aerial.jpg
-         |    ├── 📄 bgImg.png
-         |    ├── 📄 logo.png
-         |    ├── 📄 noimg.png
-         |    ├── 📄 originBG.png
-         |    ├── 📄 sungsimdang.jpg
-         └── 📂 js
-         |    ├── 📄 key.js
-         |    ├── 📄 login.js
-         |    ├── 📄 register.js
-         |    ├── 📄 search.js
-         |    ├── 📄 searchPwd.js
-    └── 📂 error
-    |    ├── 📄 changePwFail.jsp
-    |    ├── 📄 deleteUserFail.jsp
-    |    ├── 📄 error.jsp
-    |    ├── 📄 loginFail.jsp
-    |    ├── 📄 notEqPw.jsp
-    └── 📂 include
-    |    ├── 📄 footer.jsp
-    |    ├── 📄 head.jsp
-    |    ├── 📄 nav.jsp
-    └── 📂 tourplace
-    |    ├── 📄 map.jsp
-    |    ├── 📄 search.jsp
-    └── 📂 user
-    |    ├── 📄 changePwSuccess.jsp
-    |    ├── 📄 deleteUserSuccess.jsp
-    |    ├── 📄 findpwd.jsp
-    |    ├── 📄 findPwdSuccess.jsp
-    |    ├── 📄 login.jsp
-    |    ├── 📄 myPage.jsp
-    |    ├── 📄 regist.jsp
-    |    ├── 📄 registerSuccess.jsp         
-    📄 README.md
-    📄 pom.xml
-``` -->
+
+## 🧍 유스케이스 다이어그램
+
 
 
 ## 🔧 사용 기술
@@ -100,8 +39,8 @@
 | ----------------- | ------------------------------------------------------------------------------- |
 | Framework         | - Spring Boot 2.7.11                                                            |
 | Test              | - JUnit 5                                                                       |
-| Infra             | - Docker <br>- AWS EC2 <br>- Maven <br>                                         |
-| Database          | - MySql <br>- 공공데이터                                                           |
+| Infra             | - AWS EC2 <br>- Maven <br>                                                      |
+| Database          | - MySql <br>- 공공데이터                                                         |
 
 ### Communication
 | Category          | Stack                                                                           |
@@ -142,3 +81,30 @@
   - 개발 마무리 및 통합 테스트
   - AWS EC2를 이용한 배포
   - 결과 보고서 작성 (ppt)
+
+
+## 🖥 주요 화면
+
+> **`로그인`**
+![로그인 화면](https://github.com/chlgksdbs/forJ/assets/96401350/96387655-d075-40f9-bc62-098c88209ecf)
+
+> **`메인화면`**
+![(로그인 후) 메인화면 (1)](https://github.com/chlgksdbs/forJ/assets/96401350/4c0010a1-308e-44cd-9b60-e3dad838010f)
+
+> **`여행 계획 페이지`**
+![여행 계획 작성 페이지](https://github.com/chlgksdbs/forJ/assets/96401350/a5540f7f-c087-41ea-adbb-709a0888f994)
+
+> **`여행 계획 상세 페이지`**
+![여행 계획 체크 페이지](https://github.com/chlgksdbs/forJ/assets/96401350/205543f6-fa9b-4dd5-a695-e979ef5c930e)
+
+> **`마이페이지: 나의 여행일정`**
+![마이페이지 나의 여행일정 화면](https://github.com/chlgksdbs/forJ/assets/96401350/f439bf34-5281-4e21-aea3-4fe445b2b784)
+
+> **`마이페이지: 회원정보 수정`**
+![마이페이지 회원정보 수정 화면](https://github.com/chlgksdbs/forJ/assets/96401350/7cb9e9c4-045d-458f-9649-cbe1d3a6f9d8)
+
+> **`계획 공유 게시판`**
+![공유 게시판 글 목록 페이지](https://github.com/chlgksdbs/forJ/assets/96401350/8abb78be-3ef3-42f9-bda8-a1098daa8737)
+
+
+## 🎥 시연 영상
