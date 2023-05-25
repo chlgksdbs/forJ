@@ -10,20 +10,20 @@
           <img :src="imageUrl" alt="profile" v-else/>
         </div>
         <!-- 이름 -->
-        <div style="color: blue; font-weight: bold;">{{ userInfo.userNickname }}</div>
+        <div style="color: blue; font-weight: bold; font-family: LINESeedKR-Bd">{{ userInfo.userNickname }}</div>
         <!-- Category List -->
         <div class="MyPgCateBox" align="center">
           <div>
-            <h3>회원정보</h3>
-            <router-link to="/mypage/modify" class="MyPgcateList" >회원정보 수정</router-link><br/>
-            <router-link to="/mypage/calendar" class="MyPgcateList" >나의 여행일정</router-link><br/>
-            <router-link to="/mypage/cart" class="MyPgcateList" >나의 장바구니</router-link><br/>
-            <router-link to="/mypage/qna" class="MyPgcateList" >1:1 문의</router-link><br/>
+            <h3 style="font-family: LINESeedKR-Bd">회원정보</h3>
+            <router-link to="/mypage/modify" class="MyPgcateList" style="font-family: OTWelcomeRA">회원정보 수정</router-link><br/>
+            <router-link to="/mypage/calendar" class="MyPgcateList" style="font-family: OTWelcomeRA">나의 여행일정</router-link><br/>
+            <router-link to="/mypage/cart" class="MyPgcateList" style="font-family: OTWelcomeRA">나의 장바구니</router-link><br/>
+            <router-link to="/mypage/qna" class="MyPgcateList" style="font-family: OTWelcomeRA">1:1 문의</router-link><br/>
           </div>
           <div style="border-top: 1px solid #ddd; margin-top: 10px;">
-            <h3>커뮤니티</h3>
-            <router-link to="/mypage/myboard" class="MyPgcateList" >내가 쓴 게시글</router-link><br/>
-            <router-link to="/mypage/mycomment" class="MyPgcateList" >내가 쓴 댓글</router-link><br/>
+            <h3 style="font-family: LINESeedKR-Bd">커뮤니티</h3>
+            <router-link to="/mypage/myboard" class="MyPgcateList" style="font-family: OTWelcomeRA">내가 쓴 게시글</router-link><br/>
+            <router-link to="/mypage/mycomment" class="MyPgcateList" style="font-family: OTWelcomeRA">내가 쓴 댓글</router-link><br/>
           </div>
         </div>
       </div>
