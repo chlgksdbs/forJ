@@ -18,16 +18,15 @@
 
 ## 🌳 기능
 사용자의 니즈를 파악하기 위해 요구사항 명세서를 작성했다. 주요 기능을 모두 구현하고, 나머지는 명세서의 90% 정도까지 개발을 완료하는 것을 목표로 잡았다.
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/771af4fd-125c-4e79-8ff4-cc1d51a98b12.jpeg" />
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/f5a492be-0cd3-4df7-9ebd-1abd88678ae5.jpeg" />
+<img width="1004" alt="forJ 요구사항 명세서" src="https://github.com/chlgksdbs/forJ/assets/96401350/eea4c98c-fd82-45fa-b152-455d0ab884d9">
 
 
 ## 🧍 유스케이스 다이어그램
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/5094c071-c462-4df6-a2cf-4f6173f2a117.jpeg" />
+![_forJ_Usecase_Diagram drawio](https://github.com/chlgksdbs/forJ/assets/96401350/966d9e6d-c3a2-49f6-aa14-66747fd12593)
 
 
 ## 📋 클래스 다이어그램
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/abc319f2-3e6b-4f43-942b-0f4ecb83fda1.jpeg" />
+![Class Diagram](https://github.com/chlgksdbs/forJ/assets/96401350/34a251b7-14c1-4f83-95c5-3cef0bd761c6)
 
 
 ## 🔧 사용 기술
@@ -44,7 +43,7 @@
 | Framework         | - Spring Boot 2.7.11                                                            |
 | Test              | - JUnit 5                                                                       |
 | Infra             | - AWS EC2 <br>- Maven <br>                                                      |
-| Database          | - MySql <br>- 공공데이터                                                         |
+| Database          | - MySql <br>- 공공데이터                                                           |
 
 ### Communication
 | Category          | Stack                                                                           |
@@ -90,25 +89,25 @@
 ## 🖥 주요 화면
 
 > **`로그인`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/96387655-d075-40f9-bc62-098c88209ecf.jpeg" />
+![로그인 화면](https://github.com/chlgksdbs/forJ/assets/96401350/295c9c04-10ba-4e4e-bb2c-beec1a10855c)
 
 > **`메인화면`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/4c0010a1-308e-44cd-9b60-e3dad838010f.jpeg" />
+![(로그인 후) 메인화면 (1)](https://github.com/chlgksdbs/forJ/assets/96401350/a507a6d4-e14c-4984-b5c5-2f7fee86acd3)
 
 > **`여행 계획 페이지`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/a5540f7f-c087-41ea-adbb-709a0888f994.jpeg" />
+![여행 계획 작성 페이지](https://github.com/chlgksdbs/forJ/assets/96401350/8ee60f4b-03cb-4ed6-9c0f-c21d451b3b98)
 
 > **`여행 계획 상세 페이지`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/205543f6-fa9b-4dd5-a695-e979ef5c930e.jpeg" />
+![여행 계획 체크 페이지](https://github.com/chlgksdbs/forJ/assets/96401350/1816c33b-71eb-4f94-be26-4041959ab990)
 
 > **`마이페이지: 나의 여행일정`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/f439bf34-5281-4e21-aea3-4fe445b2b784.jpeg" />
+![마이페이지 나의 여행일정 화면](https://github.com/chlgksdbs/forJ/assets/96401350/b0db799a-d90f-467a-a9ac-ce448bcc2605)
 
 > **`마이페이지: 회원정보 수정`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/7cb9e9c4-045d-458f-9649-cbe1d3a6f9d8.jpeg" />
+![마이페이지 회원정보 수정 화면](https://github.com/chlgksdbs/forJ/assets/96401350/c2df708b-04da-4ad8-a104-bb99542df3d3)
 
 > **`계획 공유 게시판`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/8abb78be-3ef3-42f9-bda8-a1098daa8737.jpeg" />
+![공유 게시판 글 목록 페이지](https://github.com/chlgksdbs/forJ/assets/96401350/3676235e-5c8b-4aca-9e6c-3544727ab7d8)
 
 
 ## 🎥 시연 영상
