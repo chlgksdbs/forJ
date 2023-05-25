@@ -18,16 +18,16 @@
 
 ## 🌳 기능
 사용자의 니즈를 파악하기 위해 요구사항 명세서를 작성했다. 주요 기능을 모두 구현하고, 나머지는 명세서의 90% 정도까지 개발을 완료하는 것을 목표로 잡았다.
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/771af4fd-125c-4e79-8ff4-cc1d51a98b12" />
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/f5a492be-0cd3-4df7-9ebd-1abd88678ae5" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/771af4fd-125c-4e79-8ff4-cc1d51a98b12.jpeg" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/f5a492be-0cd3-4df7-9ebd-1abd88678ae5.jpeg" />
 
 
 ## 🧍 유스케이스 다이어그램
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/5094c071-c462-4df6-a2cf-4f6173f2a117" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/5094c071-c462-4df6-a2cf-4f6173f2a117.jpeg" />
 
 
 ## 📋 클래스 다이어그램
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/abc319f2-3e6b-4f43-942b-0f4ecb83fda1" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/abc319f2-3e6b-4f43-942b-0f4ecb83fda1.jpeg" />
 
 
 ## 🔧 사용 기술
@@ -90,25 +90,25 @@
 ## 🖥 주요 화면
 
 > **`로그인`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/96387655-d075-40f9-bc62-098c88209ecf" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/96387655-d075-40f9-bc62-098c88209ecf.jpeg" />
 
 > **`메인화면`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/4c0010a1-308e-44cd-9b60-e3dad838010f" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/4c0010a1-308e-44cd-9b60-e3dad838010f.jpeg" />
 
 > **`여행 계획 페이지`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/a5540f7f-c087-41ea-adbb-709a0888f994" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/a5540f7f-c087-41ea-adbb-709a0888f994.jpeg" />
 
 > **`여행 계획 상세 페이지`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/205543f6-fa9b-4dd5-a695-e979ef5c930e" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/205543f6-fa9b-4dd5-a695-e979ef5c930e.jpeg" />
 
 > **`마이페이지: 나의 여행일정`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/f439bf34-5281-4e21-aea3-4fe445b2b784" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/f439bf34-5281-4e21-aea3-4fe445b2b784.jpeg" />
 
 > **`마이페이지: 회원정보 수정`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/7cb9e9c4-045d-458f-9649-cbe1d3a6f9d8" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/7cb9e9c4-045d-458f-9649-cbe1d3a6f9d8.jpeg" />
 
 > **`계획 공유 게시판`**
-<img src="https://github.com/chlgksdbs/forJ/assets/96401350/8abb78be-3ef3-42f9-bda8-a1098daa8737" />
+<img src="https://github.com/chlgksdbs/forJ/assets/96401350/8abb78be-3ef3-42f9-bda8-a1098daa8737.jpeg" />
 
 
 ## 🎥 시연 영상
