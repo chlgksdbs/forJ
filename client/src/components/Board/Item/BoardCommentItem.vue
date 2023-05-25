@@ -56,6 +56,8 @@ export default {
       .then((resp) => {
         // console.log(resp); // 디버깅 -> 글자 깨짐 현상 발생
 
+        if (resp.data.size == 0) return;
+
         const reader = new FileReader();
         reader.onloadend = () => {
           this.imageUrl = reader.result;
